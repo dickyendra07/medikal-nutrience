@@ -1,51 +1,50 @@
 export function ConsultationCTA() {
   return (
-    <section className="px-5 py-20">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-[#006b3f] text-white shadow-2xl shadow-green-900/20">
-        <div className="grid items-center gap-8 md:grid-cols-[1.2fr_0.8fr]">
-          <div className="p-8 md:p-14">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#b7f7d0]">
-              Konsultasi Nutrisi
-            </p>
+    <section className="bg-[#f4fbf8] px-5 py-20 lg:px-10 md:py-24">
+      <div className="mx-auto w-full max-w-[1520px]">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-[#006b3f] shadow-2xl shadow-green-900/15">
+          <div className="absolute right-[-80px] top-[-90px] h-64 w-64 rounded-full bg-white/10" />
+          <div className="absolute bottom-[-110px] left-[45%] h-72 w-72 rounded-full bg-white/10" />
+          <div className="absolute bottom-0 right-0 top-0 hidden w-[45%] bg-gradient-to-l from-[#005837]/60 to-transparent lg:block" />
 
-            <h2 className="mt-4 max-w-2xl text-3xl font-black leading-tight md:text-5xl">
-              Bingung memilih produk nutrisi yang sesuai?
-            </h2>
+          <div className="relative grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div className="p-8 text-white md:p-12 lg:p-16">
+              <p className="text-sm font-black uppercase tracking-[0.35em] text-[#b7f7d0]">
+                Konsultasi Nutrisi
+              </p>
 
-            <p className="mt-5 max-w-2xl leading-8 text-white/80">
-              Konsultasikan kebutuhan Anda dan dapatkan arahan awal untuk
-              menemukan pilihan nutrisi yang lebih tepat.
-            </p>
+              <h2 className="mt-6 max-w-3xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
+                Bingung memilih produk nutrisi yang sesuai?
+              </h2>
 
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="/kontak"
-                className="inline-flex rounded-full bg-white px-7 py-4 text-sm font-black text-[#006b3f] shadow-xl shadow-black/10"
-              >
-                Konsultasi Sekarang
-              </a>
+              <p className="mt-7 max-w-2xl text-base leading-8 text-white/80 md:text-lg">
+                Konsultasikan kebutuhan Anda dan dapatkan arahan awal untuk
+                menemukan pilihan nutrisi yang lebih tepat.
+              </p>
 
-              <a
-                href="/produk"
-                className="inline-flex rounded-full border border-white/20 px-7 py-4 text-sm font-black text-white"
-              >
-                Lihat Produk
-              </a>
-            </div>
-          </div>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <a
+                  href="/kontak"
+                  className="inline-flex rounded-full bg-white px-8 py-4 text-sm font-black text-[#006b3f] shadow-xl shadow-black/10 transition hover:-translate-y-1"
+                >
+                  Konsultasi Sekarang
+                </a>
 
-          <div className="relative min-h-[340px] bg-[#005432] p-8">
-            <div className="absolute right-[-60px] top-[-60px] h-48 w-48 rounded-full bg-white/10" />
-            <div className="absolute bottom-[-80px] left-[-80px] h-56 w-56 rounded-full bg-white/10" />
-
-            <div className="relative flex h-full min-h-[280px] items-center justify-center">
-              <div className="rounded-[2rem] bg-white/10 p-8 text-center backdrop-blur">
-                <p className="text-5xl font-black">24/7</p>
-                <p className="mt-3 text-sm font-semibold leading-6 text-white/80">
-                  Akses informasi produk, solusi nutrisi, dan kanal resmi
-                  Medikal Nutrience.
-                </p>
+                <a
+                  href="/produk"
+                  className="inline-flex rounded-full border border-white/25 bg-white/5 px-8 py-4 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-white/10"
+                >
+                  Lihat Produk
+                </a>
               </div>
+            </div>
+
+            <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden px-2 pb-6 lg:min-h-[500px] lg:px-4 lg:py-4">
+              <img
+                src="/images/support/konsultasi.png"
+                alt="Konsultasi nutrisi Medikal Nutrience"
+                className="relative z-10 h-auto w-[118%] max-w-none object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.02] lg:w-[125%]"
+              />
             </div>
           </div>
         </div>

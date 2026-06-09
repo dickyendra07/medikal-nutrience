@@ -1,60 +1,75 @@
-import { supports } from "@/data/home";
+const supportItems = [
+  {
+    title: "Cek Status Gizi",
+    description:
+      "Hitung status gizi awal melalui fitur BMI untuk membantu memahami kebutuhan tubuh.",
+    href: "/support-system/kalkulator-status-gizi",
+    image: "/images/support/bmi-calculator.png",
+  },
+  {
+    title: "Mitra Medis & Rumah Sakit",
+    description:
+      "Dukungan kolaborasi bersama tenaga medis, klinik, rumah sakit, dan institusi kesehatan.",
+    href: "/mitra-enterprise",
+    image: "/images/support/medical-partner.png",
+  },
+  {
+    title: "Artikel FIMA",
+    description:
+      "Konten edukasi nutrisi dan kesehatan yang disusun untuk membantu masyarakat memahami kebutuhan gizi.",
+    href: "/support-system/dapur-sehat-fima",
+    image: "/images/support/edu-article.png",
+  },
+];
 
 export function SupportSystem() {
   return (
-    <section className="bg-white px-5 py-20">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-white px-5 py-20 lg:px-10 md:py-24">
+      <div className="mx-auto w-full max-w-[1440px]">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#006b3f]">
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-[#006b3f]">
             Support System
           </p>
 
-          <h2 className="mt-3 text-3xl font-black leading-tight text-[#172554] md:text-5xl">
-            Dukungan Nutrisi Terintegrasi
+          <h2 className="mt-4 text-4xl font-black leading-tight tracking-tight text-[#0f172a] md:text-6xl">
+            Pendamping Nutrisi untuk Kebutuhan Anda
           </h2>
 
-          <p className="mt-5 text-sm leading-8 text-[#475569]">
-            Lebih dari sekadar produk, Medikal Nutrience menghadirkan dukungan
-            edukasi, konsultasi, dan akses informasi untuk membantu perjalanan
-            nutrisi Anda.
+          <p className="mt-5 text-base leading-8 text-[#64748b]">
+            Fitur pendukung, edukasi, dan akses mitra resmi untuk membantu
+            perjalanan nutrisi Anda.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {supports.map((item, index) => (
-            <article
+        <div className="mt-14 grid gap-8 lg:grid-cols-3">
+          {supportItems.map((item) => (
+            <a
               key={item.title}
-              className="group overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/10 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2"
+              href={item.href}
+              className="group overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15"
             >
-              <div className="relative h-56 overflow-hidden bg-[#edf7f2]">
-                <div className="absolute inset-6 rounded-[2rem] bg-gradient-to-br from-[#d8f6e8] to-[#ffffff]" />
-                <div className="absolute bottom-6 left-6 right-6 rounded-3xl bg-white/80 p-5 shadow-lg backdrop-blur">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
-                    {item.label}
-                  </p>
-                  <p className="mt-2 text-3xl font-black text-[#0f172a]">
-                    0{index + 1}
-                  </p>
-                </div>
+              <div className="relative overflow-hidden bg-[#eaf8f1] p-5">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-auto w-full rounded-[2rem] object-contain transition duration-500 group-hover:scale-[1.03]"
+                />
               </div>
 
-              <div className="p-7">
-                <h3 className="text-xl font-black text-[#111827]">
+              <div className="p-8">
+                <h3 className="text-2xl font-black leading-tight text-[#0f172a]">
                   {item.title}
                 </h3>
 
-                <p className="mt-3 min-h-24 text-sm leading-7 text-[#475569]">
-                  {item.desc}
+                <p className="mt-5 min-h-24 text-base leading-8 text-[#64748b]">
+                  {item.description}
                 </p>
 
-                <a
-                  href="/support-system"
-                  className="mt-6 inline-flex items-center rounded-full bg-[#006b3f] px-5 py-3 text-xs font-black uppercase tracking-wide text-white"
-                >
+                <span className="mt-8 inline-flex rounded-full bg-[#006b3f] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/20">
                   Selengkapnya
-                </a>
+                </span>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </div>

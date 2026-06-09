@@ -10,27 +10,28 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#f4fbf8]">
-        <div className="absolute left-[-180px] top-[-180px] h-[420px] w-[420px] rounded-full bg-[#d8f6e8]" />
-        <div className="absolute right-[-220px] top-20 h-[520px] w-[520px] rounded-full bg-[#c7f5d4]" />
+      <section className="relative w-full overflow-hidden bg-[#f4fbf8]">
+        <div className="absolute left-[-220px] top-[-220px] h-[520px] w-[520px] rounded-full bg-[#d8f6e8]" />
+        <div className="absolute right-[-260px] top-24 h-[620px] w-[620px] rounded-full bg-[#c7f5d4]" />
+        <div className="absolute bottom-[-180px] left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-white/60" />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-20">
-          <div>
-            <p className="mb-5 inline-flex rounded-full border border-[#006b3f]/10 bg-white px-4 py-2 text-sm font-bold text-[#006b3f] shadow-sm">
+        <div className="relative mx-auto grid min-h-[760px] w-full max-w-[1600px] items-center gap-10 px-5 py-14 md:grid-cols-[0.95fr_1.05fr] md:py-20 lg:px-12 xl:px-16">
+          <div className="relative z-20">
+            <p className="mb-5 inline-flex rounded-full border border-[#006b3f]/10 bg-white px-5 py-3 text-sm font-black text-[#006b3f] shadow-sm">
               Medikal Nutrience by PT Fima Internasional
             </p>
 
-            <h1 className="max-w-2xl text-4xl font-black leading-[1.05] tracking-tight text-[#0f172a] md:text-6xl">
+            <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-5xl font-black uppercase leading-[1.02] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
               Temukan Nutrisi yang Tepat untuk Kondisi Anda
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-8 text-[#475569]">
+            <p className="mt-7 max-w-2xl text-base leading-8 text-[#475569] md:text-lg">
               Dapatkan rekomendasi produk nutrisi berdasarkan kebutuhan tubuh,
               kondisi kesehatan, dan tahap kehidupan Anda bersama Medikal
               Nutrience.
             </p>
 
-            <div className="mt-8 max-w-xl rounded-[2rem] bg-white p-4 shadow-2xl shadow-green-900/10 ring-1 ring-black/5">
+            <div className="mt-9 max-w-2xl rounded-[2rem] bg-white p-4 shadow-2xl shadow-green-900/10 ring-1 ring-black/5">
               <label className="mb-3 block text-sm font-black text-[#006b3f]">
                 Kondisi kesehatan Anda hari ini?
               </label>
@@ -39,7 +40,7 @@ export function Hero() {
                 <select
                   value={selectedAssessmentFlow}
                   onChange={(event) => setSelectedAssessmentFlow(event.target.value)}
-                  className="w-full rounded-full border border-black/10 bg-[#f8fafc] px-5 py-3 text-sm font-semibold text-[#334155] outline-none focus:border-[#006b3f]"
+                  className="w-full rounded-full border border-black/10 bg-[#f8fafc] px-5 py-4 text-sm font-semibold text-[#334155] outline-none focus:border-[#006b3f]"
                 >
                   <option value="recovery">Recovery Saat Operasi</option>
                   <option value="ginjal">Ginjal</option>
@@ -54,20 +55,20 @@ export function Hero() {
                 <button
                   type="button"
                   onClick={() => setIsAssessmentOpen(true)}
-                  className="rounded-full bg-[#006b3f] px-7 py-3 text-sm font-black text-white shadow-lg shadow-green-900/20 transition hover:bg-[#005432]"
+                  className="rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white shadow-lg shadow-green-900/20 transition hover:-translate-y-1 hover:bg-[#005432]"
                 >
                   Temukan Rekomendasi
                 </button>
               </div>
             </div>
 
-            <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
+            <div className="mt-8 grid max-w-2xl grid-cols-3 gap-4">
               {stats.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl bg-white p-4 shadow-lg shadow-green-900/5 ring-1 ring-black/5"
+                  className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5"
                 >
-                  <p className="text-2xl font-black text-[#006b3f]">
+                  <p className="text-3xl font-black text-[#006b3f]">
                     {item.value}
                   </p>
                   <p className="mt-1 text-xs font-semibold leading-5 text-[#64748b]">
@@ -78,10 +79,12 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative min-h-[520px]">
-            <div className="absolute bottom-4 left-1/2 h-[440px] w-[440px] -translate-x-1/2 rounded-full bg-[#b7f7d0]" />
+          <div className="relative z-10 min-h-[560px] md:min-h-[680px]">
+            <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b7f7d0] md:h-[680px] md:w-[680px]" />
+            <div className="absolute right-[-90px] top-24 h-[360px] w-[360px] rounded-full bg-[#d8f6e8]" />
+            <div className="absolute bottom-20 left-12 h-[180px] w-[180px] rounded-full bg-white/50" />
 
-            <div className="absolute left-0 top-14 z-20 hidden rounded-3xl bg-white p-5 shadow-2xl shadow-green-900/15 ring-1 ring-black/5 md:block">
+            <div className="absolute left-0 top-12 z-0 hidden rounded-3xl bg-white/90 p-5 shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:block xl:left-2">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
                 Konsultasi
               </p>
@@ -90,7 +93,7 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="absolute bottom-12 right-0 z-20 hidden rounded-3xl bg-white p-5 shadow-2xl shadow-green-900/15 ring-1 ring-black/5 md:block">
+            <div className="absolute bottom-10 right-0 z-0 hidden rounded-3xl bg-white/90 p-5 shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:block xl:right-2">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
                 Produk
               </p>
@@ -99,22 +102,12 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="relative z-10 mx-auto flex min-h-[520px] max-w-md items-end justify-center">
-              <div className="absolute bottom-0 h-[430px] w-[300px] rounded-t-[9rem] bg-gradient-to-b from-white to-[#e4f8ed] shadow-2xl shadow-green-900/10" />
-
-              <div className="relative z-10 mb-10 flex h-[360px] w-[230px] flex-col items-center justify-end rounded-t-[7rem] bg-gradient-to-b from-[#ecfff3] to-[#c7f5d4] px-6 pb-8 text-center shadow-xl">
-                <div className="mb-6 h-28 w-28 rounded-full bg-[#006b3f]/10" />
-                <div className="h-32 w-24 rounded-3xl bg-white shadow-xl ring-1 ring-black/5">
-                  <div className="flex h-full flex-col items-center justify-center rounded-3xl bg-gradient-to-b from-[#0b8f52] to-[#006b3f] p-3 text-white">
-                    <p className="text-xs font-bold">MEDIKAL</p>
-                    <p className="mt-2 text-lg font-black">NUTRIENCE</p>
-                  </div>
-                </div>
-                <p className="mt-5 text-xs font-semibold leading-5 text-[#064e3b]">
-                  Area visual dokter dan produk akan kita replace dengan asset
-                  asli dari Figma.
-                </p>
-              </div>
+            <div className="relative z-20 mx-auto flex min-h-[560px] max-w-[760px] items-center justify-center md:min-h-[680px]">
+              <img
+                src="/images/home/hero-home.png"
+                alt="Medikal Nutrience official product and nutrition consultant"
+                className="relative z-30 h-auto w-full max-w-[700px] object-contain drop-shadow-2xl md:max-w-[760px] xl:max-w-[820px]"
+              />
             </div>
           </div>
         </div>

@@ -1,8 +1,56 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "KalbeGeometric";
+  src: url("/fonts/kalbe/KalbeGeometric-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KalbeGeometric";
+  src: url("/fonts/kalbe/KalbeGeometric-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KalbeGeometric";
+  src: url("/fonts/kalbe/KalbeGeometric-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KalbeGeometric";
+  src: url("/fonts/kalbe/KalbeGeometric-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KalbeGeometric";
+  src: url("/fonts/kalbe/KalbeGeometric-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KalbeGeometric";
+  src: url("/fonts/kalbe/KalbeGeometric-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #f4fbf8;
-  --foreground: #111827;
+  --background: #ffffff;
+  --foreground: #0f172a;
 }
 
 * {
@@ -13,11 +61,63 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
 body {
+  margin: 0;
+  min-height: 100%;
   background: var(--background);
   color: var(--foreground);
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+  font-weight: 400;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+.font-black {
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+  font-weight: 900 !important;
+}
+
+h4,
+h5,
+h6,
+.font-extrabold {
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.font-bold {
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.font-semibold {
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+  font-weight: 600 !important;
+}
+
+.font-medium {
+  font-family: "KalbeGeometric", Arial, Helvetica, sans-serif !important;
+  font-weight: 500 !important;
 }
 
 a {
   text-decoration: none;
+}
+
+::selection {
+  background: #006b3f;
+  color: #ffffff;
 }
