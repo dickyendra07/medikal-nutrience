@@ -26,7 +26,7 @@ export function SupportSystem() {
   return (
     <section className="bg-white px-5 py-20 lg:px-10 md:py-24">
       <div className="mx-auto w-full max-w-[1440px]">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-center reveal">
           <p className="text-sm font-black uppercase tracking-[0.3em] text-[#006b3f]">
             Support System
           </p>
@@ -46,7 +46,7 @@ export function SupportSystem() {
             <a
               key={item.title}
               href={item.href}
-              className="group overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15"
+              className="group reveal overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15"
             >
               <div className="relative overflow-hidden bg-[#eaf8f1] p-5">
                 <img

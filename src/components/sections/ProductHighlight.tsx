@@ -25,7 +25,7 @@ export function ProductHighlight() {
   return (
     <section className="bg-[#004b34] px-5 py-20 lg:px-10 text-white md:py-24">
       <div className="mx-auto w-full max-w-[1440px]">
-        <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-end">
+        <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-end reveal">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.35em] text-[#b7f7d0]">
               Produk Unggulan
@@ -47,7 +47,7 @@ export function ProductHighlight() {
             <a
               key={product.name}
               href={product.href}
-              className="group block overflow-hidden rounded-[2rem] bg-white/5 transition duration-300 hover:-translate-y-2"
+              className="group reveal block overflow-hidden rounded-[2rem] bg-white/5 transition duration-300 hover:-translate-y-2"
               aria-label={`Lihat produk ${product.name}`}
             >
               <img

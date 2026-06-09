@@ -4,340 +4,236 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
-type MegaMenuItem = {
-  label: string;
-  href: string;
-  description: string;
-  badge?: string;
-};
+const menuItems = [
+  { label: "Home", href: "/" },
+  { label: "Tentang", href: "/tentang" },
+  { label: "Produk", href: "/produk", mega: "produk" },
+  { label: "Solusi", href: "/solusi", mega: "solusi" },
+  { label: "Support System", href: "/support-system", mega: "support" },
+  { label: "Apotek Resmi", href: "/apotek-resmi" },
+  { label: "Kontak", href: "/kontak" },
+];
 
-type MainMenuItem = {
-  label: string;
-  href: string;
-  description?: string;
-  children?: MegaMenuItem[];
-};
-
-const mainMenu: MainMenuItem[] = [
-  {
-    label: "Beranda",
-    href: "/",
-  },
-  {
-    label: "Produk",
-    href: "/produk",
+const megaMenus = {
+  produk: {
+    eyebrow: "Produk Nutrisi",
+    title: "Pilihan nutrisi Medikal Nutrience",
     description:
-      "Rangkaian produk nutrisi untuk anak, dewasa, lansia, dan kondisi medis tertentu.",
-    children: [
-      {
-        label: "Entrakid",
-        href: "/produk/entrakid",
-        description: "Nutrisi untuk tumbuh kembang anak usia 1–12 tahun.",
-        badge: "Anak",
-      },
-      {
-        label: "Entramix",
-        href: "/produk/entramix",
-        description: "Nutrisi lengkap dan seimbang untuk dewasa hingga lansia.",
-        badge: "Lansia",
-      },
-      {
-        label: "Entrasoy",
-        href: "/produk/entrasoy",
-        description: "Solusi gizi 100% protein nabati.",
-        badge: "Nabati",
-      },
-      {
-        label: "Peptisol",
-        href: "/produk/peptisol",
-        description: "Tinggi protein untuk pemulihan pasca sakit.",
-        badge: "Pemulihan",
-      },
-      {
-        label: "Peptibren",
-        href: "/produk/peptibren",
-        description: "Dukungan nutrisi untuk kebutuhan stroke/alzheimer.",
-        badge: "Neuro",
-      },
-      {
-        label: "Nephrisol",
-        href: "/produk/nephrisol",
-        description: "Dukungan nutrisi ginjal sebelum dialisis.",
-        badge: "Ginjal",
-      },
-      {
-        label: "Nephrisol-D",
-        href: "/produk/nephrisol-d",
-        description: "Nutrisi khusus untuk pasien ginjal dialisis.",
-        badge: "Dialisis",
-      },
-      {
-        label: "Hepatosol",
-        href: "/produk/hepatosol",
-        description: "Solusi gizi untuk gangguan fungsi hati kronik.",
-        badge: "Hati",
-      },
-      {
-        label: "Hepatosol Lola",
-        href: "/produk/hepatosol-lola",
-        description: "Nutrisi enteral untuk gangguan fungsi hati berat.",
-        badge: "Hati",
-      },
-      {
-        label: "Oligo",
-        href: "/produk/oligo",
-        description: "Nutrisi cepat serap untuk sistem saluran cerna.",
-        badge: "Cerna",
-      },
-      {
-        label: "Pulmosol",
-        href: "/produk/pulmosol",
-        description: "Solusi nutrisi untuk masalah pernafasan.",
-        badge: "Napas",
-      },
+      "Jelajahi produk nutrisi untuk kebutuhan anak, dewasa, lansia, dan kondisi kesehatan khusus.",
+    items: [
+      { label: "Entrakid", href: "/produk/entrakid", desc: "Nutrisi untuk anak" },
+      { label: "Entramix", href: "/produk/entramix", desc: "Nutrisi lengkap harian" },
+      { label: "Entrasoy", href: "/produk/entrasoy", desc: "Nutrisi berbasis soya" },
+      { label: "Peptisol", href: "/produk/peptisol", desc: "Nutrisi tinggi protein" },
+      { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal" },
+      { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati" },
+      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Dukungan nutrisi pernafasan" },
+      { label: "Oligo", href: "/produk/oligo", desc: "Nutrisi saluran cerna" },
     ],
   },
-  {
-    label: "Solusi",
-    href: "/solusi",
+  solusi: {
+    eyebrow: "Solusi Kesehatan",
+    title: "Solusi nutrisi berdasarkan kondisi",
     description:
-      "Temukan rekomendasi produk berdasarkan kondisi tubuh dan kebutuhan nutrisi.",
-    children: [
-      {
-        label: "Ginjal",
-        href: "/solusi/ginjal",
-        description: "Rekomendasi untuk pra-dialisis dan dialisis.",
-        badge: "Nephrisol",
-      },
-      {
-        label: "Hati / Liver",
-        href: "/solusi/hati-liver",
-        description: "Dukungan nutrisi untuk gangguan fungsi hati.",
-        badge: "Hepatosol",
-      },
-      {
-        label: "Pernafasan",
-        href: "/solusi/pernafasan",
-        description: "Dukungan nutrisi untuk PPOK, asma, pneumonia, dan TB paru.",
-        badge: "Pulmosol",
-      },
-      {
-        label: "Pencernaan",
-        href: "/solusi/pencernaan",
-        description: "Solusi cepat serap untuk saluran cerna.",
-        badge: "Oligo",
-      },
-      {
-        label: "Pemulihan",
-        href: "/solusi/pemulihan",
-        description: "Dukungan nutrisi pasca operasi dan pemulihan.",
-        badge: "Peptisol",
-      },
-      {
-        label: "Anak",
-        href: "/solusi/anak",
-        description: "Dukungan nutrisi untuk tumbuh kembang anak.",
-        badge: "Entrakid",
-      },
-      {
-        label: "Dewasa & Lansia",
-        href: "/solusi/dewasa-lansia",
-        description: "Nutrisi seimbang untuk dewasa dan lansia.",
-        badge: "Entramix",
-      },
+      "Temukan rekomendasi nutrisi berdasarkan kebutuhan tubuh dan kondisi kesehatan.",
+    items: [
+      { label: "Ginjal", href: "/solusi/ginjal", desc: "Pra-dialisis dan dialisis" },
+      { label: "Hati / Liver", href: "/solusi/hati-liver", desc: "Dukungan fungsi hati" },
+      { label: "Pernafasan", href: "/solusi/pernafasan", desc: "PPOK, asma, pneumonia, TB" },
+      { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan saluran cerna" },
+      { label: "Pemulihan", href: "/solusi/pemulihan", desc: "Recovery dan nutrisi protein" },
+      { label: "Anak", href: "/solusi/anak", desc: "Tumbuh kembang anak" },
     ],
   },
-  {
-    label: "Support System",
-    href: "/support-system",
+  support: {
+    eyebrow: "Support System",
+    title: "Tools dan edukasi pendukung",
     description:
-      "Fitur pendukung untuk membantu pengguna memahami status gizi, membaca edukasi, dan mengikuti aktivitas kesehatan.",
-    children: [
+      "Dukung perjalanan nutrisi dengan kalkulator, edukasi, komunitas, dan akses apotek resmi.",
+    items: [
       {
         label: "Kalkulator Status Gizi",
         href: "/support-system/kalkulator-status-gizi",
-        description: "Cek status gizi awal berdasarkan data tubuh pengguna.",
-        badge: "BMI",
+        desc: "Cek IMT dan kebutuhan kalori",
+      },
+      {
+        label: "Dapur Sehat FIMA",
+        href: "/support-system/dapur-sehat-fima",
+        desc: "Edukasi dan inspirasi nutrisi",
       },
       {
         label: "Kisah Sukses Pasien",
         href: "/support-system/kisah-sukses-pasien",
-        description: "Cerita inspiratif perjalanan pasien dan dukungan nutrisi.",
-        badge: "Story",
-      },
-      {
-        label: "Dapur Sehat Fima",
-        href: "/support-system/dapur-sehat-fima",
-        description: "Inspirasi menu dan resep sehat untuk kebutuhan harian.",
-        badge: "Resep",
+        desc: "Cerita dan pengalaman pasien",
       },
       {
         label: "Komunitas Sehat",
         href: "/support-system/komunitas-sehat",
-        description: "Ruang edukasi dan aktivitas komunitas untuk hidup lebih sehat.",
-        badge: "Community",
+        desc: "Program komunitas dan edukasi",
+      },
+      {
+        label: "Apotek Resmi",
+        href: "/apotek-resmi",
+        desc: "Temukan official pharmacy",
       },
     ],
   },
-  {
-    label: "Tentang",
-    href: "/tentang",
-  },
-];
+};
 
-const quickLinks = [
-  {
-    label: "Mitra Enterprise",
-    href: "/mitra-enterprise",
-  },
-  {
-    label: "Apotek Resmi",
-    href: "/apotek-resmi",
-  },
-  {
-    label: "Kontak",
-    href: "/kontak",
-  },
-];
+function isActivePath(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+type MegaKey = keyof typeof megaMenus;
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
+  const [activeMega, setActiveMega] = useState<MegaKey | null>(null);
   const pathname = usePathname();
-
-  const isActive = (href: string) => {
-    if (href === "/") {
-      return pathname === "/";
-    }
-
-    return pathname.startsWith(href);
-  };
-
-  const activeMenu = mainMenu.find((item) => item.label === activeMegaMenu);
 
   return (
     <header
-      className="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur"
-      onMouseLeave={() => setActiveMegaMenu(null)}
+      className="sticky top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-xl"
+      onMouseLeave={() => setActiveMega(null)}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-5">
-        <a
-          href="/"
-          className="flex items-center"
-          onClick={() => {
-            setIsOpen(false);
-            setActiveMegaMenu(null);
-          }}
-        >
-          <BrandLogo />
+      <div className="mx-auto flex h-24 w-full max-w-[1440px] items-center justify-between px-5 lg:px-10">
+        <a href="/" className="flex items-center">
+          <BrandLogo className="h-12 w-auto" />
         </a>
 
-        <div className="hidden flex-1 justify-center md:flex">
-          <div className="flex w-full max-w-md items-center rounded-full border border-black/10 bg-white px-5 py-2.5 shadow-sm">
-            <input
-              type="text"
-              placeholder="Cari produk, solusi, atau artikel..."
-              className="w-full bg-transparent text-sm outline-none placeholder:text-[#9ca3af]"
-            />
-            <span className="text-sm text-[#006b3f]">⌕</span>
-          </div>
-        </div>
+        <nav className="hidden items-center gap-1 lg:flex">
+          {menuItems.map((item) => {
+            const active = isActivePath(pathname, item.href);
+            const hasMega = Boolean(item.mega);
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-[#374151] lg:flex">
-          {mainMenu.map((item) => (
-            <div
-              key={item.label}
-              className="py-2"
-              onMouseEnter={() => {
-                if (item.children) {
-                  setActiveMegaMenu(item.label);
-                } else {
-                  setActiveMegaMenu(null);
+            return (
+              <div
+                key={item.href}
+                className="relative"
+                onMouseEnter={() =>
+                  hasMega ? setActiveMega(item.mega as MegaKey) : setActiveMega(null)
                 }
-              }}
-            >
-              <a
-                href={item.href}
-                onFocus={() => {
-                  if (item.children) {
-                    setActiveMegaMenu(item.label);
-                  }
-                }}
-                className={`inline-flex items-center gap-1 transition hover:text-[#006b3f] ${
-                  isActive(item.href) ? "font-black text-[#006b3f]" : ""
-                }`}
               >
-                {item.label}
-                {item.children ? <span className="text-xs">⌄</span> : null}
-              </a>
-            </div>
-          ))}
+                <a
+                  href={item.href}
+                  className={`group relative inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold transition duration-300 ${
+                    active
+                      ? "bg-[#e7f7ef] text-[#006b3f]"
+                      : "text-[#263238] hover:bg-[#f0faf5] hover:text-[#006b3f]"
+                  }`}
+                >
+                  <span className="relative z-10">{item.label}</span>
+
+                  {hasMega ? (
+                    <span
+                      className={`text-xs transition ${
+                        activeMega === item.mega ? "rotate-180" : ""
+                      }`}
+                    >
+                      ▾
+                    </span>
+                  ) : null}
+
+                  <span
+                    className={`absolute bottom-2 left-1/2 h-[3px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#006b3f] via-[#10b981] to-[#8bd450] transition-all duration-300 ${
+                      active
+                        ? "w-8 opacity-100"
+                        : "w-0 opacity-0 group-hover:w-8 group-hover:opacity-100"
+                    }`}
+                  />
+                </a>
+              </div>
+            );
+          })}
         </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href="/kontak"
+            className="group inline-flex items-center gap-3 rounded-full bg-[#006b3f] px-5 py-3 text-sm font-black text-white shadow-lg shadow-green-900/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#005635] hover:shadow-xl hover:shadow-green-900/20"
+          >
+            Konsultasi
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
+              →
+            </span>
+          </a>
+        </div>
 
         <button
           type="button"
-          onClick={() => setIsOpen((current) => !current)}
-          className="inline-flex items-center gap-2 rounded-full bg-[#006b3f] px-4 py-2 text-sm font-semibold text-white lg:hidden"
-          aria-label="Toggle navigation menu"
-          aria-expanded={isOpen}
+          onClick={() => setIsOpen((value) => !value)}
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white text-[#006b3f] shadow-sm lg:hidden"
+          aria-label="Toggle menu"
         >
-          <span>{isOpen ? "Tutup" : "Menu"}</span>
-          <span className="text-base leading-none">{isOpen ? "×" : "☰"}</span>
+          <span className="relative h-4 w-5">
+            <span
+              className={`absolute left-0 top-0 h-[2px] w-5 rounded-full bg-current transition ${
+                isOpen ? "translate-y-[7px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[7px] h-[2px] w-5 rounded-full bg-current transition ${
+                isOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[14px] h-[2px] w-5 rounded-full bg-current transition ${
+                isOpen ? "-translate-y-[7px] -rotate-45" : ""
+              }`}
+            />
+          </span>
         </button>
       </div>
 
-      {activeMenu?.children ? (
+      {activeMega ? (
         <div
-          className="hidden border-t border-black/5 bg-white shadow-2xl shadow-green-900/10 lg:block"
-          onMouseEnter={() => setActiveMegaMenu(activeMenu.label)}
+          className="hidden border-t border-black/5 bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur-xl lg:block"
+          onMouseEnter={() => setActiveMega(activeMega)}
         >
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 lg:grid-cols-[0.75fr_1.25fr]">
-            <div className="rounded-[2rem] bg-[#006b3f] p-8 text-white">
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-[#b7f7d0]">
-                {activeMenu.label}
+          <div className="mx-auto grid w-full max-w-[1440px] grid-cols-[0.85fr_1.15fr] gap-10 px-10 py-8">
+            <div className="rounded-[2rem] bg-gradient-to-br from-[#006b3f] via-[#087a4c] to-[#10b981] p-8 text-white">
+              <p className="text-xs font-black uppercase tracking-[0.35em] text-white/70">
+                {megaMenus[activeMega].eyebrow}
               </p>
-
-              <h3 className="mt-4 text-3xl font-black leading-tight">
-                Jelajahi {activeMenu.label}
+              <h3 className="mt-5 max-w-md text-3xl font-black leading-tight">
+                {megaMenus[activeMega].title}
               </h3>
-
-              <p className="mt-4 text-sm leading-7 text-white/80">
-                {activeMenu.description}
+              <p className="mt-4 max-w-md text-sm font-medium leading-7 text-white/80">
+                {megaMenus[activeMega].description}
               </p>
 
               <a
-                href={activeMenu.href}
-                className="mt-6 inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-[#006b3f]"
-                onClick={() => setActiveMegaMenu(null)}
+                href={
+                  activeMega === "produk"
+                    ? "/produk"
+                    : activeMega === "solusi"
+                      ? "/solusi"
+                      : "/support-system"
+                }
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-black text-[#006b3f] transition hover:-translate-y-0.5"
               >
-                Lihat Semua {activeMenu.label}
+                Lihat Semua
+                <span>→</span>
               </a>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              {activeMenu.children.map((child) => (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {megaMenus[activeMega].items.map((item) => (
                 <a
-                  key={child.href}
-                  href={child.href}
-                  onClick={() => setActiveMegaMenu(null)}
-                  className="group rounded-[1.5rem] bg-[#f8fafc] p-5 ring-1 ring-black/5 transition hover:bg-[#e4f8ed] hover:ring-[#006b3f]/20"
+                  key={item.href}
+                  href={item.href}
+                  className="group rounded-[1.5rem] border border-black/5 bg-[#f8fcfa] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#006b3f]/20 hover:bg-[#eefaf4] hover:shadow-xl hover:shadow-green-900/10"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-base font-black text-[#0f172a] group-hover:text-[#006b3f]">
-                        {child.label}
-                      </p>
-                      <p className="mt-2 text-sm leading-6 text-[#64748b]">
-                        {child.description}
-                      </p>
-                    </div>
-
-                    {child.badge ? (
-                      <span className="shrink-0 rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase tracking-wide text-[#006b3f] shadow-sm">
-                        {child.badge}
-                      </span>
-                    ) : null}
-                  </div>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e1f5eb] text-sm font-black text-[#006b3f] transition group-hover:bg-[#006b3f] group-hover:text-white">
+                    →
+                  </span>
+                  <h4 className="mt-4 text-base font-black text-[#111827]">
+                    {item.label}
+                  </h4>
+                  <p className="mt-2 text-sm font-medium leading-6 text-[#6b7280]">
+                    {item.desc}
+                  </p>
                 </a>
               ))}
             </div>
@@ -346,76 +242,35 @@ export function Navbar() {
       ) : null}
 
       {isOpen ? (
-        <div className="border-t border-black/5 bg-white px-5 pb-6 pt-2 shadow-2xl shadow-green-900/10 lg:hidden">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-5 flex rounded-full border border-black/10 bg-[#f8fafc] px-5 py-3 shadow-sm md:hidden">
-              <input
-                type="text"
-                placeholder="Cari produk, solusi, atau artikel..."
-                className="w-full bg-transparent text-sm outline-none placeholder:text-[#9ca3af]"
-              />
-              <span className="text-sm text-[#006b3f]">⌕</span>
-            </div>
+        <div className="border-t border-black/5 bg-white px-5 py-5 shadow-2xl shadow-slate-900/10 lg:hidden">
+          <div className="mx-auto flex max-w-[1440px] flex-col gap-2">
+            {menuItems.map((item) => {
+              const active = isActivePath(pathname, item.href);
 
-            <nav className="grid gap-3">
-              {mainMenu.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-[1.5rem] bg-[#f4fbf8] p-2"
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`relative overflow-hidden rounded-2xl px-5 py-4 text-base font-bold transition ${
+                    active
+                      ? "bg-[#006b3f] text-white shadow-lg shadow-green-900/15"
+                      : "bg-[#f6fbf8] text-[#263238] hover:bg-[#e7f7ef] hover:text-[#006b3f]"
+                  }`}
                 >
-                  <a
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex rounded-2xl px-5 py-4 text-sm font-black transition ${
-                      isActive(item.href)
-                        ? "bg-[#006b3f] text-white"
-                        : "bg-white text-[#334155] hover:bg-[#e4f8ed] hover:text-[#006b3f]"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
+                  {item.label}
 
-                  {item.children ? (
-                    <div className="mt-2 grid gap-1 px-2 pb-2">
-                      {item.children.map((child) => (
-                        <a
-                          key={child.href}
-                          href={child.href}
-                          onClick={() => setIsOpen(false)}
-                          className="rounded-xl px-4 py-3 text-sm font-bold text-[#475569] transition hover:bg-white hover:text-[#006b3f]"
-                        >
-                          {child.label}
-                        </a>
-                      ))}
-                    </div>
+                  {active ? (
+                    <span className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#8bd450] via-[#10b981] to-[#006b3f]" />
                   ) : null}
-                </div>
-              ))}
-            </nav>
-
-            <div className="mt-5 rounded-[1.5rem] bg-[#f8fafc] p-4 ring-1 ring-black/5">
-              <p className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">
-                Akses Cepat
-              </p>
-
-              <div className="grid gap-2 sm:grid-cols-3">
-                {quickLinks.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-2xl bg-white px-4 py-3 text-sm font-bold text-[#334155] shadow-sm transition hover:text-[#006b3f]"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
+                </a>
+              );
+            })}
 
             <a
               href="/kontak"
               onClick={() => setIsOpen(false)}
-              className="mt-5 flex items-center justify-center rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white shadow-lg shadow-green-900/20"
+              className="mt-3 rounded-2xl bg-[#006b3f] px-5 py-4 text-center text-base font-black text-white shadow-lg shadow-green-900/15"
             >
               Konsultasi Sekarang
             </a>

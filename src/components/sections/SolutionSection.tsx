@@ -84,7 +84,7 @@ export function SolutionSection() {
   return (
     <section className="bg-[#effaf5] px-5 py-20 md:py-24 lg:px-10">
       <div className="mx-auto w-full max-w-[1440px]">
-        <div>
+        <div className="reveal">
           <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-[#111827] md:text-6xl">
             Solusi Nutrisi Berdasarkan Kebutuhan Tubuh
           </h2>
@@ -95,7 +95,7 @@ export function SolutionSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-5">
+        <div className="mt-10 grid gap-4 md:grid-cols-5 reveal reveal-delay-1">
           {solutions.map((solution) => {
             const isActive = activeSolution.key === solution.key;
 
@@ -125,7 +125,7 @@ export function SolutionSection() {
         </div>
 
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5">
+          <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-left reveal-delay-2">
             <img
               src={activeSolution.image}
               alt={activeSolution.title}
@@ -133,7 +133,7 @@ export function SolutionSection() {
             />
           </div>
 
-          <div className="lg:pl-4">
+          <div className="lg:pl-4 reveal-right reveal-delay-2">
             <p className="mb-4 text-sm font-black uppercase tracking-[0.35em] text-[#006b3f]">
               {activeSolution.eyebrow}
             </p>

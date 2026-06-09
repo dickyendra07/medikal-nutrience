@@ -16,7 +16,7 @@ export function Hero() {
         <div className="absolute bottom-[-180px] left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-white/60" />
 
         <div className="relative mx-auto grid min-h-[760px] w-full max-w-[1600px] items-center gap-10 px-5 py-14 md:grid-cols-[0.95fr_1.05fr] md:py-20 lg:px-12 xl:px-16">
-          <div className="relative z-20">
+          <div className="relative z-20 reveal-left">
             <p className="mb-5 inline-flex rounded-full border border-[#006b3f]/10 bg-white px-5 py-3 text-sm font-black text-[#006b3f] shadow-sm">
               Medikal Nutrience by PT Fima Internasional
             </p>
@@ -79,7 +79,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative z-10 min-h-[560px] md:min-h-[680px]">
+          <div className="relative z-10 min-h-[560px] md:min-h-[680px] reveal-scale reveal-delay-2">
             <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b7f7d0] md:h-[680px] md:w-[680px]" />
             <div className="absolute right-[-90px] top-24 h-[360px] w-[360px] rounded-full bg-[#d8f6e8]" />
             <div className="absolute bottom-20 left-12 h-[180px] w-[180px] rounded-full bg-white/50" />
