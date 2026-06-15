@@ -5,44 +5,30 @@ import { pharmacies } from "@/data/pharmacies";
 
 export function PharmacyLocator() {
   const [search, setSearch] = useState("");
-  const [province, setProvince] = useState("Semua Provinsi");
   const [city, setCity] = useState("Semua Kota");
 
-  const provinces = useMemo(() => {
+  const cities = useMemo(() => {
     return [
-      "Semua Provinsi",
-      ...Array.from(new Set(pharmacies.map((item) => item.province))).sort(),
+      "Semua Kota",
+      ...Array.from(new Set(pharmacies.map((item) => item.city))).sort(),
     ];
   }, []);
 
-  const cities = useMemo(() => {
-    const filtered =
-      province === "Semua Provinsi"
-        ? pharmacies
-        : pharmacies.filter((item) => item.province === province);
-
-    return [
-      "Semua Kota",
-      ...Array.from(new Set(filtered.map((item) => item.city))).sort(),
-    ];
-  }, [province]);
-
   const filteredPharmacies = useMemo(() => {
     return pharmacies.filter((item) => {
-      const keyword = `${item.name} ${item.city} ${item.province} ${item.address}`.toLowerCase();
+      const keyword = `${item.name} ${item.city} ${item.address} ${item.stock.join(
+        " "
+      )}`.toLowerCase();
 
       const matchSearch = keyword.includes(search.toLowerCase());
-      const matchProvince =
-        province === "Semua Provinsi" || item.province === province;
       const matchCity = city === "Semua Kota" || item.city === city;
 
-      return matchSearch && matchProvince && matchCity;
+      return matchSearch && matchCity;
     });
-  }, [search, province, city]);
+  }, [search, city]);
 
   function resetFilter() {
     setSearch("");
-    setProvince("Semua Provinsi");
     setCity("Semua Kota");
   }
 
@@ -62,26 +48,22 @@ export function PharmacyLocator() {
                 </h2>
 
                 <p className="mt-4 max-w-xl text-sm font-medium leading-7 text-white/80 md:text-base">
-                  Gunakan pencarian dan filter lokasi untuk menemukan apotek
-                  resmi yang menyediakan produk Medikal Nutrience.
+                  Gunakan pencarian dan filter kota untuk menemukan apotek resmi
+                  yang menyediakan produk Medikal Nutrience.
                 </p>
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   <div className="rounded-2xl bg-white/12 p-4 ring-1 ring-white/15">
-                    <p className="text-2xl font-black">
-                      {pharmacies.length}
-                    </p>
+                    <p className="text-2xl font-black">{pharmacies.length}</p>
                     <p className="mt-1 text-xs font-bold uppercase tracking-wide text-white/70">
                       Total Apotek
                     </p>
                   </div>
 
                   <div className="rounded-2xl bg-white/12 p-4 ring-1 ring-white/15">
-                    <p className="text-2xl font-black">
-                      {provinces.length - 1}
-                    </p>
+                    <p className="text-2xl font-black">{cities.length - 1}</p>
                     <p className="mt-1 text-xs font-bold uppercase tracking-wide text-white/70">
-                      Provinsi
+                      Kota
                     </p>
                   </div>
                 </div>
@@ -95,48 +77,26 @@ export function PharmacyLocator() {
                   <input
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
-                    placeholder="Nama apotek, kota, atau alamat"
+                    placeholder="Nama apotek, kota, produk, atau alamat"
                     className="h-12 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-semibold text-[#111827] outline-none transition placeholder:text-[#9ca3af] focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10"
                   />
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">
-                      Provinsi
-                    </label>
-                    <select
-                      value={province}
-                      onChange={(event) => {
-                        setProvince(event.target.value);
-                        setCity("Semua Kota");
-                      }}
-                      className="h-12 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-semibold text-[#111827] outline-none transition focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10"
-                    >
-                      {provinces.map((item, index) => (
-                        <option key={`province-${item}-${index}`} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">
-                      Kota
-                    </label>
-                    <select
-                      value={city}
-                      onChange={(event) => setCity(event.target.value)}
-                      className="h-12 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-semibold text-[#111827] outline-none transition focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10"
-                    >
-                      {cities.map((item, index) => (
-                        <option key={`city-${item}-${index}`} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                <div>
+                  <label className="mb-2 block text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">
+                    Kota
+                  </label>
+                  <select
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
+                    className="h-12 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-semibold text-[#111827] outline-none transition focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10"
+                  >
+                    {cities.map((item, index) => (
+                      <option key={`city-${item}-${index}`} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <button
@@ -189,34 +149,40 @@ export function PharmacyLocator() {
                               <span className="rounded-full bg-white px-3 py-1 text-[11px] font-black uppercase tracking-wide text-[#006b3f] ring-1 ring-[#006b3f]/10">
                                 {item.city}
                               </span>
+
                               <span className="rounded-full bg-white px-3 py-1 text-[11px] font-black uppercase tracking-wide text-[#6b7280] ring-1 ring-black/5">
-                                {item.province}
+                                {item.status}
                               </span>
                             </div>
                           </div>
 
-                          {item.mapUrl ? (
-                            <a
-                              href={item.mapUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-[#006b3f] px-4 py-2 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-[#005635]"
-                            >
-                              Maps
-                              <span>→</span>
-                            </a>
-                          ) : null}
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                              `${item.name} ${item.address}`
+                            )}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-[#006b3f] px-4 py-2 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-[#005635]"
+                          >
+                            Maps
+                            <span>→</span>
+                          </a>
                         </div>
 
                         <p className="mt-3 line-clamp-2 text-sm font-medium leading-6 text-[#6b7280]">
                           {item.address}
                         </p>
 
-                        {item.phone ? (
-                          <p className="mt-2 text-xs font-bold text-[#111827]">
-                            Telp: {item.phone}
-                          </p>
-                        ) : null}
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {item.stock.slice(0, 3).map((product) => (
+                            <span
+                              key={`${item.name}-${product}`}
+                              className="rounded-full bg-[#eaf8f1] px-3 py-1 text-[11px] font-black uppercase tracking-wide text-[#006b3f]"
+                            >
+                              {product}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </article>
