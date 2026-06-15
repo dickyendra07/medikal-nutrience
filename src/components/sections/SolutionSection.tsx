@@ -82,20 +82,20 @@ export function SolutionSection() {
     solutions.find((solution) => solution.key === activeKey) ?? solutions[0];
 
   return (
-    <section className="bg-[#effaf5] px-5 py-20 md:py-24 lg:px-10">
+    <section className="bg-[#effaf5] px-5 py-12 md:py-24 lg:px-10">
       <div className="mx-auto w-full max-w-[1440px]">
         <div className="reveal">
-          <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-[#111827] md:text-6xl">
+          <h2 className="max-w-3xl text-3xl font-black leading-tight tracking-tight text-[#111827] md:text-6xl">
             Solusi Nutrisi Berdasarkan Kebutuhan Tubuh
           </h2>
 
-          <p className="mt-5 max-w-5xl text-base font-medium leading-8 text-[#111827]">
+          <p className="mt-4 max-w-5xl text-sm font-medium leading-7 text-[#111827] md:text-base md:leading-8">
             Setiap kondisi memerlukan pendekatan nutrisi yang berbeda. Temukan
             pilihan yang sesuai dengan kebutuhan Anda.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-5 reveal reveal-delay-1">
+        <div className="mt-7 flex gap-3 overflow-x-auto pb-5 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 reveal reveal-delay-1">
           {solutions.map((solution) => {
             const isActive = activeSolution.key === solution.key;
 
@@ -104,7 +104,7 @@ export function SolutionSection() {
                 key={solution.key}
                 type="button"
                 onClick={() => setActiveKey(solution.key)}
-                className={`relative flex min-h-[120px] flex-col items-center justify-center rounded-2xl border px-5 py-5 text-center transition duration-300 ${
+                className={`relative flex min-h-[92px] min-w-[132px] flex-col items-center justify-center rounded-2xl border px-4 py-4 text-center transition duration-300 md:min-h-[120px] md:min-w-0 md:px-5 md:py-5 ${
                   isActive
                     ? "border-[#006b3f] bg-[#006b3f] text-white shadow-xl shadow-green-900/20"
                     : "border-black/10 bg-white text-[#005b3d] shadow-md shadow-slate-900/5 hover:-translate-y-1 hover:border-[#006b3f]/30"
@@ -112,7 +112,7 @@ export function SolutionSection() {
               >
                 <Icon type={solution.icon} active={isActive} />
 
-                <span className="mt-3 text-base font-black leading-tight">
+                <span className="mt-2 text-sm font-black leading-tight md:mt-3 md:text-base">
                   {solution.tab}
                 </span>
 
@@ -124,8 +124,8 @@ export function SolutionSection() {
           })}
         </div>
 
-        <div className="mt-16 grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-left reveal-delay-2">
+        <div className="mt-8 grid items-center gap-7 lg:mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
+          <div className="overflow-hidden rounded-[1.8rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-left reveal-delay-2 lg:rounded-[2.5rem]">
             <img
               src={activeSolution.image}
               alt={activeSolution.title}
@@ -134,22 +134,22 @@ export function SolutionSection() {
           </div>
 
           <div className="lg:pl-4 reveal-right reveal-delay-2">
-            <p className="mb-4 text-sm font-black uppercase tracking-[0.35em] text-[#006b3f]">
+            <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-[#006b3f] md:mb-4 md:text-sm md:tracking-[0.35em]">
               {activeSolution.eyebrow}
             </p>
 
             <h3
-              className="max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl"
+              className="max-w-2xl text-2xl font-black leading-tight tracking-tight md:text-5xl"
               style={{ color: activeSolution.accent }}
             >
               {activeSolution.title}
             </h3>
 
-            <p className="mt-6 max-w-2xl text-base font-medium leading-8 text-[#6b7280]">
+            <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-[#6b7280] md:mt-6 md:text-base md:leading-8">
               {activeSolution.description}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-5">
+            <div className="mt-6 flex flex-wrap gap-3 md:mt-8 md:gap-5">
               <a
                 href={activeSolution.href}
                 className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-lg transition hover:-translate-y-1"

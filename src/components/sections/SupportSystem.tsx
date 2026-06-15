@@ -41,14 +41,14 @@ export function SupportSystem() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-3">
+        <div className="no-scrollbar mt-8 flex snap-x gap-4 overflow-x-auto pb-5 lg:mt-14 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-0">
           {supportItems.map((item) => (
             <a
               key={item.title}
               href={item.href}
-              className="group reveal overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15"
+              className="group reveal min-w-[82%] snap-start overflow-hidden rounded-[1.8rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15 sm:min-w-[58%] lg:min-w-0 lg:rounded-[2.5rem] lg:shadow-2xl"
             >
-              <div className="relative overflow-hidden bg-[#eaf8f1] p-5">
+              <div className="relative overflow-hidden bg-[#eaf8f1] p-3 lg:p-5">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -56,7 +56,7 @@ export function SupportSystem() {
                 />
               </div>
 
-              <div className="p-8">
+              <div className="p-5 lg:p-8">
                 <h3 className="text-2xl font-black leading-tight text-[#0f172a]">
                   {item.title}
                 </h3>

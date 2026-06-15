@@ -21,7 +21,7 @@ export function Hero() {
               Medikal Nutrience by PT Fima Internasional
             </p>
 
-            <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-5xl font-black uppercase leading-[1.02] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
+            <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-[2.55rem] font-black uppercase leading-[0.98] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
               Temukan Nutrisi yang Tepat untuk Kondisi Anda
             </h1>
 
@@ -79,7 +79,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative z-10 min-h-[560px] md:min-h-[680px] reveal-scale reveal-delay-2">
+          <div className="relative z-10 min-h-[360px] md:min-h-[680px] reveal-scale reveal-delay-2">
             <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b7f7d0] md:h-[680px] md:w-[680px]" />
             <div className="absolute right-[-90px] top-24 h-[360px] w-[360px] rounded-full bg-[#d8f6e8]" />
             <div className="absolute bottom-20 left-12 h-[180px] w-[180px] rounded-full bg-white/50" />

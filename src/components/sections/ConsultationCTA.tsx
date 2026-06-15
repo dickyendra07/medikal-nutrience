@@ -2,7 +2,7 @@ export function ConsultationCTA() {
   return (
     <section className="bg-[#f4fbf8] px-5 py-20 lg:px-10 md:py-24">
       <div className="mx-auto w-full max-w-[1520px]">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-[#006b3f] shadow-2xl shadow-green-900/15 reveal-scale">
+        <div className="relative overflow-hidden rounded-[1.8rem] bg-[#006b3f] shadow-2xl shadow-green-900/15 reveal-scale lg:rounded-[2.5rem]">
           <div className="absolute right-[-80px] top-[-90px] h-64 w-64 rounded-full bg-white/10" />
           <div className="absolute bottom-[-110px] left-[45%] h-72 w-72 rounded-full bg-white/10" />
           <div className="absolute bottom-0 right-0 top-0 hidden w-[45%] bg-gradient-to-l from-[#005837]/60 to-transparent lg:block" />
@@ -39,7 +39,7 @@ export function ConsultationCTA() {
               </div>
             </div>
 
-            <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden px-2 pb-6 lg:min-h-[500px] lg:px-4 lg:py-4">
+            <div className="relative hidden min-h-[260px] items-center justify-center overflow-hidden px-2 pb-4 lg:flex lg:min-h-[500px] lg:px-4 lg:py-4">
               <img
                 src="/images/support/konsultasi.png"
                 alt="Konsultasi nutrisi Medikal Nutrience"

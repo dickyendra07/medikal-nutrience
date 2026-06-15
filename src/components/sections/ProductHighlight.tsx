@@ -42,12 +42,12 @@ export function ProductHighlight() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:mt-14 xl:grid-cols-4 xl:gap-6">
           {products.map((product) => (
             <a
               key={product.name}
               href={product.href}
-              className="group reveal block overflow-hidden rounded-[2rem] bg-white/5 transition duration-300 hover:-translate-y-2"
+              className="group reveal block overflow-hidden rounded-[1.4rem] bg-white/5 transition duration-300 hover:-translate-y-2 lg:rounded-[2rem]"
               aria-label={`Lihat produk ${product.name}`}
             >
               <img
