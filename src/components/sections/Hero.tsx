@@ -104,7 +104,7 @@ export function Hero() {
 
             <div className="relative z-20 mx-auto flex min-h-[560px] max-w-[760px] items-center justify-center md:min-h-[680px]">
               <img
-                src="/images/home/hero-home.png"
+                src="/images/mednut/home/hero-family-nutrition.png"
                 alt="Medikal Nutrience official product and nutrition consultant"
                 className="relative z-30 h-auto w-full max-w-[700px] object-contain drop-shadow-2xl md:max-w-[760px] xl:max-w-[820px]"
               />

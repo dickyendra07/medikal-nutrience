@@ -2,22 +2,22 @@ const products = [
   {
     name: "ENTRASOY",
     href: "/produk/entrasoy",
-    image: "/images/products/home/entrasoy.png",
+    image: "/images/mednut/home/product-entrasoy.png",
   },
   {
     name: "ENTRAMIX",
     href: "/produk/entramix",
-    image: "/images/products/home/entramix.png",
+    image: "/images/mednut/home/product-entramix.png",
   },
   {
     name: "PEPTISOL",
     href: "/produk/peptisol",
-    image: "/images/products/home/peptisol.png",
+    image: "/images/mednut/home/product-peptisol.png",
   },
   {
     name: "ENTRAKID",
     href: "/produk/entrakid",
-    image: "/images/products/home/entrakid.png",
+    image: "/images/mednut/home/product-entrakid.png",
   },
 ];
 

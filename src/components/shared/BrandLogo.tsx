@@ -9,7 +9,7 @@ export function BrandLogo({
 }: BrandLogoProps) {
   return (
     <img
-      src="/images/brand/medikal-nutrience-logo.png"
+      src="/images/mednut/brand/logo-medikal-nutrience.png"
       alt="Medikal Nutrience"
       className={`${className} ${variant === "light" ? "brightness-0 invert" : ""}`}
     />

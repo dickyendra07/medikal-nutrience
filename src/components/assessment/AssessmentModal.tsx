@@ -6,6 +6,7 @@ import {
   assessmentFlows,
   type AssessmentLeadPayload,
 } from "@/data/assessment";
+import { mednutAssets } from "@/data/mednut-assets";
 
 type AssessmentModalProps = {
   isOpen: boolean;
@@ -13,7 +14,90 @@ type AssessmentModalProps = {
   initialFlowKey?: string;
 };
 
+
+const assessmentProductAssets: Record<
+  string,
+  {
+    logo?: string;
+    image: string;
+    accent: string;
+  }
+> = {
+  entrakid: {
+    image: mednutAssets.packshots.entrakidVanila,
+    accent: "#13a8c5",
+  },
+  entramix: {
+    logo: mednutAssets.productLogos.entramix,
+    image: mednutAssets.packshots.entramixVanila,
+    accent: "#f59e0b",
+  },
+  entrasoy: {
+    logo: mednutAssets.productLogos.entrasoy,
+    image: mednutAssets.packshots.entrasoy,
+    accent: "#009c68",
+  },
+  peptisol: {
+    logo: mednutAssets.productLogos.peptisol,
+    image: mednutAssets.packshots.peptisolVanila,
+    accent: "#d85b70",
+  },
+  peptibren: {
+    logo: mednutAssets.productLogos.peptibren,
+    image: mednutAssets.packshots.peptibrenVanila,
+    accent: "#DED316",
+  },
+  nephrisol: {
+    logo: mednutAssets.productLogos.nephrisol,
+    image: mednutAssets.packshots.nephrisolCappucino,
+    accent: "#a855f7",
+  },
+  "nephrisol-d": {
+    logo: mednutAssets.productLogos.nephrisolD,
+    image: mednutAssets.packshots.nephrisolDVanila,
+    accent: "#7e22ce",
+  },
+  hepatosol: {
+    logo: mednutAssets.productLogos.hepatosol,
+    image: mednutAssets.packshots.hepatosolVanila,
+    accent: "#ef1f2d",
+  },
+  "hepatosol-lola": {
+    logo: mednutAssets.productLogos.hepatosolLola,
+    image: mednutAssets.packshots.hepatosolLola,
+    accent: "#ef1f2d",
+  },
+  oligo: {
+    logo: mednutAssets.productLogos.oligo,
+    image: mednutAssets.packshots.oligo,
+    accent: "#d85b70",
+  },
+  pulmosol: {
+    logo: mednutAssets.productLogos.pulmosol,
+    image: mednutAssets.packshots.pulmosol,
+    accent: "#1e3a8a",
+  },
+};
+
+function getAssessmentProductAsset(slug: string) {
+  return (
+    assessmentProductAssets[slug] ?? {
+      image: mednutAssets.packshots.entrasoy,
+      accent: "#006b3f",
+    }
+  );
+}
+
 type Answers = Record<string, string>;
+
+type LeadForm = {
+  name: string;
+  age: string;
+  gender: "male" | "female" | "";
+  whatsapp: string;
+  educationConsent: boolean;
+  communicationConsent: boolean;
+};
 
 export function AssessmentModal({
   isOpen,
@@ -23,17 +107,41 @@ export function AssessmentModal({
   const [selectedFlowKey, setSelectedFlowKey] = useState(
     initialFlowKey ?? assessmentFlows[0].key
   );
-  const [screen, setScreen] = useState<"intro" | "question" | "loading" | "result">(
-    "intro"
-  );
+  const [screen, setScreen] = useState<
+    "intro" | "question" | "lead" | "loading" | "result"
+  >("intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
+  const [leadForm, setLeadForm] = useState<LeadForm>({
+    name: "",
+    age: "",
+    gender: "",
+    whatsapp: "",
+    educationConsent: false,
+    communicationConsent: false,
+  });
 
   useEffect(() => {
     if (isOpen && initialFlowKey) {
       setSelectedFlowKey(initialFlowKey);
       setStep(0);
       setAnswers({});
+    setLeadForm({
+      name: "",
+      age: "",
+      gender: "",
+      whatsapp: "",
+      educationConsent: false,
+      communicationConsent: false,
+    });
+      setLeadForm({
+        name: "",
+        age: "",
+        gender: "",
+        whatsapp: "",
+        educationConsent: false,
+        communicationConsent: false,
+      });
       setScreen("intro");
     }
   }, [isOpen, initialFlowKey]);
@@ -67,6 +175,14 @@ export function AssessmentModal({
     setScreen("intro");
     setStep(0);
     setAnswers({});
+    setLeadForm({
+      name: "",
+      age: "",
+      gender: "",
+      whatsapp: "",
+      educationConsent: false,
+      communicationConsent: false,
+    });
   };
 
   const handleClose = () => {
@@ -98,7 +214,7 @@ export function AssessmentModal({
       setScreen("loading");
 
       window.setTimeout(() => {
-        setScreen("result");
+        setScreen("lead");
       }, 650);
 
       return;
@@ -118,8 +234,13 @@ export function AssessmentModal({
       return;
     }
 
-    if (screen === "result") {
+    if (screen === "lead") {
       setScreen("question");
+      return;
+    }
+
+    if (screen === "result") {
+      setScreen("lead");
     }
   };
 
@@ -180,6 +301,37 @@ export function AssessmentModal({
   };
 
   const recommendation = getRecommendation();
+  const recommendedAsset = getAssessmentProductAsset(recommendation.slug);
+
+  const canSubmitLead =
+    leadForm.name.trim().length > 1 &&
+    leadForm.age.trim().length > 0 &&
+    leadForm.gender &&
+    leadForm.whatsapp.trim().length >= 8 &&
+    leadForm.educationConsent &&
+    leadForm.communicationConsent;
+
+  const updateLeadForm = <Key extends keyof LeadForm>(
+    key: Key,
+    value: LeadForm[Key]
+  ) => {
+    setLeadForm((current) => ({
+      ...current,
+      [key]: value,
+    }));
+  };
+
+  const handleLeadSubmit = () => {
+    if (!canSubmitLead) {
+      return;
+    }
+
+    setScreen("loading");
+
+    window.setTimeout(() => {
+      setScreen("result");
+    }, 650);
+  };
 
   const leadPayload: AssessmentLeadPayload = {
     flowKey: selectedFlow.key,
@@ -187,6 +339,7 @@ export function AssessmentModal({
     recommendedProduct: recommendation.product,
     recommendedProductSlug: recommendation.slug,
     answers,
+    lead: leadForm,
     createdAt: new Date().toISOString(),
   };
 
@@ -275,6 +428,14 @@ export function AssessmentModal({
                             setSelectedFlowKey(flow.key);
                             setStep(0);
                             setAnswers({});
+    setLeadForm({
+      name: "",
+      age: "",
+      gender: "",
+      whatsapp: "",
+      educationConsent: false,
+      communicationConsent: false,
+    });
                           }}
                           className={`group rounded-2xl border p-3 text-left transition md:rounded-3xl md:p-4 ${
                             isActive
@@ -426,19 +587,253 @@ export function AssessmentModal({
               </div>
             ) : null}
 
+
+            {screen === "lead" ? (
+              <div className="grid gap-6 pb-6 md:min-h-[560px] md:grid-cols-[0.82fr_1.18fr] md:items-stretch md:pb-0">
+                <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#006b3f] via-[#00885a] to-[#10b981] p-6 text-white md:p-8">
+                  <div className="absolute right-[-80px] top-[-80px] h-64 w-64 rounded-full bg-white/10" />
+                  <div className="absolute bottom-[-90px] left-[-70px] h-72 w-72 rounded-full bg-white/10" />
+
+                  <div className="relative z-10 flex h-full min-h-[320px] flex-col justify-between">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.25em] text-white/70 md:text-sm">
+                        Hasil Assessment
+                      </p>
+
+                      <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
+                        Rekomendasi Anda Sudah Siap
+                      </h2>
+
+                      <p className="mt-5 text-sm font-medium leading-7 text-white/80">
+                        Lengkapi data diri terlebih dahulu untuk membuka hasil
+                        rekomendasi produk yang paling sesuai.
+                      </p>
+                    </div>
+
+                    <div className="mt-8 rounded-[1.5rem] bg-white/12 p-5 backdrop-blur">
+                      <p className="text-sm font-bold leading-7 text-white/85">
+                        Data ini membantu Medikal Nutrience memberikan edukasi
+                        dan komunikasi yang lebih relevan sesuai kebutuhan Anda.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-[2rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5 md:p-8">
+                  <p className="text-sm font-black uppercase tracking-[0.25em] text-[#006b3f]">
+                    Isi Data Diri
+                  </p>
+
+                  <h3 className="mt-4 text-3xl font-black leading-tight text-[#0f172a] md:text-5xl">
+                    Lengkapi data untuk melihat hasil assessment
+                  </h3>
+
+                  <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
+                    Data ini membantu Medikal Nutrience memberikan edukasi dan
+                    komunikasi yang lebih relevan sesuai kebutuhan Anda.
+                  </p>
+
+                  <div className="mt-6 grid gap-4">
+                    <div>
+                      <label className="text-sm font-black text-[#0f172a]">
+                        Nama
+                      </label>
+                      <input
+                        value={leadForm.name}
+                        onChange={(event) =>
+                          updateLeadForm("name", event.target.value)
+                        }
+                        placeholder="Tulis nama di sini"
+                        className="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-4 text-sm font-bold text-[#0f172a] outline-none transition focus:border-[#006b3f]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-black text-[#0f172a]">
+                        Usia
+                      </label>
+                      <input
+                        value={leadForm.age}
+                        onChange={(event) =>
+                          updateLeadForm("age", event.target.value)
+                        }
+                        type="number"
+                        min="1"
+                        placeholder="Tulis usia di sini"
+                        className="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-4 text-sm font-bold text-[#0f172a] outline-none transition focus:border-[#006b3f]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-black text-[#0f172a]">
+                        Jenis Kelamin
+                      </label>
+                      <div className="mt-3 grid grid-cols-2 gap-3">
+                        <button
+                          type="button"
+                          onClick={() => updateLeadForm("gender", "male")}
+                          className={`rounded-2xl px-4 py-4 text-sm font-black transition ${
+                            leadForm.gender === "male"
+                              ? "bg-[#006b3f] text-white"
+                              : "bg-white text-[#006b3f] ring-1 ring-black/10"
+                          }`}
+                        >
+                          Laki-laki
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => updateLeadForm("gender", "female")}
+                          className={`rounded-2xl px-4 py-4 text-sm font-black transition ${
+                            leadForm.gender === "female"
+                              ? "bg-[#006b3f] text-white"
+                              : "bg-white text-[#006b3f] ring-1 ring-black/10"
+                          }`}
+                        >
+                          Perempuan
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-black text-[#0f172a]">
+                        Nomor WhatsApp
+                      </label>
+                      <div className="mt-2 grid grid-cols-[74px_1fr] overflow-hidden rounded-2xl border border-black/10 bg-white focus-within:border-[#006b3f]">
+                        <div className="flex items-center justify-center border-r border-black/10 bg-[#f4fbf8] text-sm font-black text-[#006b3f]">
+                          +62
+                        </div>
+                        <input
+                          value={leadForm.whatsapp}
+                          onChange={(event) =>
+                            updateLeadForm("whatsapp", event.target.value)
+                          }
+                          inputMode="tel"
+                          placeholder="Tulis nomor handphone di sini"
+                          className="w-full bg-white px-4 py-4 text-sm font-bold text-[#0f172a] outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <label className="flex gap-3 rounded-2xl bg-white p-4 ring-1 ring-black/5">
+                      <input
+                        type="checkbox"
+                        checked={leadForm.educationConsent}
+                        onChange={(event) =>
+                          updateLeadForm(
+                            "educationConsent",
+                            event.target.checked
+                          )
+                        }
+                        className="mt-1 h-4 w-4 shrink-0"
+                      />
+                      <span className="text-sm font-medium leading-6 text-[#64748b]">
+                        Saya setuju untuk mendapatkan informasi edukasi dari
+                        Medikal Nutrience.
+                      </span>
+                    </label>
+
+                    <label className="flex gap-3 rounded-2xl bg-white p-4 ring-1 ring-black/5">
+                      <input
+                        type="checkbox"
+                        checked={leadForm.communicationConsent}
+                        onChange={(event) =>
+                          updateLeadForm(
+                            "communicationConsent",
+                            event.target.checked
+                          )
+                        }
+                        className="mt-1 h-4 w-4 shrink-0"
+                      />
+                      <span className="text-sm font-medium leading-6 text-[#64748b]">
+                        Dengan mengikuti ini, maka saya bersedia menerima
+                        informasi dan komunikasi dari Medikal Nutrience. Medikal
+                        Nutrience berkomitmen untuk melindungi dan menghormati
+                        privasi saya.
+                      </span>
+                    </label>
+
+                    <p className="rounded-2xl bg-white px-4 py-3 text-[11px] font-medium leading-5 text-[#64748b] ring-1 ring-black/5">
+                      <strong className="text-[#006b3f]">TnC:</strong> Isilah data diri
+                      Anda dengan benar karena akan menentukan hasil dan komunikasi
+                      edukasi yang akan Anda terima.
+                    </p>
+                  </div>
+
+                  <div className="mt-6 flex items-center justify-between gap-4">
+                    <button
+                      type="button"
+                      onClick={handleBack}
+                      className="rounded-full px-6 py-3 text-sm font-black text-[#334155] transition hover:bg-white"
+                    >
+                      Sebelumnya
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleLeadSubmit}
+                      disabled={!canSubmitLead}
+                      className="rounded-full bg-[#006b3f] px-8 py-3 text-sm font-black text-white shadow-lg shadow-green-900/20 transition hover:bg-[#005432] disabled:cursor-not-allowed disabled:bg-[#e5e7eb] disabled:text-[#94a3b8]"
+                    >
+                      Lihat Hasil
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+
             {screen === "result" ? (
               <div className="grid gap-6 pb-6 md:min-h-[560px] md:grid-cols-[0.9fr_1.1fr] md:items-center md:pb-0">
-                <div
-                  className={`flex min-h-[240px] items-center justify-center rounded-[2rem] bg-gradient-to-br ${selectedFlow.theme.gradient} p-8 text-white md:min-h-[360px]`}
-                >
-                  <div className="text-center">
-                    <p className="text-xs font-black uppercase tracking-[0.25em] text-white/70 md:text-sm">
+                <div className="relative overflow-hidden rounded-[2rem] bg-white p-5 shadow-xl shadow-slate-900/8 ring-1 ring-black/5">
+                  <div
+                    className="absolute right-[-80px] top-[-80px] h-64 w-64 rounded-full opacity-15"
+                    style={{ backgroundColor: recommendedAsset.accent }}
+                  />
+                  <div
+                    className="absolute bottom-[-100px] left-[-80px] h-72 w-72 rounded-full opacity-15"
+                    style={{ backgroundColor: recommendedAsset.accent }}
+                  />
+
+                  <div
+                    className="relative z-10 rounded-[1.7rem] p-5"
+                    style={{ backgroundColor: `${recommendedAsset.accent}14` }}
+                  >
+                    <div className="flex min-h-[76px] items-center justify-center rounded-[1.4rem] bg-white px-5 py-4 shadow-lg shadow-black/5">
+                      {recommendedAsset.logo ? (
+                        <img
+                          src={recommendedAsset.logo}
+                          alt={`${recommendation.product} logo`}
+                          className="max-h-16 w-auto max-w-[280px] object-contain"
+                        />
+                      ) : (
+                        <p
+                          className="text-4xl font-black"
+                          style={{ color: recommendedAsset.accent }}
+                        >
+                          {recommendation.product}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="relative mt-5 flex min-h-[280px] items-center justify-center md:min-h-[380px]">
+                      <div
+                        className="absolute left-1/2 top-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 md:h-80 md:w-80"
+                        style={{ backgroundColor: recommendedAsset.accent }}
+                      />
+
+                      <img
+                        src={recommendedAsset.image}
+                        alt={recommendation.product}
+                        className="relative z-10 h-auto w-[78%] max-w-[360px] object-contain drop-shadow-2xl"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="relative z-10 mt-4 rounded-[1.4rem] bg-[#f8fcfa] p-4 ring-1 ring-black/5">
+                    <p className="text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">
                       Rekomendasi Produk
                     </p>
-                    <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-                      {recommendation.product}
-                    </h2>
-                    <p className="mt-5 text-sm leading-7 text-white/80">
+                    <p className="mt-2 text-sm font-bold leading-7 text-[#64748b]">
                       Arahan awal berdasarkan jawaban assessment Anda.
                     </p>
                   </div>

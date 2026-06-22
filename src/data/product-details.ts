@@ -37,10 +37,10 @@ export const productDetails: ProductDetail[] = [
     description:
       "Peptibren disiapkan sebagai rekomendasi nutrisi untuk kondisi dengan tantangan asupan makan, kesulitan menelan, atau kebutuhan makanan lembut/cair. Konten detail final produk dapat disesuaikan setelah aset dan copy resmi tersedia.",
     theme: {
-      primary: "#2563eb",
-      soft: "#eff6ff",
-      dark: "#1e3a8a",
-      gradient: "from-[#1e3a8a] to-[#60a5fa]",
+      primary: "#DED316",
+      soft: "#fbfae6",
+      dark: "#5f5a08",
+      gradient: "from-[#DED316] to-[#9f970c]",
     },
     needTitle: "Siapa yang Membutuhkan Peptibren?",
     needs: [

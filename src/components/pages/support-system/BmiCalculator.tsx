@@ -1,383 +1,563 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { mednutAssets } from "@/data/mednut-assets";
 
-type Gender = "male" | "female";
-type CalculatorMode = "bmi" | "calorie";
+const activityFactors = {
+  sedentary: {
+    label: "Ringan / jarang olahraga",
+    factor: 1.2,
+  },
+  light: {
+    label: "Aktivitas ringan 1-3x/minggu",
+    factor: 1.375,
+  },
+  moderate: {
+    label: "Aktivitas sedang 3-5x/minggu",
+    factor: 1.55,
+  },
+  active: {
+    label: "Aktif 6-7x/minggu",
+    factor: 1.725,
+  },
+};
 
-const activities = [
-  {
-    label: "Jarang / Tidak Pernah",
-    value: 1.2,
-    description: "Aktivitas harian ringan atau sangat minim olahraga.",
-  },
-  {
-    label: "Olahraga Ringan",
-    value: 1.375,
-    description: "Aktivitas ringan sekitar 1–3 hari per minggu.",
-  },
-  {
-    label: "Sedang",
-    value: 1.55,
-    description: "Olahraga atau aktivitas sedang 3–5 hari per minggu.",
-  },
-  {
-    label: "Berat",
-    value: 1.725,
-    description: "Olahraga intens 6–7 hari per minggu.",
-  },
-  {
-    label: "Ekstrem",
-    value: 1.9,
-    description: "Aktivitas fisik berat atau atlet profesional.",
-  },
+const conditionOptions = [
+  { value: "general", label: "Kebutuhan umum / menjaga kesehatan" },
+  { value: "recovery", label: "Pemulihan / pasca sakit" },
+  { value: "kidney", label: "Kebutuhan ginjal" },
+  { value: "liver", label: "Kebutuhan hati / liver" },
+  { value: "respiratory", label: "Kebutuhan pernafasan" },
+  { value: "digestive", label: "Kebutuhan pencernaan" },
+  { value: "child", label: "Tumbuh kembang anak" },
+  { value: "elderly", label: "Dewasa & lansia" },
 ];
 
+type Gender = "male" | "female";
+type Activity = keyof typeof activityFactors;
+
+function getBmiCategory(bmi: number) {
+  if (bmi < 18.5) {
+    return {
+      label: "Berat badan kurang",
+      tone: "#d97706",
+      message:
+        "Tubuh mungkin membutuhkan dukungan energi dan protein yang lebih optimal.",
+    };
+  }
+
+  if (bmi < 23) {
+    return {
+      label: "Normal",
+      tone: "#006b3f",
+      message:
+        "Status gizi berada pada rentang normal. Tetap jaga asupan seimbang dan aktivitas fisik.",
+    };
+  }
+
+  if (bmi < 25) {
+    return {
+      label: "Berisiko berat badan berlebih",
+      tone: "#ca8a04",
+      message:
+        "Mulai perhatikan pola makan, aktivitas, dan pilihan nutrisi harian.",
+    };
+  }
+
+  return {
+    label: "Berat badan berlebih",
+    tone: "#dc2626",
+    message:
+      "Disarankan mengatur pola makan, aktivitas fisik, dan berkonsultasi dengan tenaga kesehatan.",
+  };
+}
+
+function getProductRecommendations(condition: string, bmi: number, age: number) {
+  if (condition === "kidney") {
+    return [
+      {
+        name: "Nephrisol",
+        description: "Dukungan nutrisi untuk kebutuhan ginjal non dialisis.",
+        logo: mednutAssets.productLogos.nephrisol,
+        image: mednutAssets.packshots.nephrisolCappucino,
+        href: "/produk/nephrisol",
+      },
+      {
+        name: "Nephrisol-D",
+        description: "Dukungan nutrisi untuk kebutuhan ginjal dialisis.",
+        logo: mednutAssets.productLogos.nephrisolD,
+        image: mednutAssets.packshots.nephrisolDVanila,
+        href: "/produk/nephrisol-d",
+      },
+    ];
+  }
+
+  if (condition === "liver") {
+    return [
+      {
+        name: "Hepatosol",
+        description: "Dukungan nutrisi untuk kondisi hati atau liver.",
+        logo: mednutAssets.productLogos.hepatosol,
+        image: mednutAssets.packshots.hepatosolVanila,
+        href: "/produk/hepatosol",
+      },
+      {
+        name: "Hepatosol Lola",
+        description: "Dukungan nutrisi untuk kondisi hati dengan kebutuhan spesifik.",
+        logo: mednutAssets.productLogos.hepatosolLola,
+        image: mednutAssets.packshots.hepatosolLola,
+        href: "/produk/hepatosol-lola",
+      },
+    ];
+  }
+
+  if (condition === "respiratory") {
+    return [
+      {
+        name: "Pulmosol",
+        description: "Dukungan nutrisi untuk kebutuhan pernafasan.",
+        logo: mednutAssets.productLogos.pulmosol,
+        image: mednutAssets.packshots.pulmosol,
+        href: "/produk/pulmosol",
+      },
+    ];
+  }
+
+  if (condition === "digestive") {
+    return [
+      {
+        name: "Oligo",
+        description: "Dukungan nutrisi untuk kebutuhan saluran cerna.",
+        logo: mednutAssets.productLogos.oligo,
+        image: mednutAssets.packshots.oligo,
+        href: "/produk/oligo",
+      },
+    ];
+  }
+
+  if (condition === "child" || age < 13) {
+    return [
+      {
+        name: "Entrakid",
+        description: "Nutrisi untuk mendukung tumbuh kembang anak.",
+        image: mednutAssets.packshots.entrakidVanila,
+        href: "/produk/entrakid",
+      },
+    ];
+  }
+
+  if (condition === "recovery" || bmi < 18.5) {
+    return [
+      {
+        name: "Peptisol",
+        description: "Nutrisi tinggi protein untuk membantu kebutuhan pemulihan.",
+        logo: mednutAssets.productLogos.peptisol,
+        image: mednutAssets.packshots.peptisolVanila,
+        href: "/produk/peptisol",
+      },
+      {
+        name: "Entramix",
+        description: "Nutrisi lengkap untuk mendukung asupan harian.",
+        logo: mednutAssets.productLogos.entramix,
+        image: mednutAssets.packshots.entramixVanila,
+        href: "/produk/entramix",
+      },
+    ];
+  }
+
+  if (condition === "elderly") {
+    return [
+      {
+        name: "Entramix",
+        description: "Nutrisi lengkap untuk kebutuhan dewasa dan lansia.",
+        logo: mednutAssets.productLogos.entramix,
+        image: mednutAssets.packshots.entramixVanila,
+        href: "/produk/entramix",
+      },
+      {
+        name: "Entrasoy",
+        description: "Nutrisi protein nabati untuk kebutuhan harian.",
+        logo: mednutAssets.productLogos.entrasoy,
+        image: mednutAssets.packshots.entrasoy,
+        href: "/produk/entrasoy",
+      },
+    ];
+  }
+
+  if (bmi >= 23) {
+    return [
+      {
+        name: "Entrasoy",
+        description: "Nutrisi berbasis protein nabati untuk kebutuhan harian.",
+        logo: mednutAssets.productLogos.entrasoy,
+        image: mednutAssets.packshots.entrasoy,
+        href: "/produk/entrasoy",
+      },
+    ];
+  }
+
+  return [
+    {
+      name: "Entramix",
+      description: "Nutrisi lengkap dan seimbang untuk mendukung asupan harian.",
+      logo: mednutAssets.productLogos.entramix,
+      image: mednutAssets.packshots.entramixVanila,
+      href: "/produk/entramix",
+    },
+    {
+      name: "Entrasoy",
+      description: "Nutrisi protein nabati untuk kebutuhan harian.",
+      logo: mednutAssets.productLogos.entrasoy,
+      image: mednutAssets.packshots.entrasoy,
+      href: "/produk/entrasoy",
+    },
+  ];
+}
+
 export function BmiCalculator() {
-  const [mode, setMode] = useState<CalculatorMode>("bmi");
   const [gender, setGender] = useState<Gender>("male");
-  const [age, setAge] = useState("");
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
-  const [activity, setActivity] = useState(1.2);
+  const [age, setAge] = useState("33");
+  const [height, setHeight] = useState("170");
+  const [weight, setWeight] = useState("65");
+  const [activity, setActivity] = useState<Activity>("light");
+  const [condition, setCondition] = useState("general");
 
-  const bmiResult = useMemo(() => {
-    const h = Number(height) / 100;
-    const w = Number(weight);
+  const result = useMemo(() => {
+    const parsedAge = Number(age);
+    const parsedHeight = Number(height);
+    const parsedWeight = Number(weight);
 
-    if (!h || !w || h <= 0 || w <= 0) return null;
-
-    const bmi = w / (h * h);
-
-    let category = "Normal";
-    let note = "Pertahankan pola makan seimbang dan aktivitas fisik rutin.";
-    let color = "#006b3f";
-
-    if (bmi < 18.5) {
-      category = "Berat badan kurang";
-      note =
-        "Pertimbangkan dukungan nutrisi dan konsultasi ahli gizi untuk membantu memenuhi kebutuhan harian.";
-      color = "#f59e0b";
-    } else if (bmi >= 25 && bmi < 30) {
-      category = "Berat badan berlebih";
-      note =
-        "Perhatikan pola makan, aktivitas harian, dan pilihan nutrisi yang lebih sesuai.";
-      color = "#ea580c";
-    } else if (bmi >= 30) {
-      category = "Obesitas";
-      note =
-        "Sebaiknya konsultasikan kondisi dan kebutuhan nutrisi Anda dengan tenaga kesehatan.";
-      color = "#dc2626";
+    if (!parsedAge || !parsedHeight || !parsedWeight) {
+      return null;
     }
 
-    return {
-      bmi: bmi.toFixed(1),
-      category,
-      note,
-      color,
-    };
-  }, [height, weight]);
-
-  const calorieResult = useMemo(() => {
-    const h = Number(height);
-    const w = Number(weight);
-    const a = Number(age);
-
-    if (!h || !w || !a || h <= 0 || w <= 0 || a <= 0) return null;
+    const heightMeter = parsedHeight / 100;
+    const bmi = parsedWeight / (heightMeter * heightMeter);
+    const category = getBmiCategory(bmi);
 
     const bmr =
       gender === "male"
-        ? 10 * w + 6.25 * h - 5 * a + 5
-        : 10 * w + 6.25 * h - 5 * a - 161;
+        ? 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge + 5
+        : 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge - 161;
 
-    const tdee = Math.round(bmr * activity);
+    const dailyCalories = bmr * activityFactors[activity].factor;
+    const idealWeightMin = 18.5 * heightMeter * heightMeter;
+    const idealWeightMax = 22.9 * heightMeter * heightMeter;
+    const recommendations = getProductRecommendations(
+      condition,
+      bmi,
+      parsedAge
+    );
 
     return {
-      bmr: Math.round(bmr),
-      tdee,
+      bmi,
+      category,
+      bmr,
+      dailyCalories,
+      idealWeightMin,
+      idealWeightMax,
+      recommendations,
     };
-  }, [height, weight, age, gender, activity]);
+  }, [activity, age, condition, gender, height, weight]);
 
   return (
-    <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/5 ring-1 ring-black/5">
-      <div className="grid gap-0 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="bg-[#006b3f] p-8 text-white md:p-10">
-          <p className="text-sm font-black uppercase tracking-[0.25em] text-[#b7f7d0]">
-            Resources Kesehatan
+    <section className="px-5 py-12 md:py-16 lg:px-10">
+      <div className="mx-auto grid w-full max-w-[1440px] gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="reveal-left rounded-[2.5rem] bg-white p-6 shadow-xl shadow-slate-900/8 ring-1 ring-black/5 md:p-8 lg:sticky lg:top-28 lg:self-start">
+          <p className="text-xs font-black uppercase tracking-[0.35em] text-[#006b3f]">
+            Masukkan Data
           </p>
 
-          <h2 className="mt-4 text-3xl font-black leading-tight md:text-5xl">
-            Peta Jalan Nutrisi Pribadi Anda
+          <h2 className="mt-4 text-3xl font-black leading-tight text-[#111827] md:text-4xl">
+            Hitung gambaran awal kebutuhan tubuh.
           </h2>
 
-          <p className="mt-5 text-sm leading-8 text-white/80">
-            Keseimbangan adalah kunci. Gunakan kalkulator ini untuk memahami
-            status gizi dan perkiraan kebutuhan kalori harian Anda.
-          </p>
-
-          <div className="mt-8 grid gap-3">
-            <button
-              type="button"
-              onClick={() => setMode("bmi")}
-              className={`rounded-2xl px-5 py-4 text-left text-sm font-black transition ${
-                mode === "bmi"
-                  ? "bg-white text-[#006b3f]"
-                  : "bg-white/10 text-white hover:bg-white/15"
-              }`}
-            >
-              Hitung BMI / IMT
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setMode("calorie")}
-              className={`rounded-2xl px-5 py-4 text-left text-sm font-black transition ${
-                mode === "calorie"
-                  ? "bg-white text-[#006b3f]"
-                  : "bg-white/10 text-white hover:bg-white/15"
-              }`}
-            >
-              Hitung Kebutuhan Kalori
-            </button>
-          </div>
-        </div>
-
-        <div className="p-6 md:p-8">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.25em] text-[#006b3f]">
-              {mode === "bmi"
-                ? "Kalkulator Status Gizi"
-                : "Kalkulator Kalori Harian"}
-            </p>
-
-            <h3 className="mt-3 text-3xl font-black leading-tight text-[#0f172a] md:text-4xl">
-              {mode === "bmi"
-                ? "Kalkulator BMI (IMT)"
-                : "Kalkulator Kalori Harian"}
-            </h3>
-
-            <p className="mt-4 text-sm leading-7 text-[#64748b]">
-              {mode === "bmi"
-                ? "Hitung Indeks Massa Tubuh untuk mendapatkan gambaran awal status gizi berdasarkan tinggi dan berat badan."
-                : "Hitung perkiraan kalori harian tubuh Anda berdasarkan data tubuh dan tingkat aktivitas."}
-            </p>
-          </div>
-
-          <div className="mt-7 grid gap-5">
+          <div className="mt-7 grid gap-4">
             <div>
-              <label className="mb-3 block text-sm font-black text-[#0f172a]">
-                Apa Jenis Kelaminmu?
+              <label className="text-sm font-black text-[#111827]">
+                Jenis Kelamin
               </label>
-
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setGender("male")}
-                  className={`rounded-2xl border px-5 py-4 text-sm font-black transition ${
-                    gender === "male"
-                      ? "border-[#006b3f] bg-[#e4f8ed] text-[#006b3f]"
-                      : "border-black/10 bg-[#f8fafc] text-[#334155]"
-                  }`}
-                >
-                  Laki-laki
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setGender("female")}
-                  className={`rounded-2xl border px-5 py-4 text-sm font-black transition ${
-                    gender === "female"
-                      ? "border-[#006b3f] bg-[#e4f8ed] text-[#006b3f]"
-                      : "border-black/10 bg-[#f8fafc] text-[#334155]"
-                  }`}
-                >
-                  Perempuan
-                </button>
+              <div className="mt-3 grid grid-cols-2 gap-3">
+                {[
+                  { value: "male", label: "Pria" },
+                  { value: "female", label: "Wanita" },
+                ].map((item) => (
+                  <button
+                    key={item.value}
+                    type="button"
+                    onClick={() => setGender(item.value as Gender)}
+                    className={`rounded-2xl px-4 py-4 text-sm font-black transition ${
+                      gender === item.value
+                        ? "bg-[#006b3f] text-white"
+                        : "bg-[#f4fbf8] text-[#006b3f] ring-1 ring-black/5"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-3">
-              <NumberField
-                label="Usia"
-                suffix="Thn"
-                value={age}
-                onChange={setAge}
-                placeholder="30"
-              />
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div>
+                <label className="text-sm font-black text-[#111827]">
+                  Usia
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  value={age}
+                  onChange={(event) => setAge(event.target.value)}
+                  className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
+                />
+              </div>
 
-              <NumberField
-                label="Tinggi Badan"
-                suffix="Cm"
-                value={height}
-                onChange={setHeight}
-                placeholder="170"
-              />
+              <div>
+                <label className="text-sm font-black text-[#111827]">
+                  Tinggi (cm)
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  value={height}
+                  onChange={(event) => setHeight(event.target.value)}
+                  className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
+                />
+              </div>
 
-              <NumberField
-                label="Berat Badan"
-                suffix="Kg"
-                value={weight}
-                onChange={setWeight}
-                placeholder="65"
-              />
+              <div>
+                <label className="text-sm font-black text-[#111827]">
+                  Berat (kg)
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  value={weight}
+                  onChange={(event) => setWeight(event.target.value)}
+                  className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
+                />
+              </div>
             </div>
 
-            {mode === "calorie" ? (
-              <div>
-                <label className="mb-3 block text-sm font-black text-[#0f172a]">
-                  Seberapa Sering Kamu Berolahraga?
-                </label>
+            <div>
+              <label className="text-sm font-black text-[#111827]">
+                Aktivitas Harian
+              </label>
+              <select
+                value={activity}
+                onChange={(event) => setActivity(event.target.value as Activity)}
+                className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
+              >
+                {Object.entries(activityFactors).map(([key, item]) => (
+                  <option key={key} value={key}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-                <div className="grid gap-3">
-                  {activities.map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => setActivity(item.value)}
-                      className={`rounded-2xl border px-5 py-4 text-left transition ${
-                        activity === item.value
-                          ? "border-[#006b3f] bg-[#e4f8ed]"
-                          : "border-black/10 bg-[#f8fafc] hover:border-[#006b3f]/30"
-                      }`}
+            <div>
+              <label className="text-sm font-black text-[#111827]">
+                Kebutuhan / Kondisi
+              </label>
+              <select
+                value={condition}
+                onChange={(event) => setCondition(event.target.value)}
+                className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
+              >
+                {conditionOptions.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-[1.5rem] bg-[#f4fbf8] p-5">
+            <p className="text-sm font-black text-[#111827]">
+              Disclaimer
+            </p>
+            <p className="mt-2 text-sm font-medium leading-7 text-[#6b7280]">
+              Hasil kalkulator ini merupakan gambaran awal dan bukan diagnosis
+              medis. Untuk kondisi khusus, tetap konsultasikan dengan dokter,
+              ahli gizi, atau tenaga kesehatan.
+            </p>
+          </div>
+        </div>
+
+        <div className="reveal-right">
+          {result ? (
+            <div className="grid gap-5">
+              <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5">
+                <div className="bg-[#006b3f] p-6 text-white md:p-8">
+                  <p className="text-xs font-black uppercase tracking-[0.35em] text-white/70">
+                    Hasil Status Gizi
+                  </p>
+
+                  <div className="mt-5 grid gap-5 md:grid-cols-[auto_1fr] md:items-end">
+                    <div>
+                      <p className="text-7xl font-black leading-none">
+                        {result.bmi.toFixed(1)}
+                      </p>
+                      <p className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-white/70">
+                        IMT / BMI
+                      </p>
+                    </div>
+
+                    <div>
+                      <span
+                        className="inline-flex rounded-full bg-white px-4 py-2 text-sm font-black"
+                        style={{ color: result.category.tone }}
+                      >
+                        {result.category.label}
+                      </span>
+
+                      <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80 md:text-base">
+                        {result.category.message}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 p-6 md:grid-cols-3 md:p-8">
+                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
+                      Kalori Harian
+                    </p>
+                    <p className="mt-3 text-3xl font-black text-[#111827]">
+                      {Math.round(result.dailyCalories)}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#6b7280]">
+                      kkal / hari
+                    </p>
+                  </div>
+
+                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
+                      BMR
+                    </p>
+                    <p className="mt-3 text-3xl font-black text-[#111827]">
+                      {Math.round(result.bmr)}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#6b7280]">
+                      kkal / hari
+                    </p>
+                  </div>
+
+                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
+                      Rentang BB Ideal
+                    </p>
+                    <p className="mt-3 text-3xl font-black text-[#111827]">
+                      {Math.round(result.idealWeightMin)}-
+                      {Math.round(result.idealWeightMax)}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#6b7280]">
+                      kg
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[2.5rem] bg-white p-6 shadow-xl shadow-slate-900/8 ring-1 ring-black/5 md:p-8">
+                <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.35em] text-[#006b3f]">
+                      Rekomendasi Awal
+                    </p>
+                    <h2 className="mt-4 text-3xl font-black leading-tight text-[#111827] md:text-4xl">
+                      Produk yang mungkin relevan.
+                    </h2>
+                  </div>
+
+                  <a
+                    href="/kontak"
+                    className="inline-flex w-fit items-center justify-center rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white transition hover:-translate-y-0.5"
+                  >
+                    Konsultasi Lanjutan
+                  </a>
+                </div>
+
+                <div className="mt-7 grid gap-4 md:grid-cols-2">
+                  {result.recommendations.map((product) => (
+                    <a
+                      key={product.name}
+                      href={product.href}
+                      className="group overflow-hidden rounded-[2rem] bg-[#f8fcfa] ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-green-900/8"
                     >
-                      <span className="block text-sm font-black text-[#0f172a]">
-                        {item.label}
-                      </span>
-                      <span className="mt-1 block text-xs leading-5 text-[#64748b]">
-                        {item.description}
-                      </span>
-                    </button>
+                      <div className="grid grid-cols-[0.86fr_1.14fr] items-center gap-4 p-5">
+                        <div className="rounded-[1.5rem] bg-white p-3 shadow-md shadow-slate-900/5 ring-1 ring-black/5">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="aspect-square w-full object-contain transition duration-500 group-hover:scale-[1.05]"
+                          />
+                        </div>
+
+                        <div>
+                          {"logo" in product && product.logo ? (
+                            <img
+                              src={product.logo}
+                              alt={`${product.name} logo`}
+                              className="max-h-12 w-auto max-w-[190px] object-contain"
+                            />
+                          ) : (
+                            <h3 className="text-2xl font-black text-[#006b3f]">
+                              {product.name}
+                            </h3>
+                          )}
+
+                          <p className="mt-3 text-sm font-medium leading-7 text-[#6b7280]">
+                            {product.description}
+                          </p>
+
+                          <span className="mt-4 inline-flex text-sm font-black text-[#006b3f]">
+                            Lihat Produk →
+                          </span>
+                        </div>
+                      </div>
+                    </a>
                   ))}
                 </div>
               </div>
-            ) : null}
 
-            <ResultPanel
-              mode={mode}
-              bmiResult={bmiResult}
-              calorieResult={calorieResult}
-            />
-          </div>
+              <div className="rounded-[2.5rem] bg-gradient-to-br from-[#006b3f] via-[#087a4c] to-[#10b981] p-8 text-white shadow-2xl shadow-green-900/15">
+                <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.35em] text-white/70">
+                      Next Step
+                    </p>
+                    <h2 className="mt-4 text-3xl font-black leading-tight md:text-4xl">
+                      Temukan produk di official partner terdekat.
+                    </h2>
+                    <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80">
+                      Setelah memahami gambaran awal kebutuhan tubuh, Anda dapat
+                      mencari outlet resmi atau konsultasi untuk arahan lebih lanjut.
+                    </p>
+                  </div>
+
+                  <a
+                    href="/apotek-resmi"
+                    className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-black text-[#006b3f]"
+                  >
+                    Lihat Apotek Resmi
+                  </a>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-[2.5rem] bg-white p-8 text-center shadow-xl shadow-slate-900/8 ring-1 ring-black/5">
+              <p className="text-xl font-black text-[#111827]">
+                Lengkapi data terlebih dahulu.
+              </p>
+              <p className="mt-2 text-sm font-medium text-[#6b7280]">
+                Masukkan usia, tinggi badan, dan berat badan untuk melihat hasil.
+              </p>
+            </div>
+          )}
         </div>
       </div>
-    </div>
-  );
-}
-
-function NumberField({
-  label,
-  suffix,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  suffix: string;
-  value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
-}) {
-  return (
-    <div>
-      <label className="mb-2 block text-sm font-black text-[#006b3f]">
-        {label}
-      </label>
-      <div className="flex rounded-2xl border border-black/10 bg-[#f8fafc] px-5 py-4">
-        <input
-          type="number"
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          placeholder={placeholder}
-          className="w-full bg-transparent text-sm font-bold outline-none"
-        />
-        <span className="text-sm font-black text-[#64748b]">{suffix}</span>
-      </div>
-    </div>
-  );
-}
-
-function ResultPanel({
-  mode,
-  bmiResult,
-  calorieResult,
-}: {
-  mode: CalculatorMode;
-  bmiResult: {
-    bmi: string;
-    category: string;
-    note: string;
-    color: string;
-  } | null;
-  calorieResult: {
-    bmr: number;
-    tdee: number;
-  } | null;
-}) {
-  if (mode === "bmi") {
-    return (
-      <div className="rounded-[2rem] bg-[#f4fbf8] p-6">
-        {bmiResult ? (
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.25em] text-[#006b3f]">
-              Hasil BMI Anda
-            </p>
-            <p className="mt-3 text-5xl font-black text-[#0f172a]">
-              {bmiResult.bmi}
-            </p>
-            <p
-              className="mt-3 text-xl font-black"
-              style={{ color: bmiResult.color }}
-            >
-              Status Gizi Anda: {bmiResult.category}
-            </p>
-            <p className="mt-3 text-sm leading-7 text-[#64748b]">
-              {bmiResult.note}
-            </p>
-          </div>
-        ) : (
-          <EmptyResult message="Mohon lengkapi usia, tinggi, berat badan, dan pilih jenis kelamin untuk melihat hasil BMI." />
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-[2rem] bg-[#f4fbf8] p-6">
-      {calorieResult ? (
-        <div>
-          <p className="text-sm font-black uppercase tracking-[0.25em] text-[#006b3f]">
-            Kebutuhan Kalori Anda
-          </p>
-          <p className="mt-3 text-5xl font-black text-[#0f172a]">
-            {calorieResult.tdee}
-          </p>
-          <p className="mt-3 text-xl font-black text-[#006b3f]">
-            Kkal / Hari
-          </p>
-          <p className="mt-3 text-sm leading-7 text-[#64748b]">
-            Ini adalah perkiraan energi yang dibutuhkan tubuh Anda untuk
-            mempertahankan berat badan saat ini. Estimasi BMR Anda sekitar{" "}
-            <strong>{calorieResult.bmr} kkal/hari</strong>.
-          </p>
-        </div>
-      ) : (
-        <EmptyResult message="Mohon lengkapi usia, tinggi, berat badan, jenis kelamin, dan aktivitas untuk melihat kebutuhan kalori harian." />
-      )}
-    </div>
-  );
-}
-
-function EmptyResult({ message }: { message: string }) {
-  return (
-    <div>
-      <p className="text-xl font-black text-[#0f172a]">
-        Data belum lengkap
-      </p>
-      <p className="mt-3 text-sm leading-7 text-[#64748b]">{message}</p>
-      <p className="mt-5 text-xs leading-6 text-[#64748b]">
-        Catatan: Kalkulator ini hanya memberikan gambaran awal dan tidak
-        menggantikan diagnosis atau konsultasi dengan dokter/ahli gizi.
-      </p>
-    </div>
+    </section>
   );
 }

@@ -31,6 +31,14 @@ export type AssessmentLeadPayload = {
   recommendedProduct: string;
   recommendedProductSlug: string;
   answers: Record<string, string>;
+  lead?: {
+    name: string;
+    age: string;
+    gender: "male" | "female" | "";
+    whatsapp: string;
+    educationConsent: boolean;
+    communicationConsent: boolean;
+  };
   createdAt: string;
 };
 

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { mednutAssets } from "@/data/mednut-assets";
 
 const featuredProducts = [
   {
@@ -7,7 +8,8 @@ const featuredProducts = [
     category: "Protein Nabati",
     description:
       "Nutrisi berbasis soya untuk membantu memenuhi kebutuhan protein harian.",
-    image: "/images/products/home/entrasoy.png",
+    logo: mednutAssets.productLogos.entrasoy,
+    image: mednutAssets.packshots.entrasoy,
     href: "/produk/entrasoy",
     accent: "#0d7a53",
   },
@@ -16,7 +18,8 @@ const featuredProducts = [
     category: "Nutrisi Lengkap",
     description:
       "Pilihan nutrisi lengkap untuk mendukung kebutuhan energi dan asupan harian.",
-    image: "/images/products/home/entramix.png",
+    logo: mednutAssets.productLogos.entramix,
+    image: mednutAssets.packshots.entramixVanila,
     href: "/produk/entramix",
     accent: "#e88b24",
   },
@@ -25,7 +28,8 @@ const featuredProducts = [
     category: "Protein Medis",
     description:
       "Nutrisi tinggi protein untuk membantu mendukung kebutuhan pemulihan.",
-    image: "/images/products/home/peptisol.png",
+    logo: mednutAssets.productLogos.peptisol,
+    image: mednutAssets.packshots.peptisolVanila,
     href: "/produk/peptisol",
     accent: "#e84f72",
   },
@@ -34,7 +38,8 @@ const featuredProducts = [
     category: "Tumbuh Kembang Anak",
     description:
       "Nutrisi untuk membantu mendukung kebutuhan tumbuh kembang anak.",
-    image: "/images/products/home/entrakid.png",
+    logo: mednutAssets.productLogos.entramix,
+    image: mednutAssets.packshots.entrakidVanila,
     href: "/produk/entrakid",
     accent: "#1aa5b5",
   },
@@ -44,49 +49,70 @@ const medicalProducts = [
   {
     name: "Nephrisol",
     category: "Ginjal",
-    description: "Dukungan nutrisi untuk kondisi ginjal kronik tahap pra-dialisis.",
+    description:
+      "Dukungan nutrisi untuk kondisi ginjal kronik tahap pra-dialisis.",
+    logo: mednutAssets.productLogos.nephrisol,
+    image: mednutAssets.packshots.nephrisolCappucino,
     href: "/produk/nephrisol",
     color: "#7c3aed",
   },
   {
     name: "Nephrisol-D",
     category: "Ginjal",
-    description: "Dukungan nutrisi untuk kondisi ginjal kronik dengan terapi dialisis.",
+    description:
+      "Dukungan nutrisi untuk kondisi ginjal kronik dengan terapi dialisis.",
+    logo: mednutAssets.productLogos.nephrisolD,
+    image: mednutAssets.packshots.nephrisolDVanila,
     href: "/produk/nephrisol-d",
     color: "#5b21b6",
   },
   {
     name: "Hepatosol",
     category: "Hati / Liver",
-    description: "Dukungan nutrisi untuk kebutuhan pada gangguan fungsi hati.",
+    description:
+      "Dukungan nutrisi untuk kebutuhan pada gangguan fungsi hati.",
+    logo: mednutAssets.productLogos.hepatosol,
+    image: mednutAssets.packshots.hepatosolVanila,
     href: "/produk/hepatosol",
     color: "#dc2626",
   },
   {
     name: "Hepatosol Lola",
     category: "Hati / Liver",
-    description: "Nutrisi khusus untuk mendukung kebutuhan kondisi hati tertentu.",
+    description:
+      "Nutrisi khusus untuk mendukung kebutuhan kondisi hati tertentu.",
+    logo: mednutAssets.productLogos.hepatosolLola,
+    image: mednutAssets.packshots.hepatosolLola,
     href: "/produk/hepatosol-lola",
     color: "#ef4444",
   },
   {
     name: "Pulmosol",
     category: "Pernafasan",
-    description: "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernafasan.",
+    description:
+      "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernafasan.",
+    logo: mednutAssets.productLogos.pulmosol,
+    image: mednutAssets.packshots.pulmosol,
     href: "/produk/pulmosol",
     color: "#1e3a8a",
   },
   {
     name: "Oligo",
     category: "Pencernaan",
-    description: "Nutrisi untuk mendukung kebutuhan pada kondisi saluran cerna.",
+    description:
+      "Nutrisi untuk mendukung kebutuhan pada kondisi saluran cerna.",
+    logo: mednutAssets.productLogos.oligo,
+    image: mednutAssets.packshots.oligo,
     href: "/produk/oligo",
     color: "#db2777",
   },
   {
     name: "Peptibren",
     category: "Syaraf & Otak",
-    description: "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
+    description:
+      "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
+    logo: mednutAssets.productLogos.peptibren,
+    image: mednutAssets.packshots.peptibrenVanila,
     href: "/produk/peptibren",
     color: "#ca8a04",
   },
@@ -148,21 +174,27 @@ export default function ProductsPage() {
                     <a
                       key={product.name}
                       href={product.href}
-                      className="group overflow-hidden rounded-[1.5rem] bg-white/10 p-3 ring-1 ring-white/15 transition hover:-translate-y-1 hover:bg-white/15"
+                      className="group overflow-hidden rounded-[1.5rem] bg-white p-4 ring-1 ring-white/15 transition hover:-translate-y-1"
                     >
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="aspect-[4/3] w-full rounded-[1.2rem] object-cover shadow-xl shadow-black/10 transition group-hover:scale-[1.03]"
-                      />
-                      <div className="p-2">
-                        <p className="text-xs font-bold uppercase tracking-wide text-white/55">
-                          {product.category}
-                        </p>
-                        <h3 className="mt-1 text-lg font-black text-white">
-                          {product.name}
-                        </h3>
+                      <div className="flex h-16 items-center justify-center">
+                        <img
+                          src={product.logo}
+                          alt={`${product.name} logo`}
+                          className="max-h-12 w-auto max-w-[180px] object-contain"
+                        />
                       </div>
+
+                      <div className="mt-3 rounded-[1.2rem] bg-[#f4fbf8] p-3">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="mx-auto aspect-square w-full object-contain transition duration-500 group-hover:scale-[1.05]"
+                        />
+                      </div>
+
+                      <p className="mt-3 text-center text-xs font-bold uppercase tracking-wide text-[#6b7280]">
+                        {product.category}
+                      </p>
                     </a>
                   ))}
                 </div>
@@ -179,14 +211,14 @@ export default function ProductsPage() {
                   Produk Unggulan
                 </p>
                 <h2 className="mt-5 text-3xl font-black leading-tight text-[#111827] md:text-5xl">
-                  Rangkaian nutrisi keluarga dengan visual produk resmi.
+                  Rangkaian nutrisi keluarga dengan packshot produk asli.
                 </h2>
               </div>
 
               <p className="text-sm font-medium leading-7 text-[#6b7280] md:text-base md:leading-8">
-                Produk unggulan ditampilkan dengan asset visual yang sudah tersedia
-                agar halaman terasa lebih hidup, informatif, dan siap dipresentasikan
-                ke client.
+                Produk unggulan ditampilkan dengan asset resmi yang sudah
+                disiapkan client agar halaman terasa lebih kredibel, informatif,
+                dan siap dipresentasikan.
               </p>
             </div>
 
@@ -197,25 +229,29 @@ export default function ProductsPage() {
                   href={product.href}
                   className="group reveal overflow-hidden rounded-[1.6rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-900/12 lg:rounded-[2rem]"
                 >
-                  <div className="relative overflow-hidden bg-[#eaf8f1] p-2">
+                  <div className="relative overflow-hidden bg-[#eaf8f1] p-4 lg:p-6">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="aspect-[4/3] w-full rounded-[1.25rem] object-cover transition duration-500 group-hover:scale-[1.04] lg:rounded-[1.6rem]"
+                      className="mx-auto aspect-square w-full object-contain transition duration-500 group-hover:scale-[1.05]"
                     />
                   </div>
 
                   <div className="p-4 lg:p-6">
+                    <div className="flex h-16 items-center">
+                      <img
+                        src={product.logo}
+                        alt={`${product.name} logo`}
+                        className="max-h-12 w-auto max-w-[220px] object-contain"
+                      />
+                    </div>
+
                     <p
-                      className="text-[10px] font-black uppercase tracking-[0.18em] lg:text-xs"
+                      className="mt-4 text-[10px] font-black uppercase tracking-[0.18em] lg:text-xs"
                       style={{ color: product.accent }}
                     >
                       {product.category}
                     </p>
-
-                    <h3 className="mt-2 text-lg font-black leading-tight text-[#111827] lg:text-2xl">
-                      {product.name}
-                    </h3>
 
                     <p className="mt-3 hidden text-sm font-medium leading-7 text-[#6b7280] lg:block">
                       {product.description}
@@ -251,40 +287,45 @@ export default function ProductsPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {medicalProducts.map((product) => (
                 <a
                   key={product.name}
                   href={product.href}
-                  className="group reveal rounded-[1.8rem] bg-white p-5 shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
+                  className="group reveal overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
                 >
-                  <div className="flex gap-4">
-                    <div
-                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-xl font-black text-white"
-                      style={{ backgroundColor: product.color }}
-                    >
-                      {product.name.charAt(0)}
+                  <div className="grid grid-cols-[0.82fr_1.18fr] items-center gap-4 p-5">
+                    <div className="rounded-[1.5rem] bg-[#f4fbf8] p-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="mx-auto aspect-square w-full object-contain transition duration-500 group-hover:scale-[1.05]"
+                      />
                     </div>
 
                     <div>
+                      <div className="flex h-16 items-center">
+                        <img
+                          src={product.logo}
+                          alt={`${product.name} logo`}
+                          className="max-h-12 w-auto max-w-[220px] object-contain"
+                        />
+                      </div>
+
                       <p
-                        className="text-xs font-black uppercase tracking-[0.18em]"
+                        className="mt-3 text-xs font-black uppercase tracking-[0.18em]"
                         style={{ color: product.color }}
                       >
                         {product.category}
                       </p>
 
-                      <h3 className="mt-2 text-xl font-black text-[#111827]">
-                        {product.name}
-                      </h3>
-
-                      <p className="mt-2 text-sm font-medium leading-7 text-[#6b7280]">
+                      <p className="mt-3 text-sm font-medium leading-6 text-[#6b7280]">
                         {product.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between border-t border-black/5 pt-4">
+                  <div className="flex items-center justify-between border-t border-black/5 px-5 py-4">
                     <span className="text-xs font-black uppercase tracking-wide text-[#006b3f]">
                       Lihat Detail
                     </span>
