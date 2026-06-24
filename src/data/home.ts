@@ -61,8 +61,8 @@ export const stats = [
     label: "Solusi Nutrisi",
   },
   {
-    value: "100%",
-    label: "Kanal Resmi",
+    value: "50+",
+    label: "Apotek Resmi",
   },
 ];
 

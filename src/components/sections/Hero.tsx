@@ -1,8 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { stats } from "@/data/home";
 import { AssessmentModal } from "@/components/assessment/AssessmentModal";
+
+function parseStatValue(value: string) {
+  const numeric = Number(value.replace(/[^0-9]/g, ""));
+  const suffix = value.replace(/[0-9]/g, "");
+
+  return {
+    numeric: Number.isFinite(numeric) ? numeric : 0,
+    suffix,
+  };
+}
+
+function CountUpStat({ value }: { value: string }) {
+  const { numeric, suffix } = useMemo(() => parseStatValue(value), [value]);
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLParagraphElement | null>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const target = ref.current;
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated.current) return;
+
+        hasAnimated.current = true;
+        const duration = 1100;
+        const start = performance.now();
+
+        const animate = (time: number) => {
+          const progress = Math.min((time - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+
+          setCount(Math.round(numeric * eased));
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        };
+
+        requestAnimationFrame(animate);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(target);
+
+    return () => observer.disconnect();
+  }, [numeric]);
+
+  return (
+    <p ref={ref} className="text-3xl font-black text-[#006b3f] md:text-4xl">
+      {count}
+      {suffix}
+    </p>
+  );
+}
 
 export function Hero() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
@@ -17,12 +74,8 @@ export function Hero() {
 
         <div className="relative mx-auto grid min-h-[760px] w-full max-w-[1600px] items-center gap-10 px-5 py-14 md:grid-cols-[0.95fr_1.05fr] md:py-20 lg:px-12 xl:px-16">
           <div className="relative z-20 reveal-left">
-            <p className="mb-5 inline-flex rounded-full border border-[#006b3f]/10 bg-white px-5 py-3 text-sm font-black text-[#006b3f] shadow-sm">
-              Medikal Nutrience by PT Fima Internasional
-            </p>
-
             <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-[2.55rem] font-black uppercase leading-[0.98] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
-              Temukan Nutrisi yang Tepat untuk Kondisi Anda
+              Temukan Nutrisi Yang Tepat Untuk Kondisi Anda
             </h1>
 
             <p className="mt-7 max-w-2xl text-base leading-8 text-[#475569] md:text-lg">
@@ -68,11 +121,9 @@ export function Hero() {
                   key={item.label}
                   className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5"
                 >
-                  <p className="text-3xl font-black text-[#006b3f]">
-                    {item.value}
-                  </p>
+                  <CountUpStat value={item.value} />
                   <p className="mt-1 text-xs font-semibold leading-5 text-[#64748b]">
-                    {item.label}
+                    {item.label === "Kanal Resmi" ? "Apotek Resmi" : item.label}
                   </p>
                 </div>
               ))}
@@ -95,17 +146,17 @@ export function Hero() {
 
             <div className="absolute bottom-10 right-0 z-0 hidden rounded-3xl bg-white/90 p-5 shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:block xl:right-2">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
-                Produk
+                Partner
               </p>
               <p className="mt-2 text-sm font-black text-[#0f172a]">
-                100% Resmi
+                50+ Apotek Resmi
               </p>
             </div>
 
             <div className="relative z-20 mx-auto flex min-h-[560px] max-w-[760px] items-center justify-center md:min-h-[680px]">
               <img
                 src="/images/mednut/home/hero-family-nutrition.png"
-                alt="Medikal Nutrience official product and nutrition consultant"
+                alt="Keluarga Indonesia bersama produk Medikal Nutrience"
                 className="relative z-30 h-auto w-full max-w-[700px] object-contain drop-shadow-2xl md:max-w-[760px] xl:max-w-[820px]"
               />
             </div>

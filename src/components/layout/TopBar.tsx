@@ -15,7 +15,7 @@ export function TopBar() {
             Apotek Resmi
           </a>
           <a href="#" className="transition hover:text-[#d8f6e8]">
-            Masuk / Daftar
+            
           </a>
         </div>
       </div>
