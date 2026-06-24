@@ -180,67 +180,29 @@ export function SolutionSection() {
 }
 
 function Icon({ type, active }: { type: string; active: boolean }) {
-  const color = active ? "text-white" : "text-[#006b3f]";
-  const common = `h-12 w-12 ${color}`;
-
-  if (type === "kidney") {
-    return (
-      <svg className={common} viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M28 9v46" />
-        <path d="M36 9v46" />
-        <path d="M28 22c-8-10-19-3-17 10 1 8 6 15 13 16 5 1 7-3 7-8V23" />
-        <path d="M36 22c8-10 19-3 17 10-1 8-6 15-13 16-5 1-7-3-7-8V23" />
-        <path d="M20 29c2 4 5 5 8 4" />
-        <path d="M44 29c-2 4-5 5-8 4" />
-      </svg>
-    );
-  }
-
-  if (type === "liver") {
-    return (
-      <svg className={common} viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 36c6-16 18-23 35-19 8 2 11 8 10 14-1 8-8 13-18 13H20c-8 0-13-2-11-8Z" />
-        <path d="M36 18c1 9-2 17-9 26" />
-        <path d="M44 15l5-7" />
-        <path d="M47 22l9-3" />
-      </svg>
-    );
-  }
-
-  if (type === "brain") {
-    return (
-      <svg className={common} viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M25 10c-7 0-12 5-12 12 0 2 1 4 2 6-5 3-7 8-5 14 2 7 8 10 15 9" />
-        <path d="M39 10c7 0 12 5 12 12 0 2-1 4-2 6 5 3 7 8 5 14-2 7-8 10-15 9" />
-        <path d="M32 11v42" />
-        <path d="M21 23c5 0 8 3 8 8" />
-        <path d="M43 23c-5 0-8 3-8 8" />
-        <path d="M19 39c5-1 9 1 11 5" />
-        <path d="M45 39c-5-1-9 1-11 5" />
-      </svg>
-    );
-  }
-
-  if (type === "lungs") {
-    return (
-      <svg className={common} viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M32 8v22" />
-        <path d="M32 30c-7 0-13 7-15 18-1 6 2 9 7 7 7-3 8-11 8-25Z" />
-        <path d="M32 30c7 0 13 7 15 18 1 6-2 9-7 7-7-3-8-11-8-25Z" />
-        <path d="M24 20c3 4 5 7 8 10" />
-        <path d="M40 20c-3 4-5 7-8 10" />
-      </svg>
-    );
-  }
+  const icons: Record<string, string> = {
+    kidney: "/images/mednut/solutions/icons/icon-ginjal.svg",
+    liver: "/images/mednut/solutions/icons/icon-hati-liver.svg",
+    brain: "/images/mednut/solutions/icons/icon-syaraf-otak.svg",
+    lungs: "/images/mednut/solutions/icons/icon-pernafasan.svg",
+    digestive: "/images/mednut/solutions/icons/icon-pencernaan.svg",
+  };
 
   return (
-    <svg className={common} viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M32 8c8 5 11 10 8 16-2 5-8 6-8 14" />
-      <path d="M32 8c-8 5-11 10-8 16 2 5 8 6 8 14" />
-      <path d="M22 38h20" />
-      <path d="M19 45h26" />
-      <path d="M16 52h32" />
-      <path d="M32 38v16" />
-    </svg>
+    <span
+      className={`flex h-14 w-14 items-center justify-center rounded-2xl transition ${
+        active ? "bg-white/15" : "bg-[#e4f8ed]"
+      }`}
+    >
+      <img
+        src={icons[type] ?? icons.digestive}
+        alt=""
+        className={`h-9 w-9 object-contain transition ${
+          active
+            ? "brightness-0 invert"
+            : "[filter:brightness(0)_saturate(100%)_invert(23%)_sepia(97%)_saturate(798%)_hue-rotate(129deg)_brightness(91%)_contrast(101%)]"
+        }`}
+      />
+    </span>
   );
 }
