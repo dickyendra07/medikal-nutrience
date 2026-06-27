@@ -130,8 +130,8 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative z-10 min-h-[360px] md:min-h-[680px] reveal-scale reveal-delay-2">
-            <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b7f7d0] md:h-[680px] md:w-[680px]" />
+          <div className="relative z-10 min-h-[520px] md:min-h-[680px] reveal-scale reveal-delay-2">
+            <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b7f7d0] md:h-[680px] md:w-[680px]" />
             <div className="absolute right-[-90px] top-24 h-[360px] w-[360px] rounded-full bg-[#d8f6e8]" />
             <div className="absolute bottom-20 left-12 h-[180px] w-[180px] rounded-full bg-white/50" />
 
@@ -153,11 +153,11 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="relative z-20 mx-auto flex min-h-[560px] max-w-[760px] items-center justify-center md:min-h-[680px]">
+            <div className="relative z-20 mx-auto flex min-h-[500px] max-w-[860px] items-center justify-center md:min-h-[680px]">
               <img
                 src="/images/mednut/home/hero-family-nutrition.png"
                 alt="Keluarga Indonesia bersama produk Medikal Nutrience"
-                className="relative z-30 h-auto w-full max-w-[700px] object-contain drop-shadow-2xl md:max-w-[760px] xl:max-w-[820px]"
+                className="relative z-30 h-auto w-[118%] max-w-none object-contain drop-shadow-2xl md:w-full md:max-w-[760px] xl:max-w-[820px]"
               />
             </div>
           </div>

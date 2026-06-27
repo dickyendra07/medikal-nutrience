@@ -95,36 +95,87 @@ export function SolutionSection() {
           </p>
         </div>
 
-        <div className="mt-7 flex gap-3 overflow-x-auto pb-5 md:grid md:grid-cols-5 md:overflow-visible md:pb-0 reveal reveal-delay-1">
+        <div className="mt-7 grid gap-3 pb-5 md:grid-cols-5 md:pb-0 reveal reveal-delay-1">
           {solutions.map((solution) => {
             const isActive = activeSolution.key === solution.key;
 
             return (
-              <button
+              <div
                 key={solution.key}
-                type="button"
-                onClick={() => setActiveKey(solution.key)}
-                className={`relative flex min-h-[92px] min-w-[132px] flex-col items-center justify-center rounded-2xl border px-4 py-4 text-center transition duration-300 md:min-h-[120px] md:min-w-0 md:px-5 md:py-5 ${
+                className={`relative overflow-hidden rounded-2xl border transition duration-300 md:overflow-visible ${
                   isActive
                     ? "border-[#006b3f] bg-[#006b3f] text-white shadow-xl shadow-green-900/20"
-                    : "border-black/10 bg-white text-[#005b3d] shadow-md shadow-slate-900/5 hover:-translate-y-1 hover:border-[#006b3f]/30"
+                    : "border-black/10 bg-white text-[#005b3d] shadow-md shadow-slate-900/5 hover:border-[#006b3f]/30"
                 }`}
               >
-                <Icon type={solution.icon} active={isActive} />
+                <button
+                  type="button"
+                  onClick={() => setActiveKey(solution.key)}
+                  className="relative flex min-h-[76px] w-full items-center gap-4 px-4 py-4 text-left md:min-h-[120px] md:flex-col md:justify-center md:gap-0 md:px-5 md:py-5 md:text-center"
+                >
+                  <Icon type={solution.icon} active={isActive} />
 
-                <span className="mt-2 text-sm font-black leading-tight md:mt-3 md:text-base">
-                  {solution.tab}
-                </span>
+                  <span className="text-sm font-black leading-tight md:mt-3 md:text-base">
+                    {solution.tab}
+                  </span>
+
+                  {isActive ? (
+                    <span className="absolute -bottom-5 left-8 hidden h-0 w-0 border-l-[16px] border-r-[16px] border-t-[22px] border-l-transparent border-r-transparent border-t-[#006b3f] md:block md:left-1/2 md:-translate-x-1/2" />
+                  ) : null}
+                </button>
 
                 {isActive ? (
-                  <span className="absolute -bottom-6 left-1/2 h-0 w-0 -translate-x-1/2 border-l-[18px] border-r-[18px] border-t-[24px] border-l-transparent border-r-transparent border-t-[#006b3f]" />
+                  <div className="border-t border-white/10 bg-white px-4 py-5 text-[#0f172a] md:hidden">
+                    <div className="overflow-hidden rounded-[1.4rem] bg-[#f4fbf8]">
+                      <img
+                        src={solution.image}
+                        alt={solution.title}
+                        className="aspect-[1.28/1] w-full object-cover"
+                      />
+                    </div>
+
+                    <p className="mt-5 text-[10px] font-black uppercase tracking-[0.25em] text-[#006b3f]">
+                      {solution.eyebrow}
+                    </p>
+
+                    <h3
+                      className="mt-3 text-2xl font-black leading-tight"
+                      style={{ color: solution.accent }}
+                    >
+                      {solution.title}
+                    </h3>
+
+                    <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
+                      {solution.description}
+                    </p>
+
+                    <div className="mt-5 grid gap-3">
+                      <a
+                        href={solution.href}
+                        className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black text-white shadow-lg"
+                        style={{ backgroundColor: solution.accent }}
+                      >
+                        {solution.primaryButton}
+                        <span>→</span>
+                      </a>
+
+                      <a
+                        href={solution.href}
+                        className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f8fafc] px-6 py-4 text-sm font-black ring-1 ring-black/5"
+                        style={{ color: solution.accent }}
+                      >
+                        {solution.secondaryButton}
+                        <span>→</span>
+                      </a>
+                    </div>
+                  </div>
                 ) : null}
-              </button>
+              </div>
             );
           })}
         </div>
 
-        <div className="mt-8 grid items-center gap-7 lg:mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
+        <div className="mt-8 hidden items-center gap-7 md:grid lg:mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
           <div className="overflow-hidden rounded-[1.8rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-left reveal-delay-2 lg:rounded-[2.5rem]">
             <img
               src={activeSolution.image}
