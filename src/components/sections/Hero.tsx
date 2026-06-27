@@ -74,8 +74,8 @@ export function Hero() {
 
         <div className="relative mx-auto grid min-h-[760px] w-full max-w-[1600px] items-center gap-10 px-5 py-14 md:grid-cols-[0.95fr_1.05fr] md:py-20 lg:px-12 xl:px-16">
           <div className="relative z-20 reveal-left">
-            <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-[2.55rem] font-black uppercase leading-[0.98] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
-              Temukan Nutrisi Yang Tepat Untuk Kondisi Anda
+            <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-[2.55rem] font-black leading-[1.02] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
+              Temukan nutrisi yang tepat untuk kondisi Anda
             </h1>
 
             <p className="mt-7 max-w-2xl text-base leading-8 text-[#475569] md:text-lg">

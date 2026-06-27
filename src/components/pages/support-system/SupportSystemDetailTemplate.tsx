@@ -1,5 +1,6 @@
 import { BmiCalculator } from "@/components/pages/support-system/BmiCalculator";
 import { mednutAssets } from "@/data/mednut-assets";
+import { fimaRecipes } from "@/data/dapur-sehat-fima";
 import {
   communityPrograms,
   patientStories,
@@ -164,13 +165,7 @@ export function SupportSystemDetailTemplate({
       ) : null}
 
       {isRecipe ? (
-        <ListingSection
-          color={item.color}
-          eyebrow="Healthy Recipes"
-          title="Inspirasi Dapur Sehat FIMA"
-          description="Ide menu sehat dan edukasi nutrisi untuk membantu keluarga menyiapkan asupan yang lebih seimbang."
-          items={recipes}
-        />
+        <RecipeSection color={item.color} />
       ) : null}
 
       {isCommunity ? (
@@ -224,6 +219,81 @@ export function SupportSystemDetailTemplate({
         </div>
       </section>
     </>
+  );
+}
+
+
+function RecipeSection({ color }: { color: string }) {
+  return (
+    <section id="content" className="bg-white px-5 py-12 md:py-16 lg:px-10">
+      <div className="mx-auto w-full max-w-[1440px]">
+        <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-end reveal">
+          <div>
+            <p
+              className="text-xs font-black uppercase tracking-[0.35em]"
+              style={{ color }}
+            >
+              Dapur Sehat FIMA
+            </p>
+
+            <h2 className="mt-5 text-3xl font-black leading-tight text-[#111827] md:text-5xl">
+              Inspirasi menu sehat untuk keluarga Indonesia.
+            </h2>
+          </div>
+
+          <p className="text-sm font-medium leading-7 text-[#6b7280] md:text-base md:leading-8">
+            Contoh konten ini disiapkan sebagai struktur awal agar nantinya mudah
+            dikembangkan menjadi artikel, resep, dan edukasi nutrisi melalui CMS.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {fimaRecipes.map((recipe) => (
+            <a
+              key={recipe.slug}
+              href={`/support-system/dapur-sehat-fima/${recipe.slug}`}
+              className="group reveal overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
+            >
+              <div className="h-56 overflow-hidden bg-[#f4fbf8]">
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]"
+                />
+              </div>
+
+              <div className="p-6">
+                <div className="flex flex-wrap gap-2">
+                  <span
+                    className="rounded-full px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-white"
+                    style={{ backgroundColor: color }}
+                  >
+                    {recipe.category}
+                  </span>
+
+                  <span className="rounded-full bg-[#f1f5f9] px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-[#64748b]">
+                    {recipe.readTime}
+                  </span>
+                </div>
+
+                <h3 className="mt-5 text-2xl font-black leading-tight text-[#111827]">
+                  {recipe.title}
+                </h3>
+
+                <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
+                  {recipe.excerpt}
+                </p>
+
+                <div className="mt-6 flex items-center gap-2 text-sm font-black" style={{ color }}>
+                  <span>Baca Detail Resep</span>
+                  <span className="transition group-hover:translate-x-1">→</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
