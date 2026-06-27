@@ -10,7 +10,8 @@ const menuItems = [
   { label: "Produk", href: "/produk", mega: "produk" },
   { label: "Solusi", href: "/solusi", mega: "solusi" },
   { label: "Support System", href: "/support-system", mega: "support" },
-  { label: "Apotek Resmi", href: "/apotek-resmi" },
+  { label: "Apotek", href: "/apotek-resmi" },
+  { label: "Event", href: "/event" },
   { label: "Kontak", href: "/kontak" },
 ];
 
@@ -72,7 +73,7 @@ const megaMenus = {
         desc: "Program komunitas dan edukasi",
       },
       {
-        label: "Apotek Resmi",
+        label: "Apotek",
         href: "/apotek-resmi",
         desc: "Temukan official pharmacy",
       },
