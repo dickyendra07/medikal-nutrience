@@ -198,12 +198,6 @@ export default function SolutionsPage() {
                         alt={solution.title}
                         className="h-full min-h-[240px] w-full object-cover transition duration-500 group-hover:scale-[1.04]"
                       />
-
-                      <div className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-2 text-xs font-black uppercase tracking-wide shadow-lg backdrop-blur">
-                        <span style={{ color: solution.color }}>
-                          {solution.badge}
-                        </span>
-                      </div>
                     </div>
 
                     <div className="flex flex-col justify-between p-6 md:p-8">

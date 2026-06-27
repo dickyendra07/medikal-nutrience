@@ -11,7 +11,7 @@ const solutions = [
     title: "Nephrisol : Perlindungan Ginjal Dimulai dari Nutrisi yang Tepat",
     description:
       "Kebutuhan nutrisi Anda berbeda tergantung pada tahapan kondisi ginjal. Kami menyediakan formula presisi untuk tahap Pra-Dialisis dan Dialisis.",
-    image: "/images/mednut/solutions/solution-ginjal-nephrisol.png",
+    image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
     accent: "#5b0ca8",
     href: "/solusi/ginjal",
     primaryButton: "Predialisis",
@@ -25,7 +25,7 @@ const solutions = [
     title: "Hepatosol : Dukungan Nutrisi untuk Gangguan Fungsi Hati",
     description:
       "Dukung kebutuhan nutrisi pada kondisi hati kronik maupun kondisi hati yang membutuhkan perhatian lebih intensif dengan formula yang sesuai.",
-    image: "/images/mednut/solutions/solution-hati-hepatosol.png",
+    image: "/images/mednut/products/page-assets/hepatosol.png",
     accent: "#ef1f2d",
     href: "/solusi/hati-liver",
     primaryButton: "Hepatosol",
@@ -39,7 +39,7 @@ const solutions = [
     title: "Peptibren : Dukungan Nutrisi untuk Stroke dan Alzheimer",
     description:
       "Dukungan nutrisi untuk kondisi dengan tantangan asupan makan, kesulitan menelan, atau kebutuhan makanan lembut dan cair.",
-    image: "/images/mednut/solutions/solution-syaraf-otak.png",
+    image: "/images/mednut/products/page-assets/peptibren.jpeg",
     accent: "#2563eb",
     href: "/produk/peptibren",
     primaryButton: "Lihat Produk",
@@ -53,7 +53,7 @@ const solutions = [
     title: "Pulmosol : Solusi Nutrisi untuk Masalah Pernafasan",
     description:
       "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
-    image: "/images/mednut/solutions/solution-pernafasan-pulmosol.png",
+    image: "/images/mednut/products/page-assets/pulmosol.jpeg",
     accent: "#1e3a8a",
     href: "/solusi/pernafasan",
     primaryButton: "Pulmosol",
@@ -67,7 +67,7 @@ const solutions = [
     title: "Oligo : Nutrisi Cepat Serap untuk Sistem Saluran Cerna",
     description:
       "Oligo merupakan nutrisi oligomerik dengan protein terhidrolisa parsial untuk membantu memenuhi kebutuhan nutrisi pada kondisi saluran cerna tertentu.",
-    image: "/images/mednut/solutions/solution-pencernaan-oligo.png",
+    image: "/images/mednut/products/page-assets/oligo.jpeg",
     accent: "#d85b70",
     href: "/solusi/pencernaan",
     primaryButton: "Oligo",
@@ -129,7 +129,7 @@ export function SolutionSection() {
             <img
               src={activeSolution.image}
               alt={activeSolution.title}
-              className="h-auto w-full object-cover transition duration-500"
+              className="aspect-[1.18/1] w-full object-cover transition duration-500"
             />
           </div>
 

@@ -38,7 +38,7 @@ const featuredProducts = [
     category: "Tumbuh Kembang Anak",
     description:
       "Nutrisi untuk membantu mendukung kebutuhan tumbuh kembang anak.",
-    logo: mednutAssets.productLogos.entramix,
+    logo: "",
     image: mednutAssets.home.productEntrakid,
     href: "/produk/entrakid",
     accent: "#1aa5b5",
@@ -51,7 +51,7 @@ const medicalProducts = [
     category: "Ginjal",
     description:
       "Dukungan nutrisi untuk kondisi ginjal kronik tahap pra-dialisis.",
-    logo: mednutAssets.productLogos.nephrisol,
+    logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
     image: "/images/mednut/products/page-assets/nephrisol.jpeg",
     href: "/produk/nephrisol",
     color: "#7c3aed",
@@ -111,7 +111,7 @@ const medicalProducts = [
     category: "Syaraf & Otak",
     description:
       "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
-    logo: mednutAssets.productLogos.peptibren,
+    logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
     image: "/images/mednut/products/page-assets/peptibren.jpeg",
     href: "/produk/peptibren",
     color: "#ca8a04",
@@ -216,11 +216,12 @@ export default function ProductsPage() {
                   </div>
 
                   <div className="p-4 lg:p-6">
-                    <div className="flex h-16 items-center">
-                      <img
-                        src={product.logo}
-                        alt={`${product.name} logo`}
-                        className="max-h-12 w-auto max-w-[220px] object-contain"
+                    <div className="flex h-12 items-center">
+                      <ProductBrand
+                        logo={product.logo}
+                        name={product.name}
+                        color={product.accent}
+                        className="max-h-9 max-w-[150px]"
                       />
                     </div>
 
@@ -282,7 +283,7 @@ export default function ProductsPage() {
                     </div>
 
                     <div>
-                      <div className="flex h-16 items-center">
+                      <div className="flex h-12 items-center">
                         <img
                           src={product.logo}
                           alt={`${product.name} logo`}
@@ -364,5 +365,41 @@ export default function ProductsPage() {
 
       <Footer />
     </>
+  );
+}
+
+
+function ProductBrand({
+  logo,
+  name,
+  color,
+  className = "",
+}: {
+  logo: string;
+  name: string;
+  color: string;
+  className?: string;
+}) {
+  if (logo) {
+    return (
+      <div className="flex h-14 w-full items-center">
+        <img
+          src={logo}
+          alt={`${name} logo`}
+          className="max-h-11 w-auto max-w-[220px] object-contain object-left"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex h-14 w-full items-center">
+      <span
+        className="inline-flex h-10 items-center rounded-full bg-white px-4 text-sm font-black uppercase tracking-wide shadow-sm ring-1 ring-black/5"
+        style={{ color }}
+      >
+        {name}
+      </span>
+    </div>
   );
 }
