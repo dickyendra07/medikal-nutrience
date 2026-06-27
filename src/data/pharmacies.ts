@@ -15,7 +15,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 1,
     name: "Toko Susu Sunter",
-    area: "JK1",
+    area: "Jabodetabek",
     city: "Jakarta",
     pic: "Andita",
     status: "Official Partner",
@@ -25,7 +25,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 2,
     name: "Apotek Lido",
-    area: "JK1",
+    area: "Jabodetabek",
     city: "Jakarta",
     pic: "Andita",
     status: "Official Partner",
@@ -35,7 +35,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 3,
     name: "Apotek Mandjur",
-    area: "JK1",
+    area: "Jabodetabek",
     city: "Jakarta",
     pic: "Andita",
     status: "Official Partner",
@@ -46,7 +46,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 4,
     name: "NM Babyshop",
-    area: "JK2",
+    area: "Jabodetabek",
     city: "Jakarta",
     pic: "Hans",
     status: "Official Partner",
@@ -56,7 +56,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 5,
     name: "Kapal Perang",
-    area: "JK2",
+    area: "Jabodetabek",
     city: "Jakarta",
     pic: "Hans",
     status: "Official Partner",
@@ -66,7 +66,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 6,
     name: "Apotek Roxy",
-    area: "JK2",
+    area: "Jabodetabek",
     city: "Jakarta",
     pic: "Hans",
     status: "Official Partner",
@@ -77,7 +77,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 7,
     name: "Apotek Heka",
-    area: "Bekasi",
+    area: "Jabodetabek",
     city: "Bekasi",
     pic: "Sinta",
     status: "Official Partner",
@@ -87,7 +87,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 8,
     name: "Lapak Susu Store",
-    area: "Bekasi",
+    area: "Jabodetabek",
     city: "Bekasi",
     pic: "Sinta",
     status: "Official Partner",
@@ -98,7 +98,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 9,
     name: "Istana Susu",
-    area: "Bekasi",
+    area: "Jabodetabek",
     city: "Bekasi",
     pic: "Sinta",
     status: "Official Partner",
@@ -109,7 +109,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 10,
     name: "Apotek Anda",
-    area: "Depok",
+    area: "Jabodetabek",
     city: "Depok",
     pic: "Fajar",
     status: "Official Partner",
@@ -119,7 +119,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 11,
     name: "Apotek Berlian Farma",
-    area: "Depok",
+    area: "Jabodetabek",
     city: "Depok",
     pic: "Fajar",
     status: "Official Partner",
@@ -129,7 +129,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 12,
     name: "Apotek Kita",
-    area: "Depok",
+    area: "Jabodetabek",
     city: "Depok",
     pic: "Fajar",
     status: "Official Partner",
@@ -139,7 +139,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 13,
     name: "Toko Susuku",
-    area: "Tangerang",
+    area: "Jabodetabek",
     city: "Tangerang",
     pic: "Agnes",
     status: "Official Partner",
@@ -149,7 +149,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 14,
     name: "Raja Pampers",
-    area: "Tangerang",
+    area: "Jabodetabek",
     city: "Tangerang",
     pic: "Agnes",
     status: "Official Partner",
@@ -159,7 +159,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 15,
     name: "Apotek Berkat",
-    area: "Tangerang",
+    area: "Jabodetabek",
     city: "Tangerang",
     pic: "Agnes",
     status: "Official Partner",
@@ -191,7 +191,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 19,
     name: "Apotek Jaya Sentosa",
-    area: "Bandung",
+    area: "Jawa Barat",
     city: "Bandung",
     pic: "Risma",
     status: "Official Partner",
@@ -201,7 +201,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 20,
     name: "Apotek Perintis Jaya",
-    area: "Bandung",
+    area: "Jawa Barat",
     city: "Bandung",
     pic: "Risma",
     status: "Official Partner",
@@ -211,7 +211,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 21,
     name: "Borma",
-    area: "Bandung",
+    area: "Jawa Barat",
     city: "Bandung",
     pic: "Risma",
     status: "Official Partner",
@@ -222,7 +222,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 22,
     name: "Apotek Sarika",
-    area: "Semarang",
+    area: "Jawa Tengah",
     city: "Semarang",
     pic: "Sigit",
     status: "Official Partner",
@@ -263,7 +263,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 28,
     name: "Apotek Pharm 24",
-    area: "Yogyakarta",
+    area: "DI Yogyakarta",
     city: "Yogyakarta",
     pic: "Heri",
     status: "Official Partner",
@@ -273,7 +273,7 @@ export const pharmacies: PharmacyPartner[] = [
   {
     no: 29,
     name: "Apotek Orimedic",
-    area: "Yogyakarta",
+    area: "DI Yogyakarta",
     city: "Yogyakarta",
     pic: "Heri",
     status: "Official Partner",
@@ -331,5 +331,27 @@ export const pharmacies: PharmacyPartner[] = [
     status: "Official Partner",
     contactType: "Apotek",
     stock: ["Entrakid", "Entramix", "Entrasoy", "Peptisol"],
+  },
+  {
+    no: 37,
+    name: "Apotek K24",
+    onlineStore: "",
+    area: "Jabodetabek",
+    city: "Jabodetabek",
+    pic: "",
+    status: "Official Partner",
+    contactType: "apotek",
+    stock: [],
+  },
+  {
+    no: 38,
+    name: "Kimia Farma",
+    onlineStore: "",
+    area: "Jabodetabek",
+    city: "Jabodetabek",
+    pic: "",
+    status: "Official Partner",
+    contactType: "apotek",
+    stock: [],
   },
 ];
