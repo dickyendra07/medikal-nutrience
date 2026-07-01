@@ -288,68 +288,74 @@ function EntrakidMerakidsSection({ product }: { product: ProductDetail }) {
       title: "MERAKIDS Coloring Fun",
       description:
         "Aktivitas mewarnai seru untuk melatih kreativitas, fokus, dan motorik anak.",
-      color: "#27b2d0",
-      href: "#",
+      color: "#25adc7",
     },
     {
       title: "My Little Diary",
       description:
         "Tempat si kecil mencatat aktivitas, perasaan, dan momen seru setiap hari.",
-      color: "#2386d1",
-      href: "#",
+      color: "#2687cf",
     },
     {
       title: "Fun Origami Guide",
       description:
         "Tutorial origami sederhana untuk melatih kreativitas dan koordinasi anak.",
-      color: "#2327d9",
-      href: "#",
+      color: "#2227d8",
     },
   ];
 
   return (
-    <section id="merakids" className="bg-white px-5 py-12 lg:px-10">
-      <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5">
-        <div className="px-6 py-10 md:px-12 md:py-14 lg:px-20">
-          <p
-            className="text-xs font-black uppercase tracking-[0.35em]"
-            style={{ color: product.theme.primary }}
-          >
-            MERAKIDS
-          </p>
+    <section className="bg-[#f4fbf8] px-5 py-12 lg:px-10">
+      <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 reveal-scale">
+        <div className="grid gap-8 px-8 py-10 md:px-12 md:py-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <p
+              className="text-xs font-black uppercase tracking-[0.35em]"
+              style={{ color: product.theme.primary }}
+            >
+              MERAKIDS
+            </p>
 
-          <h2 className="mt-4 max-w-4xl text-3xl font-black leading-tight text-[#09265f] md:text-5xl">
-            Serunya Aktivitas Kreatif <br className="hidden md:block" />
-            Bersama{" "}
-            <span style={{ color: product.theme.primary }}>MERAKIDS</span>
-          </h2>
+            <h2 className="mt-4 max-w-3xl text-3xl font-black leading-tight text-[#10265f] md:text-5xl">
+              Serunya Aktivitas Kreatif Bersama{" "}
+              <span style={{ color: product.theme.primary }}>MERAKIDS</span>
+            </h2>
 
-          <p className="mt-5 max-w-3xl text-base font-bold leading-8 text-[#111827] md:text-xl md:leading-9">
-            Temukan berbagai aktivitas seru untuk mendukung kreativitas dan
-            tumbuh kembang si kecil di rumah.
-          </p>
+            <p className="mt-5 max-w-2xl text-sm font-bold leading-7 text-[#0f172a] md:text-base md:leading-8">
+              Temukan berbagai aktivitas seru untuk mendukung kreativitas dan
+              tumbuh kembang si kecil di rumah.
+            </p>
+          </div>
+
+          <div className="relative flex min-h-[220px] items-center justify-center overflow-hidden rounded-[2rem] bg-white p-5 md:min-h-[300px]">
+            <div className="absolute inset-0 bg-white" />
+            <img
+              src="/images/mednut/merakids/merakids-banner.png"
+              alt="MERAKIDS"
+              className="relative z-10 h-auto w-full max-w-[520px] object-contain drop-shadow-2xl"
+            />
+          </div>
         </div>
 
-        <div>
+        <div className="overflow-hidden">
           {activities.map((activity) => (
             <article
               key={activity.title}
-              className="grid gap-5 px-6 py-9 text-white md:grid-cols-[1fr_auto] md:items-center md:px-12 lg:px-20"
+              className="grid gap-4 px-8 py-7 text-white md:grid-cols-[1fr_auto] md:items-center md:px-12"
               style={{ backgroundColor: activity.color }}
             >
               <div>
-                <h3 className="text-2xl font-black leading-tight md:text-4xl">
+                <h3 className="text-2xl font-black leading-tight md:text-3xl">
                   {activity.title}
                 </h3>
-
-                <p className="mt-4 max-w-3xl text-sm font-semibold leading-7 text-white/90 md:text-base">
+                <p className="mt-3 text-sm font-medium leading-7 text-white/90 md:text-base">
                   {activity.description}
                 </p>
               </div>
 
               <a
-                href={activity.href}
-                className="inline-flex w-fit items-center justify-center rounded-full bg-[#f4b000] px-7 py-4 text-xs font-black uppercase tracking-wide text-white shadow-xl shadow-black/10 transition hover:-translate-y-0.5 hover:bg-[#e5a000]"
+                href="/support-system"
+                className="inline-flex w-fit rounded-full bg-[#f7b500] px-7 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-black/10 transition hover:-translate-y-0.5"
               >
                 Download Content
               </a>
@@ -357,26 +363,24 @@ function EntrakidMerakidsSection({ product }: { product: ProductDetail }) {
           ))}
         </div>
 
-        <div className="relative overflow-hidden bg-[#efad00] px-6 py-12 text-center text-white md:px-12 lg:px-20">
-          <div className="absolute inset-0 opacity-15">
-            <div className="absolute left-[20%] top-8 h-24 w-24 rounded-full border-8 border-white" />
-            <div className="absolute right-[12%] bottom-8 h-28 w-28 rounded-full border-8 border-white" />
-            <div className="absolute bottom-[-40px] left-1/2 h-40 w-40 -translate-x-1/2 rounded-full border-8 border-white" />
-          </div>
+        <div
+          className="relative overflow-hidden px-8 py-12 text-center text-white md:px-12 md:py-14"
+          style={{ backgroundColor: "#f7b500" }}
+        >
+          <div className="absolute left-[20%] top-[-30px] h-28 w-28 rounded-full border-8 border-white/20" />
+          <div className="absolute bottom-[-50px] left-1/2 h-36 w-36 rounded-full border-8 border-white/20" />
+          <div className="absolute right-[12%] top-10 h-28 w-28 rounded-full border-8 border-white/20" />
 
-          <div className="relative z-10 mx-auto max-w-4xl">
-            <h3 className="text-3xl font-black leading-tight md:text-5xl">
-              Bantu Si Kecil Tumbuh Maksimal
-            </h3>
+          <h2 className="relative text-3xl font-black leading-tight md:text-5xl">
+            {product.closingTitle}
+          </h2>
 
-            <p className="mx-auto mt-4 max-w-3xl text-sm font-bold leading-7 text-white md:text-base">
-              Setiap sendok Entrakid adalah langkah pasti menuju berat badan
-              ideal dan anak yang lebih aktif. Tersedia rasa Cokelat & Vanila
-              yang pasti disukai anak.
-            </p>
-          </div>
+          <p className="relative mx-auto mt-4 max-w-3xl text-sm font-bold leading-7 text-white/95 md:text-base md:leading-8">
+            {product.closingDescription}
+          </p>
         </div>
       </div>
     </section>
   );
 }
+

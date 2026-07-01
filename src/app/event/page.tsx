@@ -3,79 +3,40 @@
 import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { mednutAssets } from "@/data/mednut-assets";
 
-const events = [
-  {
-    title: "Clinical Nutrition Symposium 2026",
-    category: "Seminar Nutrisi",
-    date: "15 Agustus 2026",
-    location: "Jakarta",
-    image: mednutAssets.support.bmiCalculator,
-    description:
-      "Seminar edukasi nutrisi klinis untuk tenaga kesehatan dan masyarakat umum.",
-  },
-  {
-    title: "Edukasi Nutrisi Keluarga",
-    category: "Webinar Keluarga",
-    date: "22 Agustus 2026",
-    location: "Online",
-    image: mednutAssets.support.educationHealth,
-    description:
-      "Sesi edukasi seputar kebutuhan nutrisi keluarga di setiap tahap kehidupan.",
-  },
-  {
-    title: "Mitra Medis & Rumah Sakit",
-    category: "Program Mitra",
-    date: "29 Agustus 2026",
-    location: "Jakarta",
-    image: mednutAssets.support.doctorConsultation,
-    description:
-      "Program pengenalan solusi nutrisi Medikal Nutrience untuk mitra fasilitas kesehatan.",
-  },
-  {
-    title: "Cek Status Gizi",
-    category: "Aktivasi Kesehatan",
-    date: "5 September 2026",
-    location: "Jabodetabek",
-    image: mednutAssets.support.bmiCalculator,
-    description:
-      "Aktivitas skrining awal status gizi dan edukasi kebutuhan nutrisi harian.",
-  },
-  {
-    title: "Dapur Sehat FIMA",
-    category: "Kelas Edukasi",
-    date: "12 September 2026",
-    location: "Online",
-    image: mednutAssets.support.educationHealth,
-    description:
-      "Kelas inspirasi menu sehat dan cara menyusun asupan keluarga yang lebih seimbang.",
-  },
-  {
-    title: "Artikel Edukasi FIMA",
-    category: "Edukasi Digital",
-    date: "19 September 2026",
-    location: "Online",
-    image: mednutAssets.banners.brandArtboard1,
-    description:
-      "Sesi pengenalan materi edukasi digital dan konten kesehatan dari Medikal Nutrience.",
-  },
+const productOptions = [
+  "Entramix",
+  "Entrakid",
+  "Nephrisol",
+  "Pulmosol",
+  "Entrasoy",
+  "Peptisol",
+  "Oligo",
+  "Hepatosol",
+  "Hepatosol Lola",
+  "Peptibren",
 ];
 
-const referralOptions = [
+const infoSources = [
   "Instagram",
-  "Website",
-  "Sales Medical Nutrience",
   "WhatsApp",
-  "Teman",
-  "Rumah Sakit",
+  "Dokter / Ahli Gizi",
+  "Rumah Sakit / Klinik",
+  "Teman / Keluarga",
+  "Website Medikal Nutrience",
   "Lainnya",
 ];
 
-type EventItem = (typeof events)[number];
-
 export default function EventPage() {
-  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+
+  const toggleProduct = (product: string) => {
+    setSelectedProducts((current) =>
+      current.includes(product)
+        ? current.filter((item) => item !== product)
+        : [...current, product]
+    );
+  };
 
   return (
     <>
@@ -84,212 +45,248 @@ export default function EventPage() {
       <main className="bg-[#f4fbf8]">
         <section className="relative overflow-hidden px-5 py-12 md:py-20 lg:px-10">
           <div className="absolute left-[-180px] top-[-180px] h-[420px] w-[420px] rounded-full bg-[#d9f3e8]" />
-          <div className="absolute bottom-[-220px] right-[-120px] h-[460px] w-[460px] rounded-full bg-[#c6f1df]" />
+          <div className="absolute bottom-[-220px] right-[-140px] h-[480px] w-[480px] rounded-full bg-[#c6f1df]" />
 
-          <div className="relative mx-auto w-full max-w-[1440px] overflow-hidden rounded-[2.5rem] bg-[#006b3f] px-6 py-12 text-center text-white shadow-2xl shadow-green-900/15 md:px-10 md:py-16">
-            <p className="text-xs font-black uppercase tracking-[0.35em] text-white/70">
-              Event Medikal Nutrience
-            </p>
+          <div className="relative mx-auto grid w-full max-w-[1440px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+            <div className="reveal-left">
+              <p className="inline-flex rounded-full bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.25em] text-[#006b3f] shadow-lg shadow-green-900/8 ring-1 ring-black/5">
+                Event Medikal Nutrience
+              </p>
 
-            <h1 className="mx-auto mt-5 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
-              Ikuti Event Seminar Medikal Nutrience
-            </h1>
+              <h1 className="mt-7 max-w-4xl text-4xl font-black leading-[1.04] tracking-tight text-[#111827] md:text-6xl">
+                Hari Gizi Nasional 2026
+              </h1>
 
-            <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-white/80 md:text-base md:leading-8">
-              Temukan seminar, workshop, webinar, dan berbagai kegiatan edukasi
-              kesehatan yang dapat diikuti oleh tenaga kesehatan maupun
-              masyarakat umum.
-            </p>
+              <p className="mt-6 max-w-3xl text-base font-medium leading-8 text-[#5f6b76] md:text-lg md:leading-9">
+                Gizi Seimbang untuk Lansia Kuat & Aktif. Ikuti health talk dan
+                demo cooking bersama tenaga kesehatan profesional.
+              </p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
+                    Lokasi
+                  </p>
+                  <p className="mt-2 text-sm font-bold leading-6 text-[#334155]">
+                    Auditorium RS Permata Cibubur Lt. 4
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
+                    Tanggal
+                  </p>
+                  <p className="mt-2 text-sm font-bold leading-6 text-[#334155]">
+                    Kamis, 22 Januari 2026
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
+                    Waktu
+                  </p>
+                  <p className="mt-2 text-sm font-bold leading-6 text-[#334155]">
+                    08.30 – 11.30 WIB
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="#registration"
+                className="mt-8 inline-flex rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white shadow-xl shadow-green-900/20 transition hover:-translate-y-1 hover:bg-[#005432]"
+              >
+                Daftar Event Sekarang
+              </a>
+            </div>
+
+            <div className="reveal-scale reveal-delay-2">
+              <div className="overflow-hidden rounded-[2.5rem] bg-white p-4 shadow-2xl shadow-green-900/10 ring-1 ring-black/5">
+                <img
+                  src="/images/mednut/events/hgn-2026.webp"
+                  alt="Poster Hari Gizi Nasional 2026"
+                  className="w-full rounded-[2rem] object-cover"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="px-5 pb-16 lg:px-10">
-          <div className="mx-auto grid w-full max-w-[1180px] gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {events.map((event) => (
-              <article
-                key={event.title}
-                className="group overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
-              >
-                <div className="h-52 overflow-hidden bg-[#e8f8f1]">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]"
-                  />
-                </div>
-
-                <div className="p-6">
-                  <p className="text-xs font-black uppercase tracking-[0.24em] text-[#006b3f]">
-                    {event.category}
+        <section className="px-5 py-12 md:py-16 lg:px-10">
+          <div className="mx-auto w-full max-w-[1440px]">
+            <div className="grid gap-6 lg:grid-cols-3">
+              {[
+                {
+                  title: "Health Talk",
+                  desc: "Diskusi edukatif seputar gizi seimbang untuk lansia agar tetap kuat dan aktif.",
+                },
+                {
+                  title: "Demo Cooking",
+                  desc: "Inspirasi menu sehat yang mudah diterapkan untuk mendukung kebutuhan nutrisi harian.",
+                },
+                {
+                  title: "Free Check & Sample",
+                  desc: "Pemeriksaan protein, komposisi tubuh, snack box, lunch box, drink, dan sample selama kuota tersedia.",
+                },
+              ].map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-[2rem] bg-white p-7 shadow-xl shadow-slate-900/8 ring-1 ring-black/5"
+                >
+                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">
+                    Program
                   </p>
-
-                  <h2 className="mt-3 text-2xl font-black leading-tight text-[#111827]">
-                    {event.title}
+                  <h2 className="mt-4 text-2xl font-black leading-tight text-[#111827]">
+                    {item.title}
                   </h2>
-
-                  <div className="mt-4 space-y-2 text-sm font-bold text-[#64748b]">
-                    <p>📅 {event.date}</p>
-                    <p>📍 {event.location}</p>
-                  </div>
-
                   <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
-                    {event.description}
+                    {item.desc}
                   </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                  <button
-                    type="button"
-                    onClick={() => setSelectedEvent(event)}
-                    className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#006b3f] px-5 py-3 text-sm font-black text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
-                      →
-                    </span>
-                    Daftar Sekarang
-                  </button>
+        <section id="registration" className="px-5 py-12 md:py-20 lg:px-10">
+          <div className="mx-auto grid w-full max-w-[1440px] gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <div className="rounded-[2.5rem] bg-[#006b3f] p-8 text-white shadow-2xl shadow-green-900/15 md:p-10">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-white/60">
+                Form Registrasi
+              </p>
+              <h2 className="mt-4 text-3xl font-black leading-tight md:text-5xl">
+                Daftar Hari Gizi Nasional 2026
+              </h2>
+              <p className="mt-5 text-sm font-medium leading-7 text-white/75 md:text-base md:leading-8">
+                Lengkapi data berikut untuk mengikuti event. Data ini akan
+                membantu tim Medikal Nutrience mengelola registrasi dan edukasi
+                yang relevan.
+              </p>
+
+              <div className="mt-8 overflow-hidden rounded-[2rem] bg-white/10 p-4 ring-1 ring-white/10">
+                <img
+                  src="/images/mednut/events/hgn-2026.webp"
+                  alt="Hari Gizi Nasional 2026"
+                  className="rounded-[1.5rem]"
+                />
+              </div>
+            </div>
+
+            <form className="rounded-[2.5rem] bg-white p-6 shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 md:p-8">
+              <div className="grid gap-5 md:grid-cols-2">
+                <Field label="Nama Lengkap" placeholder="Tulis nama lengkap" />
+                <Field label="Email" placeholder="nama@email.com" type="email" />
+                <Field label="Nomor WhatsApp" placeholder="08xxxxxxxxxx" />
+                <div>
+                  <label className="mb-2 block text-sm font-black text-[#0f172a]">
+                    Sumber Informasi Event
+                  </label>
+                  <select className="w-full rounded-2xl border border-black/10 bg-[#f8fafc] px-5 py-4 text-sm font-bold text-[#334155] outline-none focus:border-[#006b3f]">
+                    <option value="">Pilih sumber informasi</option>
+                    {infoSources.map((source) => (
+                      <option key={source} value={source}>
+                        {source}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-              </article>
-            ))}
+              </div>
+
+              <div className="mt-7 rounded-[2rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
+                <p className="text-sm font-black text-[#0f172a]">
+                  Apakah Anda pernah menggunakan produk Medikal Nutrience?
+                </p>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {["Ya", "Belum"].map((item) => (
+                    <label
+                      key={item}
+                      className="flex cursor-pointer items-center gap-3 rounded-2xl bg-white px-4 py-4 text-sm font-bold text-[#334155] ring-1 ring-black/5"
+                    >
+                      <input
+                        type="radio"
+                        name="usedProduct"
+                        value={item}
+                        className="h-4 w-4 accent-[#006b3f]"
+                      />
+                      {item}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-7 rounded-[2rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
+                <p className="text-sm font-black text-[#0f172a]">
+                  Produk yang pernah digunakan / diminati
+                </p>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {productOptions.map((product) => (
+                    <label
+                      key={product}
+                      className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-4 text-sm font-bold ring-1 transition ${
+                        selectedProducts.includes(product)
+                          ? "bg-[#006b3f] text-white ring-[#006b3f]"
+                          : "bg-white text-[#334155] ring-black/5"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedProducts.includes(product)}
+                        onChange={() => toggleProduct(product)}
+                        className="h-4 w-4 accent-[#006b3f]"
+                      />
+                      {product}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <label className="mt-7 flex cursor-pointer items-start gap-3 rounded-[1.5rem] bg-[#f8fcfa] p-5 text-sm font-bold leading-7 text-[#64748b] ring-1 ring-black/5">
+                <input type="checkbox" className="mt-1 h-4 w-4 accent-[#006b3f]" />
+                Saya setuju untuk menerima informasi event, edukasi, dan
+                komunikasi dari Medikal Nutrience.
+              </label>
+
+              <button
+                type="button"
+                className="mt-7 w-full rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white shadow-xl shadow-green-900/20 transition hover:bg-[#005432]"
+              >
+                Kirim Registrasi
+              </button>
+
+              <p className="mt-4 text-center text-xs font-medium leading-6 text-[#94a3b8]">
+                Form ini masih preview frontend. Integrasi penyimpanan data akan
+                disambungkan pada tahap CMS/backend.
+              </p>
+            </form>
           </div>
         </section>
       </main>
 
       <Footer />
-
-      {selectedEvent ? (
-        <EventRegistrationModal
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
-      ) : null}
     </>
   );
 }
 
-function EventRegistrationModal({
-  event,
-  onClose,
+function Field({
+  label,
+  placeholder,
+  type = "text",
 }: {
-  event: EventItem;
-  onClose: () => void;
+  label: string;
+  placeholder: string;
+  type?: string;
 }) {
-  const [agree, setAgree] = useState(false);
-
   return (
-    <div className="fixed inset-0 z-[120] flex items-end justify-center bg-[#0f172a]/55 px-4 py-6 backdrop-blur-md md:items-center">
-      <button
-        type="button"
-        onClick={onClose}
-        className="absolute inset-0 cursor-default"
-        aria-label="Tutup form registrasi event"
+    <div>
+      <label className="mb-2 block text-sm font-black text-[#0f172a]">
+        {label}
+      </label>
+      <input
+        type={type}
+        placeholder={placeholder}
+        className="w-full rounded-2xl border border-black/10 bg-[#f8fafc] px-5 py-4 text-sm font-bold text-[#334155] outline-none focus:border-[#006b3f]"
       />
-
-      <div className="relative w-full max-w-3xl overflow-hidden rounded-[2rem] bg-white p-6 shadow-2xl md:p-8">
-        <div className="flex items-start justify-between gap-5">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.32em] text-[#006b3f]">
-              Form Registrasi
-            </p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-[#111827] md:text-4xl">
-              {event.title}
-            </h2>
-            <p className="mt-3 text-sm font-bold text-[#64748b]">
-              {event.date} • {event.location}
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e4f8ed] text-xl font-black text-[#006b3f] transition hover:bg-[#006b3f] hover:text-white"
-          >
-            ×
-          </button>
-        </div>
-
-        <form
-          className="mt-7 grid gap-4"
-          onSubmit={(eventSubmit) => {
-            eventSubmit.preventDefault();
-            onClose();
-          }}
-        >
-          <div>
-            <label className="text-sm font-black text-[#111827]">
-              Nama Lengkap
-            </label>
-            <input
-              required
-              placeholder="Tulis nama lengkap"
-              className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold outline-none focus:border-[#006b3f] focus:bg-white"
-            />
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-sm font-black text-[#111827]">
-                Email
-              </label>
-              <input
-                required
-                type="email"
-                placeholder="nama@email.com"
-                className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold outline-none focus:border-[#006b3f] focus:bg-white"
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-black text-[#111827]">
-                Nomor WhatsApp
-              </label>
-              <input
-                required
-                inputMode="tel"
-                placeholder="08xxxxxxxxxx"
-                className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold outline-none focus:border-[#006b3f] focus:bg-white"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="text-sm font-black text-[#111827]">
-              Bagaimana Anda mengetahui event ini?
-            </label>
-            <select
-              required
-              className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold outline-none focus:border-[#006b3f] focus:bg-white"
-            >
-              <option value="">Pilih sumber informasi</option>
-              {referralOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <label className="flex gap-3 rounded-2xl bg-[#f8fcfa] p-4 ring-1 ring-black/5">
-            <input
-              type="checkbox"
-              checked={agree}
-              onChange={(eventAgree) => setAgree(eventAgree.target.checked)}
-              className="mt-1 h-4 w-4 shrink-0"
-              required
-            />
-            <span className="text-sm font-medium leading-6 text-[#64748b]">
-              Saya bersedia menerima informasi mengenai event dan edukasi dari
-              Medikal Nutrience. Ini berguna untuk komunikasi event berikutnya.
-            </span>
-          </label>
-
-          <button
-            type="submit"
-            disabled={!agree}
-            className="mt-2 rounded-full bg-[#006b3f] px-7 py-4 text-sm font-black text-white shadow-lg shadow-green-900/15 transition hover:bg-[#005432] disabled:cursor-not-allowed disabled:bg-[#e5e7eb] disabled:text-[#94a3b8]"
-          >
-            Kirim Registrasi
-          </button>
-        </form>
-      </div>
     </div>
   );
 }
