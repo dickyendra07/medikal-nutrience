@@ -26,6 +26,7 @@ const megaMenus = {
       { label: "Entramix", href: "/produk/entramix", desc: "Nutrisi lengkap harian" },
       { label: "Entrasoy", href: "/produk/entrasoy", desc: "Nutrisi berbasis soya" },
       { label: "Peptisol", href: "/produk/peptisol", desc: "Nutrisi tinggi protein" },
+      { label: "Peptibren", href: "/produk/peptibren", desc: "Dukungan nutrisi stroke & Alzheimer" },
       { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal" },
       { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati" },
       { label: "Pulmosol", href: "/produk/pulmosol", desc: "Dukungan nutrisi pernafasan" },
