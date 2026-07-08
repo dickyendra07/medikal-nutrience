@@ -1,25 +1,86 @@
 import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { productDetails } from "@/data/product-details";
+import { promises as fs } from "fs";
+import path from "path";
 
-const cmsMenus = [
-  { title: "Produk", desc: "Kelola produk, logo, packshot, manfaat, dan CTA", count: "11 produk", href: "/cms/products" },
-  { title: "Solusi", desc: "Kelola solusi berdasarkan kebutuhan tubuh", count: "7 solusi", href: "#" },
-  { title: "Support System", desc: "Kelola kalkulator, komunitas, kisah pasien, dan edukasi", count: "4 modul", href: "#" },
-  { title: "Dapur Sehat FIMA", desc: "Kelola artikel resep dan detail konten nutrisi", count: "3 artikel", href: "#" },
-  { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "Soon", href: "#" },
-  { title: "Apotek", desc: "Kelola daftar apotek, area, dan link Google Maps", count: "Partner", href: "#" },
-  { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "#" },
-  { title: "Leads / Registrasi", desc: "Data dari assessment, konsultasi, dan event", count: "Soon", href: "#" },
-  { title: "Pengaturan Website", desc: "SEO, banner, navigasi, dan informasi perusahaan", count: "Settings", href: "#" },
-];
+type CmsProductDraft = {
+  slug: string;
+  name: string;
+  category: string;
+  heroTitle: string;
+  description: string;
+  ctaLabel: string;
+  status: "published" | "draft" | "review";
+  updatedAt: string;
+};
 
-const quickStats = [
-  { label: "Produk Aktif", value: "11" },
-  { label: "Solusi Nutrisi", value: "7" },
-  { label: "Apotek Partner", value: "33+" },
-  { label: "CMS Module", value: "9" },
-];
+async function getProductDrafts() {
+  try {
+    const file = await fs.readFile(
+      path.join(process.cwd(), "src/data/cms/cms-products.json"),
+      "utf8"
+    );
+
+    return JSON.parse(file) as Record<string, CmsProductDraft>;
+  } catch {
+    return {};
+  }
+}
+
+function formatLastUpdate(value: string | null) {
+  if (!value) {
+    return "Belum ada";
+  }
+
+  return new Date(value).toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+
+function getCmsMenus(productCount: number) {
+  return [
+    {
+      title: "Produk",
+      desc: "Kelola produk, logo, packshot, manfaat, dan CTA",
+      count: `${productCount} produk`,
+      href: "/cms/products",
+    },
+    { title: "Solusi", desc: "Kelola solusi berdasarkan kebutuhan tubuh", count: "7 solusi", href: "#" },
+    { title: "Support System", desc: "Kelola kalkulator, komunitas, kisah pasien, dan edukasi", count: "4 modul", href: "#" },
+    { title: "Dapur Sehat FIMA", desc: "Kelola artikel resep dan detail konten nutrisi", count: "3 artikel", href: "#" },
+    { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "Soon", href: "#" },
+    { title: "Apotek", desc: "Kelola daftar apotek, area, dan link Google Maps", count: "Partner", href: "#" },
+    { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "#" },
+    { title: "Leads / Registrasi", desc: "Data dari assessment, konsultasi, dan event", count: "Soon", href: "#" },
+    { title: "Pengaturan Website", desc: "SEO, banner, navigasi, dan informasi perusahaan", count: "Settings", href: "#" },
+  ];
+}
+
+function getQuickStats({
+  productCount,
+  publishedDraftCount,
+  pendingDraftCount,
+  lastUpdate,
+}: {
+  productCount: number;
+  publishedDraftCount: number;
+  pendingDraftCount: number;
+  lastUpdate: string | null;
+}) {
+  return [
+    { label: "Produk Aktif", value: String(productCount) },
+    { label: "Published Draft", value: String(publishedDraftCount) },
+    { label: "Draft / Review", value: String(pendingDraftCount) },
+    { label: "Last CMS Update", value: formatLastUpdate(lastUpdate) },
+  ];
+}
 
 export default async function CmsPage() {
   const authenticated = await isCmsAuthenticated();
@@ -27,6 +88,30 @@ export default async function CmsPage() {
   if (!authenticated) {
     redirect("/cms/login");
   }
+
+  const drafts = await getProductDrafts();
+  const draftList = Object.values(drafts);
+  const publishedDraftCount = draftList.filter(
+    (draft) => draft.status === "published"
+  ).length;
+  const pendingDraftCount = draftList.filter(
+    (draft) => draft.status === "draft" || draft.status === "review"
+  ).length;
+  const lastUpdate =
+    draftList
+      .map((draft) => draft.updatedAt)
+      .filter(Boolean)
+      .sort()
+      .at(-1) ?? null;
+
+  const quickStats = getQuickStats({
+    productCount: productDetails.length,
+    publishedDraftCount,
+    pendingDraftCount,
+    lastUpdate,
+  });
+
+  const cmsMenus = getCmsMenus(productDetails.length);
 
   return (
     <CmsAdminShell
@@ -108,8 +193,9 @@ export default async function CmsPage() {
           CMS sudah memiliki shell utama, login, dashboard, dan module Products.
         </h2>
         <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-white/70">
-          Tahap berikutnya adalah membuat halaman edit produk dan menyambungkan
-          data CMS ke storage/database.
+          Module Products sudah bisa menyimpan draft, reset draft, dan membaca
+          draft untuk halaman public produk. Tahap berikutnya adalah memperluas
+          modul CMS lain seperti solusi, FAQ, event, dan apotek.
         </p>
       </section>
     </CmsAdminShell>
