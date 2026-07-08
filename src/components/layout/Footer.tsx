@@ -176,6 +176,22 @@ export function Footer() {
   );
 }
 
+const footerHrefMap: Record<string, string> = {
+  Entrakid: "/produk/entrakid",
+  Entrasoy: "/produk/entrasoy",
+  Peptisol: "/produk/peptisol",
+  Entramix: "/produk/entramix",
+  "Blog Edukasi": "/support-system/dapur-sehat-fima",
+  "Kisah Sukses Pasien": "/support-system/kisah-sukses-pasien",
+  "Dapur Sehat": "/support-system/dapur-sehat-fima",
+  "Kalkulator Status Gizi": "/support-system/kalkulator-status-gizi",
+  "Komunitas Sehat": "/support-system/komunitas-sehat",
+  Event: "/event",
+  Apotek: "/apotek-resmi",
+  FAQ: "/#faq",
+  Kontak: "/kontak",
+};
+
 function FooterColumn({
   title,
   links,
@@ -188,8 +204,11 @@ function FooterColumn({
       <h3 className="mb-5 font-bold">{title}</h3>
       <ul className="space-y-3 text-sm text-white/70">
         {links.map((link) => (
-          <li key={link}>
-            <a href="#" className="transition hover:text-white">
+          <li key={`${title}-${link}`}>
+            <a
+              href={footerHrefMap[link] ?? "/"}
+              className="transition hover:text-white"
+            >
               &gt;&gt; {link}
             </a>
           </li>

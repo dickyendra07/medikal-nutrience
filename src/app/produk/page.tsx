@@ -112,7 +112,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
     logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
-    image: "/images/mednut/products/page-assets/peptibren.jpeg",
+    image: "/images/mednut/banners/menu-produk-depan.png",
     href: "/produk/peptibren",
     color: "#ca8a04",
   },
@@ -171,8 +171,8 @@ export default function ProductsPage() {
 
                 <div className="relative z-10 flex min-h-[420px] items-center justify-center rounded-[2rem] bg-[#f4fbf8] p-5 md:min-h-[520px]">
                   <img
-                    src="/images/client-assets/img/Artboard 10.png"
-                    alt="Keluarga Indonesia bersama rangkaian produk Medikal Nutrience"
+                    src="/images/mednut/banners/menu-produk-depan.png"
+                    alt="Keluarga Indonesia dan rangkaian produk Medikal Nutrience"
                     className="h-auto w-full max-w-[680px] object-contain drop-shadow-2xl"
                   />
                 </div>

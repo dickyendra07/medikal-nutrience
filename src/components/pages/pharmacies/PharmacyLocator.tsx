@@ -3,6 +3,11 @@
 import { useMemo, useState } from "react";
 import { pharmacies, type PharmacyPartner } from "@/data/pharmacies";
 
+function shouldShowOfficialPartnerBadge(name: string) {
+  const normalized = name.toLowerCase();
+  return !normalized.includes("k24") && !normalized.includes("kimia farma");
+}
+
 const allAreaLabel = "Semua Area";
 
 const preferredAreaOrder = [
@@ -278,7 +283,7 @@ export function PharmacyLocator() {
               </div>
 
               <span className="inline-flex w-fit rounded-full bg-[#e4f8ed] px-5 py-3 text-xs font-black uppercase tracking-wide text-[#006b3f]">
-                Official Partner
+                Partner Apotek
               </span>
             </div>
 
@@ -305,9 +310,11 @@ export function PharmacyLocator() {
                           )}
                         </div>
 
-                        <span className="inline-flex rounded-full bg-[#e4f8ed] px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-[#006b3f]">
-                          Official Partner
-                        </span>
+                        {partner.status === "Official Partner" && shouldShowOfficialPartnerBadge(partner.name) ? (
+                          <span className="inline-flex rounded-full bg-[#e4f8ed] px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-[#006b3f]">
+                            Official Partner
+                          </span>
+                        ) : null}
                       </div>
 
                       <div className="mt-5">

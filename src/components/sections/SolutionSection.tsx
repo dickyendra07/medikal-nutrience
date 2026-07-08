@@ -28,8 +28,8 @@ const solutions = [
     image: "/images/mednut/products/page-assets/hepatosol.png",
     accent: "#ef1f2d",
     href: "/solusi/hati-liver",
-    primaryButton: "Hepatosol",
-    secondaryButton: "Hepatosol Lola",
+    primaryButton: "Hati Kronik",
+    secondaryButton: "Hati Berat",
   },
   {
     key: "syaraf",
@@ -43,7 +43,7 @@ const solutions = [
     accent: "#2563eb",
     href: "/produk/peptibren",
     primaryButton: "Lihat Produk",
-    secondaryButton: "Konsultasi",
+    secondaryButton: "Lihat Produk",
   },
   {
     key: "pernafasan",
@@ -55,9 +55,9 @@ const solutions = [
       "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
     image: "/images/mednut/products/page-assets/pulmosol.jpeg",
     accent: "#1e3a8a",
-    href: "/solusi/pernafasan",
-    primaryButton: "Pulmosol",
-    secondaryButton: "Lihat Detail",
+    href: "/produk/pulmosol",
+    primaryButton: "Lihat Produk",
+    secondaryButton: "Lihat Produk",
   },
   {
     key: "pencernaan",
@@ -69,9 +69,9 @@ const solutions = [
       "Oligo merupakan nutrisi oligomerik dengan protein terhidrolisa parsial untuk membantu memenuhi kebutuhan nutrisi pada kondisi saluran cerna tertentu.",
     image: "/images/mednut/products/page-assets/oligo.jpeg",
     accent: "#d85b70",
-    href: "/solusi/pencernaan",
-    primaryButton: "Oligo",
-    secondaryButton: "Konsultasi",
+    href: "/produk/oligo",
+    primaryButton: "Lihat Produk",
+    secondaryButton: "Lihat Produk",
   },
 ];
 

@@ -11,7 +11,7 @@ const menuItems = [
   { label: "Solusi", href: "/solusi", mega: "solusi" },
   { label: "Support System", href: "/support-system", mega: "support" },
   { label: "Apotek", href: "/apotek-resmi" },
-  { label: "Event", href: "/event" },
+  { label: "Event", href: "/event", mega: "event" },
   { label: "Kontak", href: "/kontak" },
 ];
 
@@ -45,6 +45,29 @@ const megaMenus = {
       { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan saluran cerna" },
       { label: "Pemulihan", href: "/solusi/pemulihan", desc: "Recovery dan nutrisi protein" },
       { label: "Anak", href: "/solusi/anak", desc: "Tumbuh kembang anak" },
+    ],
+  },
+  event: {
+    eyebrow: "Event Medikal Nutrience",
+    title: "Pilih event edukasi yang ingin Anda ikuti",
+    description:
+      "Lihat daftar seminar, health talk, demo cooking, dan kegiatan edukasi Medikal Nutrience.",
+    items: [
+      {
+        label: "Hari Gizi Nasional 2026",
+        href: "/event",
+        desc: "Health talk dan demo cooking untuk lansia kuat dan aktif",
+      },
+      {
+        label: "Clinical Nutrition Symposium 2026",
+        href: "/event",
+        desc: "Seminar nutrisi klinis untuk tenaga kesehatan",
+      },
+      {
+        label: "Edukasi Nutrisi Keluarga",
+        href: "/event",
+        desc: "Webinar edukasi nutrisi keluarga",
+      },
     ],
   },
   support: {
@@ -111,7 +134,7 @@ export function Navbar() {
 
             return (
               <div
-                key={item.href}
+                key={`${item.href}-${item.label}`}
                 className="relative"
                 onMouseEnter={() =>
                   hasMega ? setActiveMega(item.mega as MegaKey) : setActiveMega(null)
@@ -211,7 +234,9 @@ export function Navbar() {
                     ? "/produk"
                     : activeMega === "solusi"
                       ? "/solusi"
-                      : "/support-system"
+                      : activeMega === "event"
+                        ? "/event"
+                        : "/support-system"
                 }
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-black text-[#006b3f] transition hover:-translate-y-0.5"
               >
@@ -223,7 +248,7 @@ export function Navbar() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {megaMenus[activeMega].items.map((item) => (
                 <a
-                  key={item.href}
+                  key={`${item.href}-${item.label}`}
                   href={item.href}
                   className="group rounded-[1.5rem] border border-black/5 bg-[#f8fcfa] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#006b3f]/20 hover:bg-[#eefaf4] hover:shadow-xl hover:shadow-green-900/10"
                 >
@@ -251,7 +276,7 @@ export function Navbar() {
 
               return (
                 <a
-                  key={item.href}
+                  key={`${item.href}-${item.label}`}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={`relative overflow-hidden rounded-2xl px-5 py-4 text-base font-bold transition ${

@@ -71,7 +71,6 @@ export const footerProducts = [
   "Entrasoy",
   "Peptisol",
   "Entramix",
-  "Nephrisol",
 ];
 
 export const footerSupport = [
@@ -80,6 +79,8 @@ export const footerSupport = [
   "Dapur Sehat",
   "Kalkulator Status Gizi",
   "Komunitas Sehat",
+  "Event",
+  "Apotek",
 ];
 
-export const footerHelp = ["FAQ", "Cara Pemesanan", "Kontak"];
+export const footerHelp = ["FAQ", "Apotek", "Kontak"];

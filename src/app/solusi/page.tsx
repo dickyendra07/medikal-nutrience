@@ -133,32 +133,12 @@ export default function SolutionsPage() {
                 <div className="absolute right-[-90px] top-[-90px] h-72 w-72 rounded-full bg-[#d9f3e8]" />
                 <div className="absolute bottom-[-110px] left-[-90px] h-80 w-80 rounded-full bg-[#eaf8f1]" />
 
-                <div className="relative z-10 grid grid-cols-2 gap-4">
-                  {featuredSolutions.map((solution) => (
-                    <a
-                      key={solution.title}
-                      href={solution.href}
-                      className="group overflow-hidden rounded-[1.5rem] bg-[#f8fcfa] shadow-lg shadow-slate-900/5 ring-1 ring-black/5 transition hover:-translate-y-1"
-                    >
-                      <img
-                        src={solution.image}
-                        alt={solution.title}
-                        className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                      />
-
-                      <div className="p-4">
-                        <p
-                          className="text-[10px] font-black uppercase tracking-[0.18em]"
-                          style={{ color: solution.color }}
-                        >
-                          {solution.badge}
-                        </p>
-                        <h3 className="mt-1 text-base font-black leading-tight text-[#111827] md:text-lg">
-                          {solution.title}
-                        </h3>
-                      </div>
-                    </a>
-                  ))}
+                <div className="relative z-10 flex min-h-[420px] items-center justify-center rounded-[2rem] bg-[#f4fbf8] p-5 md:min-h-[520px]">
+                  <img
+                    src="/images/mednut/banners/menu-produk-depan.png"
+                    alt="Keluarga Indonesia dan rangkaian produk Medikal Nutrience"
+                    className="h-auto w-full max-w-[720px] object-contain drop-shadow-2xl"
+                  />
                 </div>
               </div>
             </div>

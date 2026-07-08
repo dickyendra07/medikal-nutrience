@@ -285,7 +285,7 @@ export default function AboutPage() {
                     href="/apotek-resmi"
                     className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
                   >
-                    Apotek Resmi
+                    Lihat Apotek
                   </a>
                 </div>
               </div>

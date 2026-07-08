@@ -147,7 +147,73 @@ export default function EventPage() {
           </div>
         </section>
 
-        <section id="registration" className="px-5 py-12 md:py-20 lg:px-10">
+        
+        <section className="px-5 py-12 lg:px-10">
+          <div className="mx-auto w-full max-w-[1440px]">
+            <div className="mb-8">
+              <p className="text-xs font-black uppercase tracking-[0.32em] text-[#006b3f]">
+                Event
+              </p>
+              <h2 className="mt-3 text-3xl font-black leading-tight text-[#111827] md:text-5xl">
+                Daftar Event Medikal Nutrience
+              </h2>
+              <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-[#64748b] md:text-base">
+                Pilih kegiatan edukasi yang ingin Anda ikuti. Untuk saat ini,
+                registrasi aktif diarahkan ke Hari Gizi Nasional 2026.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {[
+                {
+                  category: "Health Talk & Demo Cooking",
+                  title: "Hari Gizi Nasional 2026",
+                  date: "Kamis, 22 Januari 2026",
+                  location: "Auditorium RS Permata Cibubur Lt. 4",
+                  href: "#registrasi-event",
+                },
+                {
+                  category: "Seminar Nutrisi",
+                  title: "Clinical Nutrition Symposium 2026",
+                  date: "15 Agustus 2026",
+                  location: "Jakarta",
+                  href: "#registrasi-event",
+                },
+                {
+                  category: "Webinar Keluarga",
+                  title: "Edukasi Nutrisi Keluarga",
+                  date: "22 Agustus 2026",
+                  location: "Online",
+                  href: "#registrasi-event",
+                },
+              ].map((eventItem) => (
+                <article
+                  key={eventItem.title}
+                  className="rounded-[1.6rem] bg-white p-6 shadow-xl shadow-slate-900/5 ring-1 ring-black/5"
+                >
+                  <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#006b3f]">
+                    {eventItem.category}
+                  </p>
+                  <h3 className="mt-4 text-2xl font-black leading-tight text-[#111827]">
+                    {eventItem.title}
+                  </h3>
+                  <div className="mt-4 space-y-2 text-sm font-medium leading-6 text-[#64748b]">
+                    <p>📅 {eventItem.date}</p>
+                    <p>📍 {eventItem.location}</p>
+                  </div>
+                  <a
+                    href={eventItem.href}
+                    className="mt-6 inline-flex rounded-full bg-[#006b3f] px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-[#005635]"
+                  >
+                    Daftar Sekarang
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+<section id="registrasi-event" className="px-5 py-12 md:py-20 lg:px-10">
           <div className="mx-auto grid w-full max-w-[1440px] gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div className="rounded-[2.5rem] bg-[#006b3f] p-8 text-white shadow-2xl shadow-green-900/15 md:p-10">
               <p className="text-xs font-black uppercase tracking-[0.3em] text-white/60">
