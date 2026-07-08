@@ -64,3 +64,27 @@ export async function saveFaqDraft(formData: FormData) {
 
   redirect(`/cms/faq/${originalIndex}/edit?saved=1`);
 }
+
+
+export async function deleteFaqDraft(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalIndex = String(formData.get("originalIndex") ?? "");
+
+  if (!originalIndex) {
+    throw new Error("Index FAQ tidak valid.");
+  }
+
+  const drafts = await readDrafts();
+
+  if (drafts[originalIndex]) {
+    delete drafts[originalIndex];
+    await writeDrafts(drafts);
+  }
+
+  redirect(`/cms/faq/${originalIndex}/edit?reset=1`);
+}
