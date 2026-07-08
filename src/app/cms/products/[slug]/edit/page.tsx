@@ -2,11 +2,41 @@ import { notFound, redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { productDetails } from "@/data/product-details";
+import { saveProductDraft } from "./actions";
+import { promises as fs } from "fs";
+import path from "path";
+
+type CmsProductDraft = {
+  slug: string;
+  name: string;
+  category: string;
+  heroTitle: string;
+  description: string;
+  ctaLabel: string;
+  status: "published" | "draft" | "review";
+  updatedAt: string;
+};
+
+async function getProductDraft(slug: string) {
+  try {
+    const file = await fs.readFile(
+      path.join(process.cwd(), "src/data/cms/cms-products.json"),
+      "utf8"
+    );
+    const drafts = JSON.parse(file) as Record<string, CmsProductDraft>;
+    return drafts[slug] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 
 export default async function CmsProductEditPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ saved?: string }>;
 }) {
   const authenticated = await isCmsAuthenticated();
 
@@ -23,10 +53,25 @@ export default async function CmsProductEditPage({
     notFound();
   }
 
+  const draft = await getProductDraft(slug);
+  const paramsQuery = await searchParams;
+  const isSaved = paramsQuery.saved === "1";
+
+  const viewData = {
+    name: draft?.name ?? product.name,
+    slug: draft?.slug ?? product.slug,
+    category: draft?.category ?? product.category,
+    heroTitle: draft?.heroTitle ?? product.heroTitle,
+    description: draft?.description ?? product.description,
+    ctaLabel: draft?.ctaLabel ?? "Temukan di Apotek",
+    status: draft?.status ?? "published",
+    updatedAt: draft?.updatedAt ?? null,
+  };
+
   return (
     <CmsAdminShell
       active="products"
-      title={`Edit ${product.name}`}
+      title={`Edit ${viewData.name}`}
       eyebrow="CMS Products"
       description="Kelola konten utama produk seperti nama, kategori, slug, headline, deskripsi, CTA, dan status publikasi."
       actions={
@@ -48,12 +93,19 @@ export default async function CmsProductEditPage({
               Informasi Produk
             </h2>
             <p className="mt-3 text-sm font-medium leading-7 text-[#64748b]">
-              Form ini masih tahap UI CMS. Save action akan dihubungkan ke
-              storage/database pada batch berikutnya.
+              Form ini sudah dapat menyimpan draft ke storage JSON lokal untuk
+              kebutuhan staging/demo CMS.
             </p>
+
+            {isSaved ? (
+              <div className="mt-5 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
+                Draft produk berhasil disimpan.
+              </div>
+            ) : null}
           </div>
 
-          <form className="mt-7 grid gap-5">
+          <form action={saveProductDraft} className="mt-7 grid gap-5">
+            <input type="hidden" name="originalSlug" value={product.slug} />
             <div className="grid gap-5 md:grid-cols-2">
               <div>
                 <label className="text-sm font-black text-[#111827]">
@@ -61,7 +113,7 @@ export default async function CmsProductEditPage({
                 </label>
                 <input
                   name="name"
-                  defaultValue={product.name}
+                  defaultValue={viewData.name}
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
                 />
               </div>
@@ -72,7 +124,7 @@ export default async function CmsProductEditPage({
                 </label>
                 <input
                   name="slug"
-                  defaultValue={product.slug}
+                  defaultValue={viewData.slug}
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
                 />
               </div>
@@ -84,7 +136,7 @@ export default async function CmsProductEditPage({
               </label>
               <input
                 name="category"
-                defaultValue={product.category}
+                defaultValue={viewData.category}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
               />
             </div>
@@ -95,7 +147,7 @@ export default async function CmsProductEditPage({
               </label>
               <textarea
                 name="heroTitle"
-                defaultValue={product.heroTitle}
+                defaultValue={viewData.heroTitle}
                 rows={3}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold leading-7 outline-none transition focus:border-[#006b3f] focus:bg-white"
               />
@@ -106,8 +158,8 @@ export default async function CmsProductEditPage({
                 Hero Description
               </label>
               <textarea
-                name="heroDescription"
-                defaultValue={product.description}
+                name="description"
+                defaultValue={viewData.description}
                 rows={5}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold leading-7 outline-none transition focus:border-[#006b3f] focus:bg-white"
               />
@@ -120,7 +172,7 @@ export default async function CmsProductEditPage({
                 </label>
                 <input
                   name="ctaLabel"
-                  defaultValue="Temukan di Apotek"
+                  defaultValue={viewData.ctaLabel}
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
                 />
               </div>
@@ -131,7 +183,7 @@ export default async function CmsProductEditPage({
                 </label>
                 <select
                   name="status"
-                  defaultValue="published"
+                  defaultValue={viewData.status}
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
                 >
                   <option value="published">Published</option>
@@ -143,14 +195,14 @@ export default async function CmsProductEditPage({
 
             <div className="mt-3 flex flex-wrap gap-3 border-t border-black/5 pt-6">
               <button
-                type="button"
+                type="submit"
                 className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
               >
-                Save Draft UI
+                Save Draft
               </button>
 
               <a
-                href={`/produk/${product.slug}`}
+                href={`/produk/${viewData.slug}`}
                 target="_blank"
                 className="rounded-full bg-[#e4f8ed] px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f] transition hover:-translate-y-0.5"
               >
@@ -180,7 +232,7 @@ export default async function CmsProductEditPage({
                   Public URL
                 </p>
                 <code className="mt-2 block break-all text-xs font-black text-[#475569]">
-                  /produk/{product.slug}
+                  /produk/{viewData.slug}
                 </code>
               </div>
             </div>
