@@ -2,6 +2,40 @@ import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { pharmacies } from "@/data/pharmacies";
+import { promises as fs } from "fs";
+import path from "path";
+
+type CmsPharmacyDraft = {
+  no: number;
+  name: string;
+  onlineStore: string;
+  area: string;
+  city: string;
+  pic: string;
+  status: string;
+  contactType: string;
+  stock: string[];
+  logo: string;
+  updatedAt: string;
+};
+
+async function getPharmacyDrafts() {
+  try {
+    const file = await fs.readFile(
+      path.join(process.cwd(), "src/data/cms/cms-pharmacies.json"),
+      "utf8"
+    );
+
+    if (!file.trim()) {
+      return {};
+    }
+
+    return JSON.parse(file) as Record<string, CmsPharmacyDraft>;
+  } catch {
+    return {};
+  }
+}
+
 
 function getMapsUrl(name: string, area: string, city: string) {
   const query = [name, city, area].filter(Boolean).join(" ");
@@ -15,10 +49,30 @@ export default async function CmsPharmaciesPage() {
     redirect("/cms/login");
   }
 
-  const pharmacyRows = pharmacies.map((partner) => ({
-    ...partner,
-    mapsUrl: getMapsUrl(partner.name, partner.area, partner.city),
-  }));
+  const drafts = await getPharmacyDrafts();
+
+  const pharmacyRows = pharmacies.map((partner) => {
+    const draft = drafts[String(partner.no)];
+
+    const viewPartner = {
+      ...partner,
+      name: draft?.name ?? partner.name,
+      onlineStore: draft?.onlineStore ?? partner.onlineStore ?? "",
+      area: draft?.area ?? partner.area,
+      city: draft?.city ?? partner.city,
+      pic: draft?.pic ?? partner.pic,
+      status: draft?.status ?? partner.status,
+      contactType: draft?.contactType ?? partner.contactType,
+      stock: draft?.stock ?? partner.stock,
+      logo: draft?.logo ?? partner.logo ?? "",
+      updatedAt: draft?.updatedAt ?? null,
+    };
+
+    return {
+      ...viewPartner,
+      mapsUrl: getMapsUrl(viewPartner.name, viewPartner.area, viewPartner.city),
+    };
+  });
 
   const officialCount = pharmacyRows.filter(
     (partner) => partner.status === "Official Partner"
@@ -163,6 +217,11 @@ export default async function CmsPharmaciesPage() {
                 </p>
                 <p className="mt-2 text-sm font-bold text-[#64748b]">
                   {partner.onlineStore ? "Online Store Available" : "Offline / Maps"}
+                </p>
+                <p className="mt-2 text-xs font-semibold text-[#94a3b8]">
+                  {partner.updatedAt
+                    ? `Last draft: ${new Date(partner.updatedAt).toLocaleString("id-ID")}`
+                    : "Belum ada draft"}
                 </p>
               </div>
 

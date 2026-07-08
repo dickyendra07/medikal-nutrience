@@ -81,16 +81,22 @@ function getDisplayArea(partner: PharmacyPartner) {
   return normalizeArea(partner.area);
 }
 
-export function PharmacyLocator() {
+export function PharmacyLocator({
+  initialPharmacies,
+}: {
+  initialPharmacies?: PharmacyPartner[];
+}) {
   const [selectedArea, setSelectedArea] = useState(allAreaLabel);
   const [search, setSearch] = useState("");
 
+  const sourcePartners = initialPharmacies ?? pharmacies;
+
   const normalizedPartners = useMemo(() => {
-    return pharmacies.map((partner) => ({
+    return sourcePartners.map((partner) => ({
       ...partner,
       displayArea: getDisplayArea(partner),
     }));
-  }, []);
+  }, [sourcePartners]);
 
   const areas = useMemo(() => {
     const uniqueAreas = Array.from(
