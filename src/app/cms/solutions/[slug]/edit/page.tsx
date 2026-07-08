@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { solutionDetails } from "@/data/solutions";
-import { saveSolutionDraft } from "./actions";
+import { deleteSolutionDraft, saveSolutionDraft } from "./actions";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -40,6 +40,7 @@ type CmsSolutionEditPageProps = {
   }>;
   searchParams: Promise<{
     saved?: string;
+    reset?: string;
   }>;
 };
 
@@ -63,6 +64,7 @@ export default async function CmsSolutionEditPage({
   const draft = await getSolutionDraft(slug);
   const paramsQuery = await searchParams;
   const isSaved = paramsQuery.saved === "1";
+  const isReset = paramsQuery.reset === "1";
 
   const viewData = {
     slug: draft?.slug ?? solution.slug,
@@ -120,6 +122,12 @@ export default async function CmsSolutionEditPage({
             {isSaved ? (
               <div className="mt-5 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
                 Draft solusi berhasil disimpan.
+              </div>
+            ) : null}
+
+            {isReset ? (
+              <div className="mt-5 rounded-2xl bg-[#fff7ed] px-5 py-4 text-sm font-black text-[#c2410c] ring-1 ring-[#fb923c]/20">
+                Draft solusi berhasil dihapus. Konten kembali menggunakan data original.
               </div>
             ) : null}
           </div>
@@ -291,6 +299,25 @@ export default async function CmsSolutionEditPage({
                     ? new Date(viewData.updatedAt).toLocaleString("id-ID")
                     : "Belum ada draft"}
                 </p>
+              </div>
+
+              <div className="rounded-2xl bg-[#fff7ed] p-4 ring-1 ring-[#fed7aa]">
+                <p className="text-xs font-black uppercase tracking-wide text-[#c2410c]">
+                  Reset Draft
+                </p>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#9a3412]">
+                  Hapus draft CMS dan kembalikan solusi ke data original.
+                </p>
+
+                <form action={deleteSolutionDraft} className="mt-4">
+                  <input type="hidden" name="originalSlug" value={solution.slug} />
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-[#c2410c] px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
+                  >
+                    Reset Draft
+                  </button>
+                </form>
               </div>
             </div>
           </section>

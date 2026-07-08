@@ -80,3 +80,27 @@ export async function saveSolutionDraft(formData: FormData) {
 
   redirect(`/cms/solutions/${originalSlug}/edit?saved=1`);
 }
+
+
+export async function deleteSolutionDraft(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalSlug = String(formData.get("originalSlug") ?? "");
+
+  if (!originalSlug) {
+    throw new Error("Slug solusi tidak valid.");
+  }
+
+  const drafts = await readDrafts();
+
+  if (drafts[originalSlug]) {
+    delete drafts[originalSlug];
+    await writeDrafts(drafts);
+  }
+
+  redirect(`/cms/solutions/${originalSlug}/edit?reset=1`);
+}

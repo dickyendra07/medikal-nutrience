@@ -1,30 +1,8 @@
 {
-  "hati-liver": {
-    "slug": "hati-liver",
-    "title": "Solusi Nutrisi untuk Hati / Liver TESTING",
-    "shortTitle": "Hati / Liver TESTING",
-    "eyebrow": "Solusi Hati",
-    "description": "Gangguan fungsi hati membutuhkan dukungan nutrisi yang tepat untuk membantu memenuhi kebutuhan tubuh dan menjaga kualitas hidup.",
-    "problemTitle": "Kondisi yang Sering Dihadapi",
-    "problems": [
-      "Gangguan fungsi hati kronik",
-      "Hepatitis kronik atau sirosis hati",
-      "Penurunan nafsu makan",
-      "Kondisi hati yang membutuhkan perhatian lebih intensif"
-    ],
-    "educationTitle": "Mengapa nutrisi penting untuk kondisi hati?",
-    "educationPoints": [
-      "Asupan kalori dan protein perlu diperhatikan sesuai kondisi pasien.",
-      "Penurunan nafsu makan dapat memengaruhi pemenuhan nutrisi harian.",
-      "Pemilihan formula nutrisi perlu disesuaikan dengan tingkat kondisi hati."
-    ],
-    "status": "published",
-    "updatedAt": "2026-07-08T06:26:44.250Z"
-  },
   "pencernaan": {
     "slug": "pencernaan",
-    "title": "Solusi Nutrisi untuk Sistem Pencernaan TESTING",
-    "shortTitle": "Pencernaan TESTING",
+    "title": "Solusi Nutrisi untuk Sistem Pencernaan",
+    "shortTitle": "Pencernaan",
     "eyebrow": "Solusi Pencernaan",
     "description": "Kondisi saluran cerna tertentu membutuhkan formula nutrisi yang lebih mudah diserap dan sesuai dengan kebutuhan tubuh.",
     "problemTitle": "Kondisi yang Cocok Dibantu",
@@ -41,6 +19,28 @@
       "Formula khusus dapat membantu memenuhi kebutuhan nutrisi harian."
     ],
     "status": "published",
-    "updatedAt": "2026-07-08T06:30:00.503Z"
+    "updatedAt": "2026-07-08T06:32:01.177Z"
+  },
+  "hati-liver": {
+    "slug": "hati-liver",
+    "title": "Solusi Nutrisi untuk Hati / Liver",
+    "shortTitle": "Hati / Liver",
+    "eyebrow": "Solusi Hati",
+    "description": "Gangguan fungsi hati membutuhkan dukungan nutrisi yang tepat untuk membantu memenuhi kebutuhan tubuh dan menjaga kualitas hidup.",
+    "problemTitle": "Kondisi yang Sering Dihadapi",
+    "problems": [
+      "Gangguan fungsi hati kronik",
+      "Hepatitis kronik atau sirosis hati",
+      "Penurunan nafsu makan",
+      "Kondisi hati yang membutuhkan perhatian lebih intensif"
+    ],
+    "educationTitle": "Mengapa nutrisi penting untuk kondisi hati?",
+    "educationPoints": [
+      "Asupan kalori dan protein perlu diperhatikan sesuai kondisi pasien.",
+      "Penurunan nafsu makan dapat memengaruhi pemenuhan nutrisi harian.",
+      "Pemilihan formula nutrisi perlu disesuaikan dengan tingkat kondisi hati."
+    ],
+    "status": "published",
+    "updatedAt": "2026-07-08T06:32:12.606Z"
   }
 }
