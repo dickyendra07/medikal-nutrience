@@ -39,29 +39,51 @@ async function getPharmacyDrafts() {
 export default async function ApotekResmiPage() {
   const drafts = await getPharmacyDrafts();
 
-  const viewPharmacies: PharmacyPartner[] = pharmacies
-    .map((partner) => {
-      const draft = drafts[String(partner.no)];
+  const staticPharmacies: PharmacyPartner[] = pharmacies.map((partner) => {
+    const draft = drafts[String(partner.no)];
 
-      if (!draft) {
-        return partner;
-      }
+    if (!draft) {
+      return partner;
+    }
 
-      return {
-        ...partner,
-        no: draft.no,
-        name: draft.name,
-        onlineStore: draft.onlineStore,
-        area: draft.area,
-        city: draft.city,
-        pic: draft.pic,
-        status: draft.status,
-        contactType: draft.contactType,
-        stock: draft.stock,
-        logo: draft.logo || undefined,
-      };
-    })
-    .filter((partner) => partner.status !== "Draft");
+    return {
+      ...partner,
+      no: draft.no,
+      name: draft.name,
+      onlineStore: draft.onlineStore,
+      area: draft.area,
+      city: draft.city,
+      pic: draft.pic,
+      status: draft.status,
+      contactType: draft.contactType,
+      stock: draft.stock,
+      logo: draft.logo || undefined,
+    };
+  });
+
+  const staticNos = new Set(pharmacies.map((partner) => String(partner.no)));
+
+  const cmsCreatedPharmacies: PharmacyPartner[] = Object.entries(drafts)
+    .filter(([key, draft]) => !staticNos.has(key) && draft.status !== "Draft")
+    .map(([, draft]) => ({
+      no: draft.no,
+      name: draft.name,
+      onlineStore: draft.onlineStore,
+      area: draft.area,
+      city: draft.city,
+      pic: draft.pic,
+      status: draft.status,
+      contactType: draft.contactType,
+      stock: draft.stock,
+      logo: draft.logo || undefined,
+    }));
+
+  const viewPharmacies: PharmacyPartner[] = [
+    ...staticPharmacies,
+    ...cmsCreatedPharmacies,
+  ]
+    .filter((partner) => partner.status !== "Draft")
+    .sort((a, b) => a.no - b.no);
 
   return (
     <PageShell>

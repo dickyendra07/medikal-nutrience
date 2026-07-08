@@ -51,7 +51,7 @@ export default async function CmsPharmaciesPage() {
 
   const drafts = await getPharmacyDrafts();
 
-  const pharmacyRows = pharmacies.map((partner) => {
+  const staticRows = pharmacies.map((partner) => {
     const draft = drafts[String(partner.no)];
 
     const viewPartner = {
@@ -74,6 +74,19 @@ export default async function CmsPharmaciesPage() {
     };
   });
 
+  const staticNos = new Set(pharmacies.map((partner) => String(partner.no)));
+
+  const cmsCreatedRows = Object.entries(drafts)
+    .filter(([key]) => !staticNos.has(key))
+    .map(([, partner]) => ({
+      ...partner,
+      mapsUrl: getMapsUrl(partner.name, partner.area, partner.city),
+    }));
+
+  const pharmacyRows = [...staticRows, ...cmsCreatedRows].sort(
+    (a, b) => a.no - b.no
+  );
+
   const officialCount = pharmacyRows.filter(
     (partner) => partner.status === "Official Partner"
   ).length;
@@ -91,13 +104,22 @@ export default async function CmsPharmaciesPage() {
       eyebrow="CMS Apotek"
       description="Kelola daftar apotek, offline store, modern channel, area, PIC, status partner, dan ketersediaan produk."
       actions={
-        <a
-          href="/apotek-resmi"
-          target="_blank"
-          className="rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f] shadow-lg shadow-slate-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
-        >
-          View Public Page
-        </a>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href="/cms/pharmacies/new"
+            className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-slate-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
+          >
+            Add Partner
+          </a>
+
+          <a
+            href="/apotek-resmi"
+            target="_blank"
+            className="rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f] shadow-lg shadow-slate-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
+          >
+            View Public Page
+          </a>
+        </div>
       }
     >
       <section className="grid gap-4 md:grid-cols-4">
@@ -158,7 +180,7 @@ export default async function CmsPharmaciesPage() {
         <div className="mt-6 grid gap-4">
           {pharmacyRows.map((partner) => (
             <article
-              key={`${partner.no}-${partner.name}`}
+              key={`${partner.no}-${partner.name}-${partner.updatedAt ?? "static"}`}
               className="grid gap-4 rounded-[1.7rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-xl hover:shadow-green-900/8 xl:grid-cols-[1fr_220px_180px]"
             >
               <div>

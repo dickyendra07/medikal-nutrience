@@ -1,1 +1,21 @@
-{}
+{
+  "39": {
+    "no": 39,
+    "name": "APOTEK KARA",
+    "onlineStore": "",
+    "area": "Jabodetabek",
+    "city": "Kota Bogor",
+    "pic": "Dicky",
+    "status": "Official Partner",
+    "contactType": "Apotek",
+    "stock": [
+      "Entrakid",
+      "Entramix",
+      "Entrasoy",
+      "Peptisol"
+    ],
+    "logo": "",
+    "updatedAt": "2026-07-08T07:05:19.768Z",
+    "source": "cms-created"
+  }
+}
