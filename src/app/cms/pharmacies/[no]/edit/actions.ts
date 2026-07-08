@@ -109,3 +109,45 @@ export async function deletePharmacyDraft(formData: FormData) {
 
   redirect(`/cms/pharmacies/${originalNo}/edit?reset=1`);
 }
+
+
+export async function deletePharmacyPartner(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalNo = String(formData.get("originalNo") ?? "");
+  const isCmsCreated = String(formData.get("isCmsCreated") ?? "") === "true";
+
+  if (!originalNo) {
+    throw new Error("Nomor apotek tidak valid.");
+  }
+
+  const drafts = await readDrafts();
+
+  if (isCmsCreated) {
+    delete drafts[originalNo];
+  } else {
+    const existing = drafts[originalNo];
+
+    drafts[originalNo] = {
+      no: existing?.no ?? Number(originalNo),
+      name: existing?.name ?? String(formData.get("name") ?? ""),
+      onlineStore: existing?.onlineStore ?? "",
+      area: existing?.area ?? String(formData.get("area") ?? ""),
+      city: existing?.city ?? String(formData.get("city") ?? ""),
+      pic: existing?.pic ?? String(formData.get("pic") ?? ""),
+      status: "Deleted",
+      contactType: existing?.contactType ?? String(formData.get("contactType") ?? ""),
+      stock: existing?.stock ?? [],
+      logo: existing?.logo ?? "",
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  await writeDrafts(drafts);
+
+  redirect("/cms/pharmacies?deleted=1");
+}

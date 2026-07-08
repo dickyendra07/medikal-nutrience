@@ -82,7 +82,7 @@ export default async function ApotekResmiPage() {
     ...staticPharmacies,
     ...cmsCreatedPharmacies,
   ]
-    .filter((partner) => partner.status !== "Draft")
+    .filter((partner) => partner.status !== "Draft" && partner.status !== "Deleted")
     .sort((a, b) => a.no - b.no);
 
   return (

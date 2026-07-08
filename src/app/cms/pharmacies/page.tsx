@@ -42,12 +42,19 @@ function getMapsUrl(name: string, area: string, city: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
-export default async function CmsPharmaciesPage() {
+export default async function CmsPharmaciesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
   const authenticated = await isCmsAuthenticated();
 
   if (!authenticated) {
     redirect("/cms/login");
   }
+
+  const paramsQuery = await searchParams;
+  const searchKeyword = (paramsQuery.q ?? "").trim().toLowerCase();
 
   const drafts = await getPharmacyDrafts();
 
@@ -83,9 +90,28 @@ export default async function CmsPharmaciesPage() {
       mapsUrl: getMapsUrl(partner.name, partner.area, partner.city),
     }));
 
-  const pharmacyRows = [...staticRows, ...cmsCreatedRows].sort(
-    (a, b) => a.no - b.no
-  );
+  const pharmacyRows = [...staticRows, ...cmsCreatedRows]
+    .filter((partner) => partner.status !== "Deleted")
+    .filter((partner) => {
+      if (!searchKeyword) {
+        return true;
+      }
+
+      return [
+        partner.name,
+        partner.area,
+        partner.city,
+        partner.pic,
+        partner.status,
+        partner.contactType,
+        partner.stock.join(" "),
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase()
+        .includes(searchKeyword);
+    })
+    .sort((a, b) => a.no - b.no);
 
   const officialCount = pharmacyRows.filter(
     (partner) => partner.status === "Official Partner"
@@ -176,6 +202,30 @@ export default async function CmsPharmaciesPage() {
             edit apotek dan save draft seperti module Products, Solutions, dan FAQ.
           </p>
         </div>
+
+        <form action="/cms/pharmacies" className="mt-6 grid gap-3 md:grid-cols-[1fr_auto]">
+          <input
+            name="q"
+            defaultValue={paramsQuery.q ?? ""}
+            placeholder="Cari nama apotek, kota, area, PIC, status, atau produk..."
+            className="w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10"
+          />
+          <button
+            type="submit"
+            className="rounded-2xl bg-[#006b3f] px-6 py-4 text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#005635]"
+          >
+            Search
+          </button>
+        </form>
+
+        {searchKeyword ? (
+          <div className="mt-4 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
+            Menampilkan {pharmacyRows.length} hasil untuk “{paramsQuery.q}”.
+            <a href="/cms/pharmacies" className="ml-2 underline">
+              Reset
+            </a>
+          </div>
+        ) : null}
 
         <div className="mt-6 grid gap-4">
           {pharmacyRows.map((partner) => (

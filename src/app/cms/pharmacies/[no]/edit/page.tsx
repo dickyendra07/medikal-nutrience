@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { pharmacies } from "@/data/pharmacies";
-import { deletePharmacyDraft, savePharmacyDraft } from "./actions";
+import { deletePharmacyDraft, deletePharmacyPartner, savePharmacyDraft } from "./actions";
 
 type CmsPharmacyEditPageProps = {
   params: Promise<{
@@ -28,6 +28,7 @@ type CmsPharmacyDraft = {
   stock: string[];
   logo: string;
   updatedAt: string;
+  source?: "cms-created";
 };
 
 async function getPharmacyDraft(no: string) {
@@ -55,28 +56,29 @@ export default async function CmsPharmacyEditPage({
 
   const { no } = await params;
   const pharmacyNo = Number(no);
+  const draft = await getPharmacyDraft(no);
   const pharmacy = pharmacies.find((item) => item.no === pharmacyNo);
 
-  if (!pharmacy || Number.isNaN(pharmacyNo)) {
+  if ((!pharmacy && !draft) || Number.isNaN(pharmacyNo)) {
     notFound();
   }
 
-  const draft = await getPharmacyDraft(no);
   const paramsQuery = await searchParams;
   const isSaved = paramsQuery.saved === "1";
   const isReset = paramsQuery.reset === "1";
+  const isCmsCreated = Boolean(draft?.source === "cms-created" || (!pharmacy && draft));
 
   const viewData = {
-    no: draft?.no ?? pharmacy.no,
-    name: draft?.name ?? pharmacy.name,
-    onlineStore: draft?.onlineStore ?? pharmacy.onlineStore ?? "",
-    area: draft?.area ?? pharmacy.area,
-    city: draft?.city ?? pharmacy.city,
-    pic: draft?.pic ?? pharmacy.pic,
-    status: draft?.status ?? pharmacy.status,
-    contactType: draft?.contactType ?? pharmacy.contactType,
-    stock: draft?.stock ?? pharmacy.stock,
-    logo: draft?.logo ?? pharmacy.logo ?? "",
+    no: draft?.no ?? pharmacy?.no ?? pharmacyNo,
+    name: draft?.name ?? pharmacy?.name ?? "",
+    onlineStore: draft?.onlineStore ?? pharmacy?.onlineStore ?? "",
+    area: draft?.area ?? pharmacy?.area ?? "",
+    city: draft?.city ?? pharmacy?.city ?? "",
+    pic: draft?.pic ?? pharmacy?.pic ?? "",
+    status: draft?.status ?? pharmacy?.status ?? "Official Partner",
+    contactType: draft?.contactType ?? pharmacy?.contactType ?? "Apotek",
+    stock: draft?.stock ?? pharmacy?.stock ?? [],
+    logo: draft?.logo ?? pharmacy?.logo ?? "",
     updatedAt: draft?.updatedAt ?? null,
   };
 
@@ -133,7 +135,7 @@ export default async function CmsPharmacyEditPage({
           </div>
 
           <form action={savePharmacyDraft} className="mt-7 grid gap-5">
-            <input type="hidden" name="originalNo" value={pharmacy.no} />
+            <input type="hidden" name="originalNo" value={viewData.no} />
 
             <div className="grid gap-5 md:grid-cols-2">
               <div>
@@ -328,12 +330,38 @@ export default async function CmsPharmacyEditPage({
                 </p>
 
                 <form action={deletePharmacyDraft} className="mt-4">
-                  <input type="hidden" name="originalNo" value={pharmacy.no} />
+                  <input type="hidden" name="originalNo" value={viewData.no} />
                   <button
                     type="submit"
                     className="w-full rounded-full bg-[#c2410c] px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
                   >
                     Reset Draft
+                  </button>
+                </form>
+              </div>
+
+              <div className="rounded-2xl bg-[#fef2f2] p-4 ring-1 ring-[#fecaca]">
+                <p className="text-xs font-black uppercase tracking-wide text-[#b91c1c]">
+                  Delete / Hide Partner
+                </p>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#991b1b]">
+                  Untuk data bawaan, tombol ini akan menyembunyikan partner dari public.
+                  Untuk data baru dari CMS, tombol ini akan menghapus data dari draft.
+                </p>
+
+                <form action={deletePharmacyPartner} className="mt-4">
+                  <input type="hidden" name="originalNo" value={viewData.no} />
+                  <input type="hidden" name="name" value={viewData.name} />
+                  <input type="hidden" name="area" value={viewData.area} />
+                  <input type="hidden" name="city" value={viewData.city} />
+                  <input type="hidden" name="pic" value={viewData.pic} />
+                  <input type="hidden" name="contactType" value={viewData.contactType} />
+                  <input type="hidden" name="isCmsCreated" value={isCmsCreated ? "true" : "false"} />
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-[#b91c1c] px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#991b1b]"
+                  >
+                    Delete / Hide
                   </button>
                 </form>
               </div>
