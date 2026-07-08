@@ -20,5 +20,27 @@
     ],
     "status": "published",
     "updatedAt": "2026-07-08T06:26:44.250Z"
+  },
+  "pencernaan": {
+    "slug": "pencernaan",
+    "title": "Solusi Nutrisi untuk Sistem Pencernaan TESTING",
+    "shortTitle": "Pencernaan TESTING",
+    "eyebrow": "Solusi Pencernaan",
+    "description": "Kondisi saluran cerna tertentu membutuhkan formula nutrisi yang lebih mudah diserap dan sesuai dengan kebutuhan tubuh.",
+    "problemTitle": "Kondisi yang Cocok Dibantu",
+    "problems": [
+      "Gangguan pencernaan kronis",
+      "Pankreatitis kronis atau akut",
+      "Pemulihan setelah tindakan medis pada pencernaan",
+      "Kesulitan mencerna makanan tertentu"
+    ],
+    "educationTitle": "Mengapa perlu nutrisi cepat serap?",
+    "educationPoints": [
+      "Beberapa kondisi cerna membutuhkan nutrisi yang lebih mudah dicerna.",
+      "Asupan yang tidak optimal dapat membuat tubuh mudah lemas.",
+      "Formula khusus dapat membantu memenuhi kebutuhan nutrisi harian."
+    ],
+    "status": "published",
+    "updatedAt": "2026-07-08T06:30:00.503Z"
   }
 }

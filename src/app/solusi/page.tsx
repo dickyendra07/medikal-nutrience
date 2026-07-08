@@ -1,5 +1,43 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { promises as fs } from "fs";
+import path from "path";
+
+type CmsSolutionDraft = {
+  slug: string;
+  title: string;
+  shortTitle: string;
+  eyebrow: string;
+  description: string;
+  problemTitle: string;
+  problems: string[];
+  educationTitle: string;
+  educationPoints: string[];
+  status: "published" | "draft" | "review";
+  updatedAt: string;
+};
+
+async function getSolutionDrafts() {
+  try {
+    const file = await fs.readFile(
+      path.join(process.cwd(), "src/data/cms/cms-solutions.json"),
+      "utf8"
+    );
+
+    const drafts = JSON.parse(file) as Record<string, CmsSolutionDraft>;
+
+    return Object.fromEntries(
+      Object.entries(drafts).filter(([, draft]) => draft.status === "published")
+    ) as Record<string, CmsSolutionDraft>;
+  } catch {
+    return {};
+  }
+}
+
+function getSlugFromHref(href: string) {
+  return href.replace("/solusi/", "");
+}
+
 
 const featuredSolutions = [
   {
@@ -90,7 +128,21 @@ const focusList = [
   "Syaraf & Otak",
 ];
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  const drafts = await getSolutionDrafts();
+
+  const otherSolutionRows = otherSolutions.map((solution) => {
+    const slug = getSlugFromHref(solution.href);
+    const draft = drafts[slug];
+
+    return {
+      ...solution,
+      title: draft?.shortTitle ?? solution.title,
+      subtitle: draft?.eyebrow ?? solution.subtitle,
+      description: draft?.description ?? solution.description,
+      href: `/solusi/${draft?.slug ?? slug}`,
+    };
+  });
   return (
     <>
       <Navbar />
@@ -225,7 +277,7 @@ export default function SolutionsPage() {
             </div>
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {otherSolutions.map((solution) => (
+              {otherSolutionRows.map((solution) => (
                 <a
                   key={solution.title}
                   href={solution.href}
