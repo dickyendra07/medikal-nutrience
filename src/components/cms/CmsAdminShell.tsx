@@ -18,8 +18,8 @@ const cmsMenus = [
   {
     title: "Solusi",
     desc: "Solusi nutrisi",
-    count: "Soon",
-    href: "#",
+    count: "7",
+    href: "/cms/solutions",
     icon: "✦",
   },
   {
@@ -71,6 +71,7 @@ type CmsAdminShellProps = {
 function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "dashboard") return href === "/cms";
   if (active === "products") return href === "/cms/products";
+  if (active === "solutions") return href === "/cms/solutions";
   return false;
 }
 

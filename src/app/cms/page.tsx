@@ -52,7 +52,7 @@ function getCmsMenus(productCount: number) {
       count: `${productCount} produk`,
       href: "/cms/products",
     },
-    { title: "Solusi", desc: "Kelola solusi berdasarkan kebutuhan tubuh", count: "7 solusi", href: "#" },
+    { title: "Solusi", desc: "Kelola solusi berdasarkan kebutuhan tubuh", count: "7 solusi", href: "/cms/solutions" },
     { title: "Support System", desc: "Kelola kalkulator, komunitas, kisah pasien, dan edukasi", count: "4 modul", href: "#" },
     { title: "Dapur Sehat FIMA", desc: "Kelola artikel resep dan detail konten nutrisi", count: "3 artikel", href: "#" },
     { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "Soon", href: "#" },
