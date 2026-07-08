@@ -67,3 +67,27 @@ export async function saveProductDraft(formData: FormData) {
 
   redirect(`/cms/products/${originalSlug}/edit?saved=1`);
 }
+
+
+export async function deleteProductDraft(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalSlug = String(formData.get("originalSlug") ?? "");
+
+  if (!originalSlug) {
+    throw new Error("Slug produk tidak valid.");
+  }
+
+  const drafts = await readDrafts();
+
+  if (drafts[originalSlug]) {
+    delete drafts[originalSlug];
+    await writeDrafts(drafts);
+  }
+
+  redirect(`/cms/products/${originalSlug}/edit?reset=1`);
+}

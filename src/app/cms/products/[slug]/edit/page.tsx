@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { productDetails } from "@/data/product-details";
-import { saveProductDraft } from "./actions";
+import { deleteProductDraft, saveProductDraft } from "./actions";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -36,7 +36,7 @@ export default async function CmsProductEditPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; reset?: string }>;
 }) {
   const authenticated = await isCmsAuthenticated();
 
@@ -56,6 +56,7 @@ export default async function CmsProductEditPage({
   const draft = await getProductDraft(slug);
   const paramsQuery = await searchParams;
   const isSaved = paramsQuery.saved === "1";
+  const isReset = paramsQuery.reset === "1";
 
   const viewData = {
     name: draft?.name ?? product.name,
@@ -100,6 +101,12 @@ export default async function CmsProductEditPage({
             {isSaved ? (
               <div className="mt-5 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
                 Draft produk berhasil disimpan.
+              </div>
+            ) : null}
+
+            {isReset ? (
+              <div className="mt-5 rounded-2xl bg-[#fff7ed] px-5 py-4 text-sm font-black text-[#c2410c] ring-1 ring-[#fb923c]/20">
+                Draft produk berhasil dihapus. Konten kembali menggunakan data original.
               </div>
             ) : null}
           </div>
@@ -245,6 +252,25 @@ export default async function CmsProductEditPage({
                     ? new Date(viewData.updatedAt).toLocaleString("id-ID")
                     : "Belum ada draft"}
                 </p>
+              </div>
+
+              <div className="rounded-2xl bg-[#fff7ed] p-4 ring-1 ring-[#fed7aa]">
+                <p className="text-xs font-black uppercase tracking-wide text-[#c2410c]">
+                  Reset Draft
+                </p>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#9a3412]">
+                  Hapus draft CMS dan kembalikan produk ke data original.
+                </p>
+
+                <form action={deleteProductDraft} className="mt-4">
+                  <input type="hidden" name="originalSlug" value={product.slug} />
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-[#c2410c] px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
+                  >
+                    Reset Draft
+                  </button>
+                </form>
               </div>
             </div>
           </section>
