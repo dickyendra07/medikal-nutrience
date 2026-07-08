@@ -235,6 +235,17 @@ export default async function CmsProductEditPage({
                   /produk/{viewData.slug}
                 </code>
               </div>
+
+              <div className="rounded-2xl bg-[#f8fafc] p-4">
+                <p className="text-xs font-black uppercase tracking-wide text-[#64748b]">
+                  Last Draft Update
+                </p>
+                <p className="mt-2 text-sm font-black text-[#475569]">
+                  {viewData.updatedAt
+                    ? new Date(viewData.updatedAt).toLocaleString("id-ID")
+                    : "Belum ada draft"}
+                </p>
+              </div>
             </div>
           </section>
 
