@@ -23,6 +23,11 @@ async function getFaqDraft(index: string) {
       path.join(process.cwd(), "src/data/cms/cms-faqs.json"),
       "utf8"
     );
+
+    if (!file.trim()) {
+      return null;
+    }
+
     const drafts = JSON.parse(file) as Record<string, CmsFaqDraft>;
     return drafts[index] ?? null;
   } catch {

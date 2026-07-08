@@ -21,6 +21,11 @@ const cmsFaqsPath = path.join(process.cwd(), "src/data/cms/cms-faqs.json");
 async function readDrafts(): Promise<Record<string, FaqDraft>> {
   try {
     const file = await fs.readFile(cmsFaqsPath, "utf8");
+
+    if (!file.trim()) {
+      return {};
+    }
+
     return JSON.parse(file) as Record<string, FaqDraft>;
   } catch {
     return {};

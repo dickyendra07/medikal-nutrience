@@ -1,0 +1,20 @@
+{
+  "1": {
+    "no": 1,
+    "name": "Toko Susu Sunter",
+    "onlineStore": "",
+    "area": "Jabodetabek",
+    "city": "Jakarta",
+    "pic": "Andita",
+    "status": "Non Official",
+    "contactType": "Offline Store",
+    "stock": [
+      "Entrakid",
+      "Entramix",
+      "Entrasoy",
+      "Peptisol"
+    ],
+    "logo": "",
+    "updatedAt": "2026-07-08T06:56:22.016Z"
+  }
+}
