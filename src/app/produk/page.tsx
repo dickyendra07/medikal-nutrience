@@ -1,6 +1,41 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { mednutAssets } from "@/data/mednut-assets";
+import { promises as fs } from "fs";
+import path from "path";
+
+type CmsProductDraft = {
+  slug: string;
+  name: string;
+  category: string;
+  heroTitle: string;
+  description: string;
+  ctaLabel: string;
+  status: "published" | "draft" | "review";
+  updatedAt: string;
+};
+
+async function getProductDrafts() {
+  try {
+    const file = await fs.readFile(
+      path.join(process.cwd(), "src/data/cms/cms-products.json"),
+      "utf8"
+    );
+
+    const drafts = JSON.parse(file) as Record<string, CmsProductDraft>;
+
+    return Object.fromEntries(
+      Object.entries(drafts).filter(([, draft]) => draft.status === "published")
+    ) as Record<string, CmsProductDraft>;
+  } catch {
+    return {};
+  }
+}
+
+function getSlugFromHref(href: string) {
+  return href.replace("/produk/", "");
+}
+
 
 const featuredProducts = [
   {
@@ -127,7 +162,34 @@ const categories = [
   "Syaraf & Otak",
 ];
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const drafts = await getProductDrafts();
+
+  const featuredProductRows = featuredProducts.map((product) => {
+    const slug = getSlugFromHref(product.href);
+    const draft = drafts[slug];
+
+    return {
+      ...product,
+      name: draft?.name ?? product.name,
+      category: draft?.category ?? product.category,
+      description: draft?.description ?? product.description,
+      href: `/produk/${draft?.slug ?? slug}`,
+    };
+  });
+
+  const medicalProductRows = medicalProducts.map((product) => {
+    const slug = getSlugFromHref(product.href);
+    const draft = drafts[slug];
+
+    return {
+      ...product,
+      name: draft?.name ?? product.name,
+      category: draft?.category ?? product.category,
+      description: draft?.description ?? product.description,
+      href: `/produk/${draft?.slug ?? slug}`,
+    };
+  });
   return (
     <>
       <Navbar />
@@ -201,7 +263,7 @@ export default function ProductsPage() {
             </div>
 
             <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-              {featuredProducts.map((product) => (
+              {featuredProductRows.map((product) => (
                 <a
                   key={product.name}
                   href={product.href}
@@ -267,7 +329,7 @@ export default function ProductsPage() {
             </div>
 
             <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {medicalProducts.map((product) => (
+              {medicalProductRows.map((product) => (
                 <a
                   key={product.name}
                   href={product.href}
