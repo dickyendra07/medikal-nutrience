@@ -3,44 +3,44 @@ import { Footer } from "@/components/layout/Footer";
 
 const featuredSolutions = [
   {
-    title: "Ginjal",
-    subtitle: "Pra-Dialisis & Dialisis",
-    description:
-      "Dukungan nutrisi untuk kebutuhan kondisi ginjal kronik pada tahap pra-dialisis maupun dialisis.",
-    image: "/images/solutions/home/ginjal-nephrisol-d.jpeg",
-    href: "/solusi/ginjal",
-    color: "#5b0ca8",
-    badge: "Nephrisol",
-  },
-  {
-    title: "Hati / Liver",
-    subtitle: "Gangguan Fungsi Hati",
-    description:
-      "Solusi nutrisi untuk membantu memenuhi kebutuhan pada kondisi hati kronik dan gangguan fungsi hati.",
+    title: "Hepatosol",
+    headline: "Butuh Kondisi Hati Perhatian Lebih?",
+    description: "Dukungan nutrisi lanjutan untuk kondisi hati kronik yang membutuhkan perhatian lebih intensif.",
     image: "/images/solutions/home/hati-liver-hepatosol.png",
-    href: "/solusi/hati-liver",
+    href: "/produk/hepatosol",
     color: "#dc2626",
-    badge: "Hepatosol",
+    gradient: "from-[#c90000] via-[#e30613] to-[#ff2a2a]",
+    button: "Lihat Hepatosol",
   },
   {
-    title: "Pernafasan",
-    subtitle: "PPOK, Asma, Pneumonia, TB",
-    description:
-      "Dukungan nutrisi untuk kondisi pernafasan yang membutuhkan asupan protein dan energi yang tepat.",
-    image: "/images/solutions/home/pernafasan-pulmosol.png",
-    href: "/solusi/pernafasan",
-    color: "#1e3a8a",
-    badge: "Pulmosol",
+    title: "Hepatosol Lola",
+    headline: "Nutrisi untuk Perawatan Hati Harian",
+    description: "Untuk kondisi hati umum atau kronik dengan dukungan formula nutrisi yang sesuai.",
+    image: "/images/mednut/products/page-assets/hepatosol-lola.png",
+    href: "/produk/hepatosol-lola",
+    color: "#dc2626",
+    gradient: "from-[#b80000] via-[#dc0000] to-[#f43f3f]",
+    button: "Lihat Hepatosol Lola",
   },
   {
-    title: "Syaraf & Otak",
-    subtitle: "Stroke & Alzheimer",
-    description:
-      "Dukungan nutrisi untuk kondisi dengan tantangan asupan makan, kesulitan menelan, atau kebutuhan nutrisi khusus.",
-    image: "/images/solutions/home/syaraf-otak-peptibren.png",
-    href: "/produk/peptibren",
-    color: "#ca8a04",
-    badge: "Peptibren",
+    title: "Nephrisol",
+    headline: "Sudah Menjalani Dialisis?",
+    description: "Jika Anda sedang menjalani cuci darah atau dialisis, kebutuhan nutrisi Anda berbeda.",
+    image: "/images/solutions/home/ginjal-nephrisol-d.jpeg",
+    href: "/produk/nephrisol",
+    color: "#7e22ce",
+    gradient: "from-[#8b00c9] via-[#8a00b8] to-[#3b005a]",
+    button: "Lihat Nephrisol",
+  },
+  {
+    title: "Nephrisol-D",
+    headline: "Belum Menjalani Dialisis?",
+    description: "Jika Anda masih dalam tahap awal gangguan ginjal, tersedia pilihan nutrisi yang sesuai.",
+    image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
+    href: "/produk/nephrisol-d",
+    color: "#6b21a8",
+    gradient: "from-[#7c1dbb] via-[#5b0ca8] to-[#2a0045]",
+    button: "Lihat Nephrisol-D",
   },
 ];
 
@@ -164,52 +164,41 @@ export default function SolutionsPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-2">
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {featuredSolutions.map((solution) => (
                 <a
                   key={solution.title}
                   href={solution.href}
-                  className="group reveal overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/12"
+                  className={`group relative overflow-hidden rounded-[2rem] bg-gradient-to-br ${solution.gradient} text-white shadow-xl shadow-slate-900/10 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/15`}
                 >
-                  <div className="grid gap-0 md:grid-cols-[1fr_0.95fr] md:items-stretch">
-                    <div className="relative overflow-hidden bg-[#eaf8f1]">
+                  <div className="relative min-h-[460px]">
+                    <div className="absolute right-[-70px] top-[-70px] h-52 w-52 rounded-full bg-white/15 blur-sm" />
+                    <div className="absolute bottom-[-80px] left-[-70px] h-56 w-56 rounded-full bg-black/15 blur-sm" />
+
+                    <div className="relative z-10 h-[220px] overflow-hidden bg-white/10">
                       <img
                         src={solution.image}
                         alt={solution.title}
-                        className="h-full min-h-[240px] w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+                        className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-[1.05]"
                       />
                     </div>
 
-                    <div className="flex flex-col justify-between p-6 md:p-8">
-                      <div>
-                        <p
-                          className="text-xs font-black uppercase tracking-[0.25em]"
-                          style={{ color: solution.color }}
-                        >
-                          {solution.subtitle}
-                        </p>
+                    <div className="relative z-10 px-6 pb-7 pt-6">
+                      <p className="text-2xl font-black leading-tight text-white drop-shadow md:text-3xl">
+                        {solution.title}
+                      </p>
 
-                        <h3 className="mt-4 text-3xl font-black leading-tight text-[#111827]">
-                          {solution.title}
-                        </h3>
+                      <h3 className="mt-6 text-2xl font-black leading-tight text-white md:text-3xl">
+                        {solution.headline}
+                      </h3>
 
-                        <p className="mt-4 text-sm font-medium leading-7 text-[#6b7280] md:text-base">
-                          {solution.description}
-                        </p>
-                      </div>
+                      <p className="mt-4 min-h-[84px] text-sm font-medium leading-7 text-white/90">
+                        {solution.description}
+                      </p>
 
-                      <div className="mt-7 flex items-center justify-between border-t border-black/5 pt-5">
-                        <span className="text-xs font-black uppercase tracking-wide text-[#006b3f]">
-                          Lihat Solusi
-                        </span>
-
-                        <span
-                          className="flex h-11 w-11 items-center justify-center rounded-full text-sm font-black text-white transition group-hover:translate-x-1"
-                          style={{ backgroundColor: solution.color }}
-                        >
-                          →
-                        </span>
-                      </div>
+                      <span className="mt-7 inline-flex rounded-full bg-black/25 px-5 py-3 text-[11px] font-black uppercase tracking-wide text-white shadow-lg shadow-black/10 ring-1 ring-white/10 transition group-hover:bg-white group-hover:text-[#111827]">
+                        {solution.button}
+                      </span>
                     </div>
                   </div>
                 </a>
