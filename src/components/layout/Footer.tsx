@@ -188,7 +188,7 @@ const footerHrefMap: Record<string, string> = {
   "Komunitas Sehat": "/support-system/komunitas-sehat",
   Event: "/event",
   Apotek: "/apotek-resmi",
-  FAQ: "/#faq",
+  FAQ: "/faq",
   Kontak: "/kontak",
 };
 

@@ -10,7 +10,6 @@ const menuItems = [
   { label: "Produk", href: "/produk", mega: "produk" },
   { label: "Solusi", href: "/solusi", mega: "solusi" },
   { label: "Support System", href: "/support-system", mega: "support" },
-  { label: "Apotek", href: "/apotek-resmi" },
   { label: "Event", href: "/event", mega: "event" },
   { label: "Kontak", href: "/kontak" },
 ];
