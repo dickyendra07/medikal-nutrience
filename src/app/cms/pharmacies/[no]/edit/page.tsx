@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { pharmacies } from "@/data/pharmacies";
-import { savePharmacyDraft } from "./actions";
+import { deletePharmacyDraft, savePharmacyDraft } from "./actions";
 
 type CmsPharmacyEditPageProps = {
   params: Promise<{
@@ -12,6 +12,7 @@ type CmsPharmacyEditPageProps = {
   }>;
   searchParams: Promise<{
     saved?: string;
+    reset?: string;
   }>;
 };
 
@@ -63,6 +64,7 @@ export default async function CmsPharmacyEditPage({
   const draft = await getPharmacyDraft(no);
   const paramsQuery = await searchParams;
   const isSaved = paramsQuery.saved === "1";
+  const isReset = paramsQuery.reset === "1";
 
   const viewData = {
     no: draft?.no ?? pharmacy.no,
@@ -120,6 +122,12 @@ export default async function CmsPharmacyEditPage({
             {isSaved ? (
               <div className="mt-5 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
                 Draft apotek berhasil disimpan.
+              </div>
+            ) : null}
+
+            {isReset ? (
+              <div className="mt-5 rounded-2xl bg-[#fff7ed] px-5 py-4 text-sm font-black text-[#c2410c] ring-1 ring-[#fb923c]/20">
+                Draft apotek berhasil dihapus. Data kembali menggunakan data original.
               </div>
             ) : null}
           </div>
@@ -309,6 +317,25 @@ export default async function CmsPharmacyEditPage({
                     ? new Date(viewData.updatedAt).toLocaleString("id-ID")
                     : "Belum ada draft"}
                 </p>
+              </div>
+
+              <div className="rounded-2xl bg-[#fff7ed] p-4 ring-1 ring-[#fed7aa]">
+                <p className="text-xs font-black uppercase tracking-wide text-[#c2410c]">
+                  Reset Draft
+                </p>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#9a3412]">
+                  Hapus draft CMS dan kembalikan data apotek ke data original.
+                </p>
+
+                <form action={deletePharmacyDraft} className="mt-4">
+                  <input type="hidden" name="originalNo" value={pharmacy.no} />
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-[#c2410c] px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
+                  >
+                    Reset Draft
+                  </button>
+                </form>
               </div>
             </div>
           </section>

@@ -85,3 +85,27 @@ export async function savePharmacyDraft(formData: FormData) {
 
   redirect(`/cms/pharmacies/${originalNo}/edit?saved=1`);
 }
+
+
+export async function deletePharmacyDraft(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalNo = String(formData.get("originalNo") ?? "");
+
+  if (!originalNo) {
+    throw new Error("Nomor apotek tidak valid.");
+  }
+
+  const drafts = await readDrafts();
+
+  if (drafts[originalNo]) {
+    delete drafts[originalNo];
+    await writeDrafts(drafts);
+  }
+
+  redirect(`/cms/pharmacies/${originalNo}/edit?reset=1`);
+}
