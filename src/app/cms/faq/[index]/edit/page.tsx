@@ -2,14 +2,48 @@ import { notFound, redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { faqs } from "@/data/faqs";
+import { saveFaqDraft } from "./actions";
+import { promises as fs } from "fs";
+import path from "path";
+
+type CmsFaqDraft = {
+  index: number;
+  category: string;
+  question: string;
+  answer: string;
+  ctaLabel: string;
+  ctaHref: string;
+  status: "published" | "draft" | "review";
+  updatedAt: string;
+};
+
+async function getFaqDraft(index: string) {
+  try {
+    const file = await fs.readFile(
+      path.join(process.cwd(), "src/data/cms/cms-faqs.json"),
+      "utf8"
+    );
+    const drafts = JSON.parse(file) as Record<string, CmsFaqDraft>;
+    return drafts[index] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 
 type CmsFaqEditPageProps = {
   params: Promise<{
     index: string;
   }>;
+  searchParams: Promise<{
+    saved?: string;
+  }>;
 };
 
-export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
+export default async function CmsFaqEditPage({
+  params,
+  searchParams,
+}: CmsFaqEditPageProps) {
   const authenticated = await isCmsAuthenticated();
 
   if (!authenticated) {
@@ -23,6 +57,20 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
   if (!faq || Number.isNaN(faqIndex)) {
     notFound();
   }
+
+  const draft = await getFaqDraft(index);
+  const paramsQuery = await searchParams;
+  const isSaved = paramsQuery.saved === "1";
+
+  const viewData = {
+    category: draft?.category ?? faq.category,
+    question: draft?.question ?? faq.question,
+    answer: draft?.answer ?? faq.answer,
+    ctaLabel: draft?.ctaLabel ?? faq.ctaLabel ?? "",
+    ctaHref: draft?.ctaHref ?? faq.ctaHref ?? "",
+    status: draft?.status ?? "published",
+    updatedAt: draft?.updatedAt ?? null,
+  };
 
   return (
     <CmsAdminShell
@@ -59,19 +107,26 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
               Informasi FAQ
             </h2>
             <p className="mt-3 text-sm font-medium leading-7 text-[#64748b]">
-              Form ini masih tahap UI edit FAQ. Batch berikutnya kita sambungkan
-              ke save draft seperti module Products dan Solutions.
+              Form ini sudah dapat menyimpan draft FAQ ke storage JSON lokal
+              untuk kebutuhan staging/demo CMS.
             </p>
+
+            {isSaved ? (
+              <div className="mt-5 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
+                Draft FAQ berhasil disimpan.
+              </div>
+            ) : null}
           </div>
 
-          <form className="mt-7 grid gap-5">
+          <form action={saveFaqDraft} className="mt-7 grid gap-5">
+            <input type="hidden" name="originalIndex" value={faqIndex} />
             <div>
               <label className="text-sm font-black text-[#111827]">
                 Category
               </label>
               <input
                 name="category"
-                defaultValue={faq.category}
+                defaultValue={viewData.category}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10"
               />
             </div>
@@ -82,7 +137,7 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
               </label>
               <textarea
                 name="question"
-                defaultValue={faq.question}
+                defaultValue={viewData.question}
                 rows={3}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold leading-7 outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10"
               />
@@ -94,7 +149,7 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
               </label>
               <textarea
                 name="answer"
-                defaultValue={faq.answer}
+                defaultValue={viewData.answer}
                 rows={8}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold leading-7 outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10"
               />
@@ -107,7 +162,7 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
                 </label>
                 <input
                   name="ctaLabel"
-                  defaultValue={faq.ctaLabel ?? ""}
+                  defaultValue={viewData.ctaLabel}
                   placeholder="Contoh: Cari Apotek"
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10"
                 />
@@ -119,7 +174,7 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
                 </label>
                 <input
                   name="ctaHref"
-                  defaultValue={faq.ctaHref ?? ""}
+                  defaultValue={viewData.ctaHref}
                   placeholder="Contoh: /apotek-resmi"
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10"
                 />
@@ -128,10 +183,10 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
 
             <div className="border-t border-black/5 pt-6">
               <button
-                type="button"
+                type="submit"
                 className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
               >
-                Save Draft UI
+                Save Draft
               </button>
             </div>
           </form>
@@ -167,7 +222,7 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
                   Category
                 </p>
                 <p className="mt-2 text-sm font-black text-[#475569]">
-                  {faq.category}
+                  {viewData.category}
                 </p>
               </div>
 
@@ -176,7 +231,18 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
                   CTA Status
                 </p>
                 <p className="mt-2 text-sm font-black text-[#475569]">
-                  {faq.ctaLabel && faq.ctaHref ? "CTA aktif" : "Tanpa CTA"}
+                  {viewData.ctaLabel && viewData.ctaHref ? "CTA aktif" : "Tanpa CTA"}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-[#f8fafc] p-4">
+                <p className="text-xs font-black uppercase tracking-wide text-[#64748b]">
+                  Last Draft Update
+                </p>
+                <p className="mt-2 text-sm font-black text-[#475569]">
+                  {viewData.updatedAt
+                    ? new Date(viewData.updatedAt).toLocaleString("id-ID")
+                    : "Belum ada draft"}
                 </p>
               </div>
             </div>
@@ -187,7 +253,7 @@ export default async function CmsFaqEditPage({ params }: CmsFaqEditPageProps) {
               Next Step
             </p>
             <h2 className="mt-4 text-2xl font-black leading-tight">
-              Batch berikutnya: save draft FAQ.
+              Batch berikutnya: connect ke public FAQ.
             </h2>
             <p className="mt-4 text-sm font-medium leading-7 text-white/70">
               Setelah halaman edit ini aman, kita buat action untuk menyimpan
