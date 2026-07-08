@@ -107,7 +107,7 @@ export default async function CmsProductEditPage({
               </label>
               <textarea
                 name="heroDescription"
-                defaultValue={product.heroDescription}
+                defaultValue={product.description}
                 rows={5}
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold leading-7 outline-none transition focus:border-[#006b3f] focus:bg-white"
               />
