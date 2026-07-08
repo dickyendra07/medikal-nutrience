@@ -57,7 +57,7 @@ function getCmsMenus(productCount: number) {
     { title: "Dapur Sehat FIMA", desc: "Kelola artikel resep dan detail konten nutrisi", count: "3 artikel", href: "#" },
     { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "Soon", href: "#" },
     { title: "Apotek", desc: "Kelola daftar apotek, area, dan link Google Maps", count: "Partner", href: "#" },
-    { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "#" },
+    { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "/cms/faq" },
     { title: "Leads / Registrasi", desc: "Data dari assessment, konsultasi, dan event", count: "Soon", href: "#" },
     { title: "Pengaturan Website", desc: "SEO, banner, navigasi, dan informasi perusahaan", count: "Settings", href: "#" },
   ];

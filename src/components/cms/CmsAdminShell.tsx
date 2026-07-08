@@ -39,8 +39,8 @@ const cmsMenus = [
   {
     title: "FAQ",
     desc: "Pertanyaan umum",
-    count: "Soon",
-    href: "#",
+    count: "10",
+    href: "/cms/faq",
     icon: "?",
   },
   {
@@ -72,6 +72,7 @@ function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "dashboard") return href === "/cms";
   if (active === "products") return href === "/cms/products";
   if (active === "solutions") return href === "/cms/solutions";
+  if (active === "faq") return href === "/cms/faq";
   return false;
 }
 
