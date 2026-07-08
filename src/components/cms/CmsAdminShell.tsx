@@ -32,8 +32,8 @@ const cmsMenus = [
   {
     title: "Apotek",
     desc: "Partner apotek",
-    count: "Soon",
-    href: "#",
+    count: "33+",
+    href: "/cms/pharmacies",
     icon: "⌖",
   },
   {
@@ -73,6 +73,7 @@ function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "products") return href === "/cms/products";
   if (active === "solutions") return href === "/cms/solutions";
   if (active === "faq") return href === "/cms/faq";
+  if (active === "pharmacies") return href === "/cms/pharmacies";
   return false;
 }
 
