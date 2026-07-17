@@ -53,8 +53,8 @@ const cmsMenus = [
   {
     title: "Leads",
     desc: "Assessment & form",
-    count: "Soon",
-    href: "#",
+    count: "2",
+    href: "/cms/leads",
     icon: "✉",
   },
   {
@@ -92,6 +92,8 @@ function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "support-system") return href === "/cms/support-system";
   if (active === "faq") return href === "/cms/faq";
   if (active === "pharmacies") return href === "/cms/pharmacies";
+  if (active === "leads") return href === "/cms/leads";
+  if (active === "settings") return href === "/cms/settings";
   return false;
 }
 

@@ -58,7 +58,7 @@ function getCmsMenus(productCount: number) {
     { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "3 event", href: "/cms/events" },
     { title: "Apotek", desc: "Kelola daftar apotek, area, dan link Google Maps", count: "Partner", href: "/cms/pharmacies" },
     { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "/cms/faq" },
-    { title: "Leads / Registrasi", desc: "Data dari assessment, konsultasi, dan event", count: "Soon", href: "#" },
+    { title: "Leads / Registrasi", desc: "Data dari assessment, konsultasi, dan event", count: "2 leads", href: "/cms/leads" },
     { title: "Pengaturan Website", desc: "SEO, banner, navigasi, dan informasi perusahaan", count: "Settings", href: "#" },
   ];
 }

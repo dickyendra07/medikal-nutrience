@@ -223,9 +223,12 @@ export default async function CmsLeadsPage({
 
               <div className="flex items-center lg:justify-end">
 
-                <span className="rounded-full bg-white px-4 py-2 text-xs font-black text-[#64748b] ring-1 ring-black/5">
-                  Detail Next
-                </span>
+                <a
+                  href={`/cms/leads/${lead.id}/edit`}
+                  className="rounded-full bg-[#006b3f] px-4 py-2 text-xs font-black text-white transition hover:bg-[#005635]"
+                >
+                  Edit
+                </a>
 
               </div>
 
