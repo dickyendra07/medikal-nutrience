@@ -8,7 +8,8 @@ const supportModules = [
     description:
       "Kelola resep, artikel nutrisi, bahan, cara penyajian, dan produk terkait.",
     publicHref: "/support-system/dapur-sehat-fima",
-    status: "Next",
+    cmsHref: "/cms/support-system/fima",
+    status: "Active",
   },
   {
     title: "Kalkulator Status Gizi",
@@ -136,9 +137,18 @@ export default async function CmsSupportSystemPage() {
                   View Public
                 </a>
 
-                <span className="cursor-not-allowed rounded-full bg-[#e2e8f0] px-5 py-3 text-xs font-black text-[#64748b]">
-                  CMS Next
-                </span>
+                {module.cmsHref ? (
+                  <a
+                    href={module.cmsHref}
+                    className="rounded-full bg-[#006b3f] px-5 py-3 text-xs font-black text-white transition hover:bg-[#005635]"
+                  >
+                    Open CMS
+                  </a>
+                ) : (
+                  <span className="cursor-not-allowed rounded-full bg-[#e2e8f0] px-5 py-3 text-xs font-black text-[#64748b]">
+                    CMS Next
+                  </span>
+                )}
               </div>
             </article>
           ))}
