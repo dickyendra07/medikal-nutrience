@@ -276,9 +276,12 @@ export default async function CmsEventsPage({
                   View
                 </a>
 
-                <span className="inline-flex cursor-not-allowed rounded-full bg-[#e2e8f0] px-4 py-2 text-xs font-black text-[#64748b]">
-                  Edit Next
-                </span>
+                <a
+                  href={`/cms/events/${eventItem.slug}/edit`}
+                  className="inline-flex rounded-full bg-[#006b3f] px-4 py-2 text-xs font-black text-white transition hover:bg-[#005635]"
+                >
+                  Edit
+                </a>
               </div>
             </article>
           ))}

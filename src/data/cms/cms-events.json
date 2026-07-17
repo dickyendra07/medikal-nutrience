@@ -1,1 +1,34 @@
-{}
+{
+  "page": {
+    "events": [
+      {
+        "slug": "hari-gizi-nasional-2026",
+        "category": "Health Talk & Demo Cooking",
+        "title": "Hari Gizi Nasional 2026",
+        "date": "Kamis, 22 Januari 2026",
+        "location": "Auditorium RS Permata Cibubur Lt. 4",
+        "href": "#registrasi-event",
+        "status": "Published"
+      },
+      {
+        "slug": "clinical-nutrition-symposium-2026",
+        "category": "Seminar Nutrisi",
+        "title": "Clinical Nutrition Symposium 2026",
+        "date": "15 Agustus 2026",
+        "location": "Jakarta",
+        "href": "#registrasi-event",
+        "status": "Published"
+      },
+      {
+        "slug": "edukasi-nutrisi-keluarga",
+        "category": "Webinar Keluarga",
+        "title": "Edukasi Nutrisi Keluarga",
+        "date": "22 Agustus 2026",
+        "location": "Online",
+        "href": "#registrasi-event",
+        "status": "Published"
+      }
+    ],
+    "updatedAt": "2026-07-17T05:14:58.268Z"
+  }
+}
