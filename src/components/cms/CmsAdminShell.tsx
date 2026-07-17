@@ -30,6 +30,13 @@ const cmsMenus = [
     icon: "◉",
   },
   {
+    title: "Support System",
+    desc: "Edukasi & layanan",
+    count: "4",
+    href: "/cms/support-system",
+    icon: "✚",
+  },
+  {
     title: "Apotek",
     desc: "Partner apotek",
     count: "33+",
@@ -60,7 +67,16 @@ const cmsMenus = [
 ];
 
 type CmsAdminShellProps = {
-  active: "dashboard" | "products" | "solutions" | "events" | "pharmacies" | "faq" | "leads" | "settings";
+  active:
+    | "dashboard"
+    | "products"
+    | "solutions"
+    | "events"
+    | "support-system"
+    | "pharmacies"
+    | "faq"
+    | "leads"
+    | "settings";
   title: string;
   eyebrow?: string;
   description?: string;
@@ -73,6 +89,7 @@ function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "products") return href === "/cms/products";
   if (active === "solutions") return href === "/cms/solutions";
   if (active === "events") return href === "/cms/events";
+  if (active === "support-system") return href === "/cms/support-system";
   if (active === "faq") return href === "/cms/faq";
   if (active === "pharmacies") return href === "/cms/pharmacies";
   return false;
