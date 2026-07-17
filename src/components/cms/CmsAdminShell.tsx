@@ -60,8 +60,8 @@ const cmsMenus = [
   {
     title: "Settings",
     desc: "SEO & website",
-    count: "Soon",
-    href: "#",
+    count: "CMS",
+    href: "/cms/settings",
     icon: "⚙",
   },
 ];
