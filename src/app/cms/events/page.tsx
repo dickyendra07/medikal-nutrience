@@ -122,13 +122,22 @@ export default async function CmsEventsPage({
       eyebrow="CMS Events"
       description="Kelola daftar event, kategori, jadwal, lokasi, status publikasi, dan konten registrasi Medikal Nutrience."
       actions={
-        <a
-          href="/event"
-          target="_blank"
-          className="rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f] shadow-lg shadow-slate-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
-        >
-          View Public Page
-        </a>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href="/cms/events/new"
+            className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
+          >
+            Add Event
+          </a>
+
+          <a
+            href="/event"
+            target="_blank"
+            className="rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f] shadow-lg shadow-slate-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
+          >
+            View Public Page
+          </a>
+        </div>
       }
     >
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

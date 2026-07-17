@@ -65,6 +65,8 @@ export default async function CmsEventEditPage({
   searchParams: Promise<{
     saved?: string;
     reset?: string;
+    created?: string;
+    resetUnavailable?: string;
   }>;
 }) {
   const authenticated = await isCmsAuthenticated();
@@ -86,6 +88,11 @@ export default async function CmsEventEditPage({
 
   const isSaved = query.saved === "1";
   const isReset = query.reset === "1";
+  const isCreated = query.created === "1";
+  const isResetUnavailable = query.resetUnavailable === "1";
+  const isOriginalEvent = eventPageData.events.some(
+    (item) => item.slug === eventItem.slug
+  );
 
   return (
     <CmsAdminShell
@@ -102,6 +109,12 @@ export default async function CmsEventEditPage({
         </a>
       }
     >
+      {isCreated ? (
+        <div className="mb-6 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
+          Event baru berhasil dibuat. Silakan lanjutkan pengecekan atau editing.
+        </div>
+      ) : null}
+
       {isSaved ? (
         <div className="mb-6 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
           Draft event berhasil disimpan dan sudah terhubung ke halaman public.
@@ -111,6 +124,13 @@ export default async function CmsEventEditPage({
       {isReset ? (
         <div className="mb-6 rounded-2xl bg-[#fff7ed] px-5 py-4 text-sm font-black text-[#c2410c] ring-1 ring-[#fb923c]/20">
           Draft event berhasil direset. Data kembali menggunakan konten original.
+        </div>
+      ) : null}
+
+      {isResetUnavailable ? (
+        <div className="mb-6 rounded-2xl bg-[#fef2f2] px-5 py-4 text-sm font-black text-[#b91c1c] ring-1 ring-[#fecaca]">
+          Event ini dibuat melalui CMS sehingga tidak memiliki data original untuk
+          direset. Gunakan fitur Delete Event untuk menghapusnya.
         </div>
       ) : null}
 
@@ -268,29 +288,41 @@ export default async function CmsEventEditPage({
             </div>
           </section>
 
-          <section className="rounded-[2rem] bg-[#fff7ed] p-6 shadow-xl shadow-orange-900/5 ring-1 ring-[#fed7aa]">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-[#c2410c]">
-              Reset Draft
-            </p>
-            <p className="mt-4 text-sm font-medium leading-7 text-[#9a3412]">
-              Hapus perubahan CMS pada event ini dan kembalikan seluruh datanya
-              ke konten original.
-            </p>
+          {isOriginalEvent ? (
+            <section className="rounded-[2rem] bg-[#fff7ed] p-6 shadow-xl shadow-orange-900/5 ring-1 ring-[#fed7aa]">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#c2410c]">
+                Reset Draft
+              </p>
+              <p className="mt-4 text-sm font-medium leading-7 text-[#9a3412]">
+                Hapus perubahan CMS pada event ini dan kembalikan seluruh datanya
+                ke konten original.
+              </p>
 
-            <form action={resetEventDraft} className="mt-5">
-              <input
-                type="hidden"
-                name="originalSlug"
-                value={eventItem.slug}
-              />
-              <button
-                type="submit"
-                className="w-full rounded-full bg-[#c2410c] px-6 py-4 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
-              >
-                Reset Event Draft
-              </button>
-            </form>
-          </section>
+              <form action={resetEventDraft} className="mt-5">
+                <input
+                  type="hidden"
+                  name="originalSlug"
+                  value={eventItem.slug}
+                />
+                <button
+                  type="submit"
+                  className="w-full rounded-full bg-[#c2410c] px-6 py-4 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
+                >
+                  Reset Event Draft
+                </button>
+              </form>
+            </section>
+          ) : (
+            <section className="rounded-[2rem] bg-[#f8fafc] p-6 shadow-xl shadow-slate-900/5 ring-1 ring-black/5">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#64748b]">
+                CMS-created Event
+              </p>
+              <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
+                Event ini dibuat melalui CMS sehingga tidak memiliki versi
+                original untuk direset.
+              </p>
+            </section>
+          )}
 
           <a
             href="/event"

@@ -52,98 +52,66 @@ async function writeStorage(storage: CmsEventsStorage) {
   );
 }
 
-export async function saveEventDraft(formData: FormData) {
+function createSlug(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+export async function createEventDraft(formData: FormData) {
   const authenticated = await isCmsAuthenticated();
 
   if (!authenticated) {
     redirect("/cms/login");
   }
 
-  const originalSlug = String(formData.get("originalSlug") ?? "").trim();
+  const title = String(formData.get("title") ?? "").trim();
 
-  if (!originalSlug) {
+  if (!title) {
+    throw new Error("Judul event wajib diisi.");
+  }
+
+  const requestedSlug = String(formData.get("slug") ?? "").trim();
+  const slug = createSlug(requestedSlug || title);
+
+  if (!slug) {
     throw new Error("Slug event tidak valid.");
   }
 
   const storage = await readStorage();
   const currentEvents = storage.page?.events ?? eventPageData.events;
 
-  const eventExists = currentEvents.some(
-    (eventItem) => eventItem.slug === originalSlug
+  const slugExists = currentEvents.some(
+    (eventItem) => eventItem.slug === slug
   );
 
-  if (!eventExists) {
-    throw new Error("Event tidak ditemukan.");
+  if (slugExists) {
+    throw new Error("Slug event sudah digunakan.");
   }
 
-  const updatedEvent: EventItem = {
-    slug: originalSlug,
+  const newEvent: EventItem = {
+    slug,
     category: String(formData.get("category") ?? "").trim(),
-    title: String(formData.get("title") ?? "").trim(),
+    title,
     date: String(formData.get("date") ?? "").trim(),
     location: String(formData.get("location") ?? "").trim(),
     href: String(formData.get("href") ?? "#registrasi-event").trim(),
     status: String(
-      formData.get("status") ?? "Published"
+      formData.get("status") ?? "Draft"
     ) as EventItem["status"],
   };
 
-  if (!updatedEvent.title) {
-    throw new Error("Judul event wajib diisi.");
-  }
-
-  const updatedEvents = currentEvents.map((eventItem) =>
-    eventItem.slug === originalSlug ? updatedEvent : eventItem
-  );
-
   await writeStorage({
     ...storage,
     page: {
       ...storage.page,
-      events: updatedEvents,
+      events: [...currentEvents, newEvent],
       updatedAt: new Date().toISOString(),
     },
   });
 
-  redirect(`/cms/events/${originalSlug}/edit?saved=1`);
-}
-
-export async function resetEventDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
-
-  const originalSlug = String(formData.get("originalSlug") ?? "").trim();
-
-  if (!originalSlug) {
-    throw new Error("Slug event tidak valid.");
-  }
-
-  const originalEvent = eventPageData.events.find(
-    (eventItem) => eventItem.slug === originalSlug
-  );
-
-  if (!originalEvent) {
-    redirect(`/cms/events/${originalSlug}/edit?resetUnavailable=1`);
-  }
-
-  const storage = await readStorage();
-  const currentEvents = storage.page?.events ?? eventPageData.events;
-
-  const restoredEvents = currentEvents.map((eventItem) =>
-    eventItem.slug === originalSlug ? originalEvent : eventItem
-  );
-
-  await writeStorage({
-    ...storage,
-    page: {
-      ...storage.page,
-      events: restoredEvents,
-      updatedAt: new Date().toISOString(),
-    },
-  });
-
-  redirect(`/cms/events/${originalSlug}/edit?reset=1`);
+  redirect(`/cms/events/${slug}/edit?created=1`);
 }
