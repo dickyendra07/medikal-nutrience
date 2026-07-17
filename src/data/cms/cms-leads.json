@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "lead-001",
+    "name": "Budi Santoso",
+    "phone": "08123456789",
+    "email": "budi@email.com",
+    "source": "Assessment",
+    "status": "New",
+    "message": "Mencari informasi nutrisi untuk lansia.",
+    "createdAt": "2026-07-17T10:00:00.000Z"
+  },
+  {
+    "id": "lead-002",
+    "name": "Siti Rahma",
+    "phone": "08234567890",
+    "email": "siti@email.com",
+    "source": "Event Registration",
+    "status": "Contacted",
+    "message": "Registrasi event Hari Gizi Nasional.",
+    "createdAt": "2026-07-16T09:30:00.000Z"
+  }
+]
