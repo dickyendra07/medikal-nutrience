@@ -25,8 +25,8 @@ const cmsMenus = [
   {
     title: "Event",
     desc: "Event & registrasi",
-    count: "Soon",
-    href: "#",
+    count: "3",
+    href: "/cms/events",
     icon: "◉",
   },
   {
@@ -72,6 +72,7 @@ function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "dashboard") return href === "/cms";
   if (active === "products") return href === "/cms/products";
   if (active === "solutions") return href === "/cms/solutions";
+  if (active === "events") return href === "/cms/events";
   if (active === "faq") return href === "/cms/faq";
   if (active === "pharmacies") return href === "/cms/pharmacies";
   return false;
