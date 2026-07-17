@@ -27,17 +27,8 @@
         "location": "Online",
         "href": "#registrasi-event",
         "status": "Published"
-      },
-      {
-        "slug": "event-kara-nutrisi-2026",
-        "category": "Seminar Nutrisi",
-        "title": "Event Kara Nutrisi 2026",
-        "date": "20 September 2026",
-        "location": "Auditorium RS Permata Cibubur Lt. 4",
-        "href": "#registrasi-event",
-        "status": "Published"
       }
     ],
-    "updatedAt": "2026-07-17T05:21:15.182Z"
+    "updatedAt": "2026-07-17T05:26:01.000Z"
   }
 }

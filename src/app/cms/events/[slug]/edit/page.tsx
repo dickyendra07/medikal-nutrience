@@ -9,7 +9,7 @@ import {
   type EventPageData,
   type EventProgram,
 } from "@/data/events";
-import { resetEventDraft, saveEventDraft } from "./actions";
+import { deleteOrHideEvent, resetEventDraft, saveEventDraft } from "./actions";
 
 type EventPageDraft = {
   featuredEvent?: Partial<EventPageData["featuredEvent"]>;
@@ -323,6 +323,33 @@ export default async function CmsEventEditPage({
               </p>
             </section>
           )}
+
+          <section className="rounded-[2rem] bg-[#fef2f2] p-6 shadow-xl shadow-red-900/5 ring-1 ring-[#fecaca]">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[#b91c1c]">
+              {isOriginalEvent ? "Hide Event" : "Delete Event"}
+            </p>
+
+            <p className="mt-4 text-sm font-medium leading-7 text-[#991b1b]">
+              {isOriginalEvent
+                ? "Event bawaan tidak akan dihapus dari data original. Event hanya disembunyikan dari halaman public."
+                : "Event buatan CMS akan dihapus dari daftar CMS dan halaman public."}
+            </p>
+
+            <form action={deleteOrHideEvent} className="mt-5">
+              <input
+                type="hidden"
+                name="originalSlug"
+                value={eventItem.slug}
+              />
+
+              <button
+                type="submit"
+                className="w-full rounded-full bg-[#b91c1c] px-6 py-4 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#991b1b]"
+              >
+                {isOriginalEvent ? "Hide Event" : "Delete Event"}
+              </button>
+            </form>
+          </section>
 
           <a
             href="/event"

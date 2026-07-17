@@ -147,3 +147,60 @@ export async function resetEventDraft(formData: FormData) {
 
   redirect(`/cms/events/${originalSlug}/edit?reset=1`);
 }
+
+export async function deleteOrHideEvent(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalSlug = String(formData.get("originalSlug") ?? "").trim();
+
+  if (!originalSlug) {
+    throw new Error("Slug event tidak valid.");
+  }
+
+  const storage = await readStorage();
+  const currentEvents = storage.page?.events ?? eventPageData.events;
+
+  const targetEvent = currentEvents.find(
+    (eventItem) => eventItem.slug === originalSlug
+  );
+
+  if (!targetEvent) {
+    throw new Error("Event tidak ditemukan.");
+  }
+
+  const isOriginalEvent = eventPageData.events.some(
+    (eventItem) => eventItem.slug === originalSlug
+  );
+
+  const updatedEvents = isOriginalEvent
+    ? currentEvents.map((eventItem) =>
+        eventItem.slug === originalSlug
+          ? {
+              ...eventItem,
+              status: "Hidden" as const,
+            }
+          : eventItem
+      )
+    : currentEvents.filter(
+        (eventItem) => eventItem.slug !== originalSlug
+      );
+
+  await writeStorage({
+    ...storage,
+    page: {
+      ...storage.page,
+      events: updatedEvents,
+      updatedAt: new Date().toISOString(),
+    },
+  });
+
+  redirect(
+    isOriginalEvent
+      ? "/cms/events?hidden=1"
+      : "/cms/events?deleted=1"
+  );
+}

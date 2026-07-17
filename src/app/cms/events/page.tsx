@@ -68,6 +68,8 @@ export default async function CmsEventsPage({
   searchParams: Promise<{
     q?: string;
     status?: string;
+    deleted?: string;
+    hidden?: string;
   }>;
 }) {
   const authenticated = await isCmsAuthenticated();
@@ -140,6 +142,18 @@ export default async function CmsEventsPage({
         </div>
       }
     >
+      {query.deleted === "1" ? (
+        <div className="mb-6 rounded-2xl bg-[#fef2f2] px-5 py-4 text-sm font-black text-[#b91c1c] ring-1 ring-[#fecaca]">
+          Event buatan CMS berhasil dihapus.
+        </div>
+      ) : null}
+
+      {query.hidden === "1" ? (
+        <div className="mb-6 rounded-2xl bg-[#fff7ed] px-5 py-4 text-sm font-black text-[#c2410c] ring-1 ring-[#fed7aa]">
+          Event bawaan berhasil disembunyikan dari halaman public.
+        </div>
+      ) : null}
+
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
           <p className="text-4xl font-black text-[#006b3f]">{events.length}</p>
