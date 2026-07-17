@@ -107,3 +107,43 @@ export async function saveEventDraft(formData: FormData) {
 
   redirect(`/cms/events/${originalSlug}/edit?saved=1`);
 }
+
+export async function resetEventDraft(formData: FormData) {
+  const authenticated = await isCmsAuthenticated();
+
+  if (!authenticated) {
+    redirect("/cms/login");
+  }
+
+  const originalSlug = String(formData.get("originalSlug") ?? "").trim();
+
+  if (!originalSlug) {
+    throw new Error("Slug event tidak valid.");
+  }
+
+  const originalEvent = eventPageData.events.find(
+    (eventItem) => eventItem.slug === originalSlug
+  );
+
+  if (!originalEvent) {
+    throw new Error("Event original tidak ditemukan.");
+  }
+
+  const storage = await readStorage();
+  const currentEvents = storage.page?.events ?? eventPageData.events;
+
+  const restoredEvents = currentEvents.map((eventItem) =>
+    eventItem.slug === originalSlug ? originalEvent : eventItem
+  );
+
+  await writeStorage({
+    ...storage,
+    page: {
+      ...storage.page,
+      events: restoredEvents,
+      updatedAt: new Date().toISOString(),
+    },
+  });
+
+  redirect(`/cms/events/${originalSlug}/edit?reset=1`);
+}

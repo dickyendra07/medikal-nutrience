@@ -9,7 +9,7 @@ import {
   type EventPageData,
   type EventProgram,
 } from "@/data/events";
-import { saveEventDraft } from "./actions";
+import { resetEventDraft, saveEventDraft } from "./actions";
 
 type EventPageDraft = {
   featuredEvent?: Partial<EventPageData["featuredEvent"]>;
@@ -64,6 +64,7 @@ export default async function CmsEventEditPage({
   }>;
   searchParams: Promise<{
     saved?: string;
+    reset?: string;
   }>;
 }) {
   const authenticated = await isCmsAuthenticated();
@@ -84,6 +85,7 @@ export default async function CmsEventEditPage({
   }
 
   const isSaved = query.saved === "1";
+  const isReset = query.reset === "1";
 
   return (
     <CmsAdminShell
@@ -103,6 +105,12 @@ export default async function CmsEventEditPage({
       {isSaved ? (
         <div className="mb-6 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">
           Draft event berhasil disimpan dan sudah terhubung ke halaman public.
+        </div>
+      ) : null}
+
+      {isReset ? (
+        <div className="mb-6 rounded-2xl bg-[#fff7ed] px-5 py-4 text-sm font-black text-[#c2410c] ring-1 ring-[#fb923c]/20">
+          Draft event berhasil direset. Data kembali menggunakan konten original.
         </div>
       ) : null}
 
@@ -258,6 +266,30 @@ export default async function CmsEventEditPage({
                 </p>
               </div>
             </div>
+          </section>
+
+          <section className="rounded-[2rem] bg-[#fff7ed] p-6 shadow-xl shadow-orange-900/5 ring-1 ring-[#fed7aa]">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[#c2410c]">
+              Reset Draft
+            </p>
+            <p className="mt-4 text-sm font-medium leading-7 text-[#9a3412]">
+              Hapus perubahan CMS pada event ini dan kembalikan seluruh datanya
+              ke konten original.
+            </p>
+
+            <form action={resetEventDraft} className="mt-5">
+              <input
+                type="hidden"
+                name="originalSlug"
+                value={eventItem.slug}
+              />
+              <button
+                type="submit"
+                className="w-full rounded-full bg-[#c2410c] px-6 py-4 text-xs font-black uppercase tracking-wide text-white transition hover:bg-[#9a3412]"
+              >
+                Reset Event Draft
+              </button>
+            </form>
           </section>
 
           <a
