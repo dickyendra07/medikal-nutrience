@@ -1,0 +1,112 @@
+import { promises as fs } from "fs";
+import path from "path";
+
+export type CmsLeadStatus =
+  | "New"
+  | "Contacted"
+  | "Qualified"
+  | "Converted"
+  | "Closed";
+
+export type CmsLeadSource =
+  | "Assessment"
+  | "Contact"
+  | "Enterprise"
+  | "Event";
+
+export type CmsLead = {
+  id: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  source: CmsLeadSource;
+  message?: string;
+  status: CmsLeadStatus;
+  createdAt: string;
+  updatedAt?: string;
+};
+
+const filePath = path.join(
+  process.cwd(),
+  "src/data/cms/cms-leads.json"
+);
+
+async function readStorage(): Promise<CmsLead[]> {
+  try {
+    const file = await fs.readFile(filePath, "utf8");
+
+    if (!file.trim()) {
+      return [];
+    }
+
+    return JSON.parse(file) as CmsLead[];
+  } catch {
+    return [];
+  }
+}
+
+async function writeStorage(data: CmsLead[]) {
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(data, null, 2),
+    "utf8"
+  );
+}
+
+export async function getLeads() {
+  return readStorage();
+}
+
+export async function createLead(
+  lead: Omit<CmsLead, "id" | "createdAt" | "updatedAt" | "status">
+) {
+  const leads = await readStorage();
+
+  const newLead: CmsLead = {
+    ...lead,
+    id: `lead-${Date.now()}`,
+    status: "New",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  leads.unshift(newLead);
+
+  await writeStorage(leads);
+
+  return newLead;
+}
+
+export async function updateLeadStatus(
+  id: string,
+  status: CmsLeadStatus
+) {
+  const leads = await readStorage();
+
+  const updated = leads.map((lead) => {
+    if (lead.id !== id) {
+      return lead;
+    }
+
+    return {
+      ...lead,
+      status,
+      updatedAt: new Date().toISOString(),
+    };
+  });
+
+  await writeStorage(updated);
+
+  return updated.find((lead) => lead.id === id) ?? null;
+}
+
+export async function deleteLead(id: string) {
+  const leads = await readStorage();
+
+  const filtered = leads.filter(
+    (lead) => lead.id !== id
+  );
+
+  await writeStorage(filtered);
+}
+

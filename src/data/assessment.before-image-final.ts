@@ -136,7 +136,7 @@ return answer==="dialysis"
 {
 product:"NEPHRISOL-D",
 productSlug:"nephrisol-d",
-image:"/images/products/assessment/nephrisol-d.png",
+image:"/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL-D/NEPHRISOL-D VANILA 2.png",
 note:"Direkomendasikan untuk kebutuhan nutrisi pasien yang menjalani dialisis.",
 benefits:[
 "Mendukung kebutuhan nutrisi pasien ginjal",
@@ -148,7 +148,7 @@ ctaUrl:"/produk/nephrisol-d"
 {
 product:"NEPHRISOL",
 productSlug:"nephrisol",
-image:"/images/products/assessment/nephrisol-d.png",
+image:"/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 1.png",
 note:"Direkomendasikan untuk dukungan nutrisi kondisi ginjal.",
 benefits:[
 "Membantu memenuhi kebutuhan nutrisi",
@@ -164,7 +164,7 @@ if(condition==="hati"){
 return {
 product:"HEPATOSOL",
 productSlug:"hepatosol",
-image:"/images/products/assessment/hepatosol.png",
+image:"/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL/HEPATOSOL VANILA 1.png",
 note:"Direkomendasikan untuk dukungan nutrisi hati.",
 benefits:[
 "Mendukung kebutuhan nutrisi hati",
@@ -180,7 +180,7 @@ if(condition==="pernapasan"){
 return {
 product:"PULMOSOL",
 productSlug:"pulmosol",
-image:"/images/products/assessment/pulmosol.png",
+image:"/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png",
 note:"Direkomendasikan untuk dukungan nutrisi sistem pernapasan.",
 benefits:[
 "Mendukung kebutuhan energi",
@@ -196,7 +196,7 @@ if(condition==="pencernaan"){
 return {
 product:"OLIGO",
 productSlug:"oligo",
-image:"/images/products/assessment/oligo.png",
+image:"/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png",
 note:"Direkomendasikan untuk kebutuhan nutrisi pencernaan.",
 benefits:[
 "Mudah dicerna",
@@ -211,7 +211,7 @@ ctaUrl:"/produk/oligo"
 return {
 product:"ENTRAMIX",
 productSlug:"entramix",
-image:"/images/products/assessment/entramix.png",
+image:"/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA.png",
 note:"Membantu memenuhi kebutuhan nutrisi harian.",
 benefits:[
 "Mendukung aktivitas harian",
