@@ -106,6 +106,8 @@ export function AssessmentModal({
     whatsapp:"",
   });
 
+  const [privacyConsent,setPrivacyConsent] = useState(false);
+
 
   const recommendation = useMemo(()=>{
     return getAssessmentRecommendation(
@@ -131,8 +133,8 @@ export function AssessmentModal({
         ...leadForm,
         age:"",
         gender:"",
-        educationConsent:true,
-        communicationConsent:true,
+        educationConsent: privacyConsent,
+        communicationConsent: privacyConsent,
       },
       createdAt:new Date().toISOString(),
     };
@@ -165,6 +167,7 @@ export function AssessmentModal({
     setStep("purpose");
     setCondition("");
     setAnswer("");
+    setPrivacyConsent(false);
     onClose();
   };
 
@@ -354,9 +357,52 @@ export function AssessmentModal({
             />
 
 
+            <div className="mt-6 rounded-[1.8rem] bg-[#f4fbf8] p-5 ring-1 ring-[#006b3f]/10">
+
+              <div className="flex gap-4">
+
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e4f8ed] text-xl">
+                  🔒
+                </div>
+
+                <div>
+
+                  <h3 className="text-sm font-black text-[#111827]">
+                    Privasi Data Anda
+                  </h3>
+
+                  <label className="mt-3 flex cursor-pointer gap-3 text-sm leading-6 text-slate-600">
+
+                    <input
+                      type="checkbox"
+                      checked={privacyConsent}
+                      onChange={(e)=>setPrivacyConsent(e.target.checked)}
+                      className="mt-1 h-5 w-5 accent-[#006b3f]"
+                    />
+
+                    <span>
+                      Saya menyetujui penggunaan data pribadi saya oleh
+                      Medikal Nutrience untuk membantu memberikan rekomendasi
+                      nutrisi serta informasi terkait produk dan layanan kami.
+                    </span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
             <button
+              disabled={!privacyConsent}
               onClick={submitLead}
-              className="mt-8 w-full rounded-full bg-[#006b3f] py-4 font-black text-white"
+              className={`mt-8 w-full rounded-full py-4 font-black transition ${
+                privacyConsent
+                  ? "bg-[#006b3f] text-white hover:bg-[#005635]"
+                  : "cursor-not-allowed bg-slate-200 text-slate-400"
+              }`}
             >
               Lihat Rekomendasi
             </button>
