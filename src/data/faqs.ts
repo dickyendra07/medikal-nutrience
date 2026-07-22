@@ -6,78 +6,146 @@ export type FaqItem = {
   ctaHref?: string;
 };
 
+
 export const faqs: FaqItem[] = [
+
   {
-    category: "Tentang Medikal Nutrience",
-    question: "Apa itu Medikal Nutrience?",
+    category:"Tentang Medikal Nutrience",
+    question:"Apa itu Medikal Nutrience?",
     answer:
-      "Medikal Nutrience menyediakan berbagai produk nutrisi medis yang dirancang untuk mendukung kebutuhan nutrisi pada berbagai kondisi kesehatan maupun untuk menjaga kesehatan sehari-hari. Produk dapat digunakan sesuai rekomendasi tenaga kesehatan atau sesuai kebutuhan nutrisi masing-masing.",
+      "Medical Nutrience menyediakan berbagai produk nutrisi medis yang dirancang untuk mendukung kebutuhan nutrisi pada berbagai kondisi kesehatan maupun untuk menjaga kesehatan sehari-hari."
   },
+
+
   {
-    category: "Nutrition Finder",
-    question: "Bagaimana cara memilih produk yang sesuai?",
+    category:"Produk",
+    question:"Apakah produk nutrisi Medical Nutrience boleh diseduh dengan air panas?",
     answer:
-      "Anda dapat menggunakan fitur Nutrition Finder di website Medikal Nutrience. Cukup jawab beberapa pertanyaan sederhana, dan sistem akan membantu merekomendasikan produk yang sesuai dengan kebutuhan Anda.",
-    ctaLabel: "Coba Nutrition Finder",
-    ctaHref: "/",
+      "Sebaiknya gunakan air hangat sesuai petunjuk penyajian pada kemasan produk. Penggunaan air yang terlalu panas dapat memengaruhi kualitas beberapa kandungan nutrisi."
   },
+
+
   {
-    category: "Produk",
-    question: "Apakah produk Medikal Nutrience dapat dikonsumsi setiap hari?",
+    category:"Produk",
+    question:"Apakah produk ini dapat dikonsumsi setiap hari?",
     answer:
-      "Setiap produk memiliki tujuan penggunaan yang berbeda. Beberapa produk dapat dikonsumsi sebagai nutrisi harian, sementara produk lainnya ditujukan untuk kondisi kesehatan tertentu. Selalu ikuti petunjuk penggunaan pada kemasan atau konsultasikan dengan tenaga kesehatan.",
+      "Produk dapat dikonsumsi sesuai dengan kebutuhan nutrisi dan anjuran penggunaan yang tertera pada kemasan. Untuk kondisi kesehatan tertentu, sebaiknya berkonsultasi dengan dokter atau ahli gizi."
   },
+
+
   {
-    category: "Pembelian",
-    question: "Di mana saya dapat membeli produk Medikal Nutrience?",
+    category:"Produk",
+    question:"Apakah produk Medical Nutrience cocok untuk lansia?",
     answer:
-      "Produk Medikal Nutrience tersedia di rumah sakit, apotek, serta distributor resmi. Anda juga dapat menggunakan fitur Cari Apotek untuk menemukan lokasi terdekat.",
-    ctaLabel: "Cari Apotek",
-    ctaHref: "/apotek-resmi",
+      "Beberapa produk Medical Nutrience dirancang untuk memenuhi kebutuhan nutrisi orang dewasa dan lansia. Pilihan produk dapat disesuaikan dengan kondisi dan kebutuhan masing-masing."
   },
+
+
   {
-    category: "Produk",
-    question: "Apakah saya memerlukan resep dokter?",
+    category:"Produk",
+    question:"Apakah produk Medical Nutrience dapat dikonsumsi oleh anak-anak?",
     answer:
-      "Sebagian besar produk nutrisi dapat diperoleh tanpa resep. Namun, untuk produk yang ditujukan bagi kondisi kesehatan tertentu, kami menyarankan berkonsultasi dengan dokter atau ahli gizi sebelum mengonsumsinya.",
+      "Tidak semua produk diperuntukkan bagi anak-anak. Untuk kebutuhan nutrisi anak, kami menyediakan produk Entrakid yang diformulasikan khusus untuk mendukung tumbuh kembang anak."
   },
+
+
   {
-    category: "Produk",
-    question: "Apa perbedaan Entramix dan Entrasoy?",
+    category:"Produk",
+    question:"Bagaimana cara penyimpanan produk setelah kemasan dibuka?",
     answer:
-      "Entramix merupakan nutrisi berbasis susu. Entrasoy merupakan nutrisi berbasis protein kedelai yang dapat menjadi alternatif bagi Anda yang tidak mengonsumsi susu sapi atau lebih memilih nutrisi berbasis kedelai.",
+      "Simpan produk sesuai petunjuk pada kemasan, di tempat yang sejuk dan kering, serta tutup rapat setelah digunakan."
   },
+
+
   {
-    category: "Kondisi Kesehatan",
-    question: "Bagaimana jika saya memiliki kondisi kesehatan tertentu?",
+    category:"Produk",
+    question:"Apa perbedaan Entramix dan Entrasoy?",
     answer:
-      "Medikal Nutrience menyediakan produk nutrisi untuk berbagai kebutuhan seperti ginjal, hati, stroke, pernapasan, pencernaan, pemulihan setelah sakit atau operasi, serta tumbuh kembang anak. Gunakan fitur Nutrition Finder atau konsultasikan dengan tenaga kesehatan untuk membantu menentukan pilihan yang sesuai.",
+      "Entramix merupakan nutrisi berbasis susu, sedangkan Entrasoy merupakan nutrisi berbasis kedelai yang dapat menjadi alternatif bagi konsumen yang tidak mengonsumsi susu sapi."
   },
+
+
   {
-    category: "Support System",
-    question: "Apakah saya bisa mengunduh brosur atau materi edukasi?",
+    category:"Nutrition Finder",
+    question:"Bagaimana cara memilih produk yang sesuai?",
     answer:
-      "Ya. Beberapa halaman produk menyediakan brosur yang dapat diunduh. Selain itu, halaman MERAKIDS menyediakan berbagai aktivitas edukatif seperti gambar mewarnai, diary si kecil, dan panduan origami.",
+      "Anda dapat menggunakan fitur Temukan Nutrisi pada website untuk mendapatkan rekomendasi produk sesuai kebutuhan, atau berkonsultasi melalui fitur Konsultasi.",
+    ctaLabel:"Coba Nutrition Finder",
+    ctaHref:"/"
   },
+
+
   {
-    category: "Event",
-    question: "Bagaimana cara mengikuti event Medikal Nutrience?",
+    category:"Nutrition Finder",
+    question:"Bagaimana jika saya masih bingung memilih produk?",
     answer:
-      "Buka menu Event, pilih kegiatan yang ingin diikuti, lalu isi formulir pendaftaran secara online. Anda akan menerima informasi lebih lanjut setelah registrasi berhasil.",
-    ctaLabel: "Lihat Event",
-    ctaHref: "/event",
+      "Anda dapat menggunakan fitur Temukan Nutrisi atau menghubungi kami melalui fitur Konsultasi untuk mendapatkan informasi yang lebih sesuai dengan kebutuhan Anda."
   },
+
+
   {
-    category: "Kontak",
-    question: "Siapa yang dapat saya hubungi jika memiliki pertanyaan lebih lanjut?",
+    category:"Kondisi Kesehatan",
+    question:"Bagaimana jika saya memiliki kondisi kesehatan tertentu?",
     answer:
-      "Silakan hubungi kami melalui halaman Kontak atau tombol WhatsApp yang tersedia di website. Tim kami akan membantu menjawab pertanyaan Anda.",
-    ctaLabel: "Hubungi Kami",
-    ctaHref: "/kontak",
+      "Medical Nutrience menyediakan produk nutrisi untuk berbagai kebutuhan seperti ginjal, hati, pernapasan, pencernaan, pemulihan setelah sakit atau operasi, serta tumbuh kembang anak."
   },
+
+
+  {
+    category:"Pembelian",
+    question:"Di mana saya dapat membeli produk Medical Nutrience?",
+    answer:
+      "Produk Medical Nutrience dapat diperoleh melalui rumah sakit, apotek, atau menggunakan fitur Cari Apotek pada website untuk menemukan lokasi yang menyediakan produk kami.",
+    ctaLabel:"Cari Apotek",
+    ctaHref:"/apotek-resmi"
+  },
+
+
+  {
+    category:"Konsultasi",
+    question:"Apakah saya memerlukan resep dokter untuk membeli produk ini?",
+    answer:
+      "Sebagian besar produk nutrisi dapat diperoleh tanpa resep. Namun, untuk produk dengan kebutuhan nutrisi khusus, disarankan berkonsultasi dengan tenaga kesehatan terlebih dahulu."
+  },
+
+
+  {
+    category:"Konsultasi",
+    question:"Bagaimana jika saya memiliki alergi terhadap susu sapi?",
+    answer:
+      "Medical Nutrience menyediakan pilihan produk Entrasoy, yaitu nutrisi berbasis kedelai sebagai alternatif bagi konsumen yang tidak mengonsumsi susu sapi."
+  },
+
+
+  {
+    category:"Support System",
+    question:"Apakah saya bisa mengunduh brosur atau materi edukasi?",
+    answer:
+      "Ya. Beberapa halaman produk menyediakan brosur yang dapat diunduh. Selain itu, tersedia berbagai materi edukasi melalui halaman Support System."
+  },
+
+
+  {
+    category:"Event",
+    question:"Bagaimana cara mengikuti event Medical Nutrience?",
+    answer:
+      "Buka menu Event, pilih kegiatan yang ingin diikuti, lalu isi formulir pendaftaran secara online.",
+    ctaLabel:"Lihat Event",
+    ctaHref:"/event"
+  },
+
+
+  {
+    category:"Kontak",
+    question:"Siapa yang dapat saya hubungi jika memiliki pertanyaan lebih lanjut?",
+    answer:
+      "Silakan hubungi kami melalui halaman Kontak atau kanal konsultasi yang tersedia pada website."
+  }
+
 ];
+
 
 export const faqCategories = [
   "Semua",
-  ...Array.from(new Set(faqs.map((faq) => faq.category))),
+  ...Array.from(new Set(faqs.map((faq)=>faq.category)))
 ];
