@@ -6,6 +6,21 @@ import {
 } from "@/components/pages/product-detail/ProductVisual";
 
 
+
+const productBanners: Record<string, string> = {
+  entrakid: "/images/products/banners/entrakid-banner.png",
+  entramix: "/images/products/banners/entramix-banner.png",
+  entrasoy: "/images/products/banners/entrasoy-banner.png",
+  hepatosol: "/images/products/banners/hepatosol-banner.png",
+  "hepatosol-lola": "/images/products/banners/hepatosol-lola-banner.png",
+  nephrisol: "/images/products/banners/nephrisol-banner.png",
+  "nephrisol-d": "/images/products/banners/nephrisol-d-banner.png",
+  oligo: "/images/products/banners/oligo-banner.png",
+  peptibren: "/images/products/banners/peptibren-banner.png",
+  peptisol: "/images/products/banners/peptisol-banner.png",
+  pulmosol: "/images/products/banners/pulmosol-banner.png",
+};
+
 function getBenefitIcons(product: ProductDetail) {
   const iconMap: Record<string, string[] | undefined> = {
     entrakid: mednutAssets.productIcons.entrakid,
@@ -92,6 +107,18 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
           </div>
         </div>
       </section>
+
+      {productBanners[product.slug] ? (
+        <section className="px-5 py-10 md:py-14 lg:px-10">
+          <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-scale">
+            <img
+              src={productBanners[product.slug]}
+              alt={`${product.name} Banner`}
+              className="h-auto w-full object-cover"
+            />
+          </div>
+        </section>
+      ) : null}
 
       <section className="px-5 py-12 md:py-16 lg:px-10">
         <div className="mx-auto w-full max-w-[1440px]">

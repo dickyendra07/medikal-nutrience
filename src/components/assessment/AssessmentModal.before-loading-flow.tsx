@@ -11,8 +11,6 @@ import {
 } from "@/data/assessment";
 
 import { AssessmentIcon } from "@/components/assessment/components/AssessmentIcon";
-import { AssessmentLoading } from "@/components/assessment/components/AssessmentLoading";
-import { AssessmentResult } from "@/components/assessment/components/AssessmentResult";
 
 type AssessmentModalProps = {
   isOpen: boolean;
