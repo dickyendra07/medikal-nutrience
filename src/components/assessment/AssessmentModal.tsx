@@ -5,6 +5,7 @@ import {
   assessmentDisclaimer,
   assessmentPurposeOptions,
   healthConditions,
+  healthTargetOptions,
   assessmentQuestions,
   getAssessmentRecommendation,
   type AssessmentLeadPayload,
@@ -28,6 +29,7 @@ type LeadForm = {
 const steps = [
   "purpose",
   "condition",
+  "target",
   "question",
   "lead",
   "loading",
@@ -88,6 +90,15 @@ const productImages: Record<string, string> = {
 
   entramix:
     "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+
+  entrakid:
+    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAKID/ENTRAKID VANILA 1.png",
+
+  entrasoy:
+    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY/ENTRASOY 1.png",
+
+  peptisol:
+    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/PEPTISOL 1.png",
 };
 
 export function AssessmentModal({
@@ -99,6 +110,7 @@ export function AssessmentModal({
   const [step,setStep] = useState<Step>("purpose");
 
   const [condition,setCondition] = useState("");
+  const [healthTarget,setHealthTarget] = useState("");
   const [answer,setAnswer] = useState("");
 
   const [leadForm,setLeadForm] = useState<LeadForm>({
@@ -166,6 +178,7 @@ export function AssessmentModal({
   const close = ()=>{
     setStep("purpose");
     setCondition("");
+    setHealthTarget("");
     setAnswer("");
     setPrivacyConsent(false);
     onClose();
@@ -233,7 +246,13 @@ export function AssessmentModal({
               {assessmentPurposeOptions.map((item:any)=>(
                 <button
                   key={item.value}
-                  onClick={()=>setStep("condition")}
+                  onClick={()=>{
+                    if(item.value==="health"){
+                      setStep("target");
+                    }else{
+                      setStep("condition");
+                    }
+                  }}
                   className="group w-full rounded-[2rem] border p-6 text-left hover:border-[#006b3f] hover:bg-[#f4fbf7]"
                 >
 
@@ -258,7 +277,47 @@ export function AssessmentModal({
 
 
 
-          {step==="condition" && (
+          
+          {step==="target" && (
+
+            <>
+
+            <h1 className="text-4xl font-black">
+              Siapa yang membutuhkan nutrisi ini?
+            </h1>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+
+            {healthTargetOptions.map((item:any)=>(
+
+              <button
+                key={item.value}
+                onClick={()=>{
+                  setHealthTarget(item.value);
+                  setCondition(item.value);
+                  setStep("question");
+                }}
+                className="rounded-2xl border p-6 text-left hover:border-[#006b3f] hover:bg-[#f4fbf7]"
+              >
+
+                <AssessmentIcon name={item.icon}/>
+
+                <h3 className="mt-4 text-xl font-black">
+                  {item.label}
+                </h3>
+
+              </button>
+
+            ))}
+
+            </div>
+
+            </>
+
+          )}
+
+
+{step==="condition" && (
 
             <>
             <h1 className="text-4xl font-black">
@@ -442,11 +501,15 @@ export function AssessmentModal({
               </p>
 
 
-              <img
-                src={image}
-                alt={recommendation.product}
-                className="mx-auto mt-6 h-56 object-contain"
-              />
+              <div className="mx-auto mt-6 flex h-64 w-full items-center justify-center rounded-[2rem] bg-[#f8fcfa]">
+                {image ? (
+                  <img
+                    src={image}
+                    alt={recommendation.product}
+                    className="h-full w-full object-contain p-6"
+                  />
+                ) : null}
+              </div>
 
 
               <h1 className="mt-6 text-4xl font-black">

@@ -77,6 +77,20 @@ export const healthConditions = [
 ];
 
 
+export const healthTargetOptions = [
+  {
+    label:"Anak",
+    value:"anak",
+    icon:"child"
+  },
+  {
+    label:"Dewasa",
+    value:"dewasa",
+    icon:"user"
+  }
+];
+
+
 export const assessmentQuestions:any = {
 
 ginjal:{
@@ -111,12 +125,31 @@ options:[
 ]
 },
 
+anak:{
+title:"Apa kebutuhan nutrisi anak saat ini?",
+options:[
+{
+label:"Mendukung tumbuh kembang anak",
+value:"entrakid"
+}
+]
+},
+
 dewasa:{
 title:"Apa tujuan utama Anda?",
 options:[
-{label:"Menjaga kesehatan harian",value:"entramix"},
-{label:"Alternatif tanpa susu sapi",value:"entrasoy"},
-{label:"Pemulihan setelah sakit",value:"peptisol"}
+{
+label:"Menjaga kesehatan harian",
+value:"entramix"
+},
+{
+label:"Alternatif tanpa susu sapi",
+value:"entrasoy"
+},
+{
+label:"Pemulihan setelah sakit",
+value:"peptisol"
+}
 ]
 }
 
@@ -148,7 +181,7 @@ ctaUrl:"/produk/nephrisol-d"
 {
 product:"NEPHRISOL",
 productSlug:"nephrisol",
-image:"/images/products/assessment/nephrisol-d.png",
+image:"/images/products/assessment/nephrisol.png",
 note:"Direkomendasikan untuk dukungan nutrisi kondisi ginjal.",
 benefits:[
 "Membantu memenuhi kebutuhan nutrisi",
@@ -159,21 +192,19 @@ ctaUrl:"/produk/nephrisol"
 }
 
 
-
 if(condition==="hati"){
 return {
-product:"HEPATOSOL",
-productSlug:"hepatosol",
+product:answer==="specific" ? "HEPATOSOL LOLA" : "HEPATOSOL",
+productSlug:answer==="specific" ? "hepatosol-lola" : "hepatosol",
 image:"/images/products/assessment/hepatosol.png",
 note:"Direkomendasikan untuk dukungan nutrisi hati.",
 benefits:[
 "Mendukung kebutuhan nutrisi hati",
 "Membantu menjaga asupan harian"
 ],
-ctaUrl:"/produk/hepatosol"
+ctaUrl:answer==="specific" ? "/produk/hepatosol-lola" : "/produk/hepatosol"
 };
 }
-
 
 
 if(condition==="pernapasan"){
@@ -191,7 +222,6 @@ ctaUrl:"/produk/pulmosol"
 }
 
 
-
 if(condition==="pencernaan"){
 return {
 product:"OLIGO",
@@ -206,6 +236,64 @@ ctaUrl:"/produk/oligo"
 };
 }
 
+
+if(condition==="anak"){
+return {
+product:"ENTRAKID",
+productSlug:"entrakid",
+image:"/images/products/assessment/entrakid.png",
+note:"Direkomendasikan untuk mendukung tumbuh kembang anak.",
+benefits:[
+"Mendukung tumbuh kembang",
+"Membantu memenuhi kebutuhan nutrisi anak"
+],
+ctaUrl:"/produk/entrakid"
+};
+}
+
+
+if(condition==="dewasa"){
+if(answer==="entrasoy"){
+return {
+product:"ENTRASOY",
+productSlug:"entrasoy",
+image:"/images/products/assessment/entrasoy.png",
+note:"Direkomendasikan sebagai alternatif nutrisi berbasis protein nabati.",
+benefits:[
+"Protein nabati",
+"Alternatif tanpa susu sapi"
+],
+ctaUrl:"/produk/entrasoy"
+};
+}
+
+if(answer==="peptisol"){
+return {
+product:"PEPTISOL",
+productSlug:"peptisol",
+image:"/images/products/assessment/peptisol.png",
+note:"Direkomendasikan untuk kebutuhan nutrisi masa pemulihan.",
+benefits:[
+"Mendukung pemulihan",
+"Membantu memenuhi kebutuhan protein"
+],
+ctaUrl:"/produk/peptisol"
+};
+}
+
+return {
+product:"ENTRAMIX",
+productSlug:"entramix",
+image:"/images/products/assessment/entramix.png",
+note:"Membantu memenuhi kebutuhan nutrisi harian.",
+benefits:[
+"Mendukung aktivitas harian",
+"Memenuhi kebutuhan nutrisi seimbang"
+],
+ctaUrl:"/produk/entramix"
+};
+
+}
 
 
 return {

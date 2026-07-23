@@ -17,6 +17,26 @@ export function AssessmentIcon({
     strokeLinejoin: "round" as const,
   };
 
+
+  if (name === "child") {
+    return (
+      <svg {...common}>
+        <circle cx="32" cy="22" r="10" />
+        <path d="M16 54c2-12 10-18 16-18s14 6 16 18" />
+        <path d="M20 48h24" />
+      </svg>
+    );
+  }
+
+  if (name === "user") {
+    return (
+      <svg {...common}>
+        <circle cx="32" cy="20" r="10" />
+        <path d="M14 54c3-12 11-18 18-18s15 6 18 18" />
+      </svg>
+    );
+  }
+
   if (name === "kidney") {
     return (
       <svg {...common}>
