@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageShell } from "@/components/shared/PageShell";
 
 export const metadata: Metadata = {
   title: "Kebijakan Privasi | Medikal Nutrience",
@@ -10,59 +11,61 @@ const sections = [
   {
     title: "Pendahuluan",
     content: `
-Kami adalah PT. Finusolprima Farma Internasional. Dalam rangka penyediaan layanan ini,
-Data Pribadi Anda akan dikendalikan oleh PT. Finusolprima Farma Internasional yang
-merupakan bagian dari Grup Kalbe dan bertindak sebagai Pengendali Data Pribadi.
+Kami adalah PT. Finusolprima Farma Internasional.
 
-Kebijakan Privasi ini menjelaskan informasi terkait pemrosesan Data Pribadi yang Kami
-lakukan mulai dari pemerolehan, pengumpulan, analisis, penyimpanan, perubahan,
-penghapusan, dan bentuk pengelolaan lainnya.
+Dalam penyediaan layanan ini, Data Pribadi Anda akan dikendalikan oleh PT. Finusolprima Farma Internasional yang merupakan bagian dari Grup Kalbe dan bertindak sebagai Pengendali Data Pribadi.
+
+Kebijakan Privasi ini menjelaskan informasi terkait pemrosesan Data Pribadi yang Kami lakukan mulai dari pemerolehan, pengumpulan, analisis, penyimpanan, perubahan, penghapusan, dan bentuk pengelolaan lainnya.
 `,
   },
   {
     title: "Dasar Pemrosesan Data Pribadi",
     content: `
-Kami melakukan pemrosesan Data Pribadi berdasarkan:
+Kami memproses Data Pribadi Anda berdasarkan:
+
 • Persetujuan (Consent)
 • Pemenuhan pelaksanaan perjanjian
 • Pemenuhan kewajiban hukum
-• Pemenuhan kepentingan yang sah (Legitimate Interest)
+• Kepentingan yang sah (Legitimate Interest)
 `,
   },
   {
     title: "Cara Kami Memperoleh Data Pribadi",
     content: `
-Data Pribadi dapat diperoleh dari:
-• Data yang diberikan langsung maupun tidak langsung oleh Anda.
-• Data yang terekam saat Anda menggunakan layanan Kami.
-• Data yang dikumpulkan oleh pihak ketiga sesuai peraturan yang berlaku.
+Data Pribadi Anda dapat diperoleh melalui:
+
+• Data yang diberikan langsung oleh Anda.
+• Data yang terekam saat menggunakan layanan Kami.
+• Data yang diperoleh melalui pihak ketiga sesuai peraturan yang berlaku.
 `,
   },
   {
-    title: "Tujuan Pemrosesan Data Pribadi",
+    title: "Tujuan Pemrosesan Data",
     content: `
-Data Pribadi Anda diproses untuk:
-• Menyediakan layanan dan memberikan pengalaman yang relevan.
-• Memahami kebutuhan pengguna dan memberikan rekomendasi personal.
-• Berkomunikasi terkait layanan dan informasi Grup Kalbe.
-• Aktivitas pemasaran dan analisis.
+Kami memproses Data Pribadi untuk:
+
+• Menyediakan layanan dan pengalaman pengguna.
+• Memberikan rekomendasi yang sesuai kebutuhan.
+• Berkomunikasi mengenai layanan dan informasi terkait.
+• Aktivitas analisis dan pemasaran.
 `,
   },
   {
     title: "Jenis Data Pribadi Yang Dikumpulkan",
     content: `
-Data yang dapat dikumpulkan meliputi:
-
 Data Umum:
+
 • Nama lengkap
 • Usia
 • Jenis kelamin
 • Nomor WhatsApp
 • Email
-• Data teknis seperti IP Address, cookies, dan ID perangkat
+• Data teknis seperti IP Address, Cookies, dan ID perangkat
+
 
 Data Spesifik:
-• Informasi terkait kesehatan
+
+• Informasi kesehatan
 • Kebutuhan atau kondisi kesehatan pengguna
 `,
   },
@@ -70,21 +73,20 @@ Data Spesifik:
     title: "Hak Subjek Data Pribadi",
     content: `
 Anda memiliki hak untuk:
-• Mendapatkan informasi mengenai pemrosesan Data Pribadi.
-• Memperbaiki data yang tidak akurat.
+
+• Mendapatkan informasi mengenai penggunaan data.
+• Memperbaiki data yang tidak sesuai.
 • Mendapatkan akses dan salinan data.
 • Meminta penghapusan data sesuai ketentuan.
-• Menarik persetujuan pemrosesan data.
+• Menarik kembali persetujuan pemrosesan data.
 `,
   },
   {
     title: "Keamanan Data Pribadi",
     content: `
-Kami menerapkan langkah keamanan fisik, elektronik, dan organisasi yang sesuai
-untuk menjaga Data Pribadi Anda.
+Kami menerapkan langkah keamanan fisik, elektronik, dan organisasi untuk menjaga keamanan Data Pribadi Anda.
 
-Kami juga memastikan pemrosesan oleh pihak ketiga dilakukan berdasarkan
-ketentuan dan tujuan yang telah ditetapkan.
+Pemrosesan data oleh pihak ketiga dilakukan berdasarkan perjanjian dan tujuan yang telah ditentukan.
 `,
   },
   {
@@ -104,36 +106,59 @@ Telp 021 – 5086 7667
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="bg-white">
+    <PageShell>
 
       <section className="
+        relative
+        overflow-hidden
         bg-gradient-to-br
         from-[#006b3f]
+        via-[#00894f]
         to-[#10b981]
         px-6
         py-24
         text-white
       ">
-        <div className="mx-auto max-w-5xl">
+
+        <div className="
+          absolute
+          right-0
+          top-0
+          h-96
+          w-96
+          rounded-full
+          bg-white/10
+          blur-3xl
+        "/>
+
+
+        <div className="
+          relative
+          mx-auto
+          max-w-7xl
+        ">
 
           <p className="
             text-xs
             font-black
-            tracking-[0.3em]
+            tracking-[0.35em]
             text-white/70
           ">
-            MEDIKAL NUTRIENCE
+            LEGAL & PRIVACY
           </p>
+
 
           <h1 className="
             mt-6
+            max-w-3xl
             text-5xl
             font-black
             leading-tight
-            md:text-6xl
+            md:text-7xl
           ">
             Kebijakan Privasi
           </h1>
+
 
           <p className="
             mt-6
@@ -142,62 +167,149 @@ export default function PrivacyPolicyPage() {
             leading-8
             text-white/80
           ">
-            Informasi mengenai pengelolaan, perlindungan,
-            dan penggunaan data pribadi pengguna Website Medikal Nutrience.
+            Komitmen Medikal Nutrience dalam menjaga keamanan,
+            transparansi, dan perlindungan data pribadi pengguna.
           </p>
 
         </div>
+
       </section>
+
 
 
       <section className="
         px-6
         py-20
       ">
+
         <div className="
           mx-auto
-          max-w-5xl
-          space-y-8
+          grid
+          max-w-7xl
+          gap-10
+          lg:grid-cols-[280px_1fr]
         ">
 
-        {sections.map((section)=>(
-          <article
-            key={section.title}
-            className="
-              rounded-[2rem]
-              border
-              border-slate-100
-              bg-white
-              p-8
-              shadow-sm
-              md:p-10
-            "
-          >
 
-            <h2 className="
-              text-2xl
-              font-black
-              text-[#006b3f]
-            ">
-              {section.title}
-            </h2>
+          <aside className="
+            hidden
+            h-fit
+            rounded-[2rem]
+            bg-white
+            p-6
+            shadow-sm
+            lg:block
+            lg:sticky
+            lg:top-28
+          ">
 
             <p className="
-              mt-5
-              whitespace-pre-line
-              text-sm
-              leading-8
-              text-slate-600
+              text-xs
+              font-black
+              tracking-widest
+              text-[#006b3f]
             ">
-              {section.content}
+              DAFTAR ISI
             </p>
 
-          </article>
-        ))}
+
+            <div className="mt-6 space-y-3">
+
+            {sections.map((item,index)=>(
+              <div
+                key={item.title}
+                className="
+                  text-sm
+                  font-bold
+                  text-slate-500
+                "
+              >
+                {index + 1}. {item.title}
+              </div>
+            ))}
+
+            </div>
+
+          </aside>
+
+
+
+          <div className="space-y-6">
+
+          {sections.map((section,index)=>(
+
+            <article
+              key={section.title}
+              className="
+                rounded-[2rem]
+                border
+                border-slate-100
+                bg-white
+                p-8
+                shadow-sm
+                transition
+                hover:shadow-md
+                md:p-10
+              "
+            >
+
+              <div className="
+                flex
+                items-start
+                gap-5
+              ">
+
+                <div className="
+                  flex
+                  h-12
+                  w-12
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-2xl
+                  bg-[#e5f7ee]
+                  font-black
+                  text-[#006b3f]
+                ">
+                  {index + 1}
+                </div>
+
+
+                <div>
+
+                <h2 className="
+                  text-2xl
+                  font-black
+                  text-[#111827]
+                ">
+                  {section.title}
+                </h2>
+
+
+                <p className="
+                  mt-5
+                  whitespace-pre-line
+                  text-sm
+                  leading-8
+                  text-slate-600
+                ">
+                  {section.content}
+                </p>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          ))}
+
+          </div>
 
         </div>
+
       </section>
 
-    </main>
+    </PageShell>
   );
 }
