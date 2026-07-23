@@ -85,8 +85,13 @@ export function Footer() {
           </p>
 
           <div className="flex gap-6">
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
+            <a href="#">
+              Terms of Service
+            </a>
+
+            <a href="/kebijakan-privasi">
+              Privacy Policy
+            </a>
           </div>
         </div>
       </footer>
