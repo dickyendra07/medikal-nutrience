@@ -10,6 +10,14 @@ export type Article = {
   popular?: boolean;
   tags: string[];
   relatedProducts?: string[];
+  author: string;
+  keyPoints: string[];
+  content: {
+    heading: string;
+    paragraphs: string[];
+  }[];
+  seoTitle: string;
+  seoDescription: string;
 };
 
 export const articleCategories = [
@@ -45,6 +53,32 @@ export const articles: Article[] = [
     relatedProducts: [
       "Peptisol",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Protein membantu memenuhi kebutuhan tubuh selama proses pemulihan.",
+      "Kebutuhan nutrisi dapat berbeda berdasarkan kondisi kesehatan.",
+      "Pemilihan nutrisi sebaiknya disesuaikan dengan kebutuhan individu.",
+    ],
+    content: [
+      {
+        heading: "Mengapa protein penting saat masa pemulihan?",
+        paragraphs: [
+          "Setelah sakit atau menjalani tindakan medis, tubuh membutuhkan dukungan nutrisi yang cukup untuk membantu proses pemulihan.",
+          "Protein menjadi salah satu nutrisi penting karena berperan dalam membantu memenuhi kebutuhan tubuh selama fase pemulihan.",
+        ],
+      },
+      {
+        heading: "Bagaimana memilih dukungan nutrisi yang tepat?",
+        paragraphs: [
+          "Setiap kondisi kesehatan memiliki kebutuhan yang berbeda. Karena itu, pendekatan nutrisi perlu disesuaikan dengan kondisi dan kebutuhan tubuh.",
+          "Konsultasi dengan tenaga kesehatan dapat membantu menentukan pilihan yang lebih sesuai.",
+        ],
+      },
+    ],
+    seoTitle:
+      "Pentingnya Protein Saat Masa Pemulihan Setelah Sakit atau Operasi | Medikal Nutrience",
+    seoDescription:
+      "Pelajari pentingnya protein dan dukungan nutrisi saat masa pemulihan setelah sakit atau operasi.",
   },
 
   {
@@ -67,6 +101,24 @@ export const articles: Article[] = [
     relatedProducts: [
       "Nephrisol",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Kebutuhan nutrisi pasien ginjal dapat berbeda pada setiap tahap kondisi.",
+      "Pemilihan nutrisi perlu mempertimbangkan kebutuhan tubuh.",
+      "Informasi nutrisi membantu pasien memahami pilihan yang tersedia.",
+    ],
+    content: [
+      {
+        heading: "Mengapa nutrisi penting pada kondisi ginjal?",
+        paragraphs: [
+          "Kondisi ginjal membutuhkan perhatian khusus terhadap asupan nutrisi.",
+          "Pendekatan nutrisi yang tepat dapat membantu memenuhi kebutuhan tubuh sesuai kondisi kesehatan.",
+        ],
+      },
+    ],
+    seoTitle: "Memahami Kebutuhan Nutrisi Pasien Ginjal | Medikal Nutrience",
+    seoDescription:
+      "Informasi mengenai kebutuhan nutrisi untuk pasien dengan gangguan ginjal.",
   },
 
   {
@@ -84,6 +136,24 @@ export const articles: Article[] = [
       "nutrisi",
       "kesehatan",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Setiap orang memiliki kebutuhan nutrisi yang berbeda.",
+      "Kondisi tubuh menjadi pertimbangan penting dalam memilih nutrisi.",
+      "Informasi yang tepat membantu menentukan pilihan lebih baik.",
+    ],
+    content: [
+      {
+        heading: "Memahami kebutuhan nutrisi tubuh",
+        paragraphs: [
+          "Kebutuhan nutrisi dapat berbeda berdasarkan usia, aktivitas, dan kondisi kesehatan.",
+          "Memahami kebutuhan tubuh menjadi langkah awal untuk memilih dukungan nutrisi yang sesuai.",
+        ],
+      },
+    ],
+    seoTitle: "Cara Memilih Nutrisi Sesuai Kondisi Tubuh | Medikal Nutrience",
+    seoDescription:
+      "Pelajari cara memilih nutrisi sesuai kebutuhan dan kondisi tubuh.",
   },
 
   {
@@ -102,6 +172,24 @@ export const articles: Article[] = [
       "nutrisi",
       "healthy aging",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Kebutuhan nutrisi dapat berubah seiring bertambahnya usia.",
+      "Asupan protein dan energi menjadi bagian penting dalam menjaga aktivitas.",
+      "Pola makan seimbang membantu mendukung kualitas hidup lansia.",
+    ],
+    content: [
+      {
+        heading: "Mengapa nutrisi penting untuk lansia?",
+        paragraphs: [
+          "Pada usia lanjut, tubuh mengalami berbagai perubahan yang dapat memengaruhi kebutuhan nutrisi.",
+          "Pemenuhan nutrisi yang baik membantu mendukung aktivitas harian dan kesehatan secara keseluruhan.",
+        ],
+      },
+    ],
+    seoTitle: "Nutrisi untuk Lansia Agar Tetap Aktif dan Sehat | Medikal Nutrience",
+    seoDescription:
+      "Panduan nutrisi untuk membantu lansia tetap aktif dan memenuhi kebutuhan tubuh.",
   },
 
   {
@@ -123,6 +211,24 @@ export const articles: Article[] = [
     relatedProducts: [
       "Entrakid",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Picky eater dapat memengaruhi asupan nutrisi anak.",
+      "Orang tua dapat membantu membangun kebiasaan makan sehat.",
+      "Nutrisi seimbang mendukung tumbuh kembang anak.",
+    ],
+    content: [
+      {
+        heading: "Menghadapi anak susah makan",
+        paragraphs: [
+          "Anak yang sulit makan menjadi tantangan yang sering dialami orang tua.",
+          "Pendekatan yang tepat dapat membantu anak mendapatkan asupan nutrisi yang dibutuhkan.",
+        ],
+      },
+    ],
+    seoTitle: "Mengatasi Anak Susah Makan dan Kebutuhan Nutrisinya | Medikal Nutrience",
+    seoDescription:
+      "Tips membantu anak susah makan dan memenuhi kebutuhan nutrisi untuk tumbuh kembang.",
   },
 
   {
@@ -144,6 +250,24 @@ export const articles: Article[] = [
     relatedProducts: [
       "Hepatosol",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Kondisi hati membutuhkan perhatian terhadap pemenuhan nutrisi.",
+      "Pendekatan nutrisi perlu disesuaikan dengan kebutuhan tubuh.",
+      "Informasi terpercaya membantu memahami pilihan nutrisi.",
+    ],
+    content: [
+      {
+        heading: "Dukungan nutrisi untuk kondisi hati",
+        paragraphs: [
+          "Hati memiliki peran penting dalam berbagai proses tubuh sehingga kebutuhan nutrisinya perlu diperhatikan.",
+          "Pemilihan nutrisi yang sesuai dapat menjadi bagian dari dukungan kesehatan secara menyeluruh.",
+        ],
+      },
+    ],
+    seoTitle: "Dukungan Nutrisi untuk Kondisi Hati | Medikal Nutrience",
+    seoDescription:
+      "Informasi mengenai dukungan nutrisi untuk kondisi hati dan liver.",
   },
 
   {
@@ -165,6 +289,32 @@ export const articles: Article[] = [
     relatedProducts: [
       "Peptisol",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Protein membantu memenuhi kebutuhan tubuh selama proses pemulihan.",
+      "Kebutuhan nutrisi dapat berbeda berdasarkan kondisi kesehatan.",
+      "Pemilihan nutrisi sebaiknya disesuaikan dengan kebutuhan individu.",
+    ],
+    content: [
+      {
+        heading: "Mengapa protein penting saat masa pemulihan?",
+        paragraphs: [
+          "Setelah sakit atau menjalani tindakan medis, tubuh membutuhkan dukungan nutrisi yang cukup untuk membantu proses pemulihan.",
+          "Protein menjadi salah satu nutrisi penting karena berperan dalam membantu memenuhi kebutuhan tubuh selama fase pemulihan.",
+        ],
+      },
+      {
+        heading: "Bagaimana memilih dukungan nutrisi yang tepat?",
+        paragraphs: [
+          "Setiap kondisi kesehatan memiliki kebutuhan yang berbeda. Karena itu, pendekatan nutrisi perlu disesuaikan dengan kondisi dan kebutuhan tubuh.",
+          "Konsultasi dengan tenaga kesehatan dapat membantu menentukan pilihan yang lebih sesuai.",
+        ],
+      },
+    ],
+    seoTitle:
+      "Pentingnya Protein Saat Masa Pemulihan Setelah Sakit atau Operasi | Medikal Nutrience",
+    seoDescription:
+      "Pelajari pentingnya protein dan dukungan nutrisi saat masa pemulihan setelah sakit atau operasi.",
   },
 
   {
@@ -182,6 +332,32 @@ export const articles: Article[] = [
       "healthy lifestyle",
       "nutrisi",
     ],
+    author: "Medikal Nutrience",
+    keyPoints: [
+      "Pola makan seimbang membantu memenuhi kebutuhan nutrisi harian.",
+      "Variasi makanan menjadi bagian penting dari gaya hidup sehat.",
+      "Kebiasaan kecil yang konsisten dapat mendukung kesehatan jangka panjang.",
+    ],
+    content: [
+      {
+        heading: "Apa itu pola makan seimbang?",
+        paragraphs: [
+          "Pola makan seimbang adalah kebiasaan mengonsumsi berbagai jenis makanan dengan jumlah yang sesuai kebutuhan tubuh.",
+          "Kombinasi nutrisi yang tepat membantu tubuh mendapatkan energi dan zat gizi yang diperlukan.",
+        ],
+      },
+      {
+        heading: "Membangun kebiasaan sehat setiap hari",
+        paragraphs: [
+          "Memulai dari perubahan sederhana seperti memilih makanan bernutrisi dan menjaga pola makan teratur dapat memberikan dampak positif.",
+          "Kebutuhan setiap individu dapat berbeda sehingga penting memahami kondisi tubuh masing-masing.",
+        ],
+      },
+    ],
+    seoTitle:
+      "Tips Menjaga Pola Makan Seimbang untuk Kesehatan Harian | Medikal Nutrience",
+    seoDescription:
+      "Pelajari tips menjaga pola makan seimbang untuk membantu memenuhi kebutuhan nutrisi harian.",
   },
 ];
 
