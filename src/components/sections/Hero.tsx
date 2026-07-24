@@ -63,7 +63,6 @@ function CountUpStat({ value }: { value: string }) {
 
 export function Hero() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
-  const [selectedAssessmentFlow, setSelectedAssessmentFlow] = useState("recovery");
 
   return (
     <>
@@ -84,35 +83,23 @@ export function Hero() {
               Nutrience.
             </p>
 
-            <div className="mt-9 max-w-2xl rounded-[2rem] bg-white p-4 shadow-2xl shadow-green-900/10 ring-1 ring-black/5">
-              <label className="mb-3 block text-sm font-black text-[#006b3f]">
-                Kondisi kesehatan Anda hari ini?
-              </label>
+            <div className="mt-9 max-w-2xl rounded-[2rem] bg-white p-6 shadow-2xl shadow-green-900/10 ring-1 ring-black/5">
+              <p className="text-sm font-black text-[#006b3f]">
+                Temukan Nutrisi Yang Tepat Untuk Anda
+              </p>
 
-              <div className="grid gap-3 md:grid-cols-[1fr_auto]">
-                <select
-                  value={selectedAssessmentFlow}
-                  onChange={(event) => setSelectedAssessmentFlow(event.target.value)}
-                  className="w-full rounded-full border border-black/10 bg-[#f8fafc] px-5 py-4 text-sm font-semibold text-[#334155] outline-none focus:border-[#006b3f]"
-                >
-                  <option value="recovery">Recovery Saat Operasi</option>
-                  <option value="ginjal">Ginjal</option>
-                  <option value="hati">Hati / Liver</option>
-                  <option value="stroke-alzheimer">Stroke / Alzheimer</option>
-                  <option value="pernapasan">Pernapasan</option>
-                  <option value="pencernaan">Pencernaan</option>
-                  <option value="anak">Anak / Tumbuh Kembang</option>
-                  <option value="daya-tahan">Jaga Kesehatan & Daya Tahan Tubuh</option>
-                </select>
+              <p className="mt-3 text-sm leading-7 text-[#64748b]">
+                Jawab beberapa pertanyaan dan dapatkan rekomendasi nutrisi
+                yang sesuai dengan kebutuhan Anda.
+              </p>
 
-                <button
-                  type="button"
-                  onClick={() => setIsAssessmentOpen(true)}
-                  className="rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white shadow-lg shadow-green-900/20 transition hover:-translate-y-1 hover:bg-[#005432]"
-                >
-                  Temukan Rekomendasi
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsAssessmentOpen(true)}
+                className="mt-5 rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white shadow-lg shadow-green-900/20 transition hover:-translate-y-1 hover:bg-[#005432]"
+              >
+                Mulai Assessment →
+              </button>
             </div>
 
             <div className="mt-8 grid max-w-2xl grid-cols-3 gap-4">
@@ -167,7 +154,7 @@ export function Hero() {
       <AssessmentModal
         isOpen={isAssessmentOpen}
         onClose={() => setIsAssessmentOpen(false)}
-        initialFlowKey={selectedAssessmentFlow}
+        initialFlowKey="recovery"
       />
     </>
   );
