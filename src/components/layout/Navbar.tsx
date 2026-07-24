@@ -43,7 +43,6 @@ const megaMenus = {
       { label: "Pernafasan", href: "/solusi/pernafasan", desc: "PPOK, asma, pneumonia, TB" },
       { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan saluran cerna" },
       { label: "Pemulihan", href: "/solusi/pemulihan", desc: "Recovery dan nutrisi protein" },
-      { label: "Anak", href: "/solusi/anak", desc: "Tumbuh kembang anak" },
     ],
   },
   event: {
