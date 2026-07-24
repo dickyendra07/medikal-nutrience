@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ArticleProductRecommendation } from "@/components/pages/articles/ArticleProductRecommendation";
 import { articles, type Article } from "@/data/articles";
 
 export function ArticleDetailPage({
@@ -7,37 +8,33 @@ export function ArticleDetailPage({
 }: {
   article: Article;
 }) {
+
   const relatedArticles = articles
     .filter((item) => item.slug !== article.slug)
     .map((item) => {
 
       const sameCategory =
-        item.category === article.category
-          ? 5
-          : 0;
-
+        item.category === article.category ? 5 : 0;
 
       const sharedTags =
         item.tags.filter((tag) =>
           article.tags.includes(tag)
         ).length * 3;
 
-
       const sharedProducts =
-        (item.relatedProducts ?? []).filter((product) =>
+        item.relatedProducts?.filter((product) =>
           article.relatedProducts?.includes(product)
-        ).length * 4;
+        ).length
+        ? 4
+        : 0;
 
 
       const popularityBonus =
-        item.popular
-          ? 1
-          : 0;
+        item.popular ? 1 : 0;
 
 
       return {
         article: item,
-
         score:
           sameCategory +
           sharedTags +
@@ -54,6 +51,7 @@ export function ArticleDetailPage({
     )
     .slice(0, 3);
 
+
   return (
     <>
       <Navbar />
@@ -65,31 +63,33 @@ export function ArticleDetailPage({
           <div className="absolute left-[-180px] top-[-180px] h-[420px] w-[420px] rounded-full bg-[#d9f3e8]" />
           <div className="absolute right-[-150px] top-20 h-[420px] w-[420px] rounded-full bg-[#c6f1df]" />
 
+
           <div className="relative mx-auto max-w-[1280px]">
+
 
             <div className="max-w-5xl reveal-left">
 
-              <nav
-                aria-label="Breadcrumb"
-                className="mb-8 flex flex-wrap items-center gap-2 text-sm font-bold text-[#64748b]"
-              >
-                <a
-                  href="/"
-                  className="transition hover:text-[#006b3f]"
-                >
-                  Home
-                </a>
+              <nav className="
+              mb-8
+              flex
+              flex-wrap
+              items-center
+              gap-2
+              text-sm
+              font-bold
+              text-[#64748b]
+              ">
+                <span>
+                  Beranda
+                </span>
 
                 <span>
                   →
                 </span>
 
-                <a
-                  href="/artikel"
-                  className="transition hover:text-[#006b3f]"
-                >
+                <span>
                   Artikel
-                </a>
+                </span>
 
                 <span>
                   →
@@ -98,6 +98,7 @@ export function ArticleDetailPage({
                 <span className="text-[#006b3f]">
                   {article.category}
                 </span>
+
               </nav>
 
 
@@ -154,6 +155,7 @@ export function ArticleDetailPage({
                         key={item}
                         className="flex gap-3 text-sm font-bold leading-7 text-[#334155]"
                       >
+
                         <span className="text-[#006b3f]">
                           ✓
                         </span>
@@ -168,11 +170,19 @@ export function ArticleDetailPage({
                 </div>
 
 
+                {article.relatedProducts?.length ? (
+                  <ArticleProductRecommendation
+                    products={article.relatedProducts}
+                  />
+                ) : null}
+
+
 
                 <div className="mt-12 space-y-12">
 
 
                   {article.content.map((section)=>(
+
                     <section key={section.heading}>
 
                       <h2 className="text-2xl font-black leading-tight text-[#111827] md:text-3xl">
@@ -183,31 +193,19 @@ export function ArticleDetailPage({
                       <div className="mt-5 space-y-5 text-base leading-8 text-[#475569]">
 
                         {section.paragraphs.map((paragraph)=>(
+
                           <p key={paragraph}>
                             {paragraph}
                           </p>
+
                         ))}
 
                       </div>
 
                     </section>
+
                   ))}
 
-
-                </div>
-
-
-
-                <div className="mt-12 rounded-[2rem] bg-[#eefaf4] p-7">
-
-                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">
-                    Catatan Medikal Nutrience
-                  </p>
-
-                  <p className="mt-4 text-sm leading-7 text-[#475569]">
-                    Informasi dalam artikel ini bersifat edukasi dan tidak
-                    menggantikan konsultasi langsung dengan tenaga kesehatan.
-                  </p>
 
                 </div>
 
@@ -216,92 +214,29 @@ export function ArticleDetailPage({
 
 
 
-              <aside className="space-y-5 lg:sticky lg:top-28 lg:h-fit">
+              <aside className="sticky top-28 h-fit rounded-[2rem] bg-gradient-to-br from-[#006b3f] via-[#087a4c] to-[#10b981] p-7 text-white shadow-xl">
+
+                <p className="text-xs font-black uppercase tracking-[0.25em] text-white/70">
+                  Butuh Bantuan?
+                </p>
 
 
-                <div className="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-black/5">
-
-                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">
-                    Topik Artikel
-                  </p>
+                <h3 className="mt-5 text-3xl font-black leading-tight">
+                  Konsultasikan kebutuhan nutrisi Anda
+                </h3>
 
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-
-                    {article.tags.map((tag)=>(
-                      <span
-                        key={tag}
-                        className="rounded-full bg-[#e7f7ef] px-4 py-2 text-xs font-black text-[#006b3f]"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-
-                  </div>
-
-                </div>
+                <p className="mt-5 text-sm leading-7 text-white/80">
+                  Dapatkan arahan awal untuk menemukan pilihan nutrisi yang sesuai.
+                </p>
 
 
-
-                {article.relatedProducts?.length ? (
-
-                  <div className="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-black/5">
-
-                    <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">
-                      Rekomendasi Produk
-                    </p>
-
-
-                    <div className="mt-5 space-y-3">
-
-                      {article.relatedProducts.map((product)=>(
-                        <a
-                          key={product}
-                          href="/produk"
-                          className="block rounded-2xl bg-[#f4fbf8] p-4 text-sm font-black text-[#111827] transition hover:bg-[#e7f7ef]"
-                        >
-                          {product}
-                          <span className="ml-2 text-[#006b3f]">
-                            →
-                          </span>
-                        </a>
-                      ))}
-
-                    </div>
-
-                  </div>
-
-                ) : null}
-
-
-
-                <div className="rounded-[2rem] bg-gradient-to-br from-[#006b3f] via-[#087a4c] to-[#10b981] p-7 text-white shadow-xl">
-
-                  <p className="text-xs font-black uppercase tracking-[0.25em] text-white/70">
-                    Butuh Bantuan?
-                  </p>
-
-
-                  <h3 className="mt-5 text-3xl font-black leading-tight">
-                    Konsultasikan kebutuhan nutrisi Anda
-                  </h3>
-
-
-                  <p className="mt-5 text-sm leading-7 text-white/80">
-                    Dapatkan arahan awal untuk menemukan pilihan nutrisi yang sesuai.
-                  </p>
-
-
-                  <a
-                    href="/kontak"
-                    className="mt-7 inline-flex rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f]"
-                  >
-                    Konsultasi Sekarang →
-                  </a>
-
-
-                </div>
-
+                <a
+                  href="/kontak"
+                  className="mt-7 inline-flex rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f]"
+                >
+                  Konsultasi Sekarang →
+                </a>
 
               </aside>
 
@@ -311,40 +246,38 @@ export function ArticleDetailPage({
 
           </div>
 
+
         </section>
 
 
 
         {relatedArticles.length ? (
 
-          <section className="px-5 pb-20 lg:px-10">
+          <section className="px-5 pb-24 lg:px-10">
 
             <div className="mx-auto max-w-[1280px]">
 
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#006b3f]">
-                Related Reading
-              </p>
-
-
-              <h2 className="mt-4 text-4xl font-black text-[#111827]">
+              <h2 className="text-4xl font-black text-[#111827]">
                 Artikel Terkait
               </h2>
 
 
-              <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <div className="mt-10 grid gap-8 md:grid-cols-3">
 
                 {relatedArticles.map((item)=>(
+
                   <a
                     key={item.slug}
                     href={`/artikel/${item.slug}`}
-                    className="overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-2"
+                    className="overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-black/5"
                   >
 
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="h-52 w-full object-cover"
+                      className="h-56 w-full object-cover"
                     />
+
 
                     <div className="p-6">
 
@@ -353,13 +286,14 @@ export function ArticleDetailPage({
                       </p>
 
 
-                      <h3 className="mt-3 text-xl font-black leading-tight text-[#111827]">
+                      <h3 className="mt-4 text-xl font-black leading-tight text-[#111827]">
                         {item.title}
                       </h3>
 
                     </div>
 
                   </a>
+
                 ))}
 
               </div>
@@ -371,9 +305,12 @@ export function ArticleDetailPage({
         ) : null}
 
 
+
       </main>
 
+
       <Footer />
+
     </>
   );
 }
