@@ -9,17 +9,49 @@ export function ArticleDetailPage({
 }) {
   const relatedArticles = articles
     .filter((item) => item.slug !== article.slug)
-    .sort((a, b) => {
-      const aScore =
-        (a.category === article.category ? 2 : 0) +
-        a.tags.filter((tag) => article.tags.includes(tag)).length;
+    .map((item) => {
 
-      const bScore =
-        (b.category === article.category ? 2 : 0) +
-        b.tags.filter((tag) => article.tags.includes(tag)).length;
+      const sameCategory =
+        item.category === article.category
+          ? 5
+          : 0;
 
-      return bScore - aScore;
+
+      const sharedTags =
+        item.tags.filter((tag) =>
+          article.tags.includes(tag)
+        ).length * 3;
+
+
+      const sharedProducts =
+        (item.relatedProducts ?? []).filter((product) =>
+          article.relatedProducts?.includes(product)
+        ).length * 4;
+
+
+      const popularityBonus =
+        item.popular
+          ? 1
+          : 0;
+
+
+      return {
+        article: item,
+
+        score:
+          sameCategory +
+          sharedTags +
+          sharedProducts +
+          popularityBonus,
+      };
+
     })
+    .sort((a, b) =>
+      b.score - a.score
+    )
+    .map((item) =>
+      item.article
+    )
     .slice(0, 3);
 
   return (
@@ -36,6 +68,38 @@ export function ArticleDetailPage({
           <div className="relative mx-auto max-w-[1280px]">
 
             <div className="max-w-5xl reveal-left">
+
+              <nav
+                aria-label="Breadcrumb"
+                className="mb-8 flex flex-wrap items-center gap-2 text-sm font-bold text-[#64748b]"
+              >
+                <a
+                  href="/"
+                  className="transition hover:text-[#006b3f]"
+                >
+                  Home
+                </a>
+
+                <span>
+                  →
+                </span>
+
+                <a
+                  href="/artikel"
+                  className="transition hover:text-[#006b3f]"
+                >
+                  Artikel
+                </a>
+
+                <span>
+                  →
+                </span>
+
+                <span className="text-[#006b3f]">
+                  {article.category}
+                </span>
+              </nav>
+
 
               <p className="inline-flex rounded-full bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.3em] text-[#006b3f] shadow-lg ring-1 ring-black/5">
                 {article.category}
