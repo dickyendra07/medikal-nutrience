@@ -85,6 +85,11 @@ const megaMenus = {
         desc: "Edukasi dan inspirasi nutrisi",
       },
       {
+        label: "Artikel",
+        href: "/artikel",
+        desc: "Informasi nutrisi dan edukasi kesehatan",
+      },
+      {
         label: "Kisah Sukses Pasien",
         href: "/support-system/kisah-sukses-pasien",
         desc: "Cerita dan pengalaman pasien",
