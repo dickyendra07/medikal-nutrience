@@ -25,11 +25,11 @@ const megaMenus = {
       { label: "Entramix", href: "/produk/entramix", desc: "Nutrisi lengkap harian" },
       { label: "Entrasoy", href: "/produk/entrasoy", desc: "Nutrisi berbasis soya" },
       { label: "Peptisol", href: "/produk/peptisol", desc: "Nutrisi tinggi protein" },
-      { label: "Peptibren", href: "/produk/peptibren", desc: "Dukungan nutrisi stroke & Alzheimer" },
+      { label: "Peptibren", href: "/produk/peptibren", desc: "Nutrisi Kesehatan Syaraf" },
       { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal" },
       { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati" },
-      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Dukungan nutrisi pernafasan" },
-      { label: "Oligo", href: "/produk/oligo", desc: "Nutrisi saluran cerna" },
+      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Nutrisi Kesehatan Pernapasan" },
+      { label: "Oligo", href: "/produk/oligo", desc: "Nutrisi Cepat Serap" },
     ],
   },
   solusi: {
@@ -38,10 +38,15 @@ const megaMenus = {
     description:
       "Temukan rekomendasi nutrisi berdasarkan kebutuhan tubuh dan kondisi kesehatan.",
     items: [
-      { label: "Ginjal", href: "/solusi/ginjal", desc: "Pra-dialisis dan dialisis" },
+      { label: "Ginjal", href: "/solusi/ginjal", desc: "Dukungan Nutrisi Ginjal" },
       { label: "Hati / Liver", href: "/solusi/hati-liver", desc: "Dukungan fungsi hati" },
-      { label: "Pernafasan", href: "/solusi/pernafasan", desc: "PPOK, asma, pneumonia, TB" },
-      { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan saluran cerna" },
+      { label: "Pernapasan", href: "/solusi/pernafasan", desc: "Dukungan Nutrisi Pernapasan" },
+      { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan Cepat Serap" },
+      {
+        label: "Otak",
+        href: "/produk/peptibren",
+        desc: "Dukungan Nutrisi Kesehatan Syaraf",
+      },
       { label: "Pemulihan", href: "/solusi/pemulihan", desc: "Recovery dan nutrisi protein" },
     ],
   },
@@ -77,10 +82,10 @@ const megaMenus = {
       {
         label: "Kalkulator Status Gizi",
         href: "/support-system/kalkulator-status-gizi",
-        desc: "Cek IMT dan kebutuhan kalori",
+        desc: "Cek BMI/IMT",
       },
       {
-        label: "Dapur Sehat FIMA",
+        label: "Dapur Sehat Mednut",
         href: "/support-system/dapur-sehat-fima",
         desc: "Edukasi dan inspirasi nutrisi",
       },
@@ -98,11 +103,6 @@ const megaMenus = {
         label: "Komunitas Sehat",
         href: "/support-system/komunitas-sehat",
         desc: "Program komunitas dan edukasi",
-      },
-      {
-        label: "Apotek",
-        href: "/apotek-resmi",
-        desc: "Temukan official pharmacy",
       },
     ],
   },
