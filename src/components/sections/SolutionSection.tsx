@@ -2,13 +2,28 @@
 
 import { useState } from "react";
 
-const solutions = [
+type Solution = {
+  key: string;
+  tab: string;
+  icon: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: string;
+  accent: string;
+  buttonTextColor?: string;
+  href: string;
+  primaryButton: string;
+  secondaryButton?: string;
+};
+
+const solutions: Solution[] = [
   {
     key: "ginjal",
     tab: "Ginjal",
     icon: "kidney",
     eyebrow: "Solusi Ginjal",
-    title: "Nephrisol : Perlindungan Ginjal Dimulai dari Nutrisi yang Tepat",
+    title: "Solusi Perlindungan Ginjal Dimulai dari Nutrisi yang Tepat",
     description:
       "Kebutuhan nutrisi Anda berbeda tergantung pada tahapan kondisi ginjal. Kami menyediakan formula presisi untuk tahap Pra-Dialisis dan Dialisis.",
     image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
@@ -22,13 +37,14 @@ const solutions = [
     tab: "Hati / Liver",
     icon: "liver",
     eyebrow: "Solusi Hati / Liver",
-    title: "Hepatosol : Dukungan Nutrisi untuk Gangguan Fungsi Hati",
+    title: "Dukungan Nutrisi untuk Gangguan Fungsi Hati",
     description:
       "Dukung kebutuhan nutrisi pada kondisi hati kronik maupun kondisi hati yang membutuhkan perhatian lebih intensif dengan formula yang sesuai.",
-    image: "/images/mednut/products/page-assets/hepatosol.png",
+    image:
+      "/images/client-assets/img/img home/HATI LIVER - HEPATOSOL.png",
     accent: "#ef1f2d",
     href: "/solusi/hati-liver",
-    primaryButton: "Hati Kronik",
+    primaryButton: "Hati Ringan Moderat",
     secondaryButton: "Hati Berat",
   },
   {
@@ -36,42 +52,40 @@ const solutions = [
     tab: "Syaraf & Otak",
     icon: "brain",
     eyebrow: "Solusi Syaraf & Otak",
-    title: "Peptibren : Dukungan Nutrisi untuk Stroke dan Alzheimer",
+    title: "Peptibren: Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
     description:
-      "Dukungan nutrisi untuk kondisi dengan tantangan asupan makan, kesulitan menelan, atau kebutuhan makanan lembut dan cair.",
+      "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
     image: "/images/mednut/products/page-assets/peptibren.jpeg",
-    accent: "#2563eb",
+    accent: "#f2b705",
+    buttonTextColor: "#3f3100",
     href: "/produk/peptibren",
     primaryButton: "Lihat Produk",
-    secondaryButton: "Lihat Produk",
   },
   {
     key: "pernafasan",
-    tab: "Pernafasan",
+    tab: "Pernapasan",
     icon: "lungs",
-    eyebrow: "Solusi Pernafasan",
-    title: "Pulmosol : Solusi Nutrisi untuk Masalah Pernafasan",
+    eyebrow: "Solusi Pernapasan",
+    title: "Pulmosol: Solusi Nutrisi untuk Kesehatan Pernapasan",
     description:
-      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
+      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
     image: "/images/mednut/products/page-assets/pulmosol.jpeg",
     accent: "#1e3a8a",
     href: "/produk/pulmosol",
     primaryButton: "Lihat Produk",
-    secondaryButton: "Lihat Produk",
   },
   {
     key: "pencernaan",
     tab: "Pencernaan",
     icon: "digestive",
     eyebrow: "Solusi Pencernaan",
-    title: "Oligo : Nutrisi Cepat Serap untuk Sistem Saluran Cerna",
+    title: "Oligo: Nutrisi Cepat Serap untuk Pemulihan yang Lebih Optimal",
     description:
-      "Oligo merupakan nutrisi oligomerik dengan protein terhidrolisa parsial untuk membantu memenuhi kebutuhan nutrisi pada kondisi saluran cerna tertentu.",
+      "Nutrisi dengan protein dan lemak yang lebih cepat diserap tubuh untuk memelihara kesehatan saluran cerna.",
     image: "/images/mednut/products/page-assets/oligo.jpeg",
     accent: "#d85b70",
     href: "/produk/oligo",
     primaryButton: "Lihat Produk",
-    secondaryButton: "Lihat Produk",
   },
 ];
 
@@ -80,6 +94,9 @@ export function SolutionSection() {
 
   const activeSolution =
     solutions.find((solution) => solution.key === activeKey) ?? solutions[0];
+
+  const activeButtonTextColor =
+    activeSolution.buttonTextColor ?? "#ffffff";
 
   return (
     <section className="bg-[#effaf5] px-5 py-12 md:py-24 lg:px-10">
@@ -120,7 +137,7 @@ export function SolutionSection() {
                   </span>
 
                   {isActive ? (
-                    <span className="absolute -bottom-5 left-8 hidden h-0 w-0 border-l-[16px] border-r-[16px] border-t-[22px] border-l-transparent border-r-transparent border-t-[#006b3f] md:block md:left-1/2 md:-translate-x-1/2" />
+                    <span className="absolute -bottom-5 left-8 hidden h-0 w-0 border-l-[16px] border-r-[16px] border-t-[22px] border-l-transparent border-r-transparent border-t-[#006b3f] md:left-1/2 md:block md:-translate-x-1/2" />
                   ) : null}
                 </button>
 
@@ -128,45 +145,62 @@ export function SolutionSection() {
                   <div className="border-t border-white/10 bg-white px-4 py-5 text-[#0f172a] md:hidden">
                     <div className="overflow-hidden rounded-[1.4rem] bg-[#f4fbf8]">
                       <img
-                        src={solution.image}
-                        alt={solution.title}
+                        src={activeSolution.image}
+                        alt={activeSolution.title}
                         className="aspect-[1.28/1] w-full object-cover"
                       />
                     </div>
 
-                    <p className="mt-5 text-[10px] font-black uppercase tracking-[0.25em] text-[#006b3f]">
-                      {solution.eyebrow}
+                    <p
+                      className="mt-5 text-[10px] font-black uppercase tracking-[0.25em]"
+                      style={{ color: activeSolution.accent }}
+                    >
+                      {activeSolution.eyebrow}
                     </p>
 
                     <h3
                       className="mt-3 text-2xl font-black leading-tight"
-                      style={{ color: solution.accent }}
+                      style={{ color: activeSolution.accent }}
                     >
-                      {solution.title}
+                      {activeSolution.title}
                     </h3>
 
                     <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
-                      {solution.description}
+                      {activeSolution.description}
                     </p>
 
-                    <div className="mt-5 grid gap-3">
+                    <div
+                      className={`mt-5 grid gap-3 ${
+                        activeSolution.secondaryButton
+                          ? "sm:grid-cols-2"
+                          : "sm:max-w-[220px]"
+                      }`}
+                    >
                       <a
-                        href={solution.href}
-                        className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black text-white shadow-lg"
-                        style={{ backgroundColor: solution.accent }}
+                        href={activeSolution.href}
+                        className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black shadow-lg transition hover:-translate-y-0.5"
+                        style={{
+                          backgroundColor: activeSolution.accent,
+                          color: activeButtonTextColor,
+                        }}
                       >
-                        {solution.primaryButton}
+                        {activeSolution.primaryButton}
                         <span>→</span>
                       </a>
 
-                      <a
-                        href={solution.href}
-                        className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f8fafc] px-6 py-4 text-sm font-black ring-1 ring-black/5"
-                        style={{ color: solution.accent }}
-                      >
-                        {solution.secondaryButton}
-                        <span>→</span>
-                      </a>
+                      {activeSolution.secondaryButton ? (
+                        <a
+                          href={activeSolution.href}
+                          className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black shadow-lg transition hover:-translate-y-0.5"
+                          style={{
+                            backgroundColor: activeSolution.accent,
+                            color: activeButtonTextColor,
+                          }}
+                        >
+                          {activeSolution.secondaryButton}
+                          <span>→</span>
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 ) : null}
@@ -185,7 +219,10 @@ export function SolutionSection() {
           </div>
 
           <div className="lg:pl-4 reveal-right reveal-delay-2">
-            <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-[#006b3f] md:mb-4 md:text-sm md:tracking-[0.35em]">
+            <p
+              className="mb-3 text-xs font-black uppercase tracking-[0.28em] md:mb-4 md:text-sm md:tracking-[0.35em]"
+              style={{ color: activeSolution.accent }}
+            >
               {activeSolution.eyebrow}
             </p>
 
@@ -203,25 +240,35 @@ export function SolutionSection() {
             <div className="mt-6 flex flex-wrap gap-3 md:mt-8 md:gap-5">
               <a
                 href={activeSolution.href}
-                className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-lg transition hover:-translate-y-1"
-                style={{ backgroundColor: activeSolution.accent }}
+                className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide shadow-lg transition hover:-translate-y-1"
+                style={{
+                  backgroundColor: activeSolution.accent,
+                  color: activeButtonTextColor,
+                }}
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
                   →
                 </span>
+
                 {activeSolution.primaryButton}
               </a>
 
-              <a
-                href={activeSolution.href}
-                className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-lg transition hover:-translate-y-1"
-                style={{ backgroundColor: activeSolution.accent }}
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
-                  →
-                </span>
-                {activeSolution.secondaryButton}
-              </a>
+              {activeSolution.secondaryButton ? (
+                <a
+                  href={activeSolution.href}
+                  className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide shadow-lg transition hover:-translate-y-1"
+                  style={{
+                    backgroundColor: activeSolution.accent,
+                    color: activeButtonTextColor,
+                  }}
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
+                    →
+                  </span>
+
+                  {activeSolution.secondaryButton}
+                </a>
+              ) : null}
             </div>
           </div>
         </div>
