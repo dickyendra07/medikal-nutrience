@@ -14,7 +14,7 @@ const supportItems = [
     image: "/images/support/medical-partner.png",
   },
   {
-    title: "Artikel FIMA",
+    title: "Artikel Medikal Nutrience",
     description:
       "Konten edukasi nutrisi dan kesehatan yang disusun untuk membantu masyarakat memahami kebutuhan gizi.",
     href: "/support-system/dapur-sehat-fima",
