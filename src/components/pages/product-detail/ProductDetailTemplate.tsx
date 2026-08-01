@@ -1,5 +1,8 @@
 import type { ProductDetail } from "@/data/product-details";
+import { WhyEntrakidSection } from "@/components/pages/product-detail/WhyEntrakidSection";
 import { mednutAssets } from "@/data/mednut-assets";
+import { productNutrition } from "@/data/product-nutrition";
+import { ProductNutritionFacts } from "@/components/pages/product-detail/ProductNutritionFacts";
 import {
   getProductAsset,
   ProductVisual,
@@ -108,7 +111,12 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
         </div>
       </section>
 
-      {productBanners[product.slug] ? (
+      {product.slug === "entrakid" && productNutrition.entrakid ? (
+        <ProductNutritionFacts
+          data={productNutrition.entrakid}
+          color={product.theme.primary}
+        />
+      ) : productBanners[product.slug] ? (
         <section className="px-5 py-10 md:py-14 lg:px-10">
           <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-scale">
             <img
@@ -227,6 +235,10 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
           </div>
         </div>
       </section>
+
+      {product.slug === "entrakid" ? (
+        <WhyEntrakidSection color={product.theme.primary} />
+      ) : null}
 
       {product.slug === "entrakid" ? (
         <EntrakidMerakidsSection product={product} />
