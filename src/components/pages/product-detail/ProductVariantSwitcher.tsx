@@ -1,28 +1,40 @@
 "use client";
 
 import { useState } from "react";
+import type { ProductVariant } from "@/data/product-nutrition";
 
 export function ProductVariantSwitcher({
   color,
+  variants,
 }: {
   color: string;
+  variants?: ProductVariant[];
 }) {
 
-  const variants = [
-    {
-      name: "Vanila",
-      image:
-        "/images/mednut/products/packshots/entrakid-vanila-1.png",
-    },
-    {
-      name: "Cokelat",
-      image:
-        "/images/mednut/products/packshots/entrakid-cokelat-1.png",
-    },
-  ];
-
-
   const [active, setActive] = useState(0);
+
+
+  if (!variants || variants.length === 0) {
+    return null;
+  }
+
+
+  if (variants.length === 1) {
+    return (
+      <div className="flex justify-center">
+        <img
+          src={variants[0].image}
+          alt={variants[0].name}
+          className="
+            h-auto
+            w-[230px]
+            object-contain
+            drop-shadow-2xl
+          "
+        />
+      </div>
+    );
+  }
 
 
   return (
@@ -47,8 +59,10 @@ export function ProductVariantSwitcher({
             style={{
               backgroundColor:
                 active === index ? color : "#ffffff",
+
               color:
                 active === index ? "#ffffff" : "#374151",
+
               boxShadow:
                 "0 8px 20px rgba(0,0,0,0.08)",
             }}
@@ -81,7 +95,7 @@ export function ProductVariantSwitcher({
 
         <img
           src={variants[active].image}
-          alt={`Entrakid ${variants[active].name}`}
+          alt={variants[active].name}
           className="
             relative
             z-10
@@ -93,7 +107,6 @@ export function ProductVariantSwitcher({
             duration-500
           "
         />
-
 
       </div>
 

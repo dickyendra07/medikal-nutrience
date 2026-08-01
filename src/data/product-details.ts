@@ -164,9 +164,9 @@ export const productDetails: ProductDetail[] = [
     slug: "hepatosol-lola",
     name: "HEPATOSOL LOLA",
     category: "Hati / Liver",
-    heroTitle: "Dukungan Nutrisi untuk Menjaga Fungsi Hati",
+    heroTitle: "Solusi Nutrisi Gangguan Fungsi Hati Berat",
     description:
-      "Hepatosol Lola adalah nutrisi enteral yang lengkap untuk pasien dengan gangguan fungsi hati berat.",
+      "Hepatosol Lola adalah nutrisi enteral lengkap yang diformulasikan untuk membantu memenuhi kebutuhan nutrisi pasien dengan gangguan fungsi hati berat.",
     theme: {
       primary: "#ef1f2d",
       soft: "#fff1f2",
@@ -201,9 +201,9 @@ export const productDetails: ProductDetail[] = [
     slug: "hepatosol",
     name: "HEPATOSOL",
     category: "Hati / Liver",
-    heroTitle: "Solusi Gizi Gangguan Fungsi Hati Kronik",
+    heroTitle: "Solusi Nutrisi Gangguan Fungsi Hati Ringan-Moderate",
     description:
-      "Hepatosol adalah nutrisi khusus untuk pasien dengan gangguan fungsi hati/liver kronik seperti hepatitis kronik, sirosis hati, gangguan fungsi hati, dan pasien dengan penurunan nafsu makan.",
+      "Hepatosol adalah nutrisi khusus yang diformulasikan untuk membantu memenuhi kebutuhan nutrisi pasien dengan gangguan fungsi hati ringan hingga moderate, termasuk kondisi hepatitis kronik, sirosis hati, dan penurunan nafsu makan.",
     theme: {
       primary: "#ef1f2d",
       soft: "#fff1f2",

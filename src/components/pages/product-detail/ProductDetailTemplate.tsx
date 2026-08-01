@@ -3,6 +3,7 @@ import { WhyEntrakidSection } from "@/components/pages/product-detail/WhyEntraki
 import { mednutAssets } from "@/data/mednut-assets";
 import { productNutrition } from "@/data/product-nutrition";
 import { ProductNutritionFacts } from "@/components/pages/product-detail/ProductNutritionFacts";
+import { ProductClinicalNutritionFacts } from "@/components/pages/product-detail/ProductClinicalNutritionFacts";
 import {
   getProductAsset,
   ProductVisual,
@@ -114,6 +115,11 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
       {product.slug === "entrakid" && productNutrition.entrakid ? (
         <ProductNutritionFacts
           data={productNutrition.entrakid}
+          color={product.theme.primary}
+        />
+      ) : (product.slug === "hepatosol" || product.slug === "hepatosol-lola") && productNutrition[product.slug] ? (
+        <ProductClinicalNutritionFacts
+          data={productNutrition[product.slug]}
           color={product.theme.primary}
         />
       ) : productBanners[product.slug] ? (
