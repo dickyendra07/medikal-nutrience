@@ -3,38 +3,18 @@
 import { useMemo, useState } from "react";
 import { mednutAssets } from "@/data/mednut-assets";
 
-const activityFactors = {
-  sedentary: {
-    label: "Ringan / jarang olahraga",
-    factor: 1.2,
-  },
-  light: {
-    label: "Aktivitas ringan 1-3x/minggu",
-    factor: 1.375,
-  },
-  moderate: {
-    label: "Aktivitas sedang 3-5x/minggu",
-    factor: 1.55,
-  },
-  active: {
-    label: "Aktif 6-7x/minggu",
-    factor: 1.725,
-  },
-};
-
 const conditionOptions = [
   { value: "general", label: "Kebutuhan umum / menjaga kesehatan" },
   { value: "recovery", label: "Pemulihan / pasca sakit" },
   { value: "kidney", label: "Kebutuhan ginjal" },
   { value: "liver", label: "Kebutuhan hati / liver" },
-  { value: "respiratory", label: "Kebutuhan pernafasan" },
+  { value: "respiratory", label: "Kebutuhan pernapasan" },
   { value: "digestive", label: "Kebutuhan pencernaan" },
   { value: "child", label: "Tumbuh kembang anak" },
   { value: "elderly", label: "Dewasa & lansia" },
 ];
 
 type Gender = "male" | "female";
-type Activity = keyof typeof activityFactors;
 
 function getBmiCategory(bmi: number) {
   if (bmi < 18.5) {
@@ -72,6 +52,18 @@ function getBmiCategory(bmi: number) {
   };
 }
 
+function getBrocaIdealWeight(height: number, gender: Gender) {
+  const baseWeight = height - 100;
+
+  if (baseWeight <= 0) {
+    return 0;
+  }
+
+  const reduction = gender === "male" ? 0.1 : 0.15;
+
+  return baseWeight - baseWeight * reduction;
+}
+
 function getProductRecommendations(condition: string, bmi: number, age: number) {
   if (condition === "kidney") {
     return [
@@ -103,7 +95,8 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
       },
       {
         name: "Hepatosol Lola",
-        description: "Dukungan nutrisi untuk kondisi hati dengan kebutuhan spesifik.",
+        description:
+          "Dukungan nutrisi untuk kondisi hati dengan kebutuhan spesifik.",
         logo: mednutAssets.productLogos.hepatosolLola,
         image: mednutAssets.packshots.hepatosolLola,
         href: "/produk/hepatosol-lola",
@@ -115,7 +108,7 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
     return [
       {
         name: "Pulmosol",
-        description: "Dukungan nutrisi untuk kebutuhan pernafasan.",
+        description: "Dukungan nutrisi untuk kebutuhan pernapasan.",
         logo: mednutAssets.productLogos.pulmosol,
         image: mednutAssets.packshots.pulmosol,
         href: "/produk/pulmosol",
@@ -150,7 +143,8 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
     return [
       {
         name: "Peptisol",
-        description: "Nutrisi tinggi protein untuk membantu kebutuhan pemulihan.",
+        description:
+          "Nutrisi tinggi protein untuk membantu kebutuhan pemulihan.",
         logo: mednutAssets.productLogos.peptisol,
         image: mednutAssets.packshots.peptisolVanila,
         href: "/produk/peptisol",
@@ -188,7 +182,8 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
     return [
       {
         name: "Entrasoy",
-        description: "Nutrisi berbasis protein nabati untuk kebutuhan harian.",
+        description:
+          "Nutrisi berbasis protein nabati untuk kebutuhan harian.",
         logo: mednutAssets.productLogos.entrasoy,
         image: mednutAssets.packshots.entrasoy,
         href: "/produk/entrasoy",
@@ -199,7 +194,8 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
   return [
     {
       name: "Entramix",
-      description: "Nutrisi lengkap dan seimbang untuk mendukung asupan harian.",
+      description:
+        "Nutrisi lengkap dan seimbang untuk mendukung asupan harian.",
       logo: mednutAssets.productLogos.entramix,
       image: mednutAssets.packshots.entramixVanila,
       href: "/produk/entramix",
@@ -219,7 +215,6 @@ export function BmiCalculator() {
   const [age, setAge] = useState("33");
   const [height, setHeight] = useState("170");
   const [weight, setWeight] = useState("65");
-  const [activity, setActivity] = useState<Activity>("light");
   const [condition, setCondition] = useState("general");
 
   const result = useMemo(() => {
@@ -234,15 +229,7 @@ export function BmiCalculator() {
     const heightMeter = parsedHeight / 100;
     const bmi = parsedWeight / (heightMeter * heightMeter);
     const category = getBmiCategory(bmi);
-
-    const bmr =
-      gender === "male"
-        ? 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge + 5
-        : 10 * parsedWeight + 6.25 * parsedHeight - 5 * parsedAge - 161;
-
-    const dailyCalories = bmr * activityFactors[activity].factor;
-    const idealWeightMin = 18.5 * heightMeter * heightMeter;
-    const idealWeightMax = 22.9 * heightMeter * heightMeter;
+    const idealWeight = getBrocaIdealWeight(parsedHeight, gender);
     const recommendations = getProductRecommendations(
       condition,
       bmi,
@@ -252,13 +239,10 @@ export function BmiCalculator() {
     return {
       bmi,
       category,
-      bmr,
-      dailyCalories,
-      idealWeightMin,
-      idealWeightMax,
+      idealWeight,
       recommendations,
     };
-  }, [activity, age, condition, gender, height, weight]);
+  }, [age, condition, gender, height, weight]);
 
   return (
     <section className="px-5 py-12 md:py-16 lg:px-10">
@@ -269,7 +253,7 @@ export function BmiCalculator() {
           </p>
 
           <h2 className="mt-4 text-3xl font-black leading-tight text-[#111827] md:text-4xl">
-            Hitung gambaran awal kebutuhan tubuh.
+            Hitung gambaran awal status gizi Anda.
           </h2>
 
           <div className="mt-7 grid gap-4">
@@ -277,6 +261,7 @@ export function BmiCalculator() {
               <label className="text-sm font-black text-[#111827]">
                 Jenis Kelamin
               </label>
+
               <div className="mt-3 grid grid-cols-2 gap-3">
                 {[
                   { value: "male", label: "Pria" },
@@ -303,6 +288,7 @@ export function BmiCalculator() {
                 <label className="text-sm font-black text-[#111827]">
                   Usia
                 </label>
+
                 <input
                   type="number"
                   min="1"
@@ -316,6 +302,7 @@ export function BmiCalculator() {
                 <label className="text-sm font-black text-[#111827]">
                   Tinggi (cm)
                 </label>
+
                 <input
                   type="number"
                   min="1"
@@ -329,6 +316,7 @@ export function BmiCalculator() {
                 <label className="text-sm font-black text-[#111827]">
                   Berat (kg)
                 </label>
+
                 <input
                   type="number"
                   min="1"
@@ -341,25 +329,9 @@ export function BmiCalculator() {
 
             <div>
               <label className="text-sm font-black text-[#111827]">
-                Aktivitas Harian
-              </label>
-              <select
-                value={activity}
-                onChange={(event) => setActivity(event.target.value as Activity)}
-                className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
-              >
-                {Object.entries(activityFactors).map(([key, item]) => (
-                  <option key={key} value={key}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="text-sm font-black text-[#111827]">
                 Kebutuhan / Kondisi
               </label>
+
               <select
                 value={condition}
                 onChange={(event) => setCondition(event.target.value)}
@@ -375,9 +347,8 @@ export function BmiCalculator() {
           </div>
 
           <div className="mt-6 rounded-[1.5rem] bg-[#f4fbf8] p-5">
-            <p className="text-sm font-black text-[#111827]">
-              Disclaimer
-            </p>
+            <p className="text-sm font-black text-[#111827]">Disclaimer</p>
+
             <p className="mt-2 text-sm font-medium leading-7 text-[#6b7280]">
               Hasil kalkulator ini merupakan gambaran awal dan bukan diagnosis
               medis. Untuk kondisi khusus, tetap konsultasikan dengan dokter,
@@ -400,6 +371,7 @@ export function BmiCalculator() {
                       <p className="text-7xl font-black leading-none">
                         {result.bmi.toFixed(1)}
                       </p>
+
                       <p className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-white/70">
                         IMT / BMI
                       </p>
@@ -420,42 +392,34 @@ export function BmiCalculator() {
                   </div>
                 </div>
 
-                <div className="grid gap-4 p-6 md:grid-cols-3 md:p-8">
-                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
-                      Kalori Harian
-                    </p>
-                    <p className="mt-3 text-3xl font-black text-[#111827]">
-                      {Math.round(result.dailyCalories)}
-                    </p>
-                    <p className="mt-1 text-sm font-bold text-[#6b7280]">
-                      kkal / hari
-                    </p>
-                  </div>
+                <div className="p-6 md:p-8">
+                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5 md:flex md:items-center md:justify-between md:gap-6">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
+                        Berat Badan Ideal
+                      </p>
 
-                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
-                      BMR
-                    </p>
-                    <p className="mt-3 text-3xl font-black text-[#111827]">
-                      {Math.round(result.bmr)}
-                    </p>
-                    <p className="mt-1 text-sm font-bold text-[#6b7280]">
-                      kkal / hari
-                    </p>
-                  </div>
+                      <p className="mt-3 text-4xl font-black text-[#111827]">
+                        {result.idealWeight > 0
+                          ? Math.round(result.idealWeight)
+                          : "-"}
+                      </p>
 
-                  <div className="rounded-[1.5rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6b7280]">
-                      Rentang BB Ideal
-                    </p>
-                    <p className="mt-3 text-3xl font-black text-[#111827]">
-                      {Math.round(result.idealWeightMin)}-
-                      {Math.round(result.idealWeightMax)}
-                    </p>
-                    <p className="mt-1 text-sm font-bold text-[#6b7280]">
-                      kg
-                    </p>
+                      <p className="mt-1 text-sm font-bold text-[#6b7280]">
+                        kg
+                      </p>
+                    </div>
+
+                    <div className="mt-5 max-w-xl rounded-2xl bg-white px-5 py-4 ring-1 ring-black/5 md:mt-0">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#006b3f]">
+                        Rumus Broca
+                      </p>
+
+                      <p className="mt-2 text-sm font-medium leading-7 text-[#64748b]">
+                        Estimasi berat badan ideal dihitung berdasarkan tinggi
+                        badan dan jenis kelamin menggunakan rumus Broca.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -466,6 +430,7 @@ export function BmiCalculator() {
                     <p className="text-xs font-black uppercase tracking-[0.35em] text-[#006b3f]">
                       Rekomendasi Awal
                     </p>
+
                     <h2 className="mt-4 text-3xl font-black leading-tight text-[#111827] md:text-4xl">
                       Produk yang mungkin relevan.
                     </h2>
@@ -528,12 +493,15 @@ export function BmiCalculator() {
                     <p className="text-xs font-black uppercase tracking-[0.35em] text-white/70">
                       Next Step
                     </p>
+
                     <h2 className="mt-4 text-3xl font-black leading-tight md:text-4xl">
                       Temukan produk di official partner terdekat.
                     </h2>
+
                     <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80">
                       Setelah memahami gambaran awal kebutuhan tubuh, Anda dapat
-                      mencari outlet resmi atau konsultasi untuk arahan lebih lanjut.
+                      mencari outlet resmi atau konsultasi untuk arahan lebih
+                      lanjut.
                     </p>
                   </div>
 
@@ -551,6 +519,7 @@ export function BmiCalculator() {
               <p className="text-xl font-black text-[#111827]">
                 Lengkapi data terlebih dahulu.
               </p>
+
               <p className="mt-2 text-sm font-medium text-[#6b7280]">
                 Masukkan usia, tinggi badan, dan berat badan untuk melihat hasil.
               </p>

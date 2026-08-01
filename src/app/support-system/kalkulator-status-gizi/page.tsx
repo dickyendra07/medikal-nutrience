@@ -5,7 +5,7 @@ import { mednutAssets } from "@/data/mednut-assets";
 
 const features = [
   "Hitung status gizi berdasarkan IMT",
-  "Estimasi kebutuhan kalori harian",
+  "Estimasi berat badan ideal dengan rumus Broca",
   "Arahan awal produk sesuai kondisi",
   "Terhubung ke konsultasi dan apotek resmi",
 ];
@@ -27,13 +27,14 @@ export default function NutritionCalculatorPage() {
               </p>
 
               <h1 className="mt-7 max-w-4xl text-4xl font-black leading-[1.04] tracking-tight text-[#111827] md:text-6xl">
-                Cek Status Gizi dan Kebutuhan Nutrisi Anda
+                Cek Status Gizi dan Berat Badan Ideal Anda
               </h1>
 
               <p className="mt-6 max-w-3xl text-base font-medium leading-8 text-[#5f6b76] md:text-lg md:leading-9">
                 Gunakan kalkulator ini untuk mendapatkan gambaran awal status
-                gizi, estimasi kebutuhan kalori harian, dan arahan produk
-                Medikal Nutrience yang mungkin relevan dengan kondisi Anda.
+                gizi, estimasi berat badan ideal dengan rumus Broca, dan arahan
+                produk Medikal Nutrience yang mungkin relevan dengan kondisi
+                Anda.
               </p>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -61,14 +62,16 @@ export default function NutritionCalculatorPage() {
                     alt="Kalkulator status gizi"
                     className="h-[360px] w-full object-cover opacity-90 md:h-[480px]"
                   />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-[#003d28]/90 via-[#003d28]/25 to-transparent" />
 
                   <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                     <p className="text-xs font-black uppercase tracking-[0.28em] text-white/70">
                       Nutrition Assessment
                     </p>
+
                     <h2 className="mt-3 max-w-xl text-3xl font-black leading-tight text-white md:text-5xl">
-                      Langkah awal memahami kebutuhan tubuh.
+                      Langkah awal memahami status gizi tubuh.
                     </h2>
                   </div>
                 </div>
@@ -86,33 +89,35 @@ export default function NutritionCalculatorPage() {
   );
 }
 
-
 function CalculatorSourceSection() {
   const sources = [
     {
       title: "Rumus IMT / BMI",
-      formula: "IMT = Berat Badan (kg) / (Tinggi Badan (m) × Tinggi Badan (m))",
+      formula:
+        "IMT = Berat Badan (kg) / (Tinggi Badan (m) × Tinggi Badan (m))",
       description:
         "IMT digunakan sebagai gambaran awal status berat badan berdasarkan perbandingan berat dan tinggi badan.",
     },
     {
       title: "Kategori Status Gizi",
-      formula: "< 18.5 kurang • 18.5–22.9 normal • 23–24.9 berisiko berlebih • ≥ 25 berlebih",
+      formula:
+        "< 18.5 kurang • 18.5–22.9 normal • 23–24.9 berisiko berlebih • ≥ 25 berlebih",
       description:
         "Kategori dibuat sebagai skrining awal yang lebih relevan untuk populasi Asia dan bukan diagnosis medis.",
     },
     {
-      title: "Rumus BMR Mifflin-St Jeor",
+      title: "Rumus Broca Pria",
       formula:
-        "Pria: 10×BB + 6.25×TB - 5×Usia + 5 • Wanita: 10×BB + 6.25×TB - 5×Usia - 161",
+        "BB Ideal = (Tinggi Badan − 100) − 10% × (Tinggi Badan − 100)",
       description:
-        "BMR memperkirakan kebutuhan energi dasar tubuh saat istirahat berdasarkan berat badan, tinggi badan, usia, dan jenis kelamin.",
+        "Digunakan untuk memperkirakan berat badan ideal pria berdasarkan tinggi badan.",
     },
     {
-      title: "Estimasi Kalori Harian",
-      formula: "Kalori Harian = BMR × Faktor Aktivitas",
+      title: "Rumus Broca Wanita",
+      formula:
+        "BB Ideal = (Tinggi Badan − 100) − 15% × (Tinggi Badan − 100)",
       description:
-        "Faktor aktivitas yang digunakan: 1.2, 1.375, 1.55, dan 1.725 sesuai tingkat aktivitas harian pengguna.",
+        "Digunakan untuk memperkirakan berat badan ideal wanita berdasarkan tinggi badan.",
     },
   ];
 
