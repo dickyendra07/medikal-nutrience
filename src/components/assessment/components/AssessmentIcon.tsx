@@ -3,10 +3,30 @@ type AssessmentIconProps = {
   className?: string;
 };
 
+const homepageConditionIcons: Record<string, string> = {
+  kidney: "/images/mednut/solutions/icons/icon-ginjal.svg",
+  liver: "/images/mednut/solutions/icons/icon-hati-liver.svg",
+  lung: "/images/mednut/solutions/icons/icon-pernafasan.svg",
+  digestive: "/images/mednut/solutions/icons/icon-pencernaan.svg",
+};
+
 export function AssessmentIcon({
   name,
   className = "",
 }: AssessmentIconProps) {
+  const homepageIcon = homepageConditionIcons[name];
+
+  if (homepageIcon) {
+    return (
+      <img
+        src={homepageIcon}
+        alt=""
+        aria-hidden="true"
+        className={`h-9 w-9 object-contain [filter:brightness(0)_saturate(100%)_invert(23%)_sepia(97%)_saturate(798%)_hue-rotate(129deg)_brightness(91%)_contrast(101%)] ${className}`}
+      />
+    );
+  }
+
   const common = {
     className: `h-12 w-12 ${className}`,
     viewBox: "0 0 64 64",
@@ -16,7 +36,6 @@ export function AssessmentIcon({
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
-
 
   if (name === "child") {
     return (
@@ -30,7 +49,6 @@ export function AssessmentIcon({
     );
   }
 
-
   if (name === "user" || name === "adult") {
     return (
       <svg {...common}>
@@ -41,49 +59,6 @@ export function AssessmentIcon({
     );
   }
 
-
-  if (name === "kidney") {
-    return (
-      <svg {...common}>
-        <path d="M27 10c-10 0-17 8-17 20 0 12 7 22 17 22 7 0 12-6 12-15V23c0-8-5-13-12-13Z" />
-        <path d="M37 10c10 0 17 8 17 20 0 12-7 22-17 22-7 0-12-6-12-15V23c0-8 5-13 12-13Z" />
-        <path d="M32 22v20" />
-      </svg>
-    );
-  }
-
-
-  if (name === "liver") {
-    return (
-      <svg {...common}>
-        <path d="M9 35c9-18 29-23 46-13 0 18-13 29-30 29H14c-6 0-8-8-5-16Z" />
-        <path d="M30 31c7 0 12 3 17 8" />
-      </svg>
-    );
-  }
-
-
-  if (name === "lung") {
-    return (
-      <svg {...common}>
-        <path d="M32 12v18" />
-        <path d="M29 30c-6-10-11-15-17-15-5 0-8 5-8 12v14c0 8 5 13 12 13 8 0 13-7 13-15Z" />
-        <path d="M35 30c6-10 11-15 17-15 5 0 8 5 8 12v14c0 8-5 13-12 13-8 0-13-7-13-15Z" />
-      </svg>
-    );
-  }
-
-
-  if (name === "digestive") {
-    return (
-      <svg {...common}>
-        <path d="M25 10v15c0 5 3 8 7 8s7-3 7-8V10" />
-        <path d="M32 33c-10 0-15 7-15 15 0 5 5 8 15 8s15-4 15-10c0-7-6-13-15-13Z" />
-      </svg>
-    );
-  }
-
-
   if (name === "shield") {
     return (
       <svg {...common}>
@@ -92,7 +67,6 @@ export function AssessmentIcon({
       </svg>
     );
   }
-
 
   if (name === "medical") {
     return (
@@ -103,7 +77,6 @@ export function AssessmentIcon({
       </svg>
     );
   }
-
 
   return (
     <svg {...common}>

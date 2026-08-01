@@ -35,10 +35,10 @@ export const assessmentDisclaimer =
 
 export const assessmentPurposeOptions = [
   {
-    label:"Memiliki kondisi kesehatan",
+    label:"Memiliki Gangguan Fungsi Organ",
     value:"condition",
     icon:"medical",
-    description:"Cari rekomendasi nutrisi berdasarkan kondisi kesehatan tertentu."
+    description:"Cari rekomendasi nutrisi berdasarkan gangguan fungsi organ tertentu."
   },
   {
     label:"Menjaga kesehatan",
@@ -81,12 +81,14 @@ export const healthTargetOptions = [
   {
     label:"Anak",
     value:"anak",
-    icon:"child"
+    icon:"child",
+    description:"Mendukung kebutuhan nutrisi untuk tumbuh kembang anak."
   },
   {
     label:"Dewasa",
     value:"dewasa",
-    icon:"user"
+    icon:"user",
+    description:"Mendukung kebutuhan nutrisi dan kesehatan harian."
   }
 ];
 
