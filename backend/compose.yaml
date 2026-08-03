@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: mednut_cms
+      POSTGRES_USER: mednut_cms
+      POSTGRES_PASSWORD: mednut_cms_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - mednut_cms_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mednut_cms -d mednut_cms"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  mednut_cms_postgres_data:
