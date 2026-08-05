@@ -1,5 +1,5 @@
 import { ArticleCard } from "@/components/pages/articles/ArticleCard";
-import { articles, articleCategories } from "@/data/articles";
+import type { PublicArticle } from "@/lib/api/articles";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -41,16 +41,18 @@ const products = [
   },
 ];
 
-export function ArticlesPage() {
-  const featured = articles.find((item) => item.featured) ?? articles[0];
+export function ArticlesPage({ articles, articleCategories }: { articles: PublicArticle[]; articleCategories: string[] }) {
+  const featured = articles.find((item) => item.isFeatured) ?? articles[0];
+
+  if (!featured) {
+    return <><Navbar /><main className="flex min-h-[70vh] items-center justify-center bg-[#f4fbf8] px-5"><div className="max-w-2xl text-center"><p className="text-xs font-black uppercase tracking-[0.3em] text-[#006b3f]">Medikal Nutrience Journal</p><h1 className="mt-5 text-4xl font-black text-[#111827]">Artikel sedang disiapkan</h1><p className="mt-4 text-base font-medium leading-8 text-[#64748b]">Tim kami sedang menyiapkan informasi nutrisi dan edukasi kesehatan terbaru untuk Anda.</p></div></main><Footer /></>;
+  }
 
   const latest = articles.filter(
     (item) => item.slug !== featured.slug
   );
 
-  const popular = articles.filter(
-    (item) => item.popular
-  );
+  const popular = articles.slice(0, 3);
 
   return (
     <>
@@ -131,11 +133,17 @@ export function ArticlesPage() {
 
               <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
 
-                <img
-                  src={featured.image}
-                  alt={featured.title}
-                  className="h-[420px] w-full object-cover"
+                <div className="relative h-[420px] w-full">
+                <Image
+                  src={featured.coverMedia?.url ?? "/images/brand/medikal-nutrience-logo.png"}
+                  alt={featured.coverMedia?.altText || featured.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                  unoptimized={featured.coverMedia?.mimeType === "image/svg+xml"}
+                  className="object-cover"
                 />
+                </div>
 
                 <div className="flex flex-col justify-center p-8 md:p-12">
 
@@ -152,15 +160,15 @@ export function ArticlesPage() {
                   </p>
 
                   <p className="mt-5 text-sm font-bold text-[#64748b]">
-                    {featured.date} · {featured.readTime}
+                    {new Intl.DateTimeFormat("id-ID", { day: "2-digit", month: "long", year: "numeric" }).format(new Date(featured.publishedAt))} · {featured.readTime}
                   </p>
 
-                  <a
+                  <Link
                     href={`/artikel/${featured.slug}`}
                     className="mt-8 inline-flex w-fit rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white"
                   >
                     Baca Artikel →
-                  </a>
+                  </Link>
 
                 </div>
 
@@ -355,3 +363,5 @@ export function ArticlesPage() {
     </>
   );
 }
+import Image from "next/image";
+import Link from "next/link";
