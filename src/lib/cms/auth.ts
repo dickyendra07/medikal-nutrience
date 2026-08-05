@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
+import { cmsInternalApiUrl } from "./backend";
 
-export const cmsSessionCookieName = "mednut_cms_session";
+export const cmsSessionCookieName = "mednut_admin_session";
 
 export async function getCmsSession() {
   const cookieStore = await cookies();
@@ -9,5 +10,15 @@ export async function getCmsSession() {
 
 export async function isCmsAuthenticated() {
   const session = await getCmsSession();
-  return session === "authenticated";
+  if (!session) return false;
+
+  try {
+    const response = await fetch(`${cmsInternalApiUrl}/admin/auth/me`, {
+      cache: "no-store",
+      headers: { Cookie: `${cmsSessionCookieName}=${encodeURIComponent(session)}` },
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { listMedia, type MediaAsset } from "@/lib/cms/media-api";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { listMedia, type MediaAsset, uploadMedia } from "@/lib/cms/media-api";
+import { trapDialogFocus } from "@/components/cms/dialog-focus";
 import { MediaThumbnail } from "./MediaThumbnail";
 
 type MediaPickerProps = {
@@ -17,6 +18,9 @@ export function MediaPicker({ open, onClose, onSelect, selectedId }: MediaPicker
   const [mimeType, setMimeType] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const dialogRef = useRef<HTMLElement>(null);
+  const uploadRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     if (!open) return;
@@ -36,14 +40,40 @@ export function MediaPicker({ open, onClose, onSelect, selectedId }: MediaPicker
     void load();
   }, [load]);
 
+  useEffect(() => {
+    if (!open) return;
+    dialogRef.current?.querySelector<HTMLElement>("button, input, select")?.focus();
+  }, [open]);
+
+  async function handleUpload(file?: File) {
+    if (!file) return;
+    setUploading(true);
+    setError(null);
+    try {
+      const media = await uploadMedia(file);
+      setItems((current) => [media, ...current]);
+      onSelect(media);
+    } catch {
+      setError("Gambar belum berhasil diunggah. Periksa format dan ukuran file.");
+    } finally {
+      setUploading(false);
+      if (uploadRef.current) uploadRef.current.value = "";
+    }
+  }
+
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#002f22]/70 p-4 backdrop-blur-sm">
       <section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Pilih media"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") onClose();
+          trapDialogFocus(event);
+        }}
         className="flex max-h-[90vh] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] bg-white shadow-2xl"
       >
         <header className="flex items-center justify-between gap-4 border-b border-black/5 p-6">
@@ -51,7 +81,7 @@ export function MediaPicker({ open, onClose, onSelect, selectedId }: MediaPicker
             <p className="text-xs font-black uppercase tracking-[0.28em] text-[#006b3f]">Media Picker</p>
             <h2 className="mt-2 text-2xl font-black">Pilih asset gambar</h2>
           </div>
-          <button type="button" onClick={onClose} className="rounded-full bg-[#f1f5f9] px-4 py-2 text-sm font-black">Tutup</button>
+          <div className="flex gap-2"><button type="button" disabled={uploading} onClick={() => uploadRef.current?.click()} className="rounded-full bg-[#006b3f] px-4 py-2 text-sm font-black text-white disabled:opacity-50">{uploading ? "Mengunggah..." : "+ Upload Baru"}</button><button type="button" onClick={onClose} className="rounded-full bg-[#f1f5f9] px-4 py-2 text-sm font-black">Tutup</button><input ref={uploadRef} type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" className="hidden" onChange={(event) => void handleUpload(event.target.files?.[0])} /></div>
         </header>
 
         <div className="grid gap-3 border-b border-black/5 p-5 md:grid-cols-[1fr_220px]">

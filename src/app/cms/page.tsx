@@ -4,6 +4,7 @@ import { isCmsAuthenticated } from "@/lib/cms/auth";
 import { productDetails } from "@/data/product-details";
 import { promises as fs } from "fs";
 import path from "path";
+import { ArticleDashboardMetrics } from "@/components/cms/articles/ArticleDashboardMetrics";
 
 type CmsProductDraft = {
   slug: string;
@@ -120,6 +121,7 @@ export default async function CmsPage() {
       eyebrow="Medikal Nutrience Admin"
       description="Dashboard awal untuk mengelola konten website Medikal Nutrience, mulai dari produk, solusi, event, apotek, FAQ, hingga leads."
     >
+      <ArticleDashboardMetrics />
       <section className="grid gap-4 md:grid-cols-4">
         {quickStats.map((stat) => (
           <article

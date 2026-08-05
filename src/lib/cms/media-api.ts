@@ -35,7 +35,7 @@ export class MediaApiError extends Error {
   }
 }
 
-const apiBaseUrl = (process.env.NEXT_PUBLIC_CMS_API_URL ?? "http://localhost:4000/api")
+const apiBaseUrl = (process.env.NEXT_PUBLIC_CMS_API_URL ?? "/api")
   .replace(/\/$/, "");
 
 async function mediaRequest<T>(path: string, init?: RequestInit): Promise<T> {

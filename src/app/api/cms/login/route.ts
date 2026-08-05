@@ -1,33 +1,44 @@
 import { NextResponse } from "next/server";
-import { cmsSessionCookieName } from "@/lib/cms/auth";
+import { cmsInternalApiUrl } from "@/lib/cms/backend";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
 
-  const username = String(formData.get("username") ?? "");
+  const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
-  const validUsername = process.env.CMS_USERNAME ?? "admin";
-  const validPassword = process.env.CMS_PASSWORD ?? "mednut2026";
-
-  if (username !== validUsername || password !== validPassword) {
+  let backendResponse: Response;
+  try {
+    backendResponse = await fetch(`${cmsInternalApiUrl}/admin/auth/login`, {
+      method: "POST",
+      cache: "no-store",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+  } catch {
     return NextResponse.redirect(
-      new URL("/cms/login?error=invalid", request.url),
+      new URL("/cms/login?error=unavailable", request.url),
       { status: 303 }
     );
+  }
+
+  if (!backendResponse.ok) {
+    return NextResponse.redirect(new URL("/cms/login?error=invalid", request.url), { status: 303 });
+  }
+
+  const sessionCookie = backendResponse.headers.get("set-cookie");
+  if (!sessionCookie) {
+    return NextResponse.redirect(new URL("/cms/login?error=unavailable", request.url), { status: 303 });
   }
 
   const response = NextResponse.redirect(new URL("/cms", request.url), {
     status: 303,
   });
 
-  response.cookies.set(cmsSessionCookieName, "authenticated", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 8,
-  });
+  response.headers.append(
+    "set-cookie",
+    sessionCookie.replace(/Path=\/api\/admin(?=;|$)/i, "Path=/"),
+  );
 
   return response;
 }

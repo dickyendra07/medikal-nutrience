@@ -15,6 +15,7 @@ export default async function CmsLoginPage({
 
   const params = await searchParams;
   const hasError = params.error === "invalid";
+  const unavailable = params.error === "unavailable";
 
   return (
     <main className="min-h-screen bg-[#eef8f3] px-5 py-10 text-[#0f172a]">
@@ -72,20 +73,26 @@ export default async function CmsLoginPage({
 
           {hasError ? (
             <div className="mt-6 rounded-2xl bg-red-50 px-5 py-4 text-sm font-bold text-red-600 ring-1 ring-red-100">
-              Username atau password tidak sesuai.
+              Email atau password tidak sesuai.
+            </div>
+          ) : null}
+
+          {unavailable ? (
+            <div className="mt-6 rounded-2xl bg-amber-50 px-5 py-4 text-sm font-bold text-amber-700 ring-1 ring-amber-100">
+              Layanan CMS sedang tidak tersedia. Silakan coba kembali beberapa saat lagi.
             </div>
           ) : null}
 
           <form action="/api/cms/login" method="post" className="mt-7 space-y-5">
             <div>
               <label className="text-sm font-black text-[#111827]">
-                Username
+                Email admin
               </label>
               <input
-                name="username"
-                type="text"
+                name="email"
+                type="email"
                 required
-                placeholder="admin"
+                placeholder="editor@medikal-nutrience.co.id"
                 className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
               />
             </div>
@@ -112,11 +119,7 @@ export default async function CmsLoginPage({
           </form>
 
           <div className="mt-6 rounded-2xl bg-[#f4fbf8] p-5 text-sm font-medium leading-7 text-[#64748b]">
-            <span className="font-black text-[#006b3f]">Demo access:</span>
-            <br />
-            Username: admin
-            <br />
-            Password: mednut2026
+            Gunakan akun admin yang telah dibuat melalui proses bootstrap backend CMS.
           </div>
         </section>
       </div>

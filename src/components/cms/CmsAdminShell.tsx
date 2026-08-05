@@ -25,9 +25,9 @@ const cmsMenuGroups = [
       },
       {
         title: "Articles",
-        desc: "Sprint berikutnya",
-        count: "Soon",
-        href: "#",
+        desc: "Artikel & publikasi",
+        count: "CMS",
+        href: "/cms/articles",
         icon: "✎",
       },
       {
@@ -106,6 +106,7 @@ type CmsAdminShellProps = {
   active:
     | "dashboard"
     | "media"
+    | "articles"
     | "products"
     | "solutions"
     | "events"
@@ -124,6 +125,7 @@ type CmsAdminShellProps = {
 function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "dashboard") return href === "/cms";
   if (active === "media") return href === "/cms/media";
+  if (active === "articles") return href === "/cms/articles";
   if (active === "products") return href === "/cms/products";
   if (active === "solutions") return href === "/cms/solutions";
   if (active === "events") return href === "/cms/events";
