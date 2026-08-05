@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module";
 import { RolesGuard } from "./auth/guards/roles.guard";
 import { SessionAuthGuard } from "./auth/guards/session-auth.guard";
 import { validateEnvironment } from "./config/environment";
+import { MediaModule } from "./modules/media/media.module";
 import { PrismaModule } from "./prisma/prisma.module";
 
 @Module({
@@ -17,6 +18,7 @@ import { PrismaModule } from "./prisma/prisma.module";
     }),
     PrismaModule,
     AuthModule,
+    MediaModule,
   ],
   controllers: [AppController],
   providers: [

@@ -10,6 +10,7 @@ NestJS CMS API foundation for Medikal Nutrience. This service is intentionally i
 - Database-backed opaque admin sessions
 - bcrypt password hashing
 - Global authentication and role guards
+- Storage-independent media management (local and S3-compatible)
 
 ## Local setup
 
@@ -50,6 +51,20 @@ The API defaults to `http://localhost:4000/api`.
 Login returns only safe admin data. The opaque session token is set by the API as an `httpOnly` cookie and its SHA-256 hash is stored in PostgreSQL. Logout revokes the database session before clearing the cookie.
 
 All future routes are protected by default. Mark intentionally public endpoints with `@Public()`. Restrict protected handlers with `@Roles(AdminRole.SUPER_ADMIN, AdminRole.ADMIN)`.
+
+## Media Library endpoints
+
+| Method | Endpoint | Access |
+| --- | --- | --- |
+| `POST` | `/api/admin/media/upload` | Super Admin, Admin, Editor |
+| `GET` | `/api/admin/media` | Authenticated admin |
+| `GET` | `/api/admin/media/:id` | Authenticated admin |
+| `PATCH` | `/api/admin/media/:id` | Super Admin, Admin, Editor |
+| `DELETE` | `/api/admin/media/:id` | Super Admin, Admin |
+
+Uploads accept a single multipart field named `file`. JPEG, PNG, WebP, and sanitized SVG files are accepted up to 10 MB by default. The API verifies actual image format, dimensions, pixel limits, and SVG active content before a generated storage key is written.
+
+Development uses `LocalStorageProvider` and serves files from `/uploads/media`. Set `STORAGE_DRIVER=s3` plus the S3 environment values for AWS S3, Cloudflare R2, or another S3-compatible service. `S3_ENDPOINT` is optional for AWS and required when the chosen compatible service supplies a custom endpoint. `MEDIA_PUBLIC_BASE_URL` must point to the public CDN or bucket URL.
 
 ## Security defaults
 

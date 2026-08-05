@@ -1,74 +1,111 @@
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
-const cmsMenus = [
+const cmsMenuGroups = [
   {
-    title: "Dashboard",
-    desc: "Overview website",
-    count: "Overview",
-    href: "/cms",
-    icon: "▦",
+    label: "Workspace",
+    menus: [
+      {
+        title: "Dashboard",
+        desc: "Overview website",
+        count: "Overview",
+        href: "/cms",
+        icon: "▦",
+      },
+    ],
   },
   {
-    title: "Produk",
-    desc: "Kelola produk",
-    count: "11",
-    href: "/cms/products",
-    icon: "◈",
+    label: "Content",
+    menus: [
+      {
+        title: "Media Library",
+        desc: "Asset gambar terpusat",
+        count: "New",
+        href: "/cms/media",
+        icon: "▧",
+      },
+      {
+        title: "Articles",
+        desc: "Sprint berikutnya",
+        count: "Soon",
+        href: "#",
+        icon: "✎",
+      },
+      {
+        title: "Events",
+        desc: "Event & registrasi",
+        count: "3",
+        href: "/cms/events",
+        icon: "◉",
+      },
+      {
+        title: "Products",
+        desc: "Kelola produk",
+        count: "11",
+        href: "/cms/products",
+        icon: "◈",
+      },
+      {
+        title: "Solutions",
+        desc: "Solusi nutrisi",
+        count: "7",
+        href: "/cms/solutions",
+        icon: "✦",
+      },
+    ],
   },
   {
-    title: "Solusi",
-    desc: "Solusi nutrisi",
-    count: "7",
-    href: "/cms/solutions",
-    icon: "✦",
+    label: "Operations",
+    menus: [
+      {
+        title: "Support System",
+        desc: "Edukasi & layanan",
+        count: "4",
+        href: "/cms/support-system",
+        icon: "✚",
+      },
+      {
+        title: "Apotek",
+        desc: "Partner apotek",
+        count: "33+",
+        href: "/cms/pharmacies",
+        icon: "⌖",
+      },
+      {
+        title: "FAQ",
+        desc: "Pertanyaan umum",
+        count: "10",
+        href: "/cms/faq",
+        icon: "?",
+      },
+      {
+        title: "Leads",
+        desc: "Assessment & form",
+        count: "2",
+        href: "/cms/leads",
+        icon: "✉",
+      },
+    ],
   },
   {
-    title: "Event",
-    desc: "Event & registrasi",
-    count: "3",
-    href: "/cms/events",
-    icon: "◉",
-  },
-  {
-    title: "Support System",
-    desc: "Edukasi & layanan",
-    count: "4",
-    href: "/cms/support-system",
-    icon: "✚",
-  },
-  {
-    title: "Apotek",
-    desc: "Partner apotek",
-    count: "33+",
-    href: "/cms/pharmacies",
-    icon: "⌖",
-  },
-  {
-    title: "FAQ",
-    desc: "Pertanyaan umum",
-    count: "10",
-    href: "/cms/faq",
-    icon: "?",
-  },
-  {
-    title: "Leads",
-    desc: "Assessment & form",
-    count: "2",
-    href: "/cms/leads",
-    icon: "✉",
-  },
-  {
-    title: "Settings",
-    desc: "SEO & website",
-    count: "CMS",
-    href: "/cms/settings",
-    icon: "⚙",
+    label: "System",
+    menus: [
+      {
+        title: "Settings",
+        desc: "SEO & website",
+        count: "CMS",
+        href: "/cms/settings",
+        icon: "⚙",
+      },
+    ],
   },
 ];
+
+const cmsMenus = cmsMenuGroups.flatMap((group) => group.menus);
 
 type CmsAdminShellProps = {
   active:
     | "dashboard"
+    | "media"
     | "products"
     | "solutions"
     | "events"
@@ -86,6 +123,7 @@ type CmsAdminShellProps = {
 
 function isActiveMenu(active: CmsAdminShellProps["active"], href: string) {
   if (active === "dashboard") return href === "/cms";
+  if (active === "media") return href === "/cms/media";
   if (active === "products") return href === "/cms/products";
   if (active === "solutions") return href === "/cms/solutions";
   if (active === "events") return href === "/cms/events";
@@ -128,56 +166,68 @@ export function CmsAdminShell({
               </div>
             </div>
 
-            <nav className="flex-1 space-y-1 overflow-y-auto px-4 pb-5">
-              {cmsMenus.map((menu) => {
-                const selected = isActiveMenu(active, menu.href);
-                const disabled = menu.href === "#";
+            <nav className="flex-1 space-y-5 overflow-y-auto px-4 pb-5">
+              {cmsMenuGroups.map((group) => (
+                <div key={group.label}>
+                  <p className="mb-2 px-4 text-[10px] font-black uppercase tracking-[0.3em] text-white/30">
+                    {group.label}
+                  </p>
+                  <div className="space-y-1">
+                    {group.menus.map((menu) => {
+                      const selected = isActiveMenu(active, menu.href);
+                      const disabled = menu.href === "#";
 
-                return (
-                  <a
-                    key={menu.title}
-                    href={menu.href}
-                    className={`group flex items-center gap-3 rounded-[1.35rem] px-4 py-3 transition ${
-                      selected
-                        ? "bg-white text-[#004b34] shadow-xl shadow-black/10"
-                        : disabled
-                          ? "cursor-not-allowed text-white/35"
-                          : "text-white/70 hover:bg-white/10 hover:text-white"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-base font-black transition ${
-                        selected
-                          ? "bg-[#e4f8ed] text-[#006b3f]"
-                          : "bg-white/10 text-white/70 group-hover:bg-white/15"
-                      }`}
-                    >
-                      {menu.icon}
-                    </span>
+                      return (
+                        <a
+                          key={menu.title}
+                          href={disabled ? undefined : menu.href}
+                          aria-disabled={disabled}
+                          className={`group flex items-center gap-3 rounded-[1.35rem] px-4 py-3 transition ${
+                            selected
+                              ? "bg-white text-[#004b34] shadow-xl shadow-black/10"
+                              : disabled
+                                ? "cursor-not-allowed text-white/35"
+                                : "text-white/70 hover:bg-white/10 hover:text-white"
+                          }`}
+                        >
+                          <span
+                            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-base font-black transition ${
+                              selected
+                                ? "bg-[#e4f8ed] text-[#006b3f]"
+                                : "bg-white/10 text-white/70 group-hover:bg-white/15"
+                            }`}
+                          >
+                            {menu.icon}
+                          </span>
 
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-black">{menu.title}</span>
-                      <span
-                        className={`mt-0.5 block truncate text-xs font-medium ${
-                          selected ? "text-[#006b3f]/70" : "text-white/40"
-                        }`}
-                      >
-                        {menu.desc}
-                      </span>
-                    </span>
+                          <span className="min-w-0 flex-1">
+                            <span className="block text-sm font-black">
+                              {menu.title}
+                            </span>
+                            <span
+                              className={`mt-0.5 block truncate text-xs font-medium ${
+                                selected ? "text-[#006b3f]/70" : "text-white/40"
+                              }`}
+                            >
+                              {menu.desc}
+                            </span>
+                          </span>
 
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-[10px] font-black ${
-                        selected
-                          ? "bg-[#006b3f] text-white"
-                          : "bg-white/10 text-white/45"
-                      }`}
-                    >
-                      {menu.count}
-                    </span>
-                  </a>
-                );
-              })}
+                          <span
+                            className={`rounded-full px-2.5 py-1 text-[10px] font-black ${
+                              selected
+                                ? "bg-[#006b3f] text-white"
+                                : "bg-white/10 text-white/45"
+                            }`}
+                          >
+                            {menu.count}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </nav>
 
             <div className="border-t border-white/10 p-5">
@@ -248,10 +298,11 @@ export function CmsAdminShell({
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-2">
-                {cmsMenus.slice(0, 4).map((menu) => (
+                {cmsMenus.slice(0, 6).map((menu) => (
                   <a
                     key={menu.title}
-                    href={menu.href}
+                    href={menu.href === "#" ? undefined : menu.href}
+                    aria-disabled={menu.href === "#"}
                     className={`rounded-2xl px-4 py-3 text-sm font-black ${
                       isActiveMenu(active, menu.href)
                         ? "bg-[#006b3f] text-white"
