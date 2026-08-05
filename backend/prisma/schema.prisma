@@ -14,19 +14,42 @@ enum AdminRole {
   VIEWER
 }
 
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum ArticleAuditAction {
+  CREATE
+  UPDATE
+  PUBLISH
+  UNPUBLISH
+  SCHEDULE
+  ARCHIVE
+  DELETE
+  RESTORE
+  DUPLICATE
+}
+
 model AdminUser {
-  id               String         @id @default(cuid())
+  id               String            @id @default(cuid())
   name             String
-  email            String         @unique
+  email            String            @unique
   passwordHash     String
-  role             AdminRole      @default(EDITOR)
-  isActive         Boolean        @default(true)
-  failedLoginCount Int            @default(0)
+  role             AdminRole         @default(EDITOR)
+  isActive         Boolean           @default(true)
+  failedLoginCount Int               @default(0)
   lockedUntil      DateTime?
   lastLoginAt      DateTime?
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   sessions         AdminSession[]
+  authoredArticles Article[]         @relation("ArticleAuthor")
+  createdArticles  Article[]         @relation("ArticleCreator")
+  updatedArticles  Article[]         @relation("ArticleUpdater")
+  articleAuditLogs ArticleAuditLog[]
 
   @@index([role])
   @@index([isActive])
@@ -50,22 +73,107 @@ model AdminSession {
 }
 
 model MediaAsset {
-  id           String    @id @default(cuid())
-  filename     String
-  originalName String
-  storageKey   String    @unique
-  url          String
-  mimeType     String
-  size         Int
-  width        Int
-  height       Int
-  altText      String?
-  caption      String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  deletedAt    DateTime?
+  id            String    @id @default(cuid())
+  filename      String
+  originalName  String
+  storageKey    String    @unique
+  url           String
+  mimeType      String
+  size          Int
+  width         Int
+  height        Int
+  altText       String?
+  caption       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+  coverArticles Article[]
 
   @@index([mimeType])
   @@index([createdAt])
   @@index([deletedAt])
+}
+
+model ArticleCategory {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  articles    Article[]
+
+  @@index([deletedAt])
+}
+
+model Tag {
+  id        String       @id @default(cuid())
+  name      String
+  slug      String       @unique
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  articles  ArticleTag[]
+}
+
+model Article {
+  id             String            @id @default(cuid())
+  title          String
+  slug           String            @unique
+  excerpt        String
+  contentJson    Json
+  contentVersion Int               @default(1)
+  coverMediaId   String?
+  categoryId     String
+  authorId       String
+  seoTitle       String?
+  seoDescription String?
+  status         ArticleStatus     @default(DRAFT)
+  isFeatured     Boolean           @default(false)
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  deletedAt      DateTime?
+  createdById    String
+  updatedById    String
+  coverMedia     MediaAsset?       @relation(fields: [coverMediaId], references: [id], onDelete: SetNull)
+  category       ArticleCategory   @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  author         AdminUser         @relation("ArticleAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  createdBy      AdminUser         @relation("ArticleCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  updatedBy      AdminUser         @relation("ArticleUpdater", fields: [updatedById], references: [id], onDelete: Restrict)
+  tags           ArticleTag[]
+  auditLogs      ArticleAuditLog[]
+
+  @@index([status])
+  @@index([publishedAt])
+  @@index([categoryId])
+  @@index([isFeatured])
+  @@index([deletedAt])
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  createdAt DateTime @default(now())
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+  @@index([tagId])
+}
+
+model ArticleAuditLog {
+  id        String             @id @default(cuid())
+  articleId String
+  actorId   String?
+  action    ArticleAuditAction
+  changes   Json?
+  createdAt DateTime           @default(now())
+  article   Article            @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  actor     AdminUser?         @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([articleId, createdAt])
+  @@index([actorId])
+  @@index([action])
 }
