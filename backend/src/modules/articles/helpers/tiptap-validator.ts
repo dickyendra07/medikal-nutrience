@@ -138,6 +138,8 @@ export function validateTipTapDocument(value: unknown) {
   if (!isRecord(value) || value.type !== "doc") fail("dokumen utama harus bertipe doc.");
 
   const mediaIds = new Set<string>();
-  validateNode(value, 0, { count: 0, text: 0 }, mediaIds);
+  const state = { count: 0, text: 0 };
+  validateNode(value, 0, state, mediaIds);
+  if (state.text < 20) fail("konten utama minimal 20 karakter.");
   return { mediaIds: [...mediaIds] };
 }

@@ -37,6 +37,8 @@ export function MediaPicker({ open, onClose, onSelect, selectedId }: MediaPicker
   }, [mimeType, open, search]);
 
   useEffect(() => {
+    // Media dimuat saat picker dibuka atau filter berubah.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void load();
   }, [load]);
 

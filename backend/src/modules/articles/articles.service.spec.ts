@@ -39,8 +39,8 @@ function article(overrides: Record<string, unknown> = {}) {
     deletedAt: null,
     createdById: "admin-1",
     updatedById: "admin-1",
-    coverMedia: { id: "media-1", deletedAt: null },
-    category: { id: "category-1", name: "Nutrisi", slug: "nutrisi" },
+    coverMedia: { id: "media-1", filename: "media.png", originalName: "media.png", storageKey: "private/media.png", url: "/media.png", mimeType: "image/png", size: 100, width: 100, height: 50, altText: "Nutrisi", caption: null, createdAt: new Date(), updatedAt: new Date(), deletedAt: null },
+    category: { id: "category-1", name: "Nutrisi", slug: "nutrisi", description: null, createdAt: new Date(), updatedAt: new Date(), deletedAt: null },
     author: { id: "admin-1", name: "Editor", email: "editor@example.com" },
     createdBy: { id: "admin-1", name: "Editor" },
     updatedBy: { id: "admin-1", name: "Editor" },
@@ -82,7 +82,7 @@ function createSetup() {
       findFirst: jest.fn().mockResolvedValue({ id: "admin-1" }),
       findMany: jest.fn().mockResolvedValue([]),
     },
-    mediaAsset: { count: jest.fn().mockResolvedValue(1) },
+    mediaAsset: { findMany: jest.fn().mockResolvedValue([{ id: "media-1", url: "/media.png", width: 100, height: 50, altText: null, caption: null }]) },
     article: {
       findFirst: jest.fn().mockResolvedValue(null),
       findMany: jest.fn().mockResolvedValue([]),
@@ -170,8 +170,27 @@ describe("ArticlesService", () => {
 
   it("requires every referenced media asset to be active", async () => {
     const { service, prisma } = createSetup();
-    prisma.mediaAsset.count.mockResolvedValueOnce(0);
+    prisma.mediaAsset.findMany.mockResolvedValueOnce([]);
     await expect(service.create(createDto(), admin)).rejects.toThrow("media artikel tidak valid");
+  });
+
+  it("replaces untrusted inline image URLs with Media Library metadata", async () => {
+    const { service, tx } = createSetup();
+    await service.create(createDto({
+      contentJson: {
+        type: "doc",
+        content: [
+          { type: "paragraph", content: [{ type: "text", text: "Konten artikel dengan gambar yang aman." }] },
+          { type: "mediaImage", attrs: { mediaId: "media-1", url: "https://attacker.invalid/image.png", alt: "Nutrisi", alignment: "center", width: 100 } },
+        ],
+      },
+    }), admin);
+
+    expect(tx.article.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({ contentJson: expect.objectContaining({ content: expect.arrayContaining([
+        expect.objectContaining({ attrs: expect.objectContaining({ mediaId: "media-1", url: "/media.png", naturalWidth: 100, naturalHeight: 50 }) }),
+      ]) }) }),
+    }));
   });
 
   it("soft deletes and restores an article safely", async () => {
@@ -192,5 +211,14 @@ describe("ArticlesService", () => {
     expect(prisma.article.findMany).toHaveBeenLastCalledWith(expect.objectContaining({
       where: expect.objectContaining({ status: ArticleStatus.PUBLISHED, deletedAt: null, publishedAt: { lte: expect.any(Date) } }),
     }));
+  });
+
+  it("returns a minimal public payload without author email or media storage keys", async () => {
+    const { service, prisma } = createSetup();
+    prisma.article.findFirst.mockResolvedValueOnce(article({ status: ArticleStatus.PUBLISHED, publishedAt: new Date() }));
+    const result = await service.getPublic("artikel-nutrisi");
+    expect(result.author).toEqual({ id: "admin-1", name: "Editor" });
+    expect(result.coverMedia).toEqual(expect.objectContaining({ id: "media-1", url: "/media.png" }));
+    expect(result.coverMedia).not.toHaveProperty("storageKey");
   });
 });

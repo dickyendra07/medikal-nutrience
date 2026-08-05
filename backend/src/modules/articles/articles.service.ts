@@ -144,7 +144,7 @@ export class ArticlesService {
 
   async create(dto: CreateArticleDto, admin: CurrentAdminUser) {
     const content = validateTipTapDocument(dto.contentJson);
-    await this.ensureRelations(dto.categoryId, dto.authorId, dto.coverMediaId, content.mediaIds);
+    const media = await this.ensureRelations(dto.categoryId, dto.authorId, dto.coverMediaId, content.mediaIds);
     const workflow = this.workflow(dto.status ?? ArticleStatus.DRAFT, dto.publishedAt, dto.scheduledAt);
     const tags = this.sanitizeTags(dto.tags ?? []);
 
@@ -156,7 +156,7 @@ export class ArticlesService {
             title: dto.title.trim(),
             slug: slugify(dto.slug),
             excerpt: dto.excerpt.trim(),
-            contentJson: dto.contentJson as Prisma.InputJsonValue,
+            contentJson: this.canonicalizeMedia(dto.contentJson, media),
             coverMediaId: optionalText(dto.coverMediaId),
             categoryId: dto.categoryId,
             authorId: dto.authorId,
@@ -187,7 +187,7 @@ export class ArticlesService {
     const existing = await this.repository.findById(id);
     if (!existing || existing.deletedAt) throw new NotFoundException("Artikel tidak ditemukan.");
     const contentValidation = dto.contentJson ? validateTipTapDocument(dto.contentJson) : null;
-    await this.ensureRelations(
+    const media = await this.ensureRelations(
       dto.categoryId ?? existing.categoryId,
       dto.authorId ?? existing.authorId,
       dto.coverMediaId !== undefined ? dto.coverMediaId : existing.coverMediaId ?? undefined,
@@ -215,7 +215,7 @@ export class ArticlesService {
             ...(dto.title !== undefined ? { title: dto.title.trim() } : {}),
             ...(dto.slug !== undefined ? { slug: slugify(dto.slug) } : {}),
             ...(dto.excerpt !== undefined ? { excerpt: dto.excerpt.trim() } : {}),
-            ...(dto.contentJson !== undefined ? { contentJson: dto.contentJson as Prisma.InputJsonValue } : {}),
+            ...(dto.contentJson !== undefined ? { contentJson: this.canonicalizeMedia(dto.contentJson, media) } : {}),
             ...(dto.coverMediaId !== undefined ? { coverMediaId: optionalText(dto.coverMediaId) } : {}),
             ...(dto.categoryId !== undefined ? { categoryId: dto.categoryId } : {}),
             ...(dto.authorId !== undefined ? { authorId: dto.authorId } : {}),
@@ -461,14 +461,42 @@ export class ArticlesService {
   private async ensureRelations(categoryId: string, authorId: string, coverMediaId: string | undefined, inlineMediaIds: string[]) {
     const prisma = this.repository.prisma;
     const mediaIds = [...new Set([...(coverMediaId?.trim() ? [coverMediaId.trim()] : []), ...inlineMediaIds])];
-    const [category, author, mediaCount] = await Promise.all([
+    const [category, author, media] = await Promise.all([
       prisma.articleCategory.findFirst({ where: { id: categoryId, deletedAt: null }, select: { id: true } }),
       prisma.adminUser.findFirst({ where: { id: authorId, isActive: true }, select: { id: true } }),
-      mediaIds.length ? prisma.mediaAsset.count({ where: { id: { in: mediaIds }, deletedAt: null } }) : 0,
+      mediaIds.length ? prisma.mediaAsset.findMany({ where: { id: { in: mediaIds }, deletedAt: null } }) : [],
     ]);
     if (!category) throw new BadRequestException("Kategori artikel tidak valid.");
     if (!author) throw new BadRequestException("Penulis artikel tidak valid.");
-    if (mediaCount !== mediaIds.length) throw new BadRequestException("Satu atau lebih media artikel tidak valid.");
+    if (media.length !== mediaIds.length) throw new BadRequestException("Satu atau lebih media artikel tidak valid.");
+    return media;
+  }
+
+  private canonicalizeMedia(content: Record<string, unknown>, media: Array<{ id: string; url: string; width: number; height: number; altText: string | null; caption: string | null }>) {
+    const mediaById = new Map(media.map((item) => [item.id, item]));
+    const visit = (value: unknown): unknown => {
+      if (Array.isArray(value)) return value.map(visit);
+      if (!value || typeof value !== "object") return value;
+      const node = value as Record<string, unknown>;
+      const copy: Record<string, unknown> = {};
+      for (const [key, child] of Object.entries(node)) copy[key] = visit(child);
+      if (node.type === "mediaImage" && node.attrs && typeof node.attrs === "object") {
+        const attrs = { ...(node.attrs as Record<string, unknown>) };
+        const asset = typeof attrs.mediaId === "string" ? mediaById.get(attrs.mediaId) : undefined;
+        if (asset) {
+          copy.attrs = {
+            ...attrs,
+            url: asset.url,
+            alt: typeof attrs.alt === "string" && attrs.alt.trim() ? attrs.alt.trim() : asset.altText ?? "",
+            caption: typeof attrs.caption === "string" ? attrs.caption.trim() : asset.caption ?? "",
+            naturalWidth: asset.width,
+            naturalHeight: asset.height,
+          };
+        }
+      }
+      return copy;
+    };
+    return visit(content) as Prisma.InputJsonValue;
   }
 
   private sanitizeTags(values: string[]) {
@@ -506,6 +534,17 @@ export class ArticlesService {
 
   private serializePublic(article: ArticleWithRelations) {
     const serialized = this.serialize(article);
+    const coverMedia = serialized.coverMedia
+      ? {
+          id: serialized.coverMedia.id,
+          url: serialized.coverMedia.url,
+          mimeType: serialized.coverMedia.mimeType,
+          width: serialized.coverMedia.width,
+          height: serialized.coverMedia.height,
+          altText: serialized.coverMedia.altText,
+          caption: serialized.coverMedia.caption,
+        }
+      : null;
     return {
       id: serialized.id,
       title: serialized.title,
@@ -513,15 +552,20 @@ export class ArticlesService {
       excerpt: serialized.excerpt,
       contentJson: serialized.contentJson,
       contentVersion: serialized.contentVersion,
-      coverMedia: serialized.coverMedia,
-      category: serialized.category,
-      author: serialized.author,
+      coverMedia,
+      category: {
+        id: serialized.category.id,
+        name: serialized.category.name,
+        slug: serialized.category.slug,
+        description: serialized.category.description,
+      },
+      author: { id: serialized.author.id, name: serialized.author.name },
       seoTitle: serialized.seoTitle,
       seoDescription: serialized.seoDescription,
       isFeatured: serialized.isFeatured,
       publishedAt: serialized.publishedAt,
       updatedAt: serialized.updatedAt,
-      tags: serialized.tags,
+      tags: article.tags.map(({ tag: { id, name, slug } }) => ({ id, name, slug })),
     };
   }
 
