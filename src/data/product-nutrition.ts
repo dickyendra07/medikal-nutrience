@@ -610,6 +610,149 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
   },
 
+  "nephrisol-d": {
+    displayName: "Nephrisol-D",
+    category: "Clinical Nutrition Formula",
+
+    productInformation: {
+      background:
+        "Nephrisol-D diformulasikan khusus untuk membantu memenuhi kebutuhan gizi pasien penyakit ginjal kronik dengan terapi dialisis (CAPD dan HD). Formula ini memiliki kandungan tinggi kalori dan protein, rendah laktosa, serta diperkaya dengan vitamin, mineral, dan serat pangan.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 150 ml air menghasilkan 200 ml larutan.",
+
+      servingPer100ml:
+        "35 gram serbuk ke 75 ml air.",
+
+      osmolality:
+        "487 mOsmol/kg air.",
+
+      flavors: [
+        "Vanilla",
+        "Cappuccino",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 210 gram (3 sachet x 70 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
+
+      composition:
+        "Base bubuk, serat pangan inulin, isomaltulosa, MCT, perisa, steviol, premiks vitamin dan mineral.",
+
+      specificComposition: [
+        "9 Asam Amino Esensial",
+        "11 Asam Amino Non Esensial",
+        "Inulin",
+        "MCT",
+      ],
+    },
+
+    variants: [
+      {
+        name: "Vanilla",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL-D/NEPHRISOL-D VANILA 1.png",
+      },
+      {
+        name: "Cappuccino",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL-D/NEPHRISOL-D - CAPPUCINO 1.png",
+      },
+    ],
+
+    disclaimer: [
+      "* Persen AKG berdasarkan kebutuhan energi 2150 kkal.",
+    ],
+
+    targetAudience: {
+      title: "Siapa yang Membutuhkan Nephrisol-D?",
+      description:
+        "Formula nutrisi klinis untuk membantu memenuhi kebutuhan pasien penyakit ginjal kronik dengan terapi dialisis.",
+    },
+
+    title: "Nutrition Facts",
+    subtitle:
+      "Informasi nutrisi lengkap untuk membantu memenuhi kebutuhan pasien ginjal kronik dengan terapi dialisis.",
+
+    serving: "Per Sajian Mengandung",
+
+    nutrition: [
+      { name: "Energi Total", value: "315", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "100,8", unit: "kkal" },
+      { name: "Lemak Total", value: "11,2", unit: "g" },
+      { name: "Lemak Tak Jenuh Tunggal", value: "4,2", unit: "g" },
+      { name: "Lemak Tak Jenuh Ganda", value: "2,45", unit: "g" },
+      { name: "Lemak Trans", value: "0", unit: "g" },
+      { name: "Kolesterol", value: "24,5", unit: "mg" },
+      { name: "Lemak Jenuh", value: "4,2", unit: "g" },
+      { name: "Protein", value: "11,9", unit: "g" },
+      { name: "Karbohidrat Total", value: "42", unit: "g" },
+      { name: "Serat Pangan", value: "4,2", unit: "g" },
+      { name: "Inulin", value: "4,2", unit: "g" },
+      { name: "Total Gula", value: "6,3", unit: "g" },
+      { name: "Laktosa", value: "0", unit: "g" },
+      { name: "Natrium", value: "84", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin A", value: "300", unit: "mcg" },
+      { name: "Vitamin B1", value: "0,5", unit: "mg" },
+      { name: "Vitamin B2", value: "0,6", unit: "mg" },
+      { name: "Vitamin B3", value: "8", unit: "mg" },
+      { name: "Vitamin B5", value: "3", unit: "mg" },
+      { name: "Vitamin B6", value: "0,7", unit: "mg" },
+      { name: "Asam Folat", value: "120", unit: "mcg" },
+      { name: "Vitamin B12", value: "1,2", unit: "mcg" },
+      { name: "Vitamin C", value: "40", unit: "mg" },
+      { name: "Vitamin D3", value: "5", unit: "mcg" },
+      { name: "Vitamin E", value: "6", unit: "mg" },
+      { name: "Vitamin K", value: "7", unit: "mcg" },
+      { name: "Biotin", value: "15", unit: "mcg" },
+    ],
+
+    components: [
+      { name: "9 Asam Amino Esensial", value: "9", unit: "jenis" },
+      { name: "11 Asam Amino Non Esensial", value: "11", unit: "jenis" },
+    ],
+
+    highlights: [
+      {
+        title: "Rendah Protein",
+        description:
+          "Disesuaikan untuk kebutuhan pasien dengan kondisi ginjal tertentu.",
+        icon:
+          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Rendah Protein.svg",
+      },
+      {
+        title: "Kandungan Mikronutrien",
+        description:
+          "Mengandung vitamin dan mineral untuk mendukung pemenuhan nutrisi.",
+        icon:
+          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Kandungan Mikronutrien.svg",
+      },
+      {
+        title: "Khusus untuk Ginjal Non Dialisis",
+        description:
+          "Formula nutrisi klinis untuk kebutuhan pasien ginjal.",
+        icon:
+          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Khusus untuk Ginjal Non Dialisis.svg",
+      },
+      {
+        title: "Vitamin dan Mineral",
+        description:
+          "Diperkaya dengan vitamin dan mineral.",
+        icon:
+          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Dengan 13 Vitamin dan 6 Mineral.svg",
+      },
+    ],
+  },
+
+
   "hepatosol-lola": {
     displayName: "Hepatosol Lola",
 

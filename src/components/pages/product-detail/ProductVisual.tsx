@@ -40,7 +40,7 @@ const productAssets: Record<
   "nephrisol-d": {
     logo: mednutAssets.productLogos.nephrisolD,
     packshot: mednutAssets.packshots.nephrisolDVanila,
-    secondaryPackshot: mednutAssets.packshots.nephrisolDCappucino,
+    secondaryPackshot: mednutAssets.packshots.nephrisolDVanilaSecondary,
   },
   nephrisol: {
     logo: mednutAssets.productLogos.nephrisol,

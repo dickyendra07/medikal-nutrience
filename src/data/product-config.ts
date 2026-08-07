@@ -44,6 +44,13 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionType: "clinical",
   },
 
+  "nephrisol-d": {
+    productInformation: true,
+    nutritionFacts: true,
+    variants: true,
+    nutritionType: "clinical",
+  },
+
   nephrisol: {
     productInformation: true,
     nutritionFacts: true,
