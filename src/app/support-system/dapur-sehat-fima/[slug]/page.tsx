@@ -104,10 +104,15 @@ export default async function DapurSehatFimaDetailPage({
                 <ul className="mt-5 grid gap-3">
                   {recipe.ingredients.map((ingredient) => (
                     <li
-                      key={ingredient}
+                      key={ingredient.name}
                       className="rounded-2xl bg-[#f8fcfa] px-5 py-4 text-sm font-bold leading-7 text-[#334155] ring-1 ring-black/5"
                     >
-                      {ingredient}
+                      <p className="font-semibold text-[#111827]">
+                        {ingredient.name}
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-[#64748b]">
+                        Nilai gizi: {ingredient.nutrition}
+                      </p>
                     </li>
                   ))}
                 </ul>

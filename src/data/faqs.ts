@@ -13,7 +13,7 @@ export const faqs: FaqItem[] = [
     category:"Tentang Medikal Nutrience",
     question:"Apa itu Medikal Nutrience?",
     answer:
-      "Medical Nutrience menyediakan berbagai produk nutrisi medis yang dirancang untuk mendukung kebutuhan nutrisi pada berbagai kondisi kesehatan maupun untuk menjaga kesehatan sehari-hari."
+      "Medical Nutrience merupakan lini produk nutrisi medis dari PT Kalbe Farma Tbk. yang menghadirkan berbagai solusi nutrisi untuk membantu memenuhi kebutuhan nutrisi pada berbagai kondisi kesehatan maupun untuk mendukung kesehatan sehari-hari. Dengan pengalaman Kalbe di bidang kesehatan, Medical Nutrience berkomitmen menyediakan produk nutrisi berkualitas yang dikembangkan berdasarkan kebutuhan pasien, tenaga kesehatan, dan masyarakat."
   },
 
 

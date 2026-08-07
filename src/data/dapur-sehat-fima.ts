@@ -1,3 +1,8 @@
+export type FimaIngredient = {
+  name: string;
+  nutrition: string;
+};
+
 export type FimaRecipe = {
   slug: string;
   title: string;
@@ -6,7 +11,7 @@ export type FimaRecipe = {
   image: string;
   excerpt: string;
   description: string;
-  ingredients: string[];
+  ingredients: FimaIngredient[];
   steps: string[];
   nutritionNotes: string[];
 };
@@ -23,10 +28,26 @@ export const fimaRecipes: FimaRecipe[] = [
     description:
       "Smoothie Pisang Entrakid adalah contoh menu praktis yang dapat disiapkan di rumah sebagai variasi asupan anak. Menu ini menggabungkan pisang, susu, dan Entrakid sesuai arahan penyajian untuk membantu mendukung kebutuhan nutrisi harian si kecil.",
     ingredients: [
-      "1 buah pisang matang",
-      "200 ml susu cair atau air matang sesuai kebutuhan",
-      "Entrakid sesuai takaran saji pada kemasan",
-      "Es batu secukupnya bila diperlukan",
+      {
+        name: "1 buah pisang matang",
+        nutrition:
+          "Mengandung energi, karbohidrat, serat, serta beberapa vitamin dan mineral.",
+      },
+      {
+        name: "200 ml susu cair atau air matang sesuai kebutuhan",
+        nutrition:
+          "Memberikan tambahan energi dan nutrisi sesuai jenis susu yang digunakan.",
+      },
+      {
+        name: "Entrakid sesuai takaran saji pada kemasan",
+        nutrition:
+          "Mengandung kombinasi nutrisi sesuai formulasi produk Entrakid.",
+      },
+      {
+        name: "Es batu secukupnya bila diperlukan",
+        nutrition:
+          "Tidak memberikan tambahan nilai gizi yang signifikan.",
+      },
     ],
     steps: [
       "Potong pisang menjadi beberapa bagian agar mudah diblender.",
@@ -51,10 +72,26 @@ export const fimaRecipes: FimaRecipe[] = [
     description:
       "Oatmeal Entramix Buah dapat menjadi variasi sarapan lembut dan mudah dikonsumsi. Cocok sebagai inspirasi menu harian untuk membantu memenuhi kebutuhan energi.",
     ingredients: [
-      "Oatmeal secukupnya",
-      "Air hangat atau susu cair",
-      "Entramix sesuai takaran saji pada kemasan",
-      "Potongan buah sesuai selera",
+      {
+        name: "Oatmeal secukupnya",
+        nutrition:
+          "Sumber karbohidrat kompleks dan serat untuk membantu memenuhi kebutuhan energi.",
+      },
+      {
+        name: "Air hangat atau susu cair",
+        nutrition:
+          "Memberikan cairan dan tambahan nutrisi sesuai pilihan bahan.",
+      },
+      {
+        name: "Entramix sesuai takaran saji pada kemasan",
+        nutrition:
+          "Mengandung kombinasi nutrisi sesuai formulasi produk Entramix.",
+      },
+      {
+        name: "Potongan buah sesuai selera",
+        nutrition:
+          "Memberikan tambahan vitamin, mineral, dan variasi rasa.",
+      },
     ],
     steps: [
       "Masak oatmeal hingga tekstur lembut.",
@@ -79,10 +116,26 @@ export const fimaRecipes: FimaRecipe[] = [
     description:
       "Puding Entrasoy Almond adalah contoh menu sederhana berbasis protein nabati yang dapat menjadi variasi hidangan keluarga.",
     ingredients: [
-      "Agar-agar plain secukupnya",
-      "Air matang",
-      "Entrasoy sesuai takaran saji pada kemasan",
-      "Potongan almond atau topping sesuai selera",
+      {
+        name: "Agar-agar plain secukupnya",
+        nutrition:
+          "Mengandung serat pangan dan membantu memberikan tekstur pada menu.",
+      },
+      {
+        name: "Air matang",
+        nutrition:
+          "Tidak memberikan tambahan nilai gizi yang signifikan.",
+      },
+      {
+        name: "Entrasoy sesuai takaran saji pada kemasan",
+        nutrition:
+          "Mengandung protein nabati dan nutrisi sesuai formulasi produk Entrasoy.",
+      },
+      {
+        name: "Potongan almond atau topping sesuai selera",
+        nutrition:
+          "Memberikan tambahan energi, lemak baik, dan variasi tekstur.",
+      },
     ],
     steps: [
       "Masak agar-agar dengan air sesuai petunjuk.",
