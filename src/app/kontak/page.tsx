@@ -11,13 +11,7 @@ const contactItems = [
     label: "Konsultasi",
     value: "Konsultasi Nutrisi",
     description: "Diskusikan kebutuhan nutrisi Anda bersama tim Medikal Nutrience.",
-  },
-  {
-    label: "Apotek",
-    value: "Apotek Resmi",
-    description: "Temukan produk Medikal Nutrience melalui kanal resmi.",
-  },
-];
+  },];
 
 export default function ContactPage() {
   return (
@@ -29,7 +23,7 @@ export default function ContactPage() {
           <div className="absolute left-[-180px] top-[-180px] h-[380px] w-[380px] rounded-full bg-[#d9f3e8]" />
           <div className="absolute bottom-[-220px] right-[-160px] h-[440px] w-[440px] rounded-full bg-[#c6f1df]" />
 
-          <div className="relative mx-auto grid w-full max-w-[1440px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <div className="relative mx-auto grid w-full max-w-[1440px] gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="reveal-left">
               <p className="inline-flex rounded-full bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.25em] text-[#006b3f] shadow-lg shadow-green-900/8 ring-1 ring-black/5">
                 Kontak Medikal Nutrience
@@ -44,17 +38,19 @@ export default function ContactPage() {
                 rekomendasi awal, dan arahan kanal pembelian resmi sesuai kebutuhan Anda.
               </p>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-3">
+              <div className="mt-8 grid max-w-[760px] gap-5 md:grid-cols-2">
                 {contactItems.map((item) => (
                   <div
                     key={item.label}
-                    className="min-w-0 rounded-[1.5rem] bg-white p-5 shadow-xl shadow-green-900/8 ring-1 ring-black/5"
+                    className="w-full rounded-[1.5rem] bg-white p-6 shadow-xl shadow-green-900/8 ring-1 ring-black/5"
                   >
                     <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[#006b3f]">
                       {item.label}
                     </p>
 
-                    <h3 className="mt-3 break-words text-base font-black leading-tight text-[#111827] md:text-lg">
+                    <h3
+                      className="mt-3 text-base font-black leading-tight tracking-tight text-[#111827] md:text-lg"
+                    >
                       {item.value}
                     </h3>
 
