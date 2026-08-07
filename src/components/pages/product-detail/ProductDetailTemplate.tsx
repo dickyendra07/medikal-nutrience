@@ -1,7 +1,8 @@
 import type { ProductDetail } from "@/data/product-details";
 import { WhyEntrakidSection } from "@/components/pages/product-detail/WhyEntrakidSection";
 import { mednutAssets } from "@/data/mednut-assets";
-import { clinicalNutritionProducts, productNutrition } from "@/data/product-nutrition";
+import { productNutrition } from "@/data/product-nutrition";
+import { productConfig } from "@/data/product-config";
 import { ProductNutritionFacts } from "@/components/pages/product-detail/ProductNutritionFacts";
 import { ProductClinicalNutritionFacts } from "@/components/pages/product-detail/ProductClinicalNutritionFacts";
 import { ProductInformationSection } from "@/components/pages/product-detail/ProductInformationSection";
@@ -46,6 +47,7 @@ function getBenefitIcons(product: ProductDetail) {
 export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
   const asset = getProductAsset(product);
   const benefitIcons = getBenefitIcons(product);
+  const config = productConfig[product.slug];
 
   return (
     <>
@@ -113,19 +115,22 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
         </div>
       </section>
 
-      {productNutrition[product.slug]?.productInformation ? (
+      {config?.productInformation &&
+      productNutrition[product.slug] ? (
         <ProductInformationSection
           data={productNutrition[product.slug]}
           color={product.theme.primary}
         />
       ) : null}
 
-      {product.slug === "entrakid" && productNutrition.entrakid ? (
+      {config?.nutritionType === "standard" &&
+      productNutrition[product.slug] ? (
         <ProductNutritionFacts
-          data={productNutrition.entrakid}
+          data={productNutrition[product.slug]}
           color={product.theme.primary}
         />
-      ) : clinicalNutritionProducts.includes(product.slug) && productNutrition[product.slug] ? (
+      ) : config?.nutritionType === "clinical" &&
+        productNutrition[product.slug] ? (
         <ProductClinicalNutritionFacts
           data={productNutrition[product.slug]}
           color={product.theme.primary}
