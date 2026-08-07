@@ -8,9 +8,7 @@ export function TopBar() {
         </p>
 
         <div className="hidden items-center gap-6 md:flex">
-          <a href="/mitra-enterprise" className="transition hover:text-[#d8f6e8]">
-            Mitra Enterprise
-          </a>
+          
           <a href="/apotek-resmi" className="transition hover:text-[#d8f6e8]">
             Apotek Resmi
           </a>
