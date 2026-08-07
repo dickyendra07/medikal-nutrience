@@ -50,7 +50,7 @@ export const mednutAssets = {
     nephrisolDCappucino: "/images/mednut/products/packshots/nephrisol-d-cappucino-1.png",
     hepatosolVanila: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL/HEPATOSOL VANILA 1.png",
     hepatosolCokelat: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL/HEPATOSOL COKELAT 1.png",
-    hepatosolLola: "/images/mednut/products/packshots/hepatosol-lola-1.png",
+    hepatosolLola: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL LOLA/HEPATOSOL LOLA 1.png",
     oligo: "/images/mednut/products/packshots/oligo-1.png",
     pulmosol: "/images/mednut/products/packshots/pulmosol-1.png",
   },

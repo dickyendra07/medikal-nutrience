@@ -477,13 +477,48 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
   "hepatosol-lola": {
     displayName: "Hepatosol Lola",
+
+    productInformation: {
+      background:
+        "Hepatosol LOLA merupakan nutrisi enteral yang lengkap untuk pasien dengan gangguan fungsi hati berat. Dengan kombinasi kandungan BCAA dan LOLA yang membantu menurunkan kadar amonia dalam darah, memperbaiki keseimbangan nitrogen dan rasio Fischer serta membantu menurunkan pemecahan protein sebagai sumber protein otot.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 250 ml air menghasilkan 303 ml larutan.",
+
+      servingPer100ml:
+        "27 gram serbuk ke 83 ml air.",
+
+      flavors: [
+        "Jeruk",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 249 gram (3 sachet x 83 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
+
+      composition:
+        "Dekstrin, Maltodekstrin, Konsentrat Protein Whey, Bubuk MCT, Inulin, Premiks Asam Amino, Natrium Klorida, Mononatrium Fosfat, Kalsium Karbonat, Trikalsium Fosfat.",
+
+      specificComposition: [
+        "MCT",
+        "BCAA",
+        "LOLA",
+        "Inulin",
+      ],
+    },
+
     category: "Clinical Nutrition Formula",
 
     variants: [
       {
         name: "Jeruk",
         image:
-          "/images/mednut/products/packshots/hepatosol-lola-1.png",
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL LOLA/HEPATOSOL LOLA 1.png",
       },
     ],
 
