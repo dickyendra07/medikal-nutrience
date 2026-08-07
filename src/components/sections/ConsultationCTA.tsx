@@ -41,7 +41,7 @@ export function ConsultationCTA() {
 
             <div className="relative hidden min-h-[260px] items-center justify-center overflow-hidden px-2 pb-4 lg:flex lg:min-h-[380px] lg:px-4 lg:py-4">
               <img
-                src="/images/support/konsultasi.png"
+                src="/images/support/konsultasi-new.png"
                 alt="Konsultasi nutrisi Medikal Nutrience"
                 className="relative z-10 h-auto w-[118%] max-w-none object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.02] lg:w-[118%]"
               />
