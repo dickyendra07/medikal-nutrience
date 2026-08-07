@@ -61,6 +61,7 @@ export type ProductNutrition = {
 
 export const clinicalNutritionProducts = [
   "entramix",
+  "entrasoy",
   "hepatosol",
   "hepatosol-lola",
 ];
@@ -229,6 +230,110 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
   },
 
+
+  entrasoy: {
+    productInformation: {
+      background:
+        "Entrasoy by Entramix merupakan formula dengan 100% protein nabati dari isolat protein kedelai. Entrasoy mengandung tinggi protein, tinggi serat pangan, sumber 12 vitamin dan 8 mineral. Entrasoy bebas laktosa, bebas gluten, dan bebas kolesterol.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke 160 ml air menghasilkan 180 ml larutan.",
+
+      servingPer100ml:
+        "Mengikuti kebutuhan.",
+
+      osmolality:
+        "Kurang dari 250.",
+
+      flavors: [
+        "Almond Vanila",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 200 gram (5 sachet x 40 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
+
+      composition:
+        "Sari kacang kedelai bubuk, maltodextrin, isolat protein kedelai, serat pangan, sukrosa, vitamin dan mineral, perisa sintetik, pengemulsi nabati, bubuk almond, steviol, allergen.",
+
+      specificComposition: [
+        "Mengandung isoflavon",
+      ],
+    },
+
+    displayName: "Entrasoy",
+    category: "Plant Based Nutrition Formula",
+
+    title: "Nutrition Facts",
+
+    subtitle:
+      "Informasi nutrisi lengkap Entrasoy dengan protein nabati dari isolat protein kedelai.",
+
+    serving:
+      "Per Sajian Mengandung",
+
+    variants: [
+      {
+        name: "Almond Vanila",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY.png",
+      },
+    ],
+
+    disclaimer: [
+      "* Persen AKG berdasarkan kebutuhan energi 2150 kkal.",
+    ],
+
+    nutrition: [
+      { name: "Energi", value: "160", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "30", unit: "kkal" },
+      { name: "Lemak Total", value: "3,5", unit: "g" },
+      { name: "Lemak Tak Jenuh Tunggal", value: "0,5", unit: "g" },
+      { name: "Lemak Tak Jenuh Ganda", value: "1,5", unit: "g" },
+      { name: "Omega 3", value: "0", unit: "mg" },
+      { name: "Omega 6", value: "0", unit: "mg" },
+      { name: "Lemak Trans", value: "0", unit: "g" },
+      { name: "Kolesterol", value: "0", unit: "mg" },
+      { name: "Lemak Jenuh", value: "1", unit: "g" },
+      { name: "MCT", value: "0", unit: "g" },
+      { name: "Protein", value: "9", unit: "g" },
+      { name: "Karbohidrat Total", value: "25", unit: "g" },
+      { name: "Serat Pangan", value: "2,5", unit: "g" },
+      { name: "Inulin", value: "2", unit: "g" },
+      { name: "Gula Total", value: "6", unit: "g" },
+      { name: "Laktosa", value: "0", unit: "g" },
+      { name: "Garam (Natrium)", value: "130", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin A", value: "72", unit: "mcg" },
+      { name: "Vitamin B1", value: "0,15", unit: "mg" },
+      { name: "Vitamin B2", value: "0,18", unit: "mg" },
+      { name: "Vitamin B3", value: "2,1", unit: "mg" },
+      { name: "Vitamin B5", value: "0,5", unit: "mg" },
+      { name: "Vitamin B6", value: "0,18", unit: "mg" },
+      { name: "Asam Folat", value: "44", unit: "mcg" },
+      { name: "Vitamin B12", value: "0,27", unit: "mcg" },
+      { name: "Vitamin C", value: "9", unit: "mg" },
+      { name: "Vitamin D3", value: "1,6", unit: "mcg" },
+      { name: "Vitamin E", value: "1,6", unit: "mg" },
+      { name: "Biotin", value: "3,2", unit: "mcg" },
+      { name: "Kalium", value: "300", unit: "mg" },
+      { name: "Kalsium", value: "133", unit: "mg" },
+      { name: "Magnesium", value: "66", unit: "mg" },
+      { name: "Fosfor", value: "84", unit: "mg" },
+      { name: "Besi", value: "3,1", unit: "mg" },
+      { name: "Yodium", value: "17", unit: "mcg" },
+      { name: "Selenium", value: "3", unit: "mcg" },
+      { name: "Kromium", value: "Tidak diukur" },
+      { name: "Seng", value: "1,5", unit: "mg" },
+    ],
+  },
 
   hepatosol: {
     displayName: "Hepatosol",

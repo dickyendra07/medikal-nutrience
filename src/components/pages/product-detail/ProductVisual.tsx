@@ -26,6 +26,7 @@ const productAssets: Record<
   entrasoy: {
     logo: mednutAssets.productLogos.entrasoy,
     packshot: mednutAssets.packshots.entrasoy,
+    secondaryPackshot: mednutAssets.packshots.entrasoySecondary,
   },
   "hepatosol-lola": {
     logo: mednutAssets.productLogos.hepatosolLola,
