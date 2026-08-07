@@ -23,7 +23,11 @@ export async function saveFimaRecipe(
     description: String(formData.get("description")),
     ingredients: String(formData.get("ingredients"))
       .split("\n")
-      .filter(Boolean),
+      .filter(Boolean)
+      .map((ingredient) => ({
+        name: ingredient,
+        nutrition: "",
+      })),
     steps: String(formData.get("steps"))
       .split("\n")
       .filter(Boolean),
