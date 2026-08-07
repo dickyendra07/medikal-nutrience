@@ -336,6 +336,40 @@ export const productNutrition: Record<string, ProductNutrition> = {
   },
 
   hepatosol: {
+    productInformation: {
+      background:
+        "Hepatosol merupakan nutrisi adekuat dengan nutrien spesifik seperti BCAA dan Lemak Rantai Sedang (MCT) yang dapat membantu mempercepat pemulihan. Solusi untuk pemenuhan nutrisi malam hari sebelum beristirahat.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 300 ml air menghasilkan 363 ml larutan.",
+
+      servingPer100ml:
+        "22 gram serbuk ke 83 ml air.",
+
+      flavors: [
+        "Vanilla",
+        "Coklat",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 240 gram (3 sachet x 80 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
+
+      composition:
+        "Maltodekstrin, Bubuk MCT, Sukrosa, Isolat Protein Whey, Konsentrat Protein Whey, Inulin, Premiks Asam Amino (BCAA), Natrium Klorida, Kalsium Karbonat, Mononatrium Fosfat, Bubuk Lemak Nabati, Vitamin & Mineral.",
+
+      specificComposition: [
+        "MCT",
+        "BCAA",
+        "Inulin",
+      ],
+    },
+
     displayName: "Hepatosol",
     category: "Clinical Nutrition Formula",
 
