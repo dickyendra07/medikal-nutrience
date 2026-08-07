@@ -45,6 +45,7 @@ const productAssets: Record<
   nephrisol: {
     logo: mednutAssets.productLogos.nephrisol,
     packshot: mednutAssets.packshots.nephrisolCappucino,
+    secondaryPackshot: mednutAssets.packshots.nephrisolCappucinoSecondary,
   },
   oligo: {
     logo: mednutAssets.productLogos.oligo,
