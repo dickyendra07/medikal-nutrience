@@ -43,8 +43,27 @@ export type ProductNutrition = {
     description: string;
     items?: string[];
   };
+
+  productInformation?: {
+    background?: string;
+    servingInstruction?: string;
+    servingPer100ml?: string;
+    osmolality?: string;
+    flavors?: string[];
+    availability?: string;
+    packaging?: string;
+    storage?: string;
+    composition?: string;
+    specificComposition?: string[];
+  };
 };
 
+
+export const clinicalNutritionProducts = [
+  "entramix",
+  "hepatosol",
+  "hepatosol-lola",
+];
 
 export const productNutrition: Record<string, ProductNutrition> = {
   entrakid: {
@@ -96,6 +115,120 @@ export const productNutrition: Record<string, ProductNutrition> = {
       { name: "Selenium", value: "2,4", unit: "mcg", percentage: "8%" },
     ],
   },
+
+  entramix: {
+    productInformation: {
+      background:
+        "Minuman berbasis whey bubuk dengan sumber protein, sumber serat pangan, sumber kalsium, rendah laktosa, mengandung 12 vitamin dan 8 mineral untuk memenuhi gizi seimbang pada dewasa dan lansia. Entramix digunakan untuk melengkapi gaya hidup sehat dengan pola makan gizi lengkap dan seimbang. Entramix mendukung pemenuhan nutrisi dan aktivitas sehari-hari.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 250 ml larutan.",
+
+      servingPer100ml:
+        "23 gram serbuk ke 80 ml air.",
+
+      osmolality:
+        "Kurang dari 250.",
+
+      flavors: [
+        "Vanilla",
+        "Coklat",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 174 gram (3 x 58 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
+
+      composition:
+        "Base bubuk maltodextrin, kalsium kaseinat, lemak nabati (mengandung protein susu dan antioksidan askorbil palmitat dan tokoferol), protein whey, MCT, serat pangan, sukrosa, premiks vitamin dan mineral.",
+
+      specificComposition: [
+        "Protein",
+        "MCT",
+        "Omega 3",
+        "Omega 6",
+        "Serat Pangan",
+      ],
+    },
+
+    displayName: "Entramix",
+    category: "Adult & Elderly Nutrition Formula",
+
+    title: "Nutrition Facts",
+
+    subtitle:
+      "Informasi nutrisi lengkap Entramix untuk membantu memenuhi kebutuhan gizi seimbang dewasa hingga lansia.",
+
+    serving: "Per Sajian Mengandung",
+
+    variants: [
+      {
+        name: "Vanila",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+      },
+      {
+        name: "Cokelat",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX COKELAT 1.png",
+      },
+    ],
+
+    disclaimer: [
+      "* Persen AKG berdasarkan kebutuhan energi 2150 kkal.",
+    ],
+
+    nutrition: [
+      { name: "Energi", value: "250", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "54", unit: "kkal" },
+      { name: "Lemak Total", value: "6", unit: "g" },
+      { name: "Lemak Tak Jenuh Tunggal", value: "0", unit: "g" },
+      { name: "Lemak Tak Jenuh Ganda", value: "0", unit: "g" },
+      { name: "Omega 3", value: "72", unit: "mg" },
+      { name: "Omega 6", value: "353", unit: "mg" },
+      { name: "Lemak Trans", value: "0", unit: "g" },
+      { name: "Kolesterol", value: "10", unit: "mg" },
+      { name: "Lemak Jenuh", value: "3", unit: "g" },
+      { name: "MCT", value: "3,5", unit: "g" },
+      { name: "Protein", value: "10", unit: "g" },
+      { name: "Karbohidrat Total", value: "38", unit: "g" },
+      { name: "Serat Pangan", value: "3", unit: "g" },
+      { name: "Inulin", value: "3", unit: "g" },
+      { name: "Gula Total", value: "9", unit: "g" },
+      { name: "Laktosa", value: "0", unit: "g" },
+      { name: "Garam / Natrium", value: "60", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin A", value: "", percentage: "20% AKG" },
+      { name: "Vitamin B1", value: "", percentage: "15% AKG" },
+      { name: "Vitamin B2", value: "", percentage: "15% AKG" },
+      { name: "Vitamin B3", value: "", percentage: "15% AKG" },
+      { name: "Vitamin B5", value: "", percentage: "15% AKG" },
+      { name: "Vitamin B6", value: "", percentage: "20% AKG" },
+      { name: "Asam Folat", value: "", percentage: "15% AKG" },
+      { name: "Vitamin B12", value: "", percentage: "15% AKG" },
+      { name: "Vitamin C", value: "", percentage: "30% AKG" },
+      { name: "Vitamin D3", value: "", percentage: "15% AKG" },
+      { name: "Vitamin E", value: "", percentage: "15% AKG" },
+      { name: "Biotin", value: "", percentage: "10% AKG" },
+      { name: "Kalium", value: "", percentage: "2% AKG" },
+      { name: "Kalsium", value: "", percentage: "15% AKG" },
+      { name: "Magnesium", value: "", percentage: "15% AKG" },
+      { name: "Fosfor", value: "", percentage: "20% AKG" },
+      { name: "Besi", value: "", percentage: "20% AKG" },
+      { name: "Yodium", value: "", percentage: "15% AKG" },
+      { name: "Selenium", value: "", percentage: "15% AKG" },
+      { name: "Kromium", value: "", percentage: "15% AKG" },
+      { name: "Seng", value: "", percentage: "15% AKG" },
+    ],
+  },
+
 
   hepatosol: {
     displayName: "Hepatosol",

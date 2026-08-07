@@ -37,8 +37,8 @@ export const mednutAssets = {
   packshots: {
     entrakidVanila: "/images/mednut/products/packshots/entrakid-vanila-1.png",
     entrakidCokelat: "/images/mednut/products/packshots/entrakid-cokelat-1.png",
-    entramixVanila: "/images/mednut/products/packshots/entramix-vanila-1.png",
-    entramixCokelat: "/images/mednut/products/packshots/entramix-cokelat-1.png",
+    entramixVanila: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+    entramixCokelat: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX COKELAT 1.png",
     entrasoy: "/images/mednut/products/packshots/entrasoy-1.png",
     peptisolVanila: "/images/mednut/products/packshots/peptisol-vanila-1.png",
     peptisolCokelat: "/images/mednut/products/packshots/peptisol-cokelat-1.png",

@@ -1,9 +1,10 @@
 import type { ProductDetail } from "@/data/product-details";
 import { WhyEntrakidSection } from "@/components/pages/product-detail/WhyEntrakidSection";
 import { mednutAssets } from "@/data/mednut-assets";
-import { productNutrition } from "@/data/product-nutrition";
+import { clinicalNutritionProducts, productNutrition } from "@/data/product-nutrition";
 import { ProductNutritionFacts } from "@/components/pages/product-detail/ProductNutritionFacts";
 import { ProductClinicalNutritionFacts } from "@/components/pages/product-detail/ProductClinicalNutritionFacts";
+import { ProductInformationSection } from "@/components/pages/product-detail/ProductInformationSection";
 import {
   getProductAsset,
   ProductVisual,
@@ -112,12 +113,19 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
         </div>
       </section>
 
+      {productNutrition[product.slug]?.productInformation ? (
+        <ProductInformationSection
+          data={productNutrition[product.slug]}
+          color={product.theme.primary}
+        />
+      ) : null}
+
       {product.slug === "entrakid" && productNutrition.entrakid ? (
         <ProductNutritionFacts
           data={productNutrition.entrakid}
           color={product.theme.primary}
         />
-      ) : (product.slug === "hepatosol" || product.slug === "hepatosol-lola") && productNutrition[product.slug] ? (
+      ) : clinicalNutritionProducts.includes(product.slug) && productNutrition[product.slug] ? (
         <ProductClinicalNutritionFacts
           data={productNutrition[product.slug]}
           color={product.theme.primary}
