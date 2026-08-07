@@ -31,7 +31,7 @@ export const mednutAssets = {
     hepatosol: "/images/mednut/products/logos/logo-hepatosol.png",
     hepatosolLola: "/images/mednut/products/logos/logo-hepatosol-lola.png",
     oligo: "/images/client-assets/img/logo/Oligo.png",
-    pulmosol: "/images/mednut/products/logos/logo-pulmosol.png",
+    pulmosol: "/images/client-assets/img/logo/pulmosol.png",
   },
 
   packshots: {
@@ -58,7 +58,8 @@ export const mednutAssets = {
     hepatosolLola: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL LOLA/HEPATOSOL LOLA 1.png",
     oligo: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png",
     oligoSecondary: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 2.png",
-    pulmosol: "/images/mednut/products/packshots/pulmosol-1.png",
+    pulmosol: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png",
+    pulmosolSecondary: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 2.png",
   },
 
   productIcons: {

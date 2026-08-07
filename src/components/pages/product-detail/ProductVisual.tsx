@@ -60,6 +60,7 @@ const productAssets: Record<
   pulmosol: {
     logo: mednutAssets.productLogos.pulmosol,
     packshot: mednutAssets.packshots.pulmosol,
+    secondaryPackshot: mednutAssets.packshots.pulmosolSecondary,
   },
 };
 

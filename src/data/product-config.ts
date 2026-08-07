@@ -58,6 +58,13 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionType: "clinical",
   },
 
+  pulmosol: {
+    productInformation: true,
+    nutritionFacts: true,
+    variants: true,
+    nutritionType: "clinical",
+  },
+
   oligo: {
     productInformation: true,
     nutritionFacts: true,

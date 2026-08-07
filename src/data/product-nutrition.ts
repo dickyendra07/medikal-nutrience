@@ -1174,4 +1174,129 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
   },
 
+  "pulmosol": {
+    displayName: "Pulmosol",
+
+    productInformation: {
+      background:
+        "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernapasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 240 ml larutan.",
+
+      servingPer100ml:
+        "21 gram serbuk ke 83 ml air.",
+
+      osmolality:
+        "221 mOsmol/kg air.",
+
+      flavors: [
+        "Creamy Vanilla",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 150 gram (3 sachet x 50 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung.",
+
+      composition:
+        "Base bubuk, MCT, isolat protein kedelai, serat pangan inulin, bubuk DHA, natrium askorbat, tokoferol, perisa sintetik, penstabil nabati, steviol, premiks vitamin mineral.",
+
+      specificComposition: [
+        "DHA",
+        "EPA",
+        "Isoleusin",
+        "Leusin",
+        "Valin",
+        "Omega 3",
+        "Omega 6",
+        "MCT",
+      ],
+    },
+
+    category: "Respiratory Nutrition Formula",
+
+    variants: [
+      {
+        name: "Creamy Vanilla",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png",
+      },
+    ],
+
+    title: "Nutrition Facts",
+    subtitle:
+      "Informasi nutrisi lengkap Pulmosol per sajian.",
+
+    serving:
+      "Per Sajian Mengandung",
+
+    nutrition: [
+      { name: "Energi Total", value: "240", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "100", unit: "kkal" },
+      { name: "Lemak Total", value: "11", unit: "g" },
+      { name: "Protein", value: "11,5", unit: "g" },
+      { name: "Karbohidrat Total", value: "23", unit: "g" },
+      { name: "Total Gula", value: "7", unit: "g" },
+      { name: "Laktosa", value: "1", unit: "g" },
+      { name: "Serat Pangan", value: "1,5", unit: "g" },
+      { name: "Garam (Natrium)", value: "50", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin D", value: "tinggi", unit: "" },
+      { name: "10 Vitamin", value: "1", unit: "formula" },
+      { name: "5 Mineral", value: "1", unit: "formula" },
+    ],
+
+    components: [
+      { name: "Omega 3", value: "360", unit: "mg" },
+      { name: "Omega 6", value: "1600", unit: "mg" },
+      { name: "MCT", value: "1,25", unit: "g" },
+      { name: "DHA", value: "", unit: "" },
+      { name: "EPA", value: "", unit: "" },
+    ],
+
+    highlightTitle:
+      "Keunggulan Utama Pulmosol",
+
+    highlightSubtitle:
+      "Formula nutrisi khusus untuk mendukung kebutuhan pasien dengan gangguan pernapasan.",
+
+    highlights: [
+      {
+        title: "Tinggi Protein",
+        description:
+          "Mendukung pemenuhan kebutuhan protein.",
+        icon:
+          "/images/mednut/products/icons/pulmosol/tinggi-protein.svg",
+      },
+      {
+        title: "Tinggi Lemak",
+        description:
+          "Mengandung lemak baik untuk kebutuhan energi.",
+        icon:
+          "/images/mednut/products/icons/pulmosol/tinggi-lemak.svg",
+      },
+      {
+        title: "Karbohidrat Rendah",
+        description:
+          "Formula dengan komposisi karbohidrat terkontrol.",
+        icon:
+          "/images/mednut/products/icons/pulmosol/karbohidrat-rendah.svg",
+      },
+      {
+        title: "Vitamin Mineral Antioksidan",
+        description:
+          "Diperkaya vitamin dan mineral untuk mendukung nutrisi.",
+        icon:
+          "/images/mednut/products/icons/pulmosol/vitamin-mineral-antioksidan.svg",
+      },
+    ],
+  },
+
 };
