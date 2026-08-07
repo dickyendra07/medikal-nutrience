@@ -45,7 +45,7 @@ export function ProductVariantSwitcher({
         {variants.map((variant, index) => (
 
           <button
-            key={variant.name}
+            key={`${variant.name}-${index}`}
             onClick={() => setActive(index)}
             className="
               flex-1

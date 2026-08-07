@@ -210,10 +210,10 @@ export function ProductInformationSection({
 
               <div className="mt-10 grid gap-8 md:grid-cols-2">
 
-                {data.variants.map((variant) => (
+                {data.variants.map((variant, index) => (
 
                   <div
-                    key={variant.name}
+                    key={`${variant.name}-${index}`}
                     className="reveal-scale rounded-[2.5rem] bg-white p-8 text-center shadow-xl ring-1 ring-black/5"
                   >
 
