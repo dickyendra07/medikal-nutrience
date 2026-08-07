@@ -1034,5 +1034,144 @@ export const productNutrition: Record<string, ProductNutrition> = {
       },
     ],
   }
+,
+
+  "peptisol": {
+    displayName: "Peptisol",
+
+    productInformation: {
+      background:
+        "Peptisol merupakan nutrisi enteral tinggi protein (13 gram/saji) dengan formula rendah residu untuk membantu memenuhi kebutuhan diet tinggi protein pada fase pemulihan, pasca pembedahan, sarkopenia, peningkatan kebutuhan protein, serta kondisi yang membutuhkan dukungan nutrisi tinggi protein.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 250 ml larutan.",
+
+      servingPer100ml:
+        "22 gram serbuk ke 80 ml air.",
+
+      flavors: [
+        "Vanilla",
+        "Coklat",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 180 gram (3 sachet x 60 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan hindari paparan sinar matahari langsung.",
+
+      composition:
+        "Maltodekstrin, Protein Whey Terhidrolisa, Lemak MCT, Isomaltulosa, Sukrosa, Vitamin & Mineral, DHA, Bubuk Pisang.",
+
+      specificComposition: [
+        "Whey",
+        "Kasein",
+        "Vitamin",
+        "Mineral",
+      ],
+    },
+
+    category: "Recovery Nutrition Formula",
+
+    variants: [
+      {
+        name: "Vanilla",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png",
+      },
+      {
+        name: "Coklat",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Cokelat 1.png",
+      },
+    ],
+
+    targetAudience: {
+      title: "Siapa yang Membutuhkan Peptisol?",
+      description:
+        "Nutrisi tinggi protein untuk membantu memenuhi kebutuhan protein pada fase pemulihan dan kondisi dengan kebutuhan protein meningkat.",
+    },
+
+    title: "Nutrition Facts",
+
+    subtitle:
+      "Informasi nutrisi lengkap Peptisol per sajian.",
+
+    serving:
+      "Per Sajian Mengandung",
+
+    nutrition: [
+      { name: "Energi Total", value: "240", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "20", unit: "kkal" },
+      { name: "Lemak Total", value: "2", unit: "g" },
+      { name: "Protein", value: "13", unit: "g" },
+      { name: "Karbohidrat Total", value: "40", unit: "g" },
+      { name: "Total Gula", value: "12", unit: "g" },
+      { name: "Laktosa", value: "0", unit: "g" },
+      { name: "Serat Pangan", value: "0", unit: "g" },
+      { name: "Garam (Natrium)", value: "140", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin A", value: "300", unit: "mcg" },
+      { name: "Vitamin B1", value: "0,28", unit: "mg" },
+      { name: "Vitamin B2", value: "0,24", unit: "mg" },
+      { name: "Vitamin B3", value: "3", unit: "mg" },
+      { name: "Vitamin B6", value: "0,39", unit: "mg" },
+      { name: "Vitamin B12", value: "0,24", unit: "mcg" },
+      { name: "Vitamin C", value: "9", unit: "mg" },
+      { name: "Vitamin D3", value: "0,6", unit: "mcg" },
+      { name: "Vitamin E", value: "1,5", unit: "mg" },
+    ],
+
+    components: [
+      { name: "Zinc", value: "0,78", unit: "mg" },
+      { name: "Kalsium", value: "110", unit: "mg" },
+      { name: "Magnesium", value: "35", unit: "mg" },
+      { name: "Fosfor", value: "105", unit: "mg" },
+      { name: "Kalium", value: "94", unit: "mg" },
+      { name: "Besi", value: "1,32", unit: "mg" },
+    ],
+
+    highlightTitle:
+      "Keunggulan Utama Peptisol",
+
+    highlightSubtitle:
+      "Formula tinggi protein dengan dukungan zinc untuk membantu proses pemulihan.",
+
+    highlights: [
+      {
+        title: "Tinggi Zinc",
+        description:
+          "Mengandung zinc untuk membantu mendukung proses pemulihan luka.",
+        icon:
+          "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Zinc (20% AKG).svg",
+      },
+      {
+        title: "Tinggi Protein",
+        description:
+          "Mengandung 13 gram protein per sajian.",
+        icon:
+          "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Protein 13 grsaji.svg",
+      },
+      {
+        title: "Rendah Laktosa",
+        description:
+          "Formula dengan kandungan laktosa rendah.",
+        icon:
+          "/images/client-assets/icon/PEPTISOL/NEW ICON/Rendah Laktosa 2.svg",
+      },
+      {
+        title: "Dual Protein Source",
+        description:
+          "Menggunakan kombinasi sumber protein.",
+        icon:
+          "/images/client-assets/icon/PEPTISOL/NEW ICON/Dual Protein Source 2.svg",
+      },
+    ],
+  },
 
 };
