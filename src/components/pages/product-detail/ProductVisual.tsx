@@ -50,6 +50,7 @@ const productAssets: Record<
   oligo: {
     logo: mednutAssets.productLogos.oligo,
     packshot: mednutAssets.packshots.oligo,
+    secondaryPackshot: mednutAssets.packshots.oligoSecondary,
   },
   peptisol: {
     logo: mednutAssets.productLogos.peptisol,

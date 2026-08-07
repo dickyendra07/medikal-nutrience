@@ -753,6 +753,155 @@ export const productNutrition: Record<string, ProductNutrition> = {
   },
 
 
+
+  oligo: {
+    displayName: "Oligo",
+    category: "Clinical Nutrition Formula",
+
+    productInformation: {
+      background:
+        "Oligo merupakan formula oligomerik dengan kandungan makronutrien cepat serap dengan mikronutrien yang lengkap. Oligo mengandung protein berbasis peptida / oligomerik, lemak rantai sedang dan karbohidrat sederhana menjadi solusi pada pasien dengan gangguan pengosongan lambung dan malabsorbsi saluran cerna.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke 200 ml air menghasilkan 250 ml larutan.",
+
+      servingPer100ml:
+        "25 gram serbuk ke 80 ml air.",
+
+      osmolality:
+        "353 mOsmol/kg air",
+
+      flavors: [
+        "Tropical Banana",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 165 gram (3 sachet x 55 gram)",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
+
+      composition:
+        "Maltodekstrin, Protein Whey Terhidrolisa, Lemak MCT, Isomaltulosa, Sukrosa, Vitamin & Mineral, DHA, Bubuk Pisang.",
+
+      specificComposition: [
+        "MCT",
+        "Whey Terhidrolisa",
+        "Omega 3",
+        "Omega 6",
+      ],
+    },
+
+    variants: [
+      {
+        name: "Tropical Banana",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png",
+      },
+    ],
+
+    targetAudience: {
+      title: "Siapa yang Membutuhkan Oligo?",
+      description:
+        "Formula nutrisi oligomerik untuk membantu memenuhi kebutuhan nutrisi pada kondisi gangguan pengosongan lambung dan malabsorbsi saluran cerna.",
+    },
+
+    title: "Nutrition Facts",
+    subtitle:
+      "Informasi kandungan gizi Oligo per sajian.",
+    serving: "Per Sajian Oligo",
+
+    nutrition: [
+      { name: "Energi", value: "250", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "90", unit: "kkal" },
+      { name: "Lemak Total", value: "10", unit: "g" },
+      { name: "Lemak Tak Jenuh Tunggal", value: "1", unit: "g" },
+      { name: "Lemak Tak Jenuh Ganda", value: "0,5", unit: "g" },
+      { name: "Omega 3", value: "80", unit: "mg" },
+      { name: "Omega 6", value: "280", unit: "mg" },
+      { name: "Lemak Trans", value: "0", unit: "g" },
+      { name: "Kolesterol", value: "25", unit: "mg" },
+      { name: "Lemak Jenuh", value: "8", unit: "g" },
+      { name: "MCT", value: "7,5", unit: "g" },
+      { name: "Protein", value: "10", unit: "g" },
+      { name: "Karbohidrat Total", value: "31", unit: "g" },
+      { name: "Serat Pangan", value: "0", unit: "g" },
+      { name: "Inulin", value: "0", unit: "g" },
+      { name: "Gula Total", value: "8", unit: "g" },
+      { name: "Laktosa", value: "1", unit: "g" },
+      { name: "Garam / Natrium", value: "90", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin A", value: "63", unit: "mcg" },
+      { name: "Vitamin B1", value: "0,13", unit: "mg" },
+      { name: "Vitamin B2", value: "0,15", unit: "mg" },
+      { name: "Vitamin B3", value: "2,1", unit: "mg" },
+      { name: "Vitamin B5", value: "0,48", unit: "mg" },
+      { name: "Vitamin B6", value: "0,16", unit: "mg" },
+      { name: "Asam Folat", value: "40", unit: "mcg" },
+      { name: "Vitamin B12", value: "0,25", unit: "mcg" },
+      { name: "Vitamin C", value: "23", unit: "mg" },
+      { name: "Vitamin D3", value: "1,4", unit: "mcg" },
+      { name: "Vitamin E", value: "1,3", unit: "mg" },
+      { name: "Biotin", value: "2,9", unit: "mcg" },
+      { name: "Kalium", value: "125", unit: "mg" },
+      { name: "Kalsium", value: "98", unit: "mg" },
+      { name: "Magnesium", value: "35", unit: "mg" },
+      { name: "Fosfor", value: "64", unit: "mg" },
+      { name: "Besi", value: "2", unit: "mg" },
+      { name: "Yodium", value: "16", unit: "mcg" },
+      { name: "Selenium", value: "2,8", unit: "mcg" },
+      { name: "Kromium", value: "2,5" },
+      { name: "Seng", value: "2,5", unit: "mg" },
+    ],
+
+    components: [
+      { name: "DHA", value: "32", unit: "mg" },
+      { name: "EPA", value: "5", unit: "mg" },
+    ],
+
+    highlightTitle:
+      "Keunggulan Utama Oligo",
+
+    highlightSubtitle:
+      "Formula oligomerik dengan makronutrien cepat serap untuk mendukung kebutuhan nutrisi pada gangguan saluran cerna.",
+
+    highlights: [
+      {
+        title: "Protein Whey Terhidrolisa",
+        description:
+          "Protein berbasis peptida / oligomerik yang membantu mendukung proses penyerapan.",
+        icon:
+          "/images/mednut/products/icons/oligo/protein-terhidrolisa.svg",
+      },
+      {
+        title: "Osmolalitas 353 mOsmol/kg",
+        description:
+          "Formula dengan osmolalitas 353 mOsmol/kg air.",
+        icon:
+          "/images/mednut/products/icons/oligo/osmolaritas-fisiologis.svg",
+      },
+      {
+        title: "Lemak MCT",
+        description:
+          "Mengandung lemak rantai sedang sebagai bagian dari formula nutrisi Oligo.",
+        icon:
+          "/images/mednut/products/icons/oligo/lemak-mct.svg",
+      },
+      {
+        title: "Formula Cepat Serap",
+        description:
+          "Makronutrien dirancang untuk mendukung kebutuhan pada kondisi gangguan pencernaan dan malabsorbsi.",
+        icon:
+          "/images/mednut/products/icons/oligo/rendah-residu-cepat-serap.svg",
+      },
+    ],
+  },
+
   "hepatosol-lola": {
     displayName: "Hepatosol Lola",
 
