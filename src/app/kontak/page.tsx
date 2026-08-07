@@ -72,7 +72,7 @@ export default function ContactPage() {
               <div className="absolute bottom-[15%] right-[12%] h-36 w-36 rounded-full bg-[#7de0b3]/30 blur-2xl" />
 
               <img
-                src="/images/support/konsultasi.png"
+                src="/images/support/konsultasi-new.png"
                 alt="Konsultasi nutrisi Medikal Nutrience"
                 className="relative z-10 h-auto w-full max-w-[560px] object-contain drop-shadow-2xl"
               />
