@@ -1299,4 +1299,142 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
   },
 
+  "peptibren": {
+    displayName: "Peptibren",
+
+    productInformation: {
+      background:
+        "Peptibren merupakan nutrisi tinggi energi dan tinggi protein yang membantu memenuhi kebutuhan nutrisi pasien dengan gangguan neurologis seperti stroke, Alzheimer dan demensia dengan kesulitan menelan atau disfagia. Peptibren mengandung nutrien spesifik Kolin, Fosfatidilserin, dan Uridin Monofosfat yang membantu mendukung pemulihan fungsi saraf.",
+
+      servingInstruction:
+        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 250 ml larutan.",
+
+      servingPer100ml:
+        "26 gram serbuk ke dalam 80 ml air.",
+
+      flavors: [
+        "Vanila",
+        "Kacang Hijau",
+      ],
+
+      availability:
+        "Box",
+
+      packaging:
+        "Gramasi 195 gram (3 sachet x 65 gram).",
+
+      storage:
+        "Simpan di tempat yang kering, bersih, dan hindari terkena sinar matahari langsung.",
+
+      composition:
+        "Maltodekstrin, Bubuk Lemak Nabati, Inulin, Sukrosa, Konsentrat Protein Whey, Dekstrin, Isomaltulosa, Sorbitol, Bubuk Ekstrak Malt.",
+
+      specificComposition: [
+        "Protein Whey",
+        "Kolin Bitartrat",
+        "Fosfatidilserin",
+        "Uridin Monofosfat",
+      ],
+    },
+
+    category:
+      "Neurological Nutrition Formula",
+
+    variants: [
+      {
+        name: "Vanila",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN VANILA 1.png",
+      },
+      {
+        name: "Kacang Hijau",
+        image:
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN KACANG HIJAU 1.png",
+      },
+    ],
+
+    title:
+      "Nutrition Facts",
+
+    subtitle:
+      "Informasi nutrisi lengkap untuk mendukung kebutuhan energi dan protein pasien dengan gangguan neurologis.",
+
+    serving:
+      "Per Sajian Mengandung",
+
+    nutrition: [
+      { name: "Energi Total", value: "273", unit: "kkal" },
+      { name: "Energi dari Lemak", value: "62", unit: "kkal" },
+      { name: "Lemak Total", value: "7", unit: "g" },
+      { name: "Lemak Tak Jenuh Tunggal", value: "3.3", unit: "g" },
+      { name: "Lemak Tak Jenuh Ganda", value: "2", unit: "g" },
+      { name: "Omega 3", value: "266.5", unit: "mg" },
+      { name: "Omega 6", value: "1.4", unit: "g" },
+      { name: "Lemak Trans", value: "0", unit: "g" },
+      { name: "Protein", value: "15", unit: "g" },
+      { name: "Karbohidrat Total", value: "37", unit: "g" },
+      { name: "Serat Pangan", value: "4", unit: "g" },
+      { name: "Inulin", value: "4", unit: "g" },
+      { name: "Gula Total", value: "8", unit: "g" },
+      { name: "Laktosa", value: "0", unit: "g" },
+      { name: "Natrium", value: "59", unit: "mg" },
+    ],
+
+    vitamins: [
+      { name: "Vitamin A", value: "150", unit: "mcg" },
+      { name: "Vitamin B1", value: "0.21", unit: "mg" },
+      { name: "Vitamin B2", value: "0.4", unit: "mg" },
+      { name: "Vitamin B3", value: "3", unit: "mg" },
+      { name: "Vitamin B5", value: "0.75", unit: "mg" },
+      { name: "Vitamin B6", value: "0.26", unit: "mg" },
+      { name: "Vitamin B12", value: "0.36", unit: "mcg" },
+      { name: "Vitamin C", value: "27", unit: "mg" },
+      { name: "Vitamin D3", value: "0.9", unit: "mcg" },
+      { name: "Vitamin E", value: "2.25", unit: "mg" },
+      { name: "Biotin", value: "4.5", unit: "mcg" },
+    ],
+
+    components: [
+      { name: "DHA", value: "14", unit: "mg" },
+      { name: "Kalium", value: "282", unit: "mg" },
+      { name: "Kalsium", value: "165", unit: "mg" },
+      { name: "Magnesium", value: "14", unit: "mg" },
+      { name: "Fosfor", value: "175", unit: "mg" },
+      { name: "Besi", value: "2.2", unit: "mg" },
+      { name: "Yodium", value: "22.5", unit: "mcg" },
+      { name: "Selenium", value: "2.4", unit: "mcg" },
+      { name: "Seng", value: "3.25", unit: "mg" },
+    ],
+
+    highlightTitle:
+      "Keunggulan Utama Peptibren",
+
+    highlightSubtitle:
+      "Formula nutrisi spesifik untuk mendukung kebutuhan energi, protein, dan nutrisi neurologis.",
+
+    highlights: [
+      {
+        title: "Tinggi Protein",
+        description:
+          "Mengandung protein untuk membantu memenuhi kebutuhan nutrisi pasien.",
+        icon:
+          "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Protein 13 grsaji.svg",
+      },
+      {
+        title: "DHA & Omega 3",
+        description:
+          "Mengandung DHA dan Omega 3 untuk mendukung fungsi neurologis.",
+        icon:
+          "/images/client-assets/icon/ENTRAKID/NEW ICON/DHA & Omega 3.svg",
+      },
+      {
+        title: "Dual Protein Source",
+        description:
+          "Kombinasi sumber protein untuk mendukung pemenuhan nutrisi.",
+        icon:
+          "/images/client-assets/icon/PEPTISOL/NEW ICON/Dual Protein Source 2.svg",
+      },
+    ],
+  },
+
 };

@@ -10,6 +10,14 @@ export type ProductConfig = {
 };
 
 export const productConfig: Record<string, ProductConfig> = {
+
+  peptibren: {
+    productInformation: true,
+    nutritionFacts: true,
+    variants: true,
+    nutritionType: "standard",
+  },
+
   entrakid: {
     nutritionFacts: true,
     variants: true,
