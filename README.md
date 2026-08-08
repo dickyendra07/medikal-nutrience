@@ -1,36 +1,257 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Medikal Nutrience Platform
 
-## Getting Started
+Modern healthcare nutrition platform developed for Medikal Nutrience — PT Kalbe Farma Tbk.
 
-First, run the development server:
+This platform provides a premium digital experience for nutrition education, product discovery, healthcare solutions, and customer engagement.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Developed by Kara Digital.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Medikal Nutrience Platform consists of:
 
-## Learn More
+- Public corporate website
+- Content Management System (CMS)
+- Product management system
+- Healthcare education platform
+- Lead and consultation management
 
-To learn more about Next.js, take a look at the following resources:
+The platform is designed to support scalable digital healthcare communication and content operations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Technology Stack
 
-## Deploy on Vercel
+## Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js 16
+- React
+- TypeScript
+- Tailwind CSS
+- App Router
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Backend
+
+- Next.js API Routes
+- Prisma ORM
+- PostgreSQL Ready Architecture
+
+## Development Tools
+
+- Node.js 20+
+- npm
+- Git
+- GitHub
+
+---
+
+# Main Features
+
+## Public Website
+
+Features:
+
+- Corporate profile
+- Product catalog
+- Product detail pages
+- Nutrition information
+- Healthcare solutions
+- Educational articles
+- FAQ
+- Events
+- Support system
+- Consultation journey
+
+---
+
+# CMS Dashboard
+
+The CMS allows internal teams to manage website content efficiently.
+
+Modules:
+
+## Product Management
+
+- Product information
+- Nutrition data
+- Product assets
+- Product descriptions
+
+## Content Management
+
+- Articles
+- FAQ
+- Events
+- Media
+
+## Support System
+
+- FIMA recipes
+- Nutrition education
+- Healthcare resources
+
+## Lead Management
+
+- Consultation inquiries
+- Customer submissions
+- Contact requests
+
+---
+
+# Project Architecture
+
+Medikal Nutrience Platform
+
+    Public Website
+          |
+    CMS Dashboard
+          |
+    API Layer
+          |
+    Data Management
+          |
+    Asset Management
+
+
+---
+
+# Installation
+
+Requirements:
+
+- Node.js 20+
+- npm 10+
+
+Install dependencies:
+
+    npm install
+
+
+---
+
+# Environment Setup
+
+Create environment file:
+
+    .env.local
+
+
+Required variables:
+
+    NEXT_PUBLIC_SITE_URL=
+    CMS_INTERNAL_API_URL=
+    NEXT_PUBLIC_MEDIA_BASE_URL=
+    CMS_STATIC_ARTICLE_FALLBACK=true
+
+
+---
+
+# Development
+
+Run development server:
+
+    npm run dev
+
+
+Application:
+
+    http://localhost:3000
+
+
+---
+
+# Production Build
+
+Validate production build:
+
+    npm run build
+
+
+Run production:
+
+    npm start
+
+
+---
+
+# Quality Assurance
+
+Completed validation:
+
+- Responsive testing
+- Desktop and mobile audit
+- Internal link validation
+- CMS functionality testing
+- SEO validation
+- Production build verification
+
+---
+
+# Security
+
+Implemented:
+
+- CMS authentication
+- Role-based access control
+- Protected CMS actions
+- Input validation
+- Secure API handling
+
+---
+
+# SEO Implementation
+
+Included:
+
+- Metadata optimization
+- Open Graph configuration
+- Sitemap generation
+- Robots configuration
+- Structured data
+- CMS route protection
+
+---
+
+# Deployment Recommendation
+
+Production architecture:
+
+Frontend
+|
+Next.js Application
+|
+API Layer
+|
+Database
+|
+Storage
+
+
+---
+
+# Project Ownership
+
+Client:
+
+Medikal Nutrience  
+PT Kalbe Farma Tbk.
+
+
+Digital Partner:
+
+Kara Digital
+
+Website Development  
+Digital Experience  
+Technology Solution
+
+
+---
+
+# License
+
+This project is proprietary software developed exclusively for Medikal Nutrience.
+
+Unauthorized distribution or modification is prohibited.
