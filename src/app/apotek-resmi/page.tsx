@@ -4,6 +4,17 @@ import { PageShell } from "@/components/shared/PageShell";
 import { PageHero } from "@/components/shared/PageHero";
 import { PharmacyLocator } from "@/components/pages/pharmacies/PharmacyLocator";
 import { pharmacies, type PharmacyPartner } from "@/data/pharmacies";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Apotek Resmi",
+  description:
+    "Temukan apotek, marketplace, dan mitra resmi Medikal Nutrience untuk menjaga keaslian produk.",
+  openGraph: {
+    title: "Apotek Resmi | Medikal Nutrience",
+    description: "Temukan apotek, marketplace, dan mitra resmi Medikal Nutrience untuk menjaga keaslian produk.",
+  },
+};
 
 type CmsPharmacyDraft = {
   no: number;

@@ -1,7 +1,18 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { FaqClientPage } from "@/components/pages/faq/FaqClientPage";
-import { faqCategories, faqs, type FaqItem } from "@/data/faqs";
+import { faqs, type FaqItem } from "@/data/faqs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pertanyaan Umum",
+  description:
+    "Temukan jawaban seputar produk, pemilihan nutrisi, apotek resmi, event, dan konsultasi Medikal Nutrience.",
+  openGraph: {
+    title: "Pertanyaan Umum | Medikal Nutrience",
+    description: "Temukan jawaban seputar produk, pemilihan nutrisi, apotek resmi, event, dan konsultasi Medikal Nutrience.",
+  },
+};
 
 type CmsFaqDraft = FaqItem & {
   index: number;

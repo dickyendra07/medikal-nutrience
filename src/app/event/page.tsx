@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import type { Metadata } from "next";
 import { EventClientPage } from "@/components/pages/events/EventClientPage";
 import {
   eventPageData,
@@ -15,6 +16,16 @@ type EventPageDraft = {
   productOptions?: string[];
   infoSources?: string[];
   updatedAt?: string;
+};
+
+export const metadata: Metadata = {
+  title: "Event",
+  description:
+    "Ikuti event, webinar, dan program edukasi kesehatan dari Medikal Nutrience.",
+  openGraph: {
+    title: "Event | Medikal Nutrience",
+    description: "Ikuti event, webinar, dan program edukasi kesehatan dari Medikal Nutrience.",
+  },
 };
 
 async function getEventPageDraft(): Promise<EventPageDraft | null> {

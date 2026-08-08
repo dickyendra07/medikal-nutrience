@@ -72,8 +72,12 @@ export async function generateMetadata({ params }: ProductDetailPageProps) {
     : product;
 
   return {
-    title: `${viewProduct.name} | Medikal Nutrience`,
+    title: { absolute: `${viewProduct.name} | Medikal Nutrience` },
     description: viewProduct.description,
+    openGraph: {
+      title: `${viewProduct.name} | Medikal Nutrience`,
+      description: viewProduct.description,
+    },
   };
 }
 

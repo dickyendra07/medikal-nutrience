@@ -13,7 +13,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const article = await getPublicArticle(slug);
-  if (!article) return { title: "Artikel Tidak Ditemukan | Medikal Nutrience" };
+  if (!article) return { title: "Artikel Tidak Ditemukan" };
   const image = article.coverMedia?.url;
   const absoluteImage = image ? (image.startsWith("http") ? image : `${siteUrl}${image}`) : undefined;
   return {

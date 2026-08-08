@@ -87,8 +87,14 @@ export async function generateMetadata({ params }: SolutionDetailPageProps) {
   const viewSolution = mergeSolutionDraft(solution, draft);
 
   return {
-    title: `${viewSolution.shortTitle} | Solusi Medikal Nutrience`,
+    title: {
+      absolute: `${viewSolution.shortTitle} - Solusi Nutrisi | Medikal Nutrience`,
+    },
     description: viewSolution.description,
+    openGraph: {
+      title: `${viewSolution.shortTitle} - Solusi Nutrisi | Medikal Nutrience`,
+      description: viewSolution.description,
+    },
   };
 }
 

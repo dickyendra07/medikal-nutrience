@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/shared/PageShell";
 
 export const metadata: Metadata = {
-  title: "Kebijakan Privasi | Medikal Nutrience",
+  title: "Kebijakan Privasi",
   description:
     "Kebijakan Privasi Website Medikal Nutrience mengenai pengelolaan dan perlindungan data pribadi pengguna.",
 };

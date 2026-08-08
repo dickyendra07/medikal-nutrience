@@ -1,5 +1,16 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kontak dan Konsultasi",
+  description:
+    "Hubungi Medikal Nutrience untuk mendapatkan informasi produk dan arahan awal kebutuhan nutrisi.",
+  openGraph: {
+    title: "Kontak dan Konsultasi | Medikal Nutrience",
+    description: "Hubungi Medikal Nutrience untuk mendapatkan informasi produk dan arahan awal kebutuhan nutrisi.",
+  },
+};
 
 const contactItems = [
   {

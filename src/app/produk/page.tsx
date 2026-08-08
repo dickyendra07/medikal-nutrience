@@ -444,7 +444,7 @@ function ProductBrand({
 }) {
   if (logo) {
     return (
-      <div className="flex h-14 w-full items-center">
+      <div className={`flex h-14 w-full items-center ${className}`}>
         <img
           src={logo}
           alt={`${name} logo`}
