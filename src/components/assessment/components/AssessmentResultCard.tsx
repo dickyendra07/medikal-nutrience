@@ -1,7 +1,9 @@
 "use client";
 
+import type { AssessmentResult } from "@/data/assessment";
+
 type Props={
-result:any;
+result:AssessmentResult;
 image:string;
 onClose:()=>void;
 };

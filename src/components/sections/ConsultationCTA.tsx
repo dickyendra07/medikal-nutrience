@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function ConsultationCTA() {
   return (
     <section className="bg-[#f4fbf8] px-5 py-12 lg:px-10 md:py-16">
@@ -30,12 +32,12 @@ export function ConsultationCTA() {
                   Konsultasi Sekarang
                 </a>
 
-                <a
+                <Link
                   href="/produk"
                   className="inline-flex rounded-full border border-white/25 bg-white/5 px-8 py-4 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-white/10"
                 >
                   Lihat Produk
-                </a>
+                </Link>
               </div>
             </div>
 

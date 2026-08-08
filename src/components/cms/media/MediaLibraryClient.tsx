@@ -67,7 +67,8 @@ export function MediaLibraryClient() {
   }, [mimeType, search]);
 
   useEffect(() => {
-    void load();
+    const timeoutId = window.setTimeout(() => void load(), 0);
+    return () => window.clearTimeout(timeoutId);
   }, [load]);
 
   useEffect(() => {
@@ -179,8 +180,10 @@ export function MediaLibraryClient() {
           onSubmit={(event) => { event.preventDefault(); setSearch(searchInput.trim()); }}
           className="mt-6 grid gap-3 md:grid-cols-[1fr_220px_auto]"
         >
-          <input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Cari filename, alt text, atau caption..." className="rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10" />
-          <select value={mimeType} onChange={(event) => setMimeType(event.target.value)} className="rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none focus:border-[#006b3f]">
+          <label className="sr-only" htmlFor="media-search">Cari media</label>
+          <input id="media-search" value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Cari filename, alt text, atau caption..." className="rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10" />
+          <label className="sr-only" htmlFor="media-type">Filter tipe media</label>
+          <select id="media-type" value={mimeType} onChange={(event) => setMimeType(event.target.value)} className="rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none focus:border-[#006b3f]">
             <option value="">Semua tipe</option>
             <option value="image/jpeg">JPEG</option>
             <option value="image/png">PNG</option>

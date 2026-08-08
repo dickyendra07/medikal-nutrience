@@ -13,7 +13,6 @@ import {
 } from "@/data/assessment";
 
 
-import { AssessmentIcon } from "@/components/assessment/components/AssessmentIcon";
 import { AssessmentProgress } from "@/components/assessment/components/AssessmentProgress";
 import { AssessmentOptionCard } from "@/components/assessment/components/AssessmentOptionCard";
 import { AssessmentResultCard } from "@/components/assessment/components/AssessmentResultCard";
@@ -33,19 +32,14 @@ type LeadForm = {
 };
 
 
-const steps = [
-  "purpose",
-  "condition",
-  "target",
-  "question",
-  "lead",
-  "loading",
-  "result",
-] as const;
-
-
-type Step = typeof steps[number];
-
+type Step =
+  | "purpose"
+  | "condition"
+  | "target"
+  | "question"
+  | "lead"
+  | "loading"
+  | "result";
 
 const productImages:Record<string,string> = {
 
@@ -443,7 +437,7 @@ assessmentQuestions[condition]?.title
 
 {
 
-assessmentQuestions[condition]?.options.map((option:any)=>(
+assessmentQuestions[condition]?.options.map((option)=>(
 
 <AssessmentOptionCard
 

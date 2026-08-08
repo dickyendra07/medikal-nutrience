@@ -93,7 +93,10 @@ export const healthTargetOptions = [
 ];
 
 
-export const assessmentQuestions:any = {
+export const assessmentQuestions: Record<
+  string,
+  { title: string; options: AssessmentOption[] }
+> = {
 
 ginjal:{
 title:"Apakah Anda sedang menjalani dialisis?",

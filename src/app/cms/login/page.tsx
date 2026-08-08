@@ -38,14 +38,14 @@ export default async function CmsLoginPage({
             </p>
 
             <div className="mt-10 grid gap-4 md:grid-cols-2">
-              {["Products", "Events", "Pharmacies", "Leads"].map((item) => (
+              {["Produk", "Artikel", "Media", "Leads"].map((item) => (
                 <div
                   key={item}
                   className="rounded-2xl bg-white/10 p-5 ring-1 ring-white/10"
                 >
                   <p className="text-sm font-black text-white">{item}</p>
                   <p className="mt-2 text-xs font-medium leading-6 text-white/55">
-                    Module ready for content management.
+                    Siap dikelola dalam satu workspace.
                   </p>
                 </div>
               ))}
@@ -59,7 +59,7 @@ export default async function CmsLoginPage({
           </div>
 
           <p className="mt-8 text-xs font-black uppercase tracking-[0.32em] text-[#006b3f] lg:mt-0">
-            Admin Login
+            Akses Administrator
           </p>
 
           <h2 className="mt-4 text-4xl font-black leading-tight text-[#111827]">
@@ -85,10 +85,11 @@ export default async function CmsLoginPage({
 
           <form action="/api/cms/login" method="post" className="mt-7 space-y-5">
             <div>
-              <label className="text-sm font-black text-[#111827]">
+              <label htmlFor="cms-email" className="text-sm font-black text-[#111827]">
                 Email admin
               </label>
               <input
+                id="cms-email"
                 name="email"
                 type="email"
                 required
@@ -98,10 +99,11 @@ export default async function CmsLoginPage({
             </div>
 
             <div>
-              <label className="text-sm font-black text-[#111827]">
+              <label htmlFor="cms-password" className="text-sm font-black text-[#111827]">
                 Password
               </label>
               <input
+                id="cms-password"
                 name="password"
                 type="password"
                 required
@@ -119,7 +121,7 @@ export default async function CmsLoginPage({
           </form>
 
           <div className="mt-6 rounded-2xl bg-[#f4fbf8] p-5 text-sm font-medium leading-7 text-[#64748b]">
-            Gunakan akun admin yang telah dibuat melalui proses bootstrap backend CMS.
+            Akses dikelola oleh administrator. Hubungi tim teknis jika akun Anda belum tersedia.
           </div>
         </section>
       </div>

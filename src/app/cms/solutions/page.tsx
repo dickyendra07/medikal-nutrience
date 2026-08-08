@@ -143,18 +143,6 @@ export default async function CmsSolutionsPage() {
         </div>
       </section>
 
-      <section className="mt-6 rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-white/60">
-          Next Development Step
-        </p>
-        <h2 className="mt-4 text-3xl font-black leading-tight">
-          Module Solutions sudah masuk ke CMS.
-        </h2>
-        <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-white/70">
-          Tahap berikutnya adalah membuat halaman edit solusi, menyimpan draft,
-          lalu menghubungkan draft solusi ke halaman public /solusi.
-        </p>
-      </section>
     </CmsAdminShell>
   );
 }

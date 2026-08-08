@@ -77,13 +77,17 @@ function getQuickStats({
 }) {
   return [
     { label: "Produk Aktif", value: String(productCount) },
-    { label: "Published Draft", value: String(publishedDraftCount) },
-    { label: "Draft / Review", value: String(pendingDraftCount) },
-    { label: "Last CMS Update", value: formatLastUpdate(lastUpdate) },
+    { label: "Konten Terbit", value: String(publishedDraftCount) },
+    { label: "Perlu Ditinjau", value: String(pendingDraftCount) },
+    { label: "Pembaruan Terakhir", value: formatLastUpdate(lastUpdate) },
   ];
 }
 
-export default async function CmsPage() {
+export default async function CmsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
   const authenticated = await isCmsAuthenticated();
 
   if (!authenticated) {
@@ -113,92 +117,72 @@ export default async function CmsPage() {
   });
 
   const cmsMenus = getCmsMenus(productDetails.length);
+  const { error } = await searchParams;
 
   return (
     <CmsAdminShell
       active="dashboard"
-      title="CMS Dashboard"
+      title="Dashboard"
       eyebrow="Medikal Nutrience Admin"
-      description="Dashboard awal untuk mengelola konten website Medikal Nutrience, mulai dari produk, solusi, event, apotek, FAQ, hingga leads."
+      description="Ringkasan konten, aktivitas editorial, dan akses cepat pengelolaan website."
     >
+      {error === "forbidden" ? (
+        <div
+          role="alert"
+          className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-bold text-amber-900"
+        >
+          Akun Anda hanya memiliki akses baca. Hubungi Super Admin jika Anda perlu mengubah konten.
+        </div>
+      ) : null}
       <ArticleDashboardMetrics />
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {quickStats.map((stat) => (
           <article
             key={stat.label}
-            className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5"
+            className="rounded-[1.5rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5"
           >
-            <p className="text-4xl font-black text-[#006b3f]">{stat.value}</p>
-            <p className="mt-2 text-sm font-black text-[#64748b]">
+            <p className="text-3xl font-black leading-tight text-[#006b3f]">{stat.value}</p>
+            <p className="mt-2 text-xs font-black uppercase tracking-[0.12em] text-[#64748b]">
               {stat.label}
             </p>
           </article>
         ))}
       </section>
 
-      <section className="mt-6 grid gap-5 xl:grid-cols-3">
+      <section className="mt-6 overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/5 ring-1 ring-black/5">
+        <div className="flex flex-col gap-3 border-b border-black/5 p-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">Akses Cepat</p>
+            <h2 className="mt-2 text-2xl font-black text-[#111827]">Kelola konten website</h2>
+          </div>
+          <p className="max-w-xl text-sm font-medium leading-6 text-[#64748b]">Pilih modul yang ingin diperbarui. Perubahan berstatus draft tidak akan tampil ke publik.</p>
+        </div>
+        <div className="grid gap-px bg-black/5 sm:grid-cols-2 xl:grid-cols-3">
         {cmsMenus.map((menu) => (
-          <article
+          <a
             key={menu.title}
-            className="group rounded-[2rem] bg-white p-6 shadow-xl shadow-slate-900/5 ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
+            href={menu.href}
+            className="group bg-white p-6 transition hover:bg-[#f4fbf8] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-[#006b3f]"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">
-                  Module
-                </p>
-                <h3 className="mt-3 text-2xl font-black leading-tight">
+                <h3 className="text-xl font-black leading-tight text-[#111827]">
                   {menu.title}
                 </h3>
               </div>
 
-              <span className="rounded-full bg-[#e4f8ed] px-3 py-1.5 text-xs font-black text-[#006b3f]">
-                {menu.count}
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e4f8ed] text-lg font-black text-[#006b3f] transition group-hover:translate-x-1">
+                →
               </span>
             </div>
 
-            <p className="mt-4 text-sm font-medium leading-7 text-[#64748b]">
+            <p className="mt-3 text-sm font-medium leading-6 text-[#64748b]">
               {menu.desc}
             </p>
-
-            <div className="mt-6 grid gap-3">
-              <div className="rounded-2xl bg-[#f8fafc] px-4 py-3 text-sm font-bold text-[#64748b]">
-                List data
-              </div>
-              <div className="rounded-2xl bg-[#f8fafc] px-4 py-3 text-sm font-bold text-[#64748b]">
-                Create / edit form
-              </div>
-              <div className="rounded-2xl bg-[#f8fafc] px-4 py-3 text-sm font-bold text-[#64748b]">
-                Publish / draft status
-              </div>
-            </div>
-
-            <a
-              href={menu.href}
-              className={`mt-6 inline-flex rounded-full px-5 py-3 text-sm font-black transition ${
-                menu.href === "#"
-                  ? "cursor-not-allowed bg-[#e2e8f0] text-[#64748b]"
-                  : "bg-[#006b3f] text-white group-hover:bg-[#005432]"
-              }`}
-            >
-              {menu.href === "#" ? "Coming Soon" : "Open Module"}
-            </a>
-          </article>
+            <p className="mt-4 text-xs font-black text-[#006b3f]">{menu.count}</p>
+          </a>
         ))}
-      </section>
-
-      <section className="mt-6 rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-white/60">
-          Next Development Step
-        </p>
-        <h2 className="mt-4 text-3xl font-black leading-tight">
-          CMS sudah memiliki shell utama, login, dashboard, dan module Products.
-        </h2>
-        <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-white/70">
-          Module Products sudah bisa menyimpan draft, reset draft, dan membaca
-          draft untuk halaman public produk. Tahap berikutnya adalah memperluas
-          modul CMS lain seperti solusi, FAQ, event, dan apotek.
-        </p>
+        </div>
       </section>
     </CmsAdminShell>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import type { FaqItem } from "@/data/faqs";
@@ -76,12 +77,12 @@ export function FaqClientPage({
                   </p>
 
                   <div className="mt-7 flex flex-wrap gap-3">
-                    <a
+                    <Link
                       href="/"
                       className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-[#005635]"
                     >
                       Coba Nutrition Finder
-                    </a>
+                    </Link>
                     <a
                       href="/kontak"
                       className="rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f] ring-1 ring-[#006b3f]/15 transition hover:-translate-y-0.5"

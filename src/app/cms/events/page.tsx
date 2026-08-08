@@ -322,18 +322,6 @@ export default async function CmsEventsPage({
         </div>
       </section>
 
-      <section className="mt-6 rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-white/60">
-          Next Development Step
-        </p>
-        <h2 className="mt-4 text-3xl font-black leading-tight">
-          Module Events sudah terbuka di CMS.
-        </h2>
-        <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-white/70">
-          Tahap berikutnya adalah membuat halaman edit event, save draft,
-          reset draft, add event baru, serta delete atau hide event.
-        </p>
-      </section>
     </CmsAdminShell>
   );
 }

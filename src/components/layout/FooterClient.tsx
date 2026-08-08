@@ -85,8 +85,9 @@ export function FooterClient() {
           </p>
 
           <div className="flex gap-6">
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
+            <a href="/kebijakan-privasi" className="transition hover:text-white">
+              Kebijakan Privasi
+            </a>
           </div>
         </div>
       </footer>

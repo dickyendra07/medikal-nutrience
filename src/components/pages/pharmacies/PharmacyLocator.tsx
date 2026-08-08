@@ -146,9 +146,9 @@ export function PharmacyLocator({
               Apotek Official Partner
             </p>
 
-            <h1 className="mt-7 max-w-4xl text-4xl font-black leading-[1.04] tracking-tight text-[#111827] md:text-6xl">
+            <h2 className="mt-7 max-w-4xl text-4xl font-black leading-[1.04] tracking-tight text-[#111827] md:text-6xl">
               Temukan Apotek Partner Medikal Nutrience
-            </h1>
+            </h2>
 
             <p className="mt-6 max-w-3xl text-base font-medium leading-8 text-[#5f6b76] md:text-lg md:leading-9">
               Cari lokasi apotek dan partner Medikal Nutrience berdasarkan area

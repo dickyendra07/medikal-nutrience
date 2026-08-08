@@ -6,6 +6,7 @@ type ProductCardProps = {
     description: string;
     color: string;
     benefits: string[];
+    href?: string;
   };
 };
 
@@ -56,7 +57,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-7 flex gap-3">
           <a
-            href="#"
+            href={product.href ?? "/produk"}
             className="flex-1 rounded-full bg-[#006b3f] px-5 py-3 text-center text-sm font-black text-white shadow-lg shadow-green-900/20"
           >
             Detail

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
 const menuItems = [
@@ -126,9 +127,9 @@ export function Navbar() {
       onMouseLeave={() => setActiveMega(null)}
     >
       <div className="mx-auto flex h-24 w-full max-w-[1440px] items-center justify-between px-5 lg:px-10">
-        <a href="/" className="flex items-center">
+        <Link href="/" className="flex items-center" aria-label="Medikal Nutrience - Beranda">
           <BrandLogo className="h-12 w-auto" />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
           {menuItems.map((item) => {

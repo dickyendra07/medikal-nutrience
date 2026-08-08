@@ -368,18 +368,6 @@ export default async function CmsPharmacyEditPage({
             </div>
           </section>
 
-          <section className="rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-white/50">
-              Next Step
-            </p>
-            <h2 className="mt-4 text-2xl font-black leading-tight">
-              Batch berikutnya: add dan delete apotek.
-            </h2>
-            <p className="mt-4 text-sm font-medium leading-7 text-white/70">
-              Setelah edit draft apotek aman, kita tambahkan fitur Add Partner
-              dan Delete/Hide Partner dari CMS.
-            </p>
-          </section>
         </aside>
       </div>
     </CmsAdminShell>

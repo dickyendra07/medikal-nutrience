@@ -12,9 +12,6 @@ export function TopBar() {
           <a href="/apotek-resmi" className="transition hover:text-[#d8f6e8]">
             Apotek Resmi
           </a>
-          <a href="#" className="transition hover:text-[#d8f6e8]">
-            
-          </a>
         </div>
       </div>
     </div>

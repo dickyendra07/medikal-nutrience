@@ -85,12 +85,8 @@ export function Footer() {
           </p>
 
           <div className="flex gap-6">
-            <a href="#">
-              Terms of Service
-            </a>
-
-            <a href="/kebijakan-privasi">
-              Privacy Policy
+            <a href="/kebijakan-privasi" className="transition hover:text-white">
+              Kebijakan Privasi
             </a>
           </div>
         </div>
