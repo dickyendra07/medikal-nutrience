@@ -3,7 +3,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { revalidatePath } from "next/cache";
+import { requireCmsEditor } from "@/lib/cms/auth";
 
 type ProductDraft = {
   slug: string;
@@ -36,11 +37,7 @@ async function writeDrafts(drafts: Record<string, ProductDraft>) {
 }
 
 export async function saveProductDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
   const slug = String(formData.get("slug") ?? "").trim();
@@ -65,16 +62,15 @@ export async function saveProductDraft(formData: FormData) {
 
   await writeDrafts(drafts);
 
+  revalidatePath("/produk");
+  revalidatePath(`/produk/${originalSlug}`);
+  if (slug !== originalSlug) revalidatePath(`/produk/${slug}`);
   redirect(`/cms/products/${originalSlug}/edit?saved=1`);
 }
 
 
 export async function deleteProductDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
 
@@ -89,5 +85,7 @@ export async function deleteProductDraft(formData: FormData) {
     await writeDrafts(drafts);
   }
 
+  revalidatePath("/produk");
+  revalidatePath(`/produk/${originalSlug}`);
   redirect(`/cms/products/${originalSlug}/edit?reset=1`);
 }

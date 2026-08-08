@@ -35,7 +35,7 @@ export const productDetails: ProductDetail[] = [
     category: "Stroke / Alzheimer",
     heroTitle: "Dukungan Nutrisi untuk Kebutuhan Stroke dan Alzheimer",
     description:
-      "Peptibren disiapkan sebagai rekomendasi nutrisi untuk kondisi dengan tantangan asupan makan, kesulitan menelan, atau kebutuhan makanan lembut/cair. Konten detail final produk dapat disesuaikan setelah aset dan copy resmi tersedia.",
+      "Peptibren merupakan dukungan nutrisi untuk kondisi dengan tantangan asupan makan, kesulitan menelan, atau kebutuhan makanan bertekstur lembut dan cair. Penggunaannya perlu disesuaikan dengan kondisi pasien serta arahan dokter atau ahli gizi.",
     theme: {
       primary: "#DED316",
       soft: "#fbfae6",

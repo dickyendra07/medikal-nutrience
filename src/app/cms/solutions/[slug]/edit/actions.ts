@@ -3,7 +3,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { revalidatePath } from "next/cache";
+import { requireCmsEditor } from "@/lib/cms/auth";
 
 type SolutionDraft = {
   slug: string;
@@ -46,11 +47,7 @@ function parseList(value: FormDataEntryValue | null) {
 }
 
 export async function saveSolutionDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
   const slug = String(formData.get("slug") ?? "").trim();
@@ -78,16 +75,15 @@ export async function saveSolutionDraft(formData: FormData) {
 
   await writeDrafts(drafts);
 
+  revalidatePath("/solusi");
+  revalidatePath(`/solusi/${originalSlug}`);
+  if (slug !== originalSlug) revalidatePath(`/solusi/${slug}`);
   redirect(`/cms/solutions/${originalSlug}/edit?saved=1`);
 }
 
 
 export async function deleteSolutionDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
 
@@ -102,5 +98,7 @@ export async function deleteSolutionDraft(formData: FormData) {
     await writeDrafts(drafts);
   }
 
+  revalidatePath("/solusi");
+  revalidatePath(`/solusi/${originalSlug}`);
   redirect(`/cms/solutions/${originalSlug}/edit?reset=1`);
 }

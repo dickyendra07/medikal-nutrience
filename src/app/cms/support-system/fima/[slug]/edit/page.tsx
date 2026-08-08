@@ -126,13 +126,19 @@ export default async function CmsFimaEditPage({
 
               <textarea
                 name="ingredients"
-                defaultValue={recipe.ingredients.join("\n")}
+                defaultValue={recipe.ingredients
+                  .map((ingredient) =>
+                    ingredient.nutrition
+                      ? `${ingredient.name} | ${ingredient.nutrition}`
+                      : ingredient.name
+                  )
+                  .join("\n")}
                 rows={6}
                 className="mt-2 w-full rounded-2xl border border-black/10 px-5 py-4 font-bold"
               />
 
               <p className="mt-2 text-xs text-[#64748b]">
-                Satu bahan per baris.
+                Satu bahan per baris. Gunakan format “Nama bahan | informasi nutrisi”.
               </p>
             </div>
 

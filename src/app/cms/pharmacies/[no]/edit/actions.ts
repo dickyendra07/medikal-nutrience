@@ -3,7 +3,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { revalidatePath } from "next/cache";
+import { requireCmsEditor } from "@/lib/cms/auth";
 
 type PharmacyDraft = {
   no: number;
@@ -17,6 +18,7 @@ type PharmacyDraft = {
   stock: string[];
   logo: string;
   updatedAt: string;
+  source?: "cms-created";
 };
 
 const cmsPharmaciesPath = path.join(
@@ -51,11 +53,7 @@ function parseStock(value: FormDataEntryValue | null) {
 }
 
 export async function savePharmacyDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalNo = String(formData.get("originalNo") ?? "");
   const no = Number(formData.get("no") ?? originalNo);
@@ -83,16 +81,13 @@ export async function savePharmacyDraft(formData: FormData) {
 
   await writeDrafts(drafts);
 
+  revalidatePath("/apotek-resmi");
   redirect(`/cms/pharmacies/${originalNo}/edit?saved=1`);
 }
 
 
 export async function deletePharmacyDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalNo = String(formData.get("originalNo") ?? "");
 
@@ -107,16 +102,13 @@ export async function deletePharmacyDraft(formData: FormData) {
     await writeDrafts(drafts);
   }
 
+  revalidatePath("/apotek-resmi");
   redirect(`/cms/pharmacies/${originalNo}/edit?reset=1`);
 }
 
 
 export async function deletePharmacyPartner(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalNo = String(formData.get("originalNo") ?? "");
   const isCmsCreated = String(formData.get("isCmsCreated") ?? "") === "true";
@@ -144,10 +136,12 @@ export async function deletePharmacyPartner(formData: FormData) {
       stock: existing?.stock ?? [],
       logo: existing?.logo ?? "",
       updatedAt: new Date().toISOString(),
+      source: existing?.source,
     };
   }
 
   await writeDrafts(drafts);
 
+  revalidatePath("/apotek-resmi");
   redirect("/cms/pharmacies?deleted=1");
 }

@@ -113,6 +113,7 @@ export async function getPublicArticles(): Promise<PublicArticle[]> {
     });
     if (!response.ok) throw new Error("Article API unavailable");
     const payload = (await response.json()) as PublicListResponse;
+    if (payload.items.length === 0 && fallbackEnabled) return fallback;
     return payload.items.map(enrich);
   } catch {
     return fallbackEnabled ? fallback : [];
@@ -125,7 +126,11 @@ export async function getPublicArticle(slug: string): Promise<PublicArticle | nu
       next: { revalidate: 300, tags: ["articles", `article:${slug}`] },
       signal: AbortSignal.timeout(3_000),
     });
-    if (response.status === 404) return null;
+    if (response.status === 404) {
+      return fallbackEnabled
+        ? fallback.find((article) => article.slug === slug) ?? null
+        : null;
+    }
     if (!response.ok) throw new Error("Article API unavailable");
     return enrich((await response.json()) as Omit<PublicArticle, "readTime" | "keyPoints" | "relatedProducts">);
   } catch {

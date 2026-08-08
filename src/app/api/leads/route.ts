@@ -5,22 +5,48 @@ import {
   type CmsLead,
 } from "@/lib/cms/leads-storage";
 
+const MAX_REQUEST_BYTES = 32_000;
+const MAX_ANSWER_BYTES = 12_000;
+
+function cleanText(value: unknown, maxLength: number) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
 export async function POST(request: Request) {
   try {
+    if (!request.headers.get("content-type")?.includes("application/json")) {
+      return NextResponse.json({ success: false }, { status: 415 });
+    }
+
+    const contentLength = Number(request.headers.get("content-length") ?? 0);
+    if (contentLength > MAX_REQUEST_BYTES) {
+      return NextResponse.json({ success: false }, { status: 413 });
+    }
+
     const body = await request.json();
+    const answerText = JSON.stringify(body.answers ?? {});
+
+    if (answerText.length > MAX_ANSWER_BYTES) {
+      return NextResponse.json({ success: false }, { status: 413 });
+    }
+
+    const name = cleanText(body.lead?.name, 120) || "Anonymous";
+    const phone = cleanText(body.lead?.whatsapp, 40);
+    const flowLabel = cleanText(body.flowLabel, 160);
+    const recommendedProduct = cleanText(body.recommendedProduct, 160);
+
+    if (!flowLabel || !recommendedProduct) {
+      return NextResponse.json({ success: false }, { status: 400 });
+    }
 
     const leads = await getLeads();
 
     const newLead: CmsLead = {
       id: `lead-${Date.now()}`,
 
-      name:
-        body.lead?.name ||
-        "Anonymous",
+      name,
 
-      phone:
-        body.lead?.whatsapp ||
-        "",
+      phone,
 
       email:
         "",
@@ -32,11 +58,11 @@ export async function POST(request: Request) {
         "New",
 
       message: [
-        `Assessment: ${body.flowLabel}`,
-        `Rekomendasi: ${body.recommendedProduct}`,
+        `Assessment: ${flowLabel}`,
+        `Rekomendasi: ${recommendedProduct}`,
         "",
         "Jawaban:",
-        JSON.stringify(body.answers, null, 2),
+        JSON.stringify(body.answers ?? {}, null, 2),
       ].join("\n"),
 
       createdAt:

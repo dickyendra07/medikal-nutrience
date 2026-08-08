@@ -1,17 +1,14 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { getSettings, writeSettingsStorage } from "@/lib/cms/settings-storage";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsEditor } from "@/lib/cms/auth";
 
 export async function updateSettings(
   formData: FormData
 ) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const currentSettings = await getSettings();
 
@@ -69,6 +66,7 @@ export async function updateSettings(
     updatedAt: new Date().toISOString(),
   });
 
+  revalidatePath("/", "layout");
   redirect(
     "/cms/settings?saved=1"
   );

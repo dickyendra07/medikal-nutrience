@@ -1,10 +1,9 @@
 import { BmiCalculator } from "@/components/pages/support-system/BmiCalculator";
 import { mednutAssets } from "@/data/mednut-assets";
-import { fimaRecipes } from "@/data/dapur-sehat-fima";
+import type { FimaRecipe } from "@/data/dapur-sehat-fima";
 import {
   communityPrograms,
   patientStories,
-  recipes,
 } from "@/data/support-system";
 
 type SupportSystemDetailTemplateProps = {
@@ -17,6 +16,7 @@ type SupportSystemDetailTemplateProps = {
     color: string;
     soft: string;
   };
+  fimaRecipes?: FimaRecipe[];
 };
 
 const supportVisuals: Record<
@@ -51,6 +51,7 @@ const supportVisuals: Record<
 
 export function SupportSystemDetailTemplate({
   item,
+  fimaRecipes = [],
 }: SupportSystemDetailTemplateProps) {
   const isBmi = item.slug === "kalkulator-status-gizi";
   const isStory = item.slug === "kisah-sukses-pasien";
@@ -165,7 +166,7 @@ export function SupportSystemDetailTemplate({
       ) : null}
 
       {isRecipe ? (
-        <RecipeSection color={item.color} />
+        <RecipeSection color={item.color} recipes={fimaRecipes} />
       ) : null}
 
       {isCommunity ? (
@@ -223,7 +224,7 @@ export function SupportSystemDetailTemplate({
 }
 
 
-function RecipeSection({ color }: { color: string }) {
+function RecipeSection({ color, recipes }: { color: string; recipes: FimaRecipe[] }) {
   return (
     <section id="content" className="bg-white px-5 py-12 md:py-16 lg:px-10">
       <div className="mx-auto w-full max-w-[1440px]">
@@ -242,13 +243,13 @@ function RecipeSection({ color }: { color: string }) {
           </div>
 
           <p className="text-sm font-medium leading-7 text-[#6b7280] md:text-base md:leading-8">
-            Contoh konten ini disiapkan sebagai struktur awal agar nantinya mudah
-            dikembangkan menjadi artikel, resep, dan edukasi nutrisi melalui CMS.
+            Temukan inspirasi menu praktis yang dapat disesuaikan dengan kebutuhan
+            nutrisi keluarga dan arahan tenaga kesehatan.
           </p>
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {fimaRecipes.map((recipe) => (
+          {recipes.map((recipe) => (
             <a
               key={recipe.slug}
               href={`/support-system/dapur-sehat-fima/${recipe.slug}`}

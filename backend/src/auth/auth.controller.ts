@@ -45,8 +45,12 @@ export class AuthController {
 
   @Get("me")
   me(@CurrentAdmin() admin: CurrentAdminUser): SafeAdminUser {
-    const { sessionId: _sessionId, ...safeAdmin } = admin;
-    return safeAdmin;
+    return {
+      id: admin.id,
+      name: admin.name,
+      email: admin.email,
+      role: admin.role,
+    };
   }
 
   @Post("logout")

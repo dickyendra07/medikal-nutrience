@@ -3,7 +3,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { revalidatePath } from "next/cache";
+import { requireCmsEditor } from "@/lib/cms/auth";
 import {
   eventPageData,
   type EventItem,
@@ -62,11 +63,7 @@ function createSlug(value: string) {
 }
 
 export async function createEventDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const title = String(formData.get("title") ?? "").trim();
 
@@ -113,5 +110,6 @@ export async function createEventDraft(formData: FormData) {
     },
   });
 
+  revalidatePath("/event");
   redirect(`/cms/events/${slug}/edit?created=1`);
 }

@@ -6,11 +6,13 @@ import {
   writeLeadsStorage,
   type CmsLead,
 } from "@/lib/cms/leads-storage";
+import { requireCmsEditor } from "@/lib/cms/auth";
 
 export async function updateLead(
   id: string,
   formData: FormData
 ) {
+  await requireCmsEditor();
   const leads = await getLeads();
 
   const currentLead = leads.find(
@@ -69,6 +71,7 @@ export async function updateLead(
 export async function deleteLead(
   id: string
 ) {
+  await requireCmsEditor();
   const leads = await getLeads();
 
   const filteredLeads = leads.filter(

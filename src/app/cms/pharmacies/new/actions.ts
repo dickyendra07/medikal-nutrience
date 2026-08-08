@@ -3,7 +3,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { revalidatePath } from "next/cache";
+import { requireCmsEditor } from "@/lib/cms/auth";
 import { pharmacies } from "@/data/pharmacies";
 
 type PharmacyDraft = {
@@ -59,11 +60,7 @@ function getNextNo(drafts: Record<string, PharmacyDraft>) {
 }
 
 export async function createPharmacyDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const drafts = await readDrafts();
   const requestedNo = Number(formData.get("no") ?? 0);
@@ -92,5 +89,6 @@ export async function createPharmacyDraft(formData: FormData) {
 
   await writeDrafts(drafts);
 
+  revalidatePath("/apotek-resmi");
   redirect(`/cms/pharmacies?created=1`);
 }

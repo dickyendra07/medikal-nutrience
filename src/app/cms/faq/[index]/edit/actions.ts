@@ -3,7 +3,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { revalidatePath } from "next/cache";
+import { requireCmsEditor } from "@/lib/cms/auth";
 
 type FaqDraft = {
   index: number;
@@ -38,11 +39,7 @@ async function writeDrafts(drafts: Record<string, FaqDraft>) {
 }
 
 export async function saveFaqDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalIndex = String(formData.get("originalIndex") ?? "");
   const indexNumber = Number(originalIndex);
@@ -67,16 +64,13 @@ export async function saveFaqDraft(formData: FormData) {
 
   await writeDrafts(drafts);
 
+  revalidatePath("/faq");
   redirect(`/cms/faq/${originalIndex}/edit?saved=1`);
 }
 
 
 export async function deleteFaqDraft(formData: FormData) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsEditor();
 
   const originalIndex = String(formData.get("originalIndex") ?? "");
 
@@ -91,5 +85,6 @@ export async function deleteFaqDraft(formData: FormData) {
     await writeDrafts(drafts);
   }
 
+  revalidatePath("/faq");
   redirect(`/cms/faq/${originalIndex}/edit?reset=1`);
 }

@@ -722,32 +722,32 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     highlights: [
       {
-        title: "Rendah Protein",
+        title: "Tinggi Kalori dan Protein",
         description:
-          "Disesuaikan untuk kebutuhan pasien dengan kondisi ginjal tertentu.",
+          "Membantu memenuhi kebutuhan energi dan protein pasien yang menjalani terapi dialisis.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Rendah Protein.svg",
+          "/images/client-assets/icon/NEPHRISOL/Website Icon-17.svg",
       },
       {
-        title: "Kandungan Mikronutrien",
+        title: "Rendah Laktosa",
         description:
-          "Mengandung vitamin dan mineral untuk mendukung pemenuhan nutrisi.",
+          "Diformulasikan rendah laktosa untuk mendukung toleransi konsumsi.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Kandungan Mikronutrien.svg",
+          "/images/client-assets/icon/NEPHRISOL/Website Icon-18.svg",
       },
       {
-        title: "Khusus untuk Ginjal Non Dialisis",
+        title: "Untuk Terapi Dialisis",
         description:
-          "Formula nutrisi klinis untuk kebutuhan pasien ginjal.",
+          "Formula nutrisi klinis untuk pasien penyakit ginjal kronik dengan terapi CAPD atau HD.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Khusus untuk Ginjal Non Dialisis.svg",
+          "/images/client-assets/icon/NEPHRISOL/Website Icon-19.svg",
       },
       {
-        title: "Vitamin dan Mineral",
+        title: "Diperkaya Vitamin dan Mineral",
         description:
-          "Diperkaya dengan vitamin dan mineral.",
+          "Mengandung vitamin dan mineral untuk membantu melengkapi kebutuhan nutrisi harian.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Dengan 13 Vitamin dan 6 Mineral.svg",
+          "/images/client-assets/icon/NEPHRISOL/Website Icon-20.svg",
       },
     ],
   },
