@@ -13,7 +13,7 @@ export default async function CmsNewPharmacyPage() {
   return (
     <CmsAdminShell
       active="pharmacies"
-      title="Add New Pharmacy"
+      title="Tambah Apotek"
       eyebrow="CMS Apotek"
       description="Tambah data apotek atau partner baru untuk ditampilkan di CMS dan halaman public Apotek Resmi."
       actions={

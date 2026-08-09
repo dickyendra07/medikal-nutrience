@@ -322,19 +322,6 @@ export default async function CmsSolutionEditPage({
             </div>
           </section>
 
-          <section className="rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-white/50">
-              Next Step
-            </p>
-            <h2 className="mt-4 text-2xl font-black leading-tight">
-              Batch berikutnya: connect ke public.
-            </h2>
-            <p className="mt-4 text-sm font-medium leading-7 text-white/70">
-              Setelah halaman edit ini aman, kita buat server action untuk
-              menyimpan draft solusi ke JSON lokal, lalu hubungkan ke halaman
-              public /solusi.
-            </p>
-          </section>
         </aside>
       </div>
     </CmsAdminShell>

@@ -42,7 +42,7 @@ export default async function CmsLeadEditPage({
   return (
     <CmsAdminShell
       active="leads"
-      title="Edit Lead"
+      title="Detail Lead"
       eyebrow="CMS Leads"
       description="Kelola informasi customer lead Medikal Nutrience."
       actions={

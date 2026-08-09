@@ -126,7 +126,7 @@ export default async function CmsPharmaciesPage({
   return (
     <CmsAdminShell
       active="pharmacies"
-      title="Pharmacies Management"
+      title="Manajemen Apotek"
       eyebrow="CMS Apotek"
       description="Kelola daftar apotek, offline store, modern channel, area, PIC, status partner, dan ketersediaan produk."
       actions={
@@ -148,7 +148,7 @@ export default async function CmsPharmaciesPage({
         </div>
       }
     >
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
           <p className="text-4xl font-black text-[#006b3f]">
             {pharmacyRows.length}
@@ -197,10 +197,7 @@ export default async function CmsPharmaciesPage({
             </h2>
           </div>
 
-          <p className="max-w-xl text-sm font-medium leading-7 text-[#64748b]">
-            Module ini masih tahap list CMS. Batch berikutnya kita buat halaman
-            edit apotek dan save draft seperti module Products, Solutions, dan FAQ.
-          </p>
+          <p className="max-w-xl text-sm font-medium leading-7 text-[#64748b]">Cari, tambah, dan perbarui informasi partner yang tampil pada halaman Apotek Resmi.</p>
         </div>
 
         <form action="/cms/pharmacies" className="mt-6 grid gap-3 md:grid-cols-[1fr_auto]">

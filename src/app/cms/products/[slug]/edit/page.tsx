@@ -275,18 +275,6 @@ export default async function CmsProductEditPage({
             </div>
           </section>
 
-          <section className="rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-white/55">
-              Next Step
-            </p>
-            <h3 className="mt-3 text-2xl font-black leading-tight">
-              Batch berikutnya: save data.
-            </h3>
-            <p className="mt-4 text-sm font-medium leading-7 text-white/70">
-              Setelah UI edit ini aman, kita buat server action / API untuk
-              menyimpan draft ke storage sementara atau database.
-            </p>
-          </section>
         </aside>
       </div>
     </CmsAdminShell>

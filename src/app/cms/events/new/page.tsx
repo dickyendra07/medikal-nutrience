@@ -13,7 +13,7 @@ export default async function CmsNewEventPage() {
   return (
     <CmsAdminShell
       active="events"
-      title="Add New Event"
+      title="Buat Event"
       eyebrow="CMS Events"
       description="Tambahkan event baru untuk ditampilkan pada halaman public Medikal Nutrience."
       actions={

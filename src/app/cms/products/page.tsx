@@ -22,24 +22,16 @@ export default async function CmsProductsPage() {
   return (
     <CmsAdminShell
       active="products"
-      title="Products Management"
+      title="Manajemen Produk"
       eyebrow="CMS Module"
       description="Kelola daftar produk Medikal Nutrience, mulai dari nama produk, kategori, slug halaman, status publikasi, hingga kebutuhan konten detail produk."
-      actions={
-        <button
-          type="button"
-          className="rounded-full bg-[#006b3f] px-5 py-3 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
-        >
-          Add Product
-        </button>
-      }
     >
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {[
           { label: "Total Produk", value: productRows.length },
-          { label: "Published", value: productRows.length },
+          { label: "Terbit", value: productRows.length },
           { label: "Draft", value: 0 },
-          { label: "Need Review", value: 0 },
+          { label: "Perlu Ditinjau", value: 0 },
         ].map((stat) => (
           <article
             key={stat.label}
@@ -75,7 +67,7 @@ export default async function CmsProductsPage() {
           {productRows.map((product) => (
             <article
               key={product.slug}
-              className="grid gap-4 px-6 py-5 transition hover:bg-[#f8fcfa] lg:grid-cols-[0.9fr_0.7fr_0.8fr_0.6fr_0.7fr] lg:items-center"
+              className="grid gap-4 px-6 py-4 transition hover:bg-[#f8fcfa] lg:grid-cols-[0.9fr_0.7fr_0.8fr_0.6fr_0.7fr] lg:items-center"
             >
               <div>
                 <p className="text-lg font-black text-[#111827]">
@@ -116,7 +108,7 @@ export default async function CmsProductsPage() {
                   target="_blank"
                   className="relative z-20 inline-flex rounded-full bg-[#f1f5f9] px-4 py-2 text-xs font-black text-[#475569] transition hover:bg-[#e2e8f0]"
                 >
-                  View
+                  Lihat
                 </a>
                 <a
                   href={`/cms/products/${product.slug}/edit`}
@@ -130,18 +122,6 @@ export default async function CmsProductsPage() {
         </div>
       </section>
 
-      <section className="mt-6 rounded-[2rem] bg-[#004b34] p-6 text-white shadow-2xl shadow-green-900/15">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-white/60">
-          CMS Development Note
-        </p>
-        <h2 className="mt-4 text-3xl font-black leading-tight">
-          Module Products sudah masuk ke layout CMS utama.
-        </h2>
-        <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-white/70">
-          Tahap berikutnya adalah membuat halaman edit produk, lalu menyambungkan
-          data ke storage atau database supaya konten dapat diubah dari CMS.
-        </p>
-      </section>
     </CmsAdminShell>
   );
 }

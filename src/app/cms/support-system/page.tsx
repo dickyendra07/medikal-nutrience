@@ -9,28 +9,28 @@ const supportModules = [
       "Kelola resep, artikel nutrisi, bahan, cara penyajian, dan produk terkait.",
     publicHref: "/support-system/dapur-sehat-fima",
     cmsHref: "/cms/support-system/fima",
-    status: "Active",
+    status: "Aktif",
   },
   {
     title: "Kalkulator Status Gizi",
     description:
       "Kelola copywriting, informasi kalkulator, disclaimer, dan hasil status gizi.",
     publicHref: "/support-system/kalkulator-status-gizi",
-    status: "Next",
+    status: "Belum tersedia",
   },
   {
     title: "Kisah Sukses Pasien",
     description:
       "Kelola testimonial, cerita pasien, gambar, dan informasi pendukung.",
     publicHref: "/support-system/kisah-sukses-pasien",
-    status: "Next",
+    status: "Belum tersedia",
   },
   {
     title: "Komunitas Sehat",
     description:
       "Kelola informasi komunitas, program edukasi, manfaat, dan CTA.",
     publicHref: "/support-system/komunitas-sehat",
-    status: "Next",
+    status: "Belum tersedia",
   },
 ];
 
@@ -44,7 +44,7 @@ export default async function CmsSupportSystemPage() {
   return (
     <CmsAdminShell
       active="support-system"
-      title="Support System Management"
+      title="Manajemen Support System"
       eyebrow="CMS Support System"
       description="Kelola seluruh layanan edukasi dan support system Medikal Nutrience dalam satu module."
       actions={
@@ -57,7 +57,7 @@ export default async function CmsSupportSystemPage() {
         </a>
       }
     >
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
           <p className="text-4xl font-black text-[#006b3f]">
             {supportModules.length}
@@ -75,14 +75,14 @@ export default async function CmsSupportSystemPage() {
         </article>
 
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
-          <p className="text-4xl font-black text-[#c2410c]">0</p>
+          <p className="text-4xl font-black text-[#006b3f]">1</p>
           <p className="mt-2 text-sm font-black text-[#64748b]">
             CMS Connected
           </p>
         </article>
 
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
-          <p className="text-2xl font-black text-[#006b3f]">Development</p>
+          <p className="text-2xl font-black text-[#006b3f]">Aktif</p>
           <p className="mt-2 text-sm font-black text-[#64748b]">
             Current Status
           </p>
@@ -97,10 +97,7 @@ export default async function CmsSupportSystemPage() {
           <h2 className="mt-3 text-3xl font-black text-[#111827]">
             Daftar Support System
           </h2>
-          <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-[#64748b]">
-            Setiap module akan dikembangkan bertahap dengan pola list, edit,
-            draft, reset, dan sinkronisasi ke halaman public.
-          </p>
+          <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-[#64748b]">Buka modul yang tersedia untuk mengelola konten, atau tinjau halaman publik untuk layanan lainnya.</p>
         </div>
 
         <div className="mt-6 grid gap-5 lg:grid-cols-2">
@@ -119,7 +116,7 @@ export default async function CmsSupportSystemPage() {
                   </h3>
                 </div>
 
-                <span className="rounded-full bg-[#fff7ed] px-3 py-1.5 text-xs font-black text-[#c2410c]">
+                <span className={`rounded-lg px-2.5 py-1 text-[10px] font-semibold ${module.status === "Aktif" ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>
                   {module.status}
                 </span>
               </div>
@@ -146,7 +143,7 @@ export default async function CmsSupportSystemPage() {
                   </a>
                 ) : (
                   <span className="cursor-not-allowed rounded-full bg-[#e2e8f0] px-5 py-3 text-xs font-black text-[#64748b]">
-                    CMS Next
+                    Belum tersedia
                   </span>
                 )}
               </div>

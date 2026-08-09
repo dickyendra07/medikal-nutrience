@@ -24,7 +24,7 @@ export default async function CmsSolutionsPage() {
   return (
     <CmsAdminShell
       active="solutions"
-      title="Solutions Management"
+      title="Manajemen Solusi"
       eyebrow="CMS Solutions"
       description="Kelola konten solusi nutrisi berdasarkan kebutuhan tubuh seperti ginjal, hati, pernafasan, pencernaan, anak, pemulihan, dan lansia."
       actions={
@@ -37,7 +37,7 @@ export default async function CmsSolutionsPage() {
         </a>
       }
     >
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-3">
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
           <p className="text-4xl font-black text-[#006b3f]">
             {solutionRows.length}
@@ -75,10 +75,7 @@ export default async function CmsSolutionsPage() {
             </h2>
           </div>
 
-          <p className="max-w-xl text-sm font-medium leading-7 text-[#64748b]">
-            Module ini masih tahap list CMS. Batch berikutnya kita buat halaman
-            edit solusi dan save draft seperti module Products.
-          </p>
+          <p className="max-w-xl text-sm font-medium leading-7 text-[#64748b]">Pilih solusi untuk memperbarui konten dan meninjau tampilannya di halaman publik.</p>
         </div>
 
         <div className="mt-6 grid gap-4">

@@ -120,7 +120,7 @@ export default async function CmsEventsPage({
   return (
     <CmsAdminShell
       active="events"
-      title="Events Management"
+      title="Manajemen Event"
       eyebrow="CMS Events"
       description="Kelola daftar event, kategori, jadwal, lokasi, status publikasi, dan konten registrasi Medikal Nutrience."
       actions={
@@ -154,7 +154,7 @@ export default async function CmsEventsPage({
         </div>
       ) : null}
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
         <article className="rounded-[1.7rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5">
           <p className="text-4xl font-black text-[#006b3f]">{events.length}</p>
           <p className="mt-2 text-sm font-black text-[#64748b]">Total Event</p>

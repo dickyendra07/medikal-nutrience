@@ -44,7 +44,7 @@ export default async function CmsFimaPage() {
   return (
     <CmsAdminShell
       active="support-system"
-      title="Dapur Sehat FIMA Management"
+      title="Manajemen Dapur Sehat FIMA"
       eyebrow="CMS Support System"
       description="Kelola resep, bahan, langkah pembuatan, dan informasi nutrisi pada Dapur Sehat FIMA."
       actions={
@@ -57,7 +57,7 @@ export default async function CmsFimaPage() {
         </a>
       }
     >
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {[
           {
             label: "Total Recipe",

@@ -116,10 +116,7 @@ export default async function CmsPharmacyEditPage({
             <h2 className="mt-3 text-3xl font-black text-[#111827]">
               Informasi Apotek
             </h2>
-            <p className="mt-3 text-sm font-medium leading-7 text-[#64748b]">
-              Form ini sudah dapat menyimpan draft apotek ke storage JSON lokal.
-              Batch berikutnya kita hubungkan draft ke list CMS dan halaman public.
-            </p>
+            <p className="mt-3 text-sm font-medium leading-7 text-[#64748b]">Perbarui identitas partner, area layanan, kontak, ketersediaan produk, dan kanal pembelian.</p>
 
             {isSaved ? (
               <div className="mt-5 rounded-2xl bg-[#e4f8ed] px-5 py-4 text-sm font-black text-[#006b3f] ring-1 ring-[#006b3f]/10">

@@ -83,7 +83,7 @@ export default async function CmsLeadsPage({
   return (
     <CmsAdminShell
       active="leads"
-      title="Leads Management"
+      title="Manajemen Leads"
       eyebrow="CMS Leads"
       description="Kelola seluruh leads yang masuk dari assessment, contact form, event registration, dan konsultasi Medikal Nutrience."
       actions={
@@ -97,7 +97,7 @@ export default async function CmsLeadsPage({
       }
     >
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
 
         {[
           ["Total Leads", leads.length],
