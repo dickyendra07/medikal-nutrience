@@ -16,11 +16,11 @@ import { MediaImage } from "./extensions/MediaImage";
 type Props = { value: TipTapDocument; onChange: (value: TipTapDocument) => void; error?: string };
 
 function ToolButton({ label, title, active, disabled, onClick }: { label: string; title: string; active?: boolean; disabled?: boolean; onClick: () => void }) {
-  return <button type="button" aria-label={title} title={title} aria-pressed={active} disabled={disabled} onClick={onClick} className={`h-9 rounded-xl px-3 text-xs font-black transition focus:outline-none focus:ring-4 focus:ring-[#006b3f]/20 disabled:cursor-not-allowed disabled:opacity-35 ${active ? "bg-[#006b3f] text-white" : "bg-white text-[#475569] ring-1 ring-black/10 hover:bg-[#e4f8ed] hover:text-[#006b3f]"}`}>{label}</button>;
+  return <button type="button" aria-label={title} title={title} aria-pressed={active} disabled={disabled} onClick={onClick} className={`h-8 rounded-lg px-2.5 text-[11px] font-semibold transition focus:outline-none focus:ring-4 focus:ring-[#006b3f]/15 disabled:cursor-not-allowed disabled:opacity-35 ${active ? "bg-[#08704c] text-white" : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 hover:text-[#08704c]"}`}>{label}</button>;
 }
 
 function Group({ children }: { children: React.ReactNode }) {
-  return <div className="flex items-center gap-1.5 rounded-2xl bg-white/70 p-1.5 ring-1 ring-black/5">{children}</div>;
+  return <div className="flex items-center gap-1 rounded-lg bg-white/70 p-1 ring-1 ring-slate-200/80">{children}</div>;
 }
 
 export function ArticleRichTextEditor({ value, onChange, error }: Props) {
@@ -46,7 +46,7 @@ export function ArticleRichTextEditor({ value, onChange, error }: Props) {
       MediaImage,
     ],
     content: value,
-    editorProps: { attributes: { class: "mednut-rich-editor min-h-[620px] px-6 py-8 outline-none md:px-10" } },
+    editorProps: { attributes: { class: "mednut-rich-editor min-h-[360px] px-4 py-5 outline-none md:min-h-[520px] md:px-8 md:py-6" } },
     onUpdate({ editor: instance }) {
       onChange(instance.getJSON() as TipTapDocument);
       setWordCount(instance.getText().trim().split(/\s+/).filter(Boolean).length);
@@ -62,7 +62,7 @@ export function ArticleRichTextEditor({ value, onChange, error }: Props) {
     if (JSON.stringify(editor.getJSON()) !== JSON.stringify(value)) editor.commands.setContent(value, { emitUpdate: false });
   }, [editor, value]);
 
-  if (!editor) return <div className="h-[720px] animate-pulse rounded-[2rem] bg-slate-100" aria-label="Menyiapkan editor" />;
+  if (!editor) return <div className="h-[620px] animate-pulse rounded-2xl bg-slate-100" aria-label="Menyiapkan editor" />;
 
   function openLink() {
     setLinkValue(String(editor?.getAttributes("link").href ?? ""));
@@ -103,8 +103,8 @@ export function ArticleRichTextEditor({ value, onChange, error }: Props) {
 
   return (
     <div className={`overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 transition focus-within:ring-4 ${error ? "ring-red-300 focus-within:ring-red-100" : "ring-black/10 focus-within:ring-[#006b3f]/15"}`}>
-      <div className="sticky top-0 z-20 border-b border-black/5 bg-[#f4fbf8]/95 p-3 backdrop-blur-xl">
-        <div className="mb-3 flex items-center justify-between gap-3 px-1"><div><p className="text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">Editor Artikel</p><p className="mt-1 text-xs font-medium text-[#64748b]">Konten disimpan sebagai TipTap JSON yang aman.</p></div><span className="rounded-full bg-white px-3 py-2 text-xs font-black text-[#64748b] ring-1 ring-black/5">{wordCount} kata</span></div>
+      <div className="sticky top-[82px] z-20 border-b border-slate-200 bg-[#f7faf8]/95 p-2.5 backdrop-blur-xl">
+        <div className="mb-2 flex items-center justify-between gap-3 px-1"><div><p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#08704c]">Konten</p><p className="mt-0.5 text-[10px] text-slate-500">Editor artikel</p></div><span className="rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] font-medium text-slate-500">{wordCount} kata</span></div>
         <div className="flex flex-wrap gap-2">
           <Group><select aria-label="Format paragraf" value={editor.isActive("heading", { level: 2 }) ? "h2" : editor.isActive("heading", { level: 3 }) ? "h3" : "p"} onChange={(event) => event.target.value === "h2" ? editor.chain().focus().setHeading({ level: 2 }).run() : event.target.value === "h3" ? editor.chain().focus().setHeading({ level: 3 }).run() : editor.chain().focus().setParagraph().run()} className="h-9 rounded-xl border-0 bg-white px-2 text-xs font-black text-[#475569] outline-none"><option value="p">Paragraf</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option></select></Group>
           <Group><ToolButton label="B" title="Tebal (Ctrl+B)" active={editor.isActive("bold")} onClick={() => editor.chain().focus().toggleBold().run()} /><ToolButton label="I" title="Miring (Ctrl+I)" active={editor.isActive("italic")} onClick={() => editor.chain().focus().toggleItalic().run()} /><ToolButton label="U" title="Garis bawah (Ctrl+U)" active={editor.isActive("underline")} onClick={() => editor.chain().focus().toggleUnderline().run()} /><ToolButton label="S" title="Coret" active={editor.isActive("strike")} onClick={() => editor.chain().focus().toggleStrike().run()} /></Group>

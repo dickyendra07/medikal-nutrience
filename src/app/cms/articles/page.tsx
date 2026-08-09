@@ -10,7 +10,7 @@ export default async function CmsArticlesPage() {
     <CmsAdminShell
       active="articles"
       eyebrow="CMS Editorial"
-      title="Article Management"
+      title="Manajemen Artikel"
       description="Kelola pusat edukasi Medikal Nutrience dari draft hingga publikasi dengan workflow editorial yang aman."
     >
       <ArticleListClient />

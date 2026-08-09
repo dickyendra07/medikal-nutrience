@@ -164,21 +164,21 @@ export function MediaLibraryClient() {
         </div>
       ) : null}
 
-      <section className="rounded-[2rem] bg-white p-5 shadow-xl shadow-slate-900/5 ring-1 ring-black/5 md:p-6">
-        <div className="flex flex-col gap-5 border-b border-black/5 pb-6 xl:flex-row xl:items-end xl:justify-between">
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="flex flex-col gap-4 border-b border-slate-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-[#006b3f]">Asset Management</p>
-            <h2 className="mt-3 text-3xl font-black">{total} media asset</h2>
-            <p className="mt-2 text-sm font-medium text-[#64748b]">JPEG, PNG, WebP, dan SVG · maksimal 10 MB</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#16805b]">Asset management</p>
+            <h2 className="mt-1.5 text-lg font-semibold text-slate-900">{total} media asset</h2>
+            <p className="mt-1 text-[11px] text-slate-500">JPEG, PNG, WebP, dan SVG · maksimal 10 MB</p>
           </div>
-          <button type="button" onClick={() => setUploadOpen(true)} className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]">
-            + Upload Image
+          <button type="button" onClick={() => setUploadOpen(true)} className="h-9 rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white transition hover:bg-[#065e40]">
+            Upload image
           </button>
         </div>
 
         <form
           onSubmit={(event) => { event.preventDefault(); setSearch(searchInput.trim()); }}
-          className="mt-6 grid gap-3 md:grid-cols-[1fr_220px_auto]"
+          className="mt-4 grid gap-2.5 md:grid-cols-[1fr_190px_auto]"
         >
           <label className="sr-only" htmlFor="media-search">Cari media</label>
           <input id="media-search" value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Cari filename, alt text, atau caption..." className="rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:ring-4 focus:ring-[#006b3f]/10" />
@@ -190,7 +190,7 @@ export function MediaLibraryClient() {
             <option value="image/webp">WebP</option>
             <option value="image/svg+xml">SVG</option>
           </select>
-          <button className="rounded-full bg-[#e4f8ed] px-6 py-4 text-xs font-black uppercase tracking-wide text-[#006b3f]">Search</button>
+          <button className="h-10 rounded-lg border border-emerald-200 bg-emerald-50 px-4 text-[11px] font-semibold text-[#08704c]">Cari</button>
         </form>
 
         {loading ? <div className="py-24 text-center text-sm font-bold text-[#64748b]">Memuat Media Library...</div> : null}
@@ -201,13 +201,13 @@ export function MediaLibraryClient() {
           </div>
         ) : null}
         {!loading && items.length > 0 ? (
-          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {items.map((media) => (
-              <button key={media.id} type="button" onClick={() => openDetails(media)} className="group overflow-hidden rounded-[1.4rem] bg-white text-left ring-1 ring-black/10 transition hover:-translate-y-1 hover:shadow-xl">
+              <button key={media.id} type="button" onClick={() => openDetails(media)} className="group overflow-hidden rounded-xl border border-slate-200 bg-white text-left transition hover:border-emerald-200 hover:shadow-md">
                 <span className="relative block aspect-square overflow-hidden bg-[#f4fbf8]"><MediaThumbnail media={media} /></span>
-                <span className="block p-4">
-                  <span className="block truncate text-sm font-black text-[#111827]">{media.originalName}</span>
-                  <span className="mt-1 block text-xs font-bold text-[#94a3b8]">{media.width} × {media.height} · {formatBytes(media.size)}</span>
+                <span className="block p-3">
+                  <span className="block truncate text-xs font-semibold text-slate-800">{media.originalName}</span>
+                  <span className="mt-1 block text-[10px] font-medium text-slate-400">{media.width} × {media.height} · {formatBytes(media.size)}</span>
                 </span>
               </button>
             ))}
@@ -239,7 +239,7 @@ export function MediaLibraryClient() {
 
       {selected ? (
         <div className="fixed inset-0 z-[80] flex justify-end bg-[#002f22]/55 backdrop-blur-sm" onMouseDown={(event) => { if (event.currentTarget === event.target) setSelected(null); }}>
-          <aside role="dialog" aria-modal="true" aria-label="Detail media" className="h-full w-full max-w-xl overflow-y-auto bg-white p-6 shadow-2xl md:p-8">
+          <aside role="dialog" aria-modal="true" aria-label="Detail media" className="h-full w-full max-w-lg overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-2xl md:p-6">
             <div className="flex items-start justify-between gap-4">
               <div><p className="text-xs font-black uppercase tracking-[0.28em] text-[#006b3f]">Asset Detail</p><h2 className="mt-2 max-w-sm break-words text-2xl font-black">{selected.originalName}</h2></div>
               <button type="button" onClick={() => setSelected(null)} className="rounded-full bg-[#f1f5f9] px-4 py-2 text-sm font-black">Tutup</button>
