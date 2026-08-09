@@ -5,6 +5,7 @@ import { productDetails } from "@/data/product-details";
 import { promises as fs } from "fs";
 import path from "path";
 import { ArticleDashboardMetrics } from "@/components/cms/articles/ArticleDashboardMetrics";
+import { CmsCard, CmsMetricCard, CmsSectionHeader } from "@/components/cms/CmsUi";
 
 type CmsProductDraft = {
   slug: string;
@@ -134,56 +135,36 @@ export default async function CmsPage({
           Akun Anda hanya memiliki akses baca. Hubungi Super Admin jika Anda perlu mengubah konten.
         </div>
       ) : null}
-      <ArticleDashboardMetrics />
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {quickStats.map((stat) => (
-          <article
-            key={stat.label}
-            className="rounded-[1.5rem] bg-white p-5 shadow-lg shadow-slate-900/5 ring-1 ring-black/5"
-          >
-            <p className="text-3xl font-black leading-tight text-[#006b3f]">{stat.value}</p>
-            <p className="mt-2 text-xs font-black uppercase tracking-[0.12em] text-[#64748b]">
-              {stat.label}
-            </p>
-          </article>
-        ))}
+      <section aria-label="Ringkasan website" className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+        {quickStats.map((stat, index) => <CmsMetricCard key={stat.label} label={stat.label} value={stat.value} tone={index === 2 ? "amber" : index === 3 ? "neutral" : "green"} />)}
       </section>
 
-      <section className="mt-6 overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/5 ring-1 ring-black/5">
-        <div className="flex flex-col gap-3 border-b border-black/5 p-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">Akses Cepat</p>
-            <h2 className="mt-2 text-2xl font-black text-[#111827]">Kelola konten website</h2>
-          </div>
-          <p className="max-w-xl text-sm font-medium leading-6 text-[#64748b]">Pilih modul yang ingin diperbarui. Perubahan berstatus draft tidak akan tampil ke publik.</p>
-        </div>
-        <div className="grid gap-px bg-black/5 sm:grid-cols-2 xl:grid-cols-3">
+      <ArticleDashboardMetrics />
+
+      <CmsCard padding="none" className="mt-5 overflow-hidden">
+        <CmsSectionHeader
+          className="border-b border-slate-100 px-5 py-4"
+          eyebrow="Akses cepat"
+          title="Kelola konten website"
+          description="Pilih area kerja. Konten draft tetap aman dan tidak tampil di website publik."
+        />
+        <div className="grid gap-px bg-slate-200 sm:grid-cols-2 xl:grid-cols-3">
         {cmsMenus.map((menu) => (
           <a
             key={menu.title}
             href={menu.href}
-            className="group bg-white p-6 transition hover:bg-[#f4fbf8] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-[#006b3f]"
+            className="group bg-white px-5 py-4 transition hover:bg-slate-50 focus-visible:z-10"
           >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 className="text-xl font-black leading-tight text-[#111827]">
-                  {menu.title}
-                </h3>
-              </div>
-
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e4f8ed] text-lg font-black text-[#006b3f] transition group-hover:translate-x-1">
-                →
-              </span>
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="text-sm font-semibold text-slate-800">{menu.title}</h3>
+              <span aria-hidden="true" className="text-sm text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-[#16805b]">→</span>
             </div>
-
-            <p className="mt-3 text-sm font-medium leading-6 text-[#64748b]">
-              {menu.desc}
-            </p>
-            <p className="mt-4 text-xs font-black text-[#006b3f]">{menu.count}</p>
+            <p className="mt-1.5 line-clamp-1 text-[11px] leading-5 text-slate-500">{menu.desc}</p>
+            <p className="mt-2.5 text-[10px] font-medium text-[#16805b]">{menu.count}</p>
           </a>
         ))}
         </div>
-      </section>
+      </CmsCard>
     </CmsAdminShell>
   );
 }

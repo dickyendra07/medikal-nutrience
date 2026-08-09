@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./cms-theme.css";
 
 export const metadata: Metadata = {
   title: { absolute: "CMS | Medikal Nutrience" },
@@ -6,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function CmsLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <div className="cms-app">{children}</div>;
 }

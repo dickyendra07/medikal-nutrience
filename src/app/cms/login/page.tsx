@@ -18,74 +18,68 @@ export default async function CmsLoginPage({
   const unavailable = params.error === "unavailable";
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] px-5 py-10 text-[#0f172a]">
-      <div className="mx-auto grid min-h-[calc(100vh-80px)] w-full max-w-[1200px] items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <main className="min-h-screen bg-[#f4f7f5] px-5 py-8 text-slate-900">
+      <div className="mx-auto grid min-h-[calc(100vh-64px)] w-full max-w-[1040px] items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
         <section className="hidden lg:block">
-          <div className="rounded-[3rem] bg-[#004b34] p-10 text-white shadow-2xl shadow-green-900/20">
+          <div className="rounded-3xl bg-[#064c38] p-8 text-white shadow-[0_24px_60px_rgba(6,76,56,0.14)]">
             <BrandLogo variant="light" />
 
-            <p className="mt-12 text-xs font-black uppercase tracking-[0.35em] text-white/50">
-              Medikal Nutrience CMS
+            <p className="mt-10 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
+              Content workspace
             </p>
 
-            <h1 className="mt-5 max-w-2xl text-5xl font-black leading-tight">
-              Kelola konten website dengan dashboard yang aman dan terstruktur.
+            <h1 className="mt-3 max-w-lg text-[27px] font-semibold leading-[1.25] tracking-[-0.025em]">
+              Pengelolaan konten yang aman, tenang, dan terstruktur.
             </h1>
 
-            <p className="mt-6 max-w-xl text-base font-medium leading-8 text-white/70">
-              CMS ini disiapkan untuk mengelola produk, solusi, event, apotek,
-              FAQ, dan data registrasi website Medikal Nutrience.
+            <p className="mt-4 max-w-md text-[13px] leading-6 text-white/68">
+              Satu ruang kerja untuk menjaga informasi Medikal Nutrience tetap
+              akurat, konsisten, dan siap dipublikasikan.
             </p>
 
-            <div className="mt-10 grid gap-4 md:grid-cols-2">
-              {["Produk", "Artikel", "Media", "Leads"].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl bg-white/10 p-5 ring-1 ring-white/10"
-                >
-                  <p className="text-sm font-black text-white">{item}</p>
-                  <p className="mt-2 text-xs font-medium leading-6 text-white/55">
-                    Siap dikelola dalam satu workspace.
-                  </p>
+            <div className="mt-8 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.06] px-5">
+              {["Konten terpusat", "Akses berbasis peran", "Media terkelola"].map((item) => (
+                <div key={item} className="flex items-center gap-3 py-3.5">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-md bg-white/10 text-[10px] text-emerald-100" aria-hidden="true">✓</span>
+                  <p className="text-xs font-medium text-white/85">{item}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[520px] rounded-[2.5rem] bg-white p-7 shadow-2xl shadow-slate-900/10 ring-1 ring-black/5 md:p-9">
+        <section className="mx-auto w-full max-w-[440px] rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_16px_50px_rgba(15,23,42,0.06)] md:p-8">
           <div className="lg:hidden">
             <BrandLogo />
           </div>
 
-          <p className="mt-8 text-xs font-black uppercase tracking-[0.32em] text-[#006b3f] lg:mt-0">
+          <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#08704c] lg:mt-0">
             Akses Administrator
           </p>
 
-          <h2 className="mt-4 text-4xl font-black leading-tight text-[#111827]">
+          <h2 className="mt-2 text-[26px] font-semibold leading-tight tracking-[-0.025em] text-slate-900">
             Masuk ke CMS
           </h2>
 
-          <p className="mt-3 text-sm font-medium leading-7 text-[#64748b]">
-            Gunakan akses admin untuk masuk ke dashboard pengelolaan konten
-            Medikal Nutrience.
+          <p className="mt-2 text-[13px] leading-5 text-slate-500">
+            Gunakan akun yang telah diberikan untuk mengakses ruang kerja konten.
           </p>
 
           {hasError ? (
-            <div className="mt-6 rounded-2xl bg-red-50 px-5 py-4 text-sm font-bold text-red-600 ring-1 ring-red-100">
+            <div role="alert" className="mt-5 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-[12px] font-medium text-red-700">
               Email atau password tidak sesuai.
             </div>
           ) : null}
 
           {unavailable ? (
-            <div className="mt-6 rounded-2xl bg-amber-50 px-5 py-4 text-sm font-bold text-amber-700 ring-1 ring-amber-100">
+            <div role="alert" className="mt-5 rounded-xl border border-amber-100 bg-amber-50 px-4 py-3 text-[12px] font-medium text-amber-700">
               Layanan CMS sedang tidak tersedia. Silakan coba kembali beberapa saat lagi.
             </div>
           ) : null}
 
-          <form action="/api/cms/login" method="post" className="mt-7 space-y-5">
+          <form action="/api/cms/login" method="post" className="mt-6 space-y-4">
             <div>
-              <label htmlFor="cms-email" className="text-sm font-black text-[#111827]">
+              <label htmlFor="cms-email" className="text-xs font-semibold text-slate-700">
                 Email admin
               </label>
               <input
@@ -93,13 +87,14 @@ export default async function CmsLoginPage({
                 name="email"
                 type="email"
                 required
+                autoComplete="username"
                 placeholder="editor@medikal-nutrience.co.id"
-                className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
+                className="mt-1.5 h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-[13px] outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-[#16805b] focus:ring-4 focus:ring-[#16805b]/10"
               />
             </div>
 
             <div>
-              <label htmlFor="cms-password" className="text-sm font-black text-[#111827]">
+              <label htmlFor="cms-password" className="text-xs font-semibold text-slate-700">
                 Password
               </label>
               <input
@@ -107,21 +102,22 @@ export default async function CmsLoginPage({
                 name="password"
                 type="password"
                 required
+                autoComplete="current-password"
                 placeholder="••••••••"
-                className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
+                className="mt-1.5 h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-[13px] outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-[#16805b] focus:ring-4 focus:ring-[#16805b]/10"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
+              className="mt-1 h-10 w-full rounded-lg bg-[#08704c] px-4 text-xs font-semibold text-white shadow-sm transition hover:bg-[#065e40] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#16805b]/20"
             >
-              Masuk Dashboard
+              Masuk ke dashboard
             </button>
           </form>
 
-          <div className="mt-6 rounded-2xl bg-[#f4fbf8] p-5 text-sm font-medium leading-7 text-[#64748b]">
-            Akses dikelola oleh administrator. Hubungi tim teknis jika akun Anda belum tersedia.
+          <div className="mt-5 border-t border-slate-100 pt-4 text-[11px] leading-5 text-slate-400">
+            Akses dikelola oleh administrator. Hubungi tim teknis jika akun belum tersedia.
           </div>
         </section>
       </div>
