@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { getLeads } from "@/lib/cms/leads-storage";
 
 function getStatusClass(status: string) {
@@ -35,11 +35,8 @@ export default async function CmsLeadsPage({
     status?: string;
   }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.CONSULTATION_VIEW);
+  const canMutate = identity.permissions.includes(CMS_PERMISSIONS.CONSULTATION_REVIEW) || identity.permissions.includes(CMS_PERMISSIONS.CONSULTATION_UPDATE);
 
   const query = await searchParams;
 
@@ -227,7 +224,7 @@ export default async function CmsLeadsPage({
                   href={`/cms/leads/${lead.id}/edit`}
                   className="rounded-full bg-[#006b3f] px-4 py-2 text-xs font-black text-white transition hover:bg-[#005635]"
                 >
-                  Edit
+                  {canMutate ? "Tinjau" : "Lihat"}
                 </a>
 
               </div>

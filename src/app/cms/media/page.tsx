@@ -1,12 +1,10 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { MediaLibraryClient } from "@/components/cms/media/MediaLibraryClient";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 export default async function CmsMediaPage() {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) redirect("/cms/login");
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.MEDIA_VIEW);
 
   return (
     <CmsAdminShell
@@ -15,7 +13,7 @@ export default async function CmsMediaPage() {
       eyebrow="CMS Content"
       description="Kelola asset gambar terpusat untuk artikel, event, produk, solusi, dan Support System."
     >
-      <MediaLibraryClient />
+      <MediaLibraryClient permissions={identity.permissions} />
     </CmsAdminShell>
   );
 }

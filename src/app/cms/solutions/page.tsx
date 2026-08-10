@@ -1,14 +1,10 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { solutionDetails } from "@/data/solutions";
 
 export default async function CmsSolutionsPage() {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsPermission(CMS_PERMISSIONS.SOLUTION_VIEW);
 
   const solutionRows = solutionDetails.map((solution) => ({
     title: solution.title,

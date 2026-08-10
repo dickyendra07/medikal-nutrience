@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 const supportModules = [
   {
@@ -35,11 +35,7 @@ const supportModules = [
 ];
 
 export default async function CmsSupportSystemPage() {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsPermission(CMS_PERMISSIONS.SUPPORT_VIEW);
 
   return (
     <CmsAdminShell

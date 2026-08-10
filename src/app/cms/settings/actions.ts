@@ -3,12 +3,13 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getSettings, writeSettingsStorage } from "@/lib/cms/settings-storage";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 export async function updateSettings(
   formData: FormData
 ) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.SETTINGS_MANAGE);
 
   const currentSettings = await getSettings();
 

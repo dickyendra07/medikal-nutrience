@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 type PharmacyDraft = {
   no: number;
@@ -53,7 +54,7 @@ function parseStock(value: FormDataEntryValue | null) {
 }
 
 export async function savePharmacyDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.PHARMACY_EDIT);
 
   const originalNo = String(formData.get("originalNo") ?? "");
   const no = Number(formData.get("no") ?? originalNo);
@@ -87,7 +88,7 @@ export async function savePharmacyDraft(formData: FormData) {
 
 
 export async function deletePharmacyDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.PHARMACY_DELETE);
 
   const originalNo = String(formData.get("originalNo") ?? "");
 
@@ -108,7 +109,7 @@ export async function deletePharmacyDraft(formData: FormData) {
 
 
 export async function deletePharmacyPartner(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.PHARMACY_DELETE);
 
   const originalNo = String(formData.get("originalNo") ?? "");
   const isCmsCreated = String(formData.get("isCmsCreated") ?? "") === "true";

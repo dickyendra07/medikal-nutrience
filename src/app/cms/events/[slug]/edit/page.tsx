@@ -1,8 +1,9 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import {
   eventPageData,
   type EventItem,
@@ -69,11 +70,7 @@ export default async function CmsEventEditPage({
     resetUnavailable?: string;
   }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.EVENT_EDIT);
 
   const { slug } = await params;
   const query = await searchParams;
@@ -335,7 +332,7 @@ export default async function CmsEventEditPage({
                 : "Event buatan CMS akan dihapus dari daftar CMS dan halaman public."}
             </p>
 
-            <form action={deleteOrHideEvent} className="mt-5">
+            {identity.permissions.includes(CMS_PERMISSIONS.EVENT_DELETE) ? <form action={deleteOrHideEvent} className="mt-5">
               <input
                 type="hidden"
                 name="originalSlug"
@@ -348,7 +345,7 @@ export default async function CmsEventEditPage({
               >
                 {isOriginalEvent ? "Hide Event" : "Delete Event"}
               </button>
-            </form>
+            </form> : null}
           </section>
 
           <a

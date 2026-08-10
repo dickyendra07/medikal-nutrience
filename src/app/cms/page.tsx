@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS, hasCmsPermission, type CmsAdminIdentity } from "@/lib/cms/permissions";
 import { productDetails } from "@/data/product-details";
 import { promises as fs } from "fs";
 import path from "path";
@@ -46,23 +46,25 @@ function formatLastUpdate(value: string | null) {
 }
 
 
-function getCmsMenus(productCount: number) {
+function getCmsMenus(productCount: number, identity: CmsAdminIdentity) {
   return [
     {
       title: "Produk",
       desc: "Kelola produk, logo, packshot, manfaat, dan CTA",
       count: `${productCount} produk`,
       href: "/cms/products",
+      permission: CMS_PERMISSIONS.PRODUCT_VIEW,
     },
-    { title: "Solusi", desc: "Kelola solusi berdasarkan kebutuhan tubuh", count: "7 solusi", href: "/cms/solutions" },
-    { title: "Support System", desc: "Kelola kalkulator, komunitas, kisah pasien, dan edukasi", count: "4 modul", href: "/cms/support-system" },
-    { title: "Dapur Sehat FIMA", desc: "Kelola artikel resep dan detail konten nutrisi", count: "3 artikel", href: "/cms/support-system/fima" },
-    { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "3 event", href: "/cms/events" },
-    { title: "Apotek", desc: "Kelola daftar apotek, area, dan link Google Maps", count: "Partner", href: "/cms/pharmacies" },
-    { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "/cms/faq" },
-    { title: "Leads / Registrasi", desc: "Data dari assessment, konsultasi, dan event", count: "2 leads", href: "/cms/leads" },
-    { title: "Pengaturan Website", desc: "SEO, banner, navigasi, dan informasi perusahaan", count: "CMS", href: "/cms/settings" },
-  ];
+    { title: "Artikel", desc: "Kelola draft, medical review, dan publikasi", count: "Editorial", href: "/cms/articles", permission: CMS_PERMISSIONS.ARTICLE_VIEW },
+    { title: "Solusi", desc: "Kelola solusi berdasarkan kebutuhan tubuh", count: "7 solusi", href: "/cms/solutions", permission: CMS_PERMISSIONS.SOLUTION_VIEW },
+    { title: "Support System", desc: "Kelola kalkulator, komunitas, kisah pasien, dan edukasi", count: "4 modul", href: "/cms/support-system", permission: CMS_PERMISSIONS.SUPPORT_VIEW },
+    { title: "Dapur Sehat FIMA", desc: "Kelola artikel resep dan detail konten nutrisi", count: "3 artikel", href: "/cms/support-system/fima", permission: CMS_PERMISSIONS.FIMA_VIEW },
+    { title: "Event", desc: "Kelola event, registrasi, dan data peserta", count: "3 event", href: "/cms/events", permission: CMS_PERMISSIONS.EVENT_VIEW },
+    { title: "Apotek", desc: "Kelola daftar apotek, area, dan link Google Maps", count: "Partner", href: "/cms/pharmacies", permission: CMS_PERMISSIONS.PHARMACY_VIEW },
+    { title: "FAQ", desc: "Kelola halaman FAQ dan accordion", count: "10 FAQ", href: "/cms/faq", permission: CMS_PERMISSIONS.FAQ_VIEW },
+    { title: "Konsultasi", desc: "Data assessment, konsultasi, dan review medis", count: "2 kasus", href: "/cms/leads", permission: CMS_PERMISSIONS.CONSULTATION_VIEW },
+    { title: "Pengaturan Website", desc: "SEO, banner, navigasi, dan informasi perusahaan", count: "CMS", href: "/cms/settings", permission: CMS_PERMISSIONS.SETTINGS_MANAGE },
+  ].filter((menu) => hasCmsPermission(identity, menu.permission));
 }
 
 function getQuickStats({
@@ -89,11 +91,7 @@ export default async function CmsPage({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.DASHBOARD_VIEW);
 
   const drafts = await getProductDrafts();
   const draftList = Object.values(drafts);
@@ -110,14 +108,26 @@ export default async function CmsPage({
       .sort()
       .at(-1) ?? null;
 
-  const quickStats = getQuickStats({
+  const baseQuickStats = getQuickStats({
     productCount: productDetails.length,
     publishedDraftCount,
     pendingDraftCount,
     lastUpdate,
   });
 
-  const cmsMenus = getCmsMenus(productDetails.length);
+  const dashboardMode = hasCmsPermission(identity, CMS_PERMISSIONS.USERS_MANAGE) ? "admin" : hasCmsPermission(identity, CMS_PERMISSIONS.ARTICLE_MEDICAL_REVIEW) ? "medical" : "dtc";
+  const quickStats = dashboardMode === "medical" ? [
+    { label: "Perlu Review Produk", value: String(pendingDraftCount) },
+    { label: "Produk Terpantau", value: String(productDetails.length) },
+    { label: "Kasus Konsultasi", value: "2" },
+    { label: "Pembaruan Terakhir", value: formatLastUpdate(lastUpdate) },
+  ] : dashboardMode === "dtc" ? [
+    { label: "Draft Konten", value: String(pendingDraftCount) },
+    { label: "Event Mendatang", value: "3" },
+    { label: "Konten Terbit", value: String(publishedDraftCount) },
+    { label: "Pembaruan Terakhir", value: formatLastUpdate(lastUpdate) },
+  ] : baseQuickStats;
+  const cmsMenus = getCmsMenus(productDetails.length, identity);
   const { error } = await searchParams;
 
   return (
@@ -125,7 +135,7 @@ export default async function CmsPage({
       active="dashboard"
       title="Dashboard"
       eyebrow="Medikal Nutrience Admin"
-      description="Ringkasan konten, aktivitas editorial, dan akses cepat pengelolaan website."
+      description={dashboardMode === "medical" ? "Antrean validasi konten medis, pembaruan produk, dan kasus konsultasi." : dashboardMode === "dtc" ? "Draft digital, agenda event, dan progres konten marketing." : "Ringkasan konten, aktivitas editorial, dan akses cepat pengelolaan website."}
     >
       {error === "forbidden" ? (
         <div
@@ -139,7 +149,7 @@ export default async function CmsPage({
         {quickStats.map((stat, index) => <CmsMetricCard key={stat.label} label={stat.label} value={stat.value} tone={index === 2 ? "amber" : index === 3 ? "neutral" : "green"} />)}
       </section>
 
-      <ArticleDashboardMetrics />
+      {hasCmsPermission(identity, CMS_PERMISSIONS.ARTICLE_VIEW) ? <ArticleDashboardMetrics mode={dashboardMode} /> : null}
 
       <CmsCard padding="none" className="mt-5 overflow-hidden">
         <CmsSectionHeader

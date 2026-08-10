@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import {
   eventPageData,
   type EventItem,
@@ -63,7 +64,10 @@ function createSlug(value: string) {
 }
 
 export async function createEventDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.EVENT_CREATE);
+  if (String(formData.get("status") ?? "Draft") === "Published") {
+    await requireCmsPermission(CMS_PERMISSIONS.EVENT_PUBLISH);
+  }
 
   const title = String(formData.get("title") ?? "").trim();
 

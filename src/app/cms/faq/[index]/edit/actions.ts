@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 type FaqDraft = {
   index: number;
@@ -39,7 +40,7 @@ async function writeDrafts(drafts: Record<string, FaqDraft>) {
 }
 
 export async function saveFaqDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.FAQ_EDIT);
 
   const originalIndex = String(formData.get("originalIndex") ?? "");
   const indexNumber = Number(originalIndex);
@@ -70,7 +71,7 @@ export async function saveFaqDraft(formData: FormData) {
 
 
 export async function deleteFaqDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.FAQ_DELETE);
 
   const originalIndex = String(formData.get("originalIndex") ?? "");
 

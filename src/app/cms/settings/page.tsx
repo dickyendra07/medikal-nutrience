@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { getSettings } from "@/lib/cms/settings-storage";
 import { updateSettings } from "./actions";
 import { CmsCard, CmsSectionHeader, cmsFieldClass } from "@/components/cms/CmsUi";
@@ -26,11 +26,7 @@ export default async function CmsSettingsPage({
     saved?: string;
   }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsPermission(CMS_PERMISSIONS.SETTINGS_MANAGE);
 
   const settings = await getSettings();
   const query = await searchParams;

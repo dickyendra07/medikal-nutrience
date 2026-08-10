@@ -1,8 +1,9 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { pharmacies } from "@/data/pharmacies";
 import { deletePharmacyDraft, deletePharmacyPartner, savePharmacyDraft } from "./actions";
 
@@ -48,11 +49,7 @@ export default async function CmsPharmacyEditPage({
   params,
   searchParams,
 }: CmsPharmacyEditPageProps) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.PHARMACY_EDIT);
 
   const { no } = await params;
   const pharmacyNo = Number(no);
@@ -337,7 +334,7 @@ export default async function CmsPharmacyEditPage({
                 </form>
               </div>
 
-              <div className="rounded-2xl bg-[#fef2f2] p-4 ring-1 ring-[#fecaca]">
+              {identity.permissions.includes(CMS_PERMISSIONS.PHARMACY_DELETE) ? <div className="rounded-2xl bg-[#fef2f2] p-4 ring-1 ring-[#fecaca]">
                 <p className="text-xs font-black uppercase tracking-wide text-[#b91c1c]">
                   Delete / Hide Partner
                 </p>
@@ -361,7 +358,7 @@ export default async function CmsPharmacyEditPage({
                     Delete / Hide
                   </button>
                 </form>
-              </div>
+              </div> : null}
             </div>
           </section>
 

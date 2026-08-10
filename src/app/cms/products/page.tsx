@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { productDetails } from "@/data/product-details";
 
 const productRows = Object.values(productDetails).map((product) => ({
@@ -13,11 +13,8 @@ const productRows = Object.values(productDetails).map((product) => ({
 }));
 
 export default async function CmsProductsPage() {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.PRODUCT_VIEW);
+  const canEdit = identity.permissions.includes(CMS_PERMISSIONS.PRODUCT_EDIT);
 
   return (
     <CmsAdminShell
@@ -110,12 +107,12 @@ export default async function CmsProductsPage() {
                 >
                   Lihat
                 </a>
-                <a
+                {canEdit ? <a
                   href={`/cms/products/${product.slug}/edit`}
                   className="relative z-20 inline-flex rounded-full bg-[#006b3f] px-4 py-2 text-xs font-black text-white transition hover:bg-[#005635]"
                 >
                   Edit
-                </a>
+                </a> : null}
               </div>
             </article>
           ))}

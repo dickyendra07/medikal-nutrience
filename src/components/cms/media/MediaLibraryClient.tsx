@@ -11,6 +11,7 @@ import {
   uploadMedia,
 } from "@/lib/cms/media-api";
 import { MediaThumbnail } from "./MediaThumbnail";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
 
@@ -34,7 +35,7 @@ function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Terjadi kesalahan pada Media Library.";
 }
 
-export function MediaLibraryClient() {
+export function MediaLibraryClient({ permissions }: { permissions: string[] }) {
   const fileInput = useRef<HTMLInputElement>(null);
   const [items, setItems] = useState<MediaAsset[]>([]);
   const [total, setTotal] = useState(0);
@@ -51,6 +52,9 @@ export function MediaLibraryClient() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadPreview, setUploadPreview] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const canUpload = permissions.includes(CMS_PERMISSIONS.MEDIA_UPLOAD);
+  const canEdit = permissions.includes(CMS_PERMISSIONS.MEDIA_EDIT);
+  const canDelete = permissions.includes(CMS_PERMISSIONS.MEDIA_DELETE);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -171,9 +175,9 @@ export function MediaLibraryClient() {
             <h2 className="mt-1.5 text-lg font-semibold text-slate-900">{total} media asset</h2>
             <p className="mt-1 text-[11px] text-slate-500">JPEG, PNG, WebP, dan SVG · maksimal 10 MB</p>
           </div>
-          <button type="button" onClick={() => setUploadOpen(true)} className="h-9 rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white transition hover:bg-[#065e40]">
+          {canUpload ? <button type="button" onClick={() => setUploadOpen(true)} className="h-9 rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white transition hover:bg-[#065e40]">
             Upload image
-          </button>
+          </button> : null}
         </div>
 
         <form
@@ -215,7 +219,7 @@ export function MediaLibraryClient() {
         ) : null}
       </section>
 
-      {uploadOpen ? (
+      {uploadOpen && canUpload ? (
         <div className="fixed inset-0 z-[90] flex items-center justify-center bg-[#002f22]/70 p-4 backdrop-blur-sm">
           <section role="dialog" aria-modal="true" aria-label="Upload image" className="w-full max-w-xl rounded-[2rem] bg-white p-6 shadow-2xl md:p-8">
             <div className="flex items-start justify-between gap-4">
@@ -252,15 +256,15 @@ export function MediaLibraryClient() {
               <div className="rounded-2xl bg-[#f8fcfa] p-4"><dt className="text-xs font-black uppercase text-[#94a3b8]">Uploaded</dt><dd className="mt-1 font-bold">{formatDate(selected.createdAt)}</dd></div>
             </dl>
             <form onSubmit={handleSave} className="mt-6 space-y-5 border-t border-black/5 pt-6">
-              <div><label htmlFor="media-alt" className="text-sm font-black">Alt text</label><p className="mt-1 text-xs font-medium text-[#64748b]">Deskripsi singkat gambar untuk aksesibilitas dan SEO.</p><input id="media-alt" value={altText} onChange={(event) => setAltText(event.target.value)} maxLength={500} className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none focus:border-[#006b3f]" /></div>
-              <div><label htmlFor="media-caption" className="text-sm font-black">Caption</label><textarea id="media-caption" value={caption} onChange={(event) => setCaption(event.target.value)} maxLength={2000} rows={4} className="mt-2 w-full resize-none rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none focus:border-[#006b3f]" /></div>
-              <button disabled={saving} className="w-full rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white disabled:opacity-50">{saving ? "Menyimpan..." : "Save Metadata"}</button>
+              <div><label htmlFor="media-alt" className="text-sm font-black">Alt text</label><p className="mt-1 text-xs font-medium text-[#64748b]">Deskripsi singkat gambar untuk aksesibilitas dan SEO.</p><input id="media-alt" disabled={!canEdit} value={altText} onChange={(event) => setAltText(event.target.value)} maxLength={500} className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none focus:border-[#006b3f] disabled:cursor-not-allowed disabled:text-slate-500" /></div>
+              <div><label htmlFor="media-caption" className="text-sm font-black">Caption</label><textarea id="media-caption" disabled={!canEdit} value={caption} onChange={(event) => setCaption(event.target.value)} maxLength={2000} rows={4} className="mt-2 w-full resize-none rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none focus:border-[#006b3f] disabled:cursor-not-allowed disabled:text-slate-500" /></div>
+              {canEdit ? <button disabled={saving} className="w-full rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white disabled:opacity-50">{saving ? "Menyimpan..." : "Save Metadata"}</button> : <p className="rounded-xl bg-slate-50 px-4 py-3 text-xs text-slate-500">Anda memiliki akses baca saja untuk metadata media.</p>}
             </form>
-            <div className="mt-6 border-t border-black/5 pt-6">
+            {canDelete ? <div className="mt-6 border-t border-black/5 pt-6">
               {!confirmDelete ? <button type="button" onClick={() => setConfirmDelete(true)} className="w-full rounded-full bg-red-50 px-6 py-4 text-sm font-black text-red-700 ring-1 ring-red-100">Delete Asset</button> : (
                 <div className="rounded-2xl bg-red-50 p-5 ring-1 ring-red-100"><p className="font-black text-red-800">Hapus asset secara permanen?</p><p className="mt-2 text-sm font-medium leading-6 text-red-700">Data akan diarsipkan dan file di storage dihapus. Tindakan ini tidak dapat dibatalkan dari CMS.</p><div className="mt-4 grid grid-cols-2 gap-3"><button type="button" onClick={() => setConfirmDelete(false)} className="rounded-full bg-white px-4 py-3 text-sm font-black text-[#475569]">Batal</button><button type="button" disabled={saving} onClick={() => void handleDelete()} className="rounded-full bg-red-700 px-4 py-3 text-sm font-black text-white disabled:opacity-50">Ya, Hapus</button></div></div>
               )}
-            </div>
+            </div> : null}
           </aside>
         </div>
       ) : null}

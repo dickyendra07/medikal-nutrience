@@ -6,12 +6,13 @@ import {
   readFimaStorage,
   writeFimaStorage,
 } from "@/lib/cms/fima-storage";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 export async function saveFimaRecipe(
   formData: FormData
 ) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.FIMA_EDIT);
   const slug = String(formData.get("slug"));
 
   const storage = await readFimaStorage();

@@ -10,9 +10,10 @@ type MediaPickerProps = {
   onClose: () => void;
   onSelect: (media: MediaAsset) => void;
   selectedId?: string;
+  canUpload?: boolean;
 };
 
-export function MediaPicker({ open, onClose, onSelect, selectedId }: MediaPickerProps) {
+export function MediaPicker({ open, onClose, onSelect, selectedId, canUpload = false }: MediaPickerProps) {
   const [items, setItems] = useState<MediaAsset[]>([]);
   const [search, setSearch] = useState("");
   const [mimeType, setMimeType] = useState("");
@@ -83,7 +84,7 @@ export function MediaPicker({ open, onClose, onSelect, selectedId }: MediaPicker
             <p className="text-xs font-black uppercase tracking-[0.28em] text-[#006b3f]">Media Picker</p>
             <h2 className="mt-2 text-2xl font-black">Pilih asset gambar</h2>
           </div>
-          <div className="flex gap-2"><button type="button" disabled={uploading} onClick={() => uploadRef.current?.click()} className="rounded-full bg-[#006b3f] px-4 py-2 text-sm font-black text-white disabled:opacity-50">{uploading ? "Mengunggah..." : "+ Upload Baru"}</button><button type="button" onClick={onClose} className="rounded-full bg-[#f1f5f9] px-4 py-2 text-sm font-black">Tutup</button><input ref={uploadRef} type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" className="hidden" onChange={(event) => void handleUpload(event.target.files?.[0])} /></div>
+          <div className="flex gap-2">{canUpload ? <><button type="button" disabled={uploading} onClick={() => uploadRef.current?.click()} className="rounded-full bg-[#006b3f] px-4 py-2 text-sm font-black text-white disabled:opacity-50">{uploading ? "Mengunggah..." : "+ Upload Baru"}</button><input ref={uploadRef} type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" className="hidden" onChange={(event) => void handleUpload(event.target.files?.[0])} /></> : null}<button type="button" onClick={onClose} className="rounded-full bg-[#f1f5f9] px-4 py-2 text-sm font-black">Tutup</button></div>
         </header>
 
         <div className="grid gap-3 border-b border-black/5 p-5 md:grid-cols-[1fr_220px]">

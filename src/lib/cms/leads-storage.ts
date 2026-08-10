@@ -17,6 +17,8 @@ export type CmsLead = {
     | "Converted"
     | "Closed";
   message: string;
+  medicalNotes?: string;
+  reviewStatus?: "Pending" | "Reviewed" | "Follow Up";
   createdAt: string;
 };
 

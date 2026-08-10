@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import {
   eventPageData,
   type EventItem,
@@ -54,7 +55,10 @@ async function writeStorage(storage: CmsEventsStorage) {
 }
 
 export async function saveEventDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.EVENT_EDIT);
+  if (String(formData.get("status") ?? "Published") === "Published") {
+    await requireCmsPermission(CMS_PERMISSIONS.EVENT_PUBLISH);
+  }
 
   const originalSlug = String(formData.get("originalSlug") ?? "").trim();
 
@@ -107,7 +111,7 @@ export async function saveEventDraft(formData: FormData) {
 }
 
 export async function resetEventDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.EVENT_EDIT);
 
   const originalSlug = String(formData.get("originalSlug") ?? "").trim();
 
@@ -144,7 +148,7 @@ export async function resetEventDraft(formData: FormData) {
 }
 
 export async function deleteOrHideEvent(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.EVENT_DELETE);
 
   const originalSlug = String(formData.get("originalSlug") ?? "").trim();
 

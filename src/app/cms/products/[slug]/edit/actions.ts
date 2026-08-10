@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 type ProductDraft = {
   slug: string;
@@ -37,7 +38,7 @@ async function writeDrafts(drafts: Record<string, ProductDraft>) {
 }
 
 export async function saveProductDraft(formData: FormData) {
-  await requireCmsEditor();
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.PRODUCT_EDIT);
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
   const slug = String(formData.get("slug") ?? "").trim();
@@ -46,6 +47,7 @@ export async function saveProductDraft(formData: FormData) {
     throw new Error("Slug produk tidak valid.");
   }
 
+  const requestedStatus = String(formData.get("status") ?? "draft") as ProductDraft["status"];
   const draft: ProductDraft = {
     slug,
     name: String(formData.get("name") ?? "").trim(),
@@ -53,7 +55,9 @@ export async function saveProductDraft(formData: FormData) {
     heroTitle: String(formData.get("heroTitle") ?? "").trim(),
     description: String(formData.get("description") ?? "").trim(),
     ctaLabel: String(formData.get("ctaLabel") ?? "").trim(),
-    status: String(formData.get("status") ?? "draft") as ProductDraft["status"],
+    status: requestedStatus === "published" && !identity.permissions.includes(CMS_PERMISSIONS.PRODUCT_PUBLISH)
+      ? "review"
+      : requestedStatus,
     updatedAt: new Date().toISOString(),
   };
 
@@ -70,7 +74,7 @@ export async function saveProductDraft(formData: FormData) {
 
 
 export async function deleteProductDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.PRODUCT_DELETE);
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
 

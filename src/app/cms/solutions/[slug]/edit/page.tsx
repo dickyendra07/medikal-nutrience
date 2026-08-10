@@ -1,6 +1,7 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { solutionDetails } from "@/data/solutions";
 import { deleteSolutionDraft, saveSolutionDraft } from "./actions";
 import { promises as fs } from "fs";
@@ -48,11 +49,7 @@ export default async function CmsSolutionEditPage({
   params,
   searchParams,
 }: CmsSolutionEditPageProps) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsPermission(CMS_PERMISSIONS.SOLUTION_EDIT);
 
   const { slug } = await params;
   const solution = solutionDetails.find((item) => item.slug === slug);

@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { pharmacies } from "@/data/pharmacies";
 import { promises as fs } from "fs";
 import path from "path";
@@ -47,11 +47,7 @@ export default async function CmsPharmaciesPage({
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.PHARMACY_VIEW);
 
   const paramsQuery = await searchParams;
   const searchKeyword = (paramsQuery.q ?? "").trim().toLowerCase();
@@ -131,12 +127,12 @@ export default async function CmsPharmaciesPage({
       description="Kelola daftar apotek, offline store, modern channel, area, PIC, status partner, dan ketersediaan produk."
       actions={
         <div className="flex flex-wrap gap-3">
-          <a
+          {identity.permissions.includes(CMS_PERMISSIONS.PHARMACY_CREATE) ? <a
             href="/cms/pharmacies/new"
             className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-slate-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
           >
             Add Partner
-          </a>
+          </a> : null}
 
           <a
             href="/apotek-resmi"

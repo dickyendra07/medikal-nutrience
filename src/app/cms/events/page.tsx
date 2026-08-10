@@ -1,8 +1,8 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import {
   eventPageData,
   type EventItem,
@@ -72,11 +72,7 @@ export default async function CmsEventsPage({
     hidden?: string;
   }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.EVENT_VIEW);
 
   const query = await searchParams;
   const keyword = (query.q ?? "").trim().toLowerCase();
@@ -125,12 +121,12 @@ export default async function CmsEventsPage({
       description="Kelola daftar event, kategori, jadwal, lokasi, status publikasi, dan konten registrasi Medikal Nutrience."
       actions={
         <div className="flex flex-wrap gap-3">
-          <a
+          {identity.permissions.includes(CMS_PERMISSIONS.EVENT_CREATE) ? <a
             href="/cms/events/new"
             className="rounded-full bg-[#006b3f] px-6 py-4 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
           >
             Add Event
-          </a>
+          </a> : null}
 
           <a
             href="/event"

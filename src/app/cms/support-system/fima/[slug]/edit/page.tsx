@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { getFimaRecipeBySlug } from "@/lib/cms/fima-storage";
 import { saveFimaRecipe } from "./actions";
 
@@ -10,11 +10,7 @@ export default async function CmsFimaEditPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsPermission(CMS_PERMISSIONS.FIMA_EDIT);
 
   const { slug } = await params;
 

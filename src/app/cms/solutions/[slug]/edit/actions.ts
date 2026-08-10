@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 type SolutionDraft = {
   slug: string;
@@ -47,7 +48,7 @@ function parseList(value: FormDataEntryValue | null) {
 }
 
 export async function saveSolutionDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.SOLUTION_EDIT);
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
   const slug = String(formData.get("slug") ?? "").trim();
@@ -83,7 +84,7 @@ export async function saveSolutionDraft(formData: FormData) {
 
 
 export async function deleteSolutionDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.SOLUTION_DELETE);
 
   const originalSlug = String(formData.get("originalSlug") ?? "");
 

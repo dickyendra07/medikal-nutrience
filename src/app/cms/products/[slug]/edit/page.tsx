@@ -1,6 +1,7 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { productDetails } from "@/data/product-details";
 import { deleteProductDraft, saveProductDraft } from "./actions";
 import { promises as fs } from "fs";
@@ -38,11 +39,7 @@ export default async function CmsProductEditPage({
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ saved?: string; reset?: string }>;
 }) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.PRODUCT_EDIT);
 
   const { slug } = await params;
   const product = Object.values(productDetails).find(
@@ -193,7 +190,7 @@ export default async function CmsProductEditPage({
                   defaultValue={viewData.status}
                   className="mt-2 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-5 py-4 text-sm font-bold outline-none transition focus:border-[#006b3f] focus:bg-white"
                 >
-                  <option value="published">Published</option>
+                  {identity.permissions.includes(CMS_PERMISSIONS.PRODUCT_PUBLISH) ? <option value="published">Published</option> : <option value="published">Kirim untuk review</option>}
                   <option value="draft">Draft</option>
                   <option value="review">Need Review</option>
                 </select>
@@ -262,7 +259,7 @@ export default async function CmsProductEditPage({
                   Hapus draft CMS dan kembalikan produk ke data original.
                 </p>
 
-                <form action={deleteProductDraft} className="mt-4">
+                {identity.permissions.includes(CMS_PERMISSIONS.PRODUCT_DELETE) ? <form action={deleteProductDraft} className="mt-4">
                   <input type="hidden" name="originalSlug" value={product.slug} />
                   <button
                     type="submit"
@@ -270,7 +267,7 @@ export default async function CmsProductEditPage({
                   >
                     Reset Draft
                   </button>
-                </form>
+                </form> : null}
               </div>
             </div>
           </section>

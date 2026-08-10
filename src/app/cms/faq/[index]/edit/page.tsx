@@ -1,6 +1,7 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { faqs } from "@/data/faqs";
 import { deleteFaqDraft, saveFaqDraft } from "./actions";
 import { promises as fs } from "fs";
@@ -50,11 +51,7 @@ export default async function CmsFaqEditPage({
   params,
   searchParams,
 }: CmsFaqEditPageProps) {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  const identity = await requireCmsPermission(CMS_PERMISSIONS.FAQ_EDIT);
 
   const { index } = await params;
   const faqIndex = Number(index);
@@ -267,7 +264,7 @@ export default async function CmsFaqEditPage({
                   Hapus draft CMS dan kembalikan FAQ ke data original.
                 </p>
 
-                <form action={deleteFaqDraft} className="mt-4">
+                {identity.permissions.includes(CMS_PERMISSIONS.FAQ_DELETE) ? <form action={deleteFaqDraft} className="mt-4">
                   <input type="hidden" name="originalIndex" value={faqIndex} />
                   <button
                     type="submit"
@@ -275,7 +272,7 @@ export default async function CmsFaqEditPage({
                   >
                     Reset Draft
                   </button>
-                </form>
+                </form> : null}
               </div>
             </div>
           </section>

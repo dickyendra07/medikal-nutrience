@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { getFimaRecipes } from "@/lib/cms/fima-storage";
 
 function formatLastUpdate(value: string | null) {
@@ -18,11 +18,7 @@ function formatLastUpdate(value: string | null) {
 }
 
 export default async function CmsFimaPage() {
-  const authenticated = await isCmsAuthenticated();
-
-  if (!authenticated) {
-    redirect("/cms/login");
-  }
+  await requireCmsPermission(CMS_PERMISSIONS.FIMA_VIEW);
 
   const recipes = await getFimaRecipes();
 

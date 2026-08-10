@@ -4,7 +4,8 @@ import { promises as fs } from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireCmsEditor } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { pharmacies } from "@/data/pharmacies";
 
 type PharmacyDraft = {
@@ -60,7 +61,7 @@ function getNextNo(drafts: Record<string, PharmacyDraft>) {
 }
 
 export async function createPharmacyDraft(formData: FormData) {
-  await requireCmsEditor();
+  await requireCmsPermission(CMS_PERMISSIONS.PHARMACY_CREATE);
 
   const drafts = await readDrafts();
   const requestedNo = Number(formData.get("no") ?? 0);
