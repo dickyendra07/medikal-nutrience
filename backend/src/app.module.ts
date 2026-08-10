@@ -3,12 +3,13 @@ import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { AppController } from "./app.controller";
 import { AuthModule } from "./auth/auth.module";
-import { RolesGuard } from "./auth/guards/roles.guard";
+import { PermissionsGuard } from "./auth/guards/permissions.guard";
 import { SessionAuthGuard } from "./auth/guards/session-auth.guard";
 import { validateEnvironment } from "./config/environment";
 import { MediaModule } from "./modules/media/media.module";
 import { ArticlesModule } from "./modules/articles/articles.module";
 import { PrismaModule } from "./prisma/prisma.module";
+import { AccessControlModule } from "./modules/access-control/access-control.module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PrismaModule } from "./prisma/prisma.module";
     AuthModule,
     MediaModule,
     ArticlesModule,
+    AccessControlModule,
   ],
   controllers: [AppController],
   providers: [
@@ -30,7 +32,7 @@ import { PrismaModule } from "./prisma/prisma.module";
     },
     {
       provide: APP_GUARD,
-      useClass: RolesGuard,
+      useClass: PermissionsGuard,
     },
   ],
 })

@@ -1,7 +1,6 @@
 import type { ExecutionContext } from "@nestjs/common";
 import { UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { AdminRole } from "@prisma/client";
 import type { Reflector } from "@nestjs/core";
 import type { AuthService } from "../auth.service";
 import { SessionAuthGuard } from "./session-auth.guard";
@@ -22,7 +21,8 @@ describe("SessionAuthGuard", () => {
     id: "admin-1",
     name: "Admin",
     email: "admin@example.com",
-    role: AdminRole.ADMIN,
+    role: { id: "role-admin", slug: "admin-marketing", name: "Admin Marketing" },
+    permissions: ["dashboard.view"],
     sessionId: "session-1",
   };
 

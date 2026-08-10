@@ -1,10 +1,13 @@
-import { AdminRole } from "@prisma/client";
-
 export type CurrentAdminUser = {
   id: string;
   name: string;
   email: string;
-  role: AdminRole;
+  role: {
+    id: string;
+    slug: string;
+    name: string;
+  };
+  permissions: string[];
   sessionId: string;
 };
 

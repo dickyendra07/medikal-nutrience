@@ -31,6 +31,16 @@ enum ArticleAuditAction {
   DELETE
   RESTORE
   DUPLICATE
+  SUBMIT_REVIEW
+  APPROVE_REVIEW
+  REQUEST_CHANGES
+}
+
+enum ArticleReviewStatus {
+  DRAFT
+  MEDICAL_REVIEW
+  APPROVED
+  PUBLISHED
 }
 
 model AdminUser {
@@ -38,7 +48,8 @@ model AdminUser {
   name             String
   email            String            @unique
   passwordHash     String
-  role             AdminRole         @default(EDITOR)
+  legacyRole       AdminRole         @default(EDITOR) @map("role")
+  roleId           String
   isActive         Boolean           @default(true)
   failedLoginCount Int               @default(0)
   lockedUntil      DateTime?
@@ -50,8 +61,12 @@ model AdminUser {
   createdArticles  Article[]         @relation("ArticleCreator")
   updatedArticles  Article[]         @relation("ArticleUpdater")
   articleAuditLogs ArticleAuditLog[]
+  reviewedArticles Article[]         @relation("ArticleReviewer")
+  cmsAuditLogs     CmsAuditLog[]
+  cmsRole          CmsRole           @relation(fields: [roleId], references: [id], onDelete: Restrict)
 
-  @@index([role])
+  @@index([legacyRole])
+  @@index([roleId])
   @@index([isActive])
 }
 
@@ -117,31 +132,36 @@ model Tag {
 }
 
 model Article {
-  id             String            @id @default(cuid())
+  id             String              @id @default(cuid())
   title          String
-  slug           String            @unique
+  slug           String              @unique
   excerpt        String
   contentJson    Json
-  contentVersion Int               @default(1)
+  contentVersion Int                 @default(1)
   coverMediaId   String?
   categoryId     String
   authorId       String
   seoTitle       String?
   seoDescription String?
-  status         ArticleStatus     @default(DRAFT)
-  isFeatured     Boolean           @default(false)
+  status         ArticleStatus       @default(DRAFT)
+  isFeatured     Boolean             @default(false)
   publishedAt    DateTime?
   scheduledAt    DateTime?
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
   deletedAt      DateTime?
   createdById    String
   updatedById    String
-  coverMedia     MediaAsset?       @relation(fields: [coverMediaId], references: [id], onDelete: SetNull)
-  category       ArticleCategory   @relation(fields: [categoryId], references: [id], onDelete: Restrict)
-  author         AdminUser         @relation("ArticleAuthor", fields: [authorId], references: [id], onDelete: Restrict)
-  createdBy      AdminUser         @relation("ArticleCreator", fields: [createdById], references: [id], onDelete: Restrict)
-  updatedBy      AdminUser         @relation("ArticleUpdater", fields: [updatedById], references: [id], onDelete: Restrict)
+  reviewStatus   ArticleReviewStatus @default(DRAFT)
+  reviewNotes    String?
+  reviewedAt     DateTime?
+  reviewedById   String?
+  coverMedia     MediaAsset?         @relation(fields: [coverMediaId], references: [id], onDelete: SetNull)
+  category       ArticleCategory     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  author         AdminUser           @relation("ArticleAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  createdBy      AdminUser           @relation("ArticleCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  updatedBy      AdminUser           @relation("ArticleUpdater", fields: [updatedById], references: [id], onDelete: Restrict)
+  reviewedBy     AdminUser?          @relation("ArticleReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
   tags           ArticleTag[]
   auditLogs      ArticleAuditLog[]
 
@@ -150,6 +170,59 @@ model Article {
   @@index([categoryId])
   @@index([isFeatured])
   @@index([deletedAt])
+  @@index([reviewStatus])
+}
+
+model CmsRole {
+  id          String           @id @default(cuid())
+  slug        String           @unique
+  name        String
+  description String?
+  isSystem    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       AdminUser[]
+  permissions RolePermission[]
+
+  @@index([isSystem])
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  key         String           @unique
+  module      String
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  roles       RolePermission[]
+
+  @@index([module])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  createdAt    DateTime   @default(now())
+  role         CmsRole    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model CmsAuditLog {
+  id         String     @id @default(cuid())
+  actorId    String?
+  action     String
+  resource   String
+  resourceId String?
+  metadata   Json?
+  createdAt  DateTime   @default(now())
+  actor      AdminUser? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId, createdAt])
+  @@index([resource, resourceId])
+  @@index([action])
 }
 
 model ArticleTag {

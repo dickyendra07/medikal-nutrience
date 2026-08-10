@@ -1,4 +1,6 @@
 import { BrandLogo } from "@/components/shared/BrandLogo";
+import { getCmsAdminIdentity } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS, type CmsPermission } from "@/lib/cms/permissions";
 
 type CmsMenuKey =
   | "dashboard"
@@ -11,7 +13,8 @@ type CmsMenuKey =
   | "pharmacies"
   | "faq"
   | "leads"
-  | "settings";
+  | "settings"
+  | "users";
 
 type CmsMenu = {
   key: CmsMenuKey;
@@ -19,39 +22,41 @@ type CmsMenu = {
   desc: string;
   href: string;
   icon: "grid" | "image" | "edit" | "calendar" | "box" | "spark" | "plus" | "pin" | "help" | "mail" | "settings";
+  permission: CmsPermission;
 };
 
 const cmsMenuGroups: Array<{ label: string; menus: CmsMenu[] }> = [
   {
     label: "Workspace",
-    menus: [{ key: "dashboard", title: "Dashboard", desc: "Ringkasan website", href: "/cms", icon: "grid" }],
+    menus: [{ key: "dashboard", title: "Dashboard", desc: "Ringkasan website", href: "/cms", icon: "grid", permission: CMS_PERMISSIONS.DASHBOARD_VIEW }],
   },
   {
     label: "Konten",
     menus: [
-      { key: "media", title: "Media Library", desc: "Aset gambar", href: "/cms/media", icon: "image" },
-      { key: "articles", title: "Artikel", desc: "Editorial", href: "/cms/articles", icon: "edit" },
-      { key: "events", title: "Event", desc: "Agenda & registrasi", href: "/cms/events", icon: "calendar" },
-      { key: "products", title: "Produk", desc: "Informasi produk", href: "/cms/products", icon: "box" },
-      { key: "solutions", title: "Solusi", desc: "Solusi nutrisi", href: "/cms/solutions", icon: "spark" },
+      { key: "media", title: "Media Library", desc: "Aset gambar", href: "/cms/media", icon: "image", permission: CMS_PERMISSIONS.MEDIA_VIEW },
+      { key: "articles", title: "Artikel", desc: "Editorial", href: "/cms/articles", icon: "edit", permission: CMS_PERMISSIONS.ARTICLE_VIEW },
+      { key: "events", title: "Event", desc: "Agenda & registrasi", href: "/cms/events", icon: "calendar", permission: CMS_PERMISSIONS.EVENT_VIEW },
+      { key: "products", title: "Produk", desc: "Informasi produk", href: "/cms/products", icon: "box", permission: CMS_PERMISSIONS.PRODUCT_VIEW },
+      { key: "solutions", title: "Solusi", desc: "Solusi nutrisi", href: "/cms/solutions", icon: "spark", permission: CMS_PERMISSIONS.SOLUTION_VIEW },
     ],
   },
   {
     label: "Operasional",
     menus: [
-      { key: "support-system", title: "Support System", desc: "Edukasi & layanan", href: "/cms/support-system", icon: "plus" },
-      { key: "pharmacies", title: "Apotek", desc: "Partner resmi", href: "/cms/pharmacies", icon: "pin" },
-      { key: "faq", title: "FAQ", desc: "Pertanyaan umum", href: "/cms/faq", icon: "help" },
-      { key: "leads", title: "Leads", desc: "Assessment & form", href: "/cms/leads", icon: "mail" },
+      { key: "support-system", title: "Support System", desc: "Edukasi & layanan", href: "/cms/support-system", icon: "plus", permission: CMS_PERMISSIONS.SUPPORT_VIEW },
+      { key: "pharmacies", title: "Apotek", desc: "Partner resmi", href: "/cms/pharmacies", icon: "pin", permission: CMS_PERMISSIONS.PHARMACY_VIEW },
+      { key: "faq", title: "FAQ", desc: "Pertanyaan umum", href: "/cms/faq", icon: "help", permission: CMS_PERMISSIONS.FAQ_VIEW },
+      { key: "leads", title: "Konsultasi", desc: "Assessment & leads", href: "/cms/leads", icon: "mail", permission: CMS_PERMISSIONS.CONSULTATION_VIEW },
     ],
   },
   {
     label: "Sistem",
-    menus: [{ key: "settings", title: "Pengaturan", desc: "SEO & website", href: "/cms/settings", icon: "settings" }],
+    menus: [
+      { key: "settings", title: "Pengaturan", desc: "SEO & website", href: "/cms/settings", icon: "settings", permission: CMS_PERMISSIONS.SETTINGS_MANAGE },
+      { key: "users", title: "User & Role", desc: "Akses CMS", href: "/cms/users", icon: "settings", permission: CMS_PERMISSIONS.USERS_MANAGE },
+    ],
   },
 ];
-
-const cmsMenus = cmsMenuGroups.flatMap((group) => group.menus);
 
 type CmsAdminShellProps = {
   active: CmsMenuKey;
@@ -84,10 +89,10 @@ function CmsNavIcon({ icon }: { icon: CmsMenu["icon"] }) {
   );
 }
 
-function SidebarNavigation({ active }: { active: CmsMenuKey }) {
+function SidebarNavigation({ active, groups }: { active: CmsMenuKey; groups: typeof cmsMenuGroups }) {
   return (
     <nav aria-label="Navigasi CMS" className="flex-1 space-y-5 overflow-y-auto px-3 pb-5">
-      {cmsMenuGroups.map((group) => (
+      {groups.map((group) => (
         <div key={group.label}>
           <p className="mb-1.5 px-2.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-slate-400">
             {group.label}
@@ -124,7 +129,7 @@ function SidebarNavigation({ active }: { active: CmsMenuKey }) {
   );
 }
 
-export function CmsAdminShell({
+export async function CmsAdminShell({
   active,
   title,
   eyebrow = "Medikal Nutrience CMS",
@@ -132,6 +137,13 @@ export function CmsAdminShell({
   children,
   actions,
 }: CmsAdminShellProps) {
+  const identity = await getCmsAdminIdentity();
+  const granted = new Set(identity?.permissions ?? []);
+  const visibleGroups = cmsMenuGroups
+    .map((group) => ({ ...group, menus: group.menus.filter((menu) => granted.has(menu.permission)) }))
+    .filter((group) => group.menus.length);
+  const visibleMenus = visibleGroups.flatMap((group) => group.menus);
+  const initials = identity?.name.split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toUpperCase() || "AD";
   return (
     <main className="min-h-screen bg-[#f5f7f6] text-slate-800">
       <div className="grid min-h-screen lg:grid-cols-[248px_minmax(0,1fr)]">
@@ -146,14 +158,14 @@ export function CmsAdminShell({
               </div>
             </div>
 
-            <SidebarNavigation active={active} />
+            <SidebarNavigation active={active} groups={visibleGroups} />
 
             <div className="border-t border-slate-100 p-3">
               <div className="flex items-center gap-3 rounded-xl border border-slate-200/70 bg-slate-50/70 p-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#08704c] text-[11px] font-semibold text-white">AD</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#08704c] text-[11px] font-semibold text-white">{initials}</span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-xs font-medium text-slate-700">Admin CMS</p>
-                  <p className="mt-0.5 text-[10px] text-slate-400">Sesi terlindungi</p>
+                  <p className="truncate text-xs font-medium text-slate-700">{identity?.name || "Admin CMS"}</p>
+                  <p className="mt-0.5 truncate text-[10px] text-slate-400">{identity?.role.name || "Sesi terlindungi"}</p>
                 </div>
                 <form action="/api/cms/logout" method="post">
                   <button type="submit" aria-label="Keluar dari CMS" title="Keluar" className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition hover:bg-white hover:text-slate-700">
@@ -197,7 +209,7 @@ export function CmsAdminShell({
                   Navigasi CMS <span aria-hidden="true" className="float-right text-slate-400">⌄</span>
                 </summary>
                 <div className="mt-2 grid grid-cols-2 gap-1.5">
-                  {cmsMenus.map((menu) => (
+                  {visibleMenus.map((menu) => (
                     <a key={menu.key} href={menu.href} aria-current={active === menu.key ? "page" : undefined} className={`flex min-h-9 items-center gap-2 rounded-lg px-2.5 text-[11px] font-medium ${active === menu.key ? "bg-[#eaf6f0] text-[#08704c]" : "bg-slate-50 text-slate-600"}`}>
                       <CmsNavIcon icon={menu.icon} />{menu.title}
                     </a>

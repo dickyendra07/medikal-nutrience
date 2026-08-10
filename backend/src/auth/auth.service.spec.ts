@@ -1,6 +1,6 @@
 import { UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { AdminRole, type AdminUser } from "@prisma/client";
+import { AdminRole } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import type { PrismaService } from "../prisma/prisma.service";
 import { AuthService } from "./auth.service";
@@ -41,7 +41,7 @@ function createPrismaMock(): PrismaMock {
 
 describe("AuthService", () => {
   let passwordHash: string;
-  let admin: AdminUser;
+  let admin: Record<string, unknown> & { id: string; name: string; email: string; passwordHash: string; failedLoginCount: number };
 
   beforeAll(async () => {
     passwordHash = await bcrypt.hash("correct-password", 4);
@@ -50,7 +50,16 @@ describe("AuthService", () => {
       name: "CMS Admin",
       email: "admin@example.com",
       passwordHash,
-      role: AdminRole.ADMIN,
+      legacyRole: AdminRole.ADMIN,
+      roleId: "role-admin",
+      cmsRole: {
+        id: "role-admin",
+        slug: "admin-marketing",
+        name: "Admin Marketing Medical Nutrience",
+        permissions: [
+          { permission: { id: "permission-1", key: "dashboard.view", module: "dashboard", description: "View dashboard", createdAt: new Date() } },
+        ],
+      },
       isActive: true,
       failedLoginCount: 0,
       lockedUntil: null,
@@ -78,7 +87,8 @@ describe("AuthService", () => {
       id: admin.id,
       name: admin.name,
       email: admin.email,
-      role: admin.role,
+      role: { id: "role-admin", slug: "admin-marketing", name: "Admin Marketing Medical Nutrience" },
+      permissions: ["dashboard.view"],
     });
     expect(prisma.adminSession.create).toHaveBeenCalledWith({
       data: expect.objectContaining({
@@ -125,7 +135,8 @@ describe("AuthService", () => {
       id: admin.id,
       name: admin.name,
       email: admin.email,
-      role: admin.role,
+      role: { id: "role-admin", slug: "admin-marketing", name: "Admin Marketing Medical Nutrience" },
+      permissions: ["dashboard.view"],
       sessionId: "session-1",
     });
   });

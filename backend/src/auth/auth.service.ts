@@ -3,7 +3,7 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import type { AdminUser } from "@prisma/client";
+import type { AdminUser, Prisma } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import { createHash, randomBytes } from "crypto";
 import { PrismaService } from "../prisma/prisma.service";
@@ -26,12 +26,31 @@ function hashSessionToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
 }
 
-function toSafeAdmin(admin: Pick<AdminUser, "id" | "name" | "email" | "role">): SafeAdminUser {
+const adminAccessInclude = {
+  cmsRole: {
+    include: {
+      permissions: { include: { permission: true } },
+    },
+  },
+} satisfies Prisma.AdminUserInclude;
+
+type AdminWithAccess = Prisma.AdminUserGetPayload<{
+  include: typeof adminAccessInclude;
+}>;
+
+function toSafeAdmin(admin: AdminWithAccess): SafeAdminUser {
   return {
     id: admin.id,
     name: admin.name,
     email: admin.email,
-    role: admin.role,
+    role: {
+      id: admin.cmsRole.id,
+      slug: admin.cmsRole.slug,
+      name: admin.cmsRole.name,
+    },
+    permissions: admin.cmsRole.permissions
+      .map(({ permission }) => permission.key)
+      .sort(),
   };
 }
 
@@ -45,6 +64,7 @@ export class AuthService {
   async login(dto: LoginDto, metadata: SessionMetadata) {
     const admin = await this.prisma.adminUser.findUnique({
       where: { email: dto.email },
+      include: adminAccessInclude,
     });
 
     const passwordMatches = admin
@@ -106,7 +126,7 @@ export class AuthService {
         expiresAt: { gt: new Date() },
         adminUser: { isActive: true },
       },
-      include: { adminUser: true },
+      include: { adminUser: { include: adminAccessInclude } },
     });
 
     if (!session) {

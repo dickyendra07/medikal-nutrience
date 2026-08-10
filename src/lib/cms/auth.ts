@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { cmsInternalApiUrl } from "./backend";
+import type { CmsAdminIdentity, CmsPermission } from "./permissions";
 
 export const cmsSessionCookieName = "mednut_admin_session";
 
@@ -24,13 +25,6 @@ export async function isCmsAuthenticated() {
   }
 }
 
-type CmsAdminIdentity = {
-  id: string;
-  name: string;
-  email: string;
-  role: "SUPER_ADMIN" | "ADMIN" | "EDITOR" | "VIEWER";
-};
-
 export async function getCmsAdminIdentity(): Promise<CmsAdminIdentity | null> {
   const session = await getCmsSession();
   if (!session) return null;
@@ -48,12 +42,21 @@ export async function getCmsAdminIdentity(): Promise<CmsAdminIdentity | null> {
   }
 }
 
-/** Guard every file-backed Server Action, where NestJS RBAC cannot run. */
-export async function requireCmsEditor() {
+/** Guards file-backed Server Actions and server-rendered CMS pages. */
+export async function requireCmsPermission(permission: CmsPermission) {
   const admin = await getCmsAdminIdentity();
 
   if (!admin) redirect("/cms/login");
-  if (admin.role === "VIEWER") redirect("/cms?error=forbidden");
+  if (!admin.permissions.includes(permission)) redirect("/cms?error=forbidden");
 
+  return admin;
+}
+
+export async function requireAnyCmsPermission(permissions: readonly CmsPermission[]) {
+  const admin = await getCmsAdminIdentity();
+  if (!admin) redirect("/cms/login");
+  if (!permissions.some((permission) => admin.permissions.includes(permission))) {
+    redirect("/cms?error=forbidden");
+  }
   return admin;
 }
