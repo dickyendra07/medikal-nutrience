@@ -1,4 +1,5 @@
 export type ArticleStatus = "DRAFT" | "PUBLISHED" | "SCHEDULED" | "ARCHIVED";
+export type ArticleReviewStatus = "DRAFT" | "MEDICAL_REVIEW" | "APPROVED" | "PUBLISHED";
 export type TipTapDocument = { type: "doc"; content?: Record<string, unknown>[] };
 
 export type ArticleCategory = {
@@ -30,6 +31,10 @@ export type AdminArticle = {
   seoTitle: string | null;
   seoDescription: string | null;
   status: ArticleStatus;
+  reviewStatus: ArticleReviewStatus;
+  reviewNotes: string | null;
+  reviewedAt: string | null;
+  reviewedBy: { id: string; name: string } | null;
   isFeatured: boolean;
   publishedAt: string | null;
   scheduledAt: string | null;
@@ -66,7 +71,7 @@ export type ArticlePayload = {
 export type ArticleListResponse = {
   items: AdminArticle[];
   pagination: { page: number; limit: number; total: number; totalPages: number };
-  summary: { total: number; published: number; draft: number; scheduled: number; archived: number; trash: number };
+  summary: { total: number; published: number; draft: number; scheduled: number; archived: number; trash: number; pendingReview: number; approved: number };
   recentActivity: Array<{
     id: string;
     action: string;
@@ -112,7 +117,7 @@ export function listArticles(filters: Record<string, string | number | boolean |
 
 export function getArticle(id: string) { return request<AdminArticle>(`/articles/${id}`); }
 export function getArticleMeta() { return request<ArticleMeta>("/articles/meta"); }
-export function getCurrentAdmin() { return request<ArticleAuthor>("/auth/me"); }
+export function getCurrentAdmin() { return request<import("./permissions").CmsAdminIdentity>("/auth/me"); }
 export function checkArticleSlug(slug: string, excludeId?: string) {
   const query = new URLSearchParams({ slug });
   if (excludeId) query.set("excludeId", excludeId);
@@ -126,6 +131,12 @@ export function updateArticle(id: string, payload: Partial<ArticlePayload>) {
 }
 export function articleAction(id: string, action: "restore" | "publish" | "unpublish" | "archive" | "duplicate") {
   return request<AdminArticle>(`/articles/${id}/${action}`, { method: "POST" });
+}
+export function submitArticleReview(id: string) {
+  return request<AdminArticle>(`/articles/${id}/submit-review`, { method: "POST", body: "{}" });
+}
+export function reviewArticle(id: string, action: "approve-review" | "request-changes", notes?: string) {
+  return request<AdminArticle>(`/articles/${id}/${action}`, { method: "POST", body: JSON.stringify({ notes }) });
 }
 export function trashArticle(id: string) {
   return request<{ success: true }>(`/articles/${id}`, { method: "DELETE" });

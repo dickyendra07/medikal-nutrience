@@ -1,10 +1,10 @@
-import { redirect } from "next/navigation";
 import { CmsAdminShell } from "@/components/cms/CmsAdminShell";
 import { ArticleListClient } from "@/components/cms/articles/ArticleListClient";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 export default async function CmsArticlesPage() {
-  if (!(await isCmsAuthenticated())) redirect("/cms/login");
+  await requireCmsPermission(CMS_PERMISSIONS.ARTICLE_VIEW);
 
   return (
     <CmsAdminShell

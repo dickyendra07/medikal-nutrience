@@ -1,5 +1,6 @@
 import { BadRequestException, ConflictException } from "@nestjs/common";
-import { AdminRole, ArticleAuditAction, ArticleStatus, Prisma } from "@prisma/client";
+import { ArticleAuditAction, ArticleReviewStatus, ArticleStatus, Prisma } from "@prisma/client";
+import { PERMISSIONS } from "../../auth/permissions";
 import type { CurrentAdminUser } from "../../auth/types/current-admin";
 import type { ArticlesRepository } from "./articles.repository";
 import { ArticlesService } from "./articles.service";
@@ -8,7 +9,8 @@ const admin: CurrentAdminUser = {
   id: "admin-1",
   name: "Editor",
   email: "editor@example.com",
-  role: AdminRole.EDITOR,
+  role: { id: "role-editor", slug: "dtc", name: "Direct To Customer" },
+  permissions: [PERMISSIONS.ARTICLE_CREATE, PERMISSIONS.ARTICLE_EDIT, PERMISSIONS.ARTICLE_SUBMIT_REVIEW],
   sessionId: "session-1",
 };
 
@@ -31,6 +33,10 @@ function article(overrides: Record<string, unknown> = {}) {
     seoTitle: null,
     seoDescription: null,
     status: ArticleStatus.DRAFT,
+    reviewStatus: ArticleReviewStatus.DRAFT,
+    reviewNotes: null,
+    reviewedAt: null,
+    reviewedById: null,
     isFeatured: false,
     publishedAt: null,
     scheduledAt: null,
@@ -44,6 +50,7 @@ function article(overrides: Record<string, unknown> = {}) {
     author: { id: "admin-1", name: "Editor", email: "editor@example.com" },
     createdBy: { id: "admin-1", name: "Editor" },
     updatedBy: { id: "admin-1", name: "Editor" },
+    reviewedBy: null,
     tags: [],
     ...overrides,
   };
@@ -148,24 +155,36 @@ describe("ArticlesService", () => {
     await expect(service.create(createDto(), admin)).rejects.toBeInstanceOf(ConflictException);
   });
 
-  it("publishes immediately with a published date", async () => {
-    const { service, tx } = createSetup();
-    const result = await service.publish("article-1", admin);
+  it("publishes only after medical approval", async () => {
+    const { service, tx, setCurrent } = createSetup();
+    await expect(service.publish("article-1", admin)).rejects.toBeInstanceOf(BadRequestException);
+    setCurrent(article({ reviewStatus: ArticleReviewStatus.APPROVED }));
+    const publishingAdmin = { ...admin, permissions: [...admin.permissions, PERMISSIONS.ARTICLE_PUBLISH] };
+    const result = await service.publish("article-1", publishingAdmin);
     expect(result.status).toBe(ArticleStatus.PUBLISHED);
+    expect(result.reviewStatus).toBe(ArticleReviewStatus.PUBLISHED);
     expect(tx.article.update).toHaveBeenCalledWith(expect.objectContaining({
       data: expect.objectContaining({ status: ArticleStatus.PUBLISHED, publishedAt: expect.any(Date) }),
     }));
   });
 
-  it("requires a future date when scheduling", async () => {
+  it("requires new articles to start as draft", async () => {
     const { service } = createSetup();
     await expect(service.create(createDto({ status: ArticleStatus.SCHEDULED }), admin)).rejects.toBeInstanceOf(
       BadRequestException,
     );
-    const scheduledAt = new Date(Date.now() + 86_400_000).toISOString();
-    await expect(service.create(createDto({ status: ArticleStatus.SCHEDULED, scheduledAt }), admin)).resolves.toMatchObject({
-      status: ArticleStatus.SCHEDULED,
-    });
+  });
+
+  it("enforces draft to medical review to approved workflow", async () => {
+    const { service, setCurrent } = createSetup();
+    const submitted = await service.submitReview("article-1", admin);
+    expect(submitted.reviewStatus).toBe(ArticleReviewStatus.MEDICAL_REVIEW);
+
+    setCurrent(article({ reviewStatus: ArticleReviewStatus.MEDICAL_REVIEW }));
+    const doctor = { ...admin, role: { id: "role-medical", slug: "medical-affairs", name: "Medical Affairs" }, permissions: [PERMISSIONS.ARTICLE_MEDICAL_REVIEW] };
+    const approved = await service.approveReview("article-1", "Konten medis valid.", doctor);
+    expect(approved.reviewStatus).toBe(ArticleReviewStatus.APPROVED);
+    expect(approved.reviewNotes).toBe("Konten medis valid.");
   });
 
   it("requires every referenced media asset to be active", async () => {
@@ -209,13 +228,13 @@ describe("ArticlesService", () => {
     prisma.article.findMany.mockResolvedValueOnce([]).mockResolvedValueOnce([]);
     await service.listPublic({ page: 1, limit: 20 });
     expect(prisma.article.findMany).toHaveBeenLastCalledWith(expect.objectContaining({
-      where: expect.objectContaining({ status: ArticleStatus.PUBLISHED, deletedAt: null, publishedAt: { lte: expect.any(Date) } }),
+      where: expect.objectContaining({ status: ArticleStatus.PUBLISHED, reviewStatus: ArticleReviewStatus.PUBLISHED, deletedAt: null, publishedAt: { lte: expect.any(Date) } }),
     }));
   });
 
   it("returns a minimal public payload without author email or media storage keys", async () => {
     const { service, prisma } = createSetup();
-    prisma.article.findFirst.mockResolvedValueOnce(article({ status: ArticleStatus.PUBLISHED, publishedAt: new Date() }));
+    prisma.article.findFirst.mockResolvedValueOnce(article({ status: ArticleStatus.PUBLISHED, reviewStatus: ArticleReviewStatus.PUBLISHED, publishedAt: new Date() }));
     const result = await service.getPublic("artikel-nutrisi");
     expect(result.author).toEqual({ id: "admin-1", name: "Editor" });
     expect(result.coverMedia).toEqual(expect.objectContaining({ id: "media-1", url: "/media.png" }));

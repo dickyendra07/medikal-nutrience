@@ -11,12 +11,17 @@ import {
   getArticle,
   getArticleMeta,
   getCurrentAdmin,
+  articleAction,
+  reviewArticle,
+  submitArticleReview,
   updateArticle,
+  type AdminArticle,
   type ArticleMeta,
   type ArticlePayload,
   type ArticleStatus,
   type TipTapDocument,
 } from "@/lib/cms/article-api";
+import { CMS_PERMISSIONS, type CmsAdminIdentity } from "@/lib/cms/permissions";
 import type { MediaAsset } from "@/lib/cms/media-api";
 import { ArticleRichTextEditor } from "./ArticleRichTextEditor";
 
@@ -76,6 +81,9 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
   const [leaveOpen, setLeaveOpen] = useState(false);
   const [savedSnapshot, setSavedSnapshot] = useState(JSON.stringify(emptyForm));
   const [currentId, setCurrentId] = useState(articleId);
+  const [identity, setIdentity] = useState<CmsAdminIdentity | null>(null);
+  const [articleState, setArticleState] = useState<AdminArticle | null>(null);
+  const [reviewNotes, setReviewNotes] = useState("");
 
   const dirty = useMemo(() => JSON.stringify(form) !== savedSnapshot, [form, savedSnapshot]);
 
@@ -88,6 +96,9 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
         articleId ? getArticle(articleId) : Promise.resolve(null),
       ]);
       setMeta(options);
+      setIdentity(currentAdmin);
+      setArticleState(existing);
+      setReviewNotes(existing?.reviewNotes ?? "");
       const next: ArticlePayload = existing ? {
         title: existing.title,
         slug: existing.slug,
@@ -190,6 +201,7 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
       const next = { ...payload, status: saved.status, publishedAt: localDate(saved.publishedAt), scheduledAt: localDate(saved.scheduledAt) };
       setForm(next);
       setCover(saved.coverMedia);
+      setArticleState(saved);
       setSavedSnapshot(JSON.stringify(next));
       setMessage({ tone: "success", text: status === "PUBLISHED" ? "Artikel berhasil diterbitkan." : status === "SCHEDULED" ? "Artikel berhasil dijadwalkan." : status === "ARCHIVED" ? "Artikel berhasil diarsipkan." : "Draft artikel berhasil disimpan." });
       if (!articleId) router.replace(`/cms/articles/${saved.id}/edit`);
@@ -197,6 +209,45 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
     } catch {
       setMessage({ tone: "error", text: "Artikel belum berhasil disimpan. Periksa slug, relasi media, dan field wajib." });
       return null;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function workflowAction(action: "submit" | "approve" | "changes" | "publish" | "unpublish") {
+    if (!currentId) return;
+    if (action === "changes" && !reviewNotes.trim()) {
+      setMessage({ tone: "error", text: "Catatan perubahan wajib diisi sebelum dikirim ke editor." });
+      return;
+    }
+    setSaving(true);
+    setMessage(null);
+    try {
+      let updated: AdminArticle;
+      if (action === "submit") updated = await submitArticleReview(currentId);
+      else if (action === "approve") updated = await reviewArticle(currentId, "approve-review", reviewNotes.trim() || undefined);
+      else if (action === "changes") updated = await reviewArticle(currentId, "request-changes", reviewNotes.trim());
+      else updated = await articleAction(currentId, action);
+      setArticleState(updated);
+      const next = {
+        ...form,
+        status: updated.status,
+        publishedAt: localDate(updated.publishedAt),
+        scheduledAt: localDate(updated.scheduledAt),
+      };
+      setForm(next);
+      setSavedSnapshot(JSON.stringify(next));
+      setReviewNotes(updated.reviewNotes ?? "");
+      setMessage({
+        tone: "success",
+        text: action === "submit" ? "Artikel berhasil dikirim untuk medical review."
+          : action === "approve" ? "Konten medis disetujui dan siap diterbitkan oleh Admin."
+            : action === "changes" ? "Artikel dikembalikan ke editor beserta catatan revisi."
+              : action === "publish" ? "Artikel berhasil diterbitkan."
+                : "Publikasi artikel berhasil dibatalkan.",
+      });
+    } catch {
+      setMessage({ tone: "error", text: "Aksi workflow belum dapat diproses. Simpan perubahan dan periksa kembali status artikel." });
     } finally {
       setSaving(false);
     }
@@ -216,6 +267,12 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
 
   if (loading) return <div className="space-y-5"><div className="h-28 animate-pulse rounded-[2rem] bg-white" /><div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_360px]"><div className="h-[900px] animate-pulse rounded-[2rem] bg-white" /><div className="h-[640px] animate-pulse rounded-[2rem] bg-white" /></div></div>;
 
+  const canSubmitReview = Boolean(identity?.permissions.includes(CMS_PERMISSIONS.ARTICLE_SUBMIT_REVIEW));
+  const canMedicalReview = Boolean(identity?.permissions.includes(CMS_PERMISSIONS.ARTICLE_MEDICAL_REVIEW));
+  const canPublish = Boolean(identity?.permissions.includes(CMS_PERMISSIONS.ARTICLE_PUBLISH));
+  const reviewStatus = articleState?.reviewStatus ?? "DRAFT";
+  const reviewLabel = reviewStatus === "MEDICAL_REVIEW" ? "Medical Review" : reviewStatus === "APPROVED" ? "Approved" : reviewStatus === "PUBLISHED" ? "Published" : "Draft";
+
   return (
     <>
       {message ? <div role={message.tone === "error" ? "alert" : "status"} className={`mb-5 flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-black ring-1 ${message.tone === "success" ? "bg-emerald-50 text-emerald-700 ring-emerald-100" : "bg-red-50 text-red-700 ring-red-100"}`}><span>{message.tone === "success" ? "✓ " : ""}{message.text}</span><button type="button" onClick={() => setMessage(null)} aria-label="Tutup pesan">×</button></div> : null}
@@ -228,15 +285,17 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
             <div className="mt-7"><label htmlFor="article-slug" className="text-sm font-black text-[#111827]">Slug URL <span className="text-red-600">*</span></label><div className="mt-2 flex items-center rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 focus-within:border-[#006b3f] focus-within:ring-4 focus-within:ring-[#006b3f]/10"><span className="text-sm font-bold text-[#94a3b8]">/artikel/</span><input id="article-slug" value={form.slug} maxLength={180} onChange={(event) => { setManualSlug(true); field("slug", slugify(event.target.value)); }} className="h-12 min-w-0 flex-1 bg-transparent text-sm font-bold outline-none" /></div><div className="mt-2 flex items-center justify-between gap-3"><p className={`text-xs font-bold ${errors.slug || slugState === "used" ? "text-red-600" : slugState === "available" ? "text-emerald-600" : "text-[#94a3b8]"}`}>{errors.slug || (slugState === "checking" ? "Memeriksa ketersediaan…" : slugState === "available" ? "✓ Slug tersedia" : slugState === "used" ? "Slug sudah digunakan" : "Slug dibuat otomatis dan dapat diedit.")}</p>{manualSlug ? <button type="button" onClick={() => { setManualSlug(false); field("slug", slugify(form.title)); }} className="text-xs font-black text-[#006b3f]">Gunakan otomatis</button> : null}</div></div>
             <div className="mt-7"><label htmlFor="article-excerpt" className="text-sm font-black text-[#111827]">Ringkasan <span className="text-red-600">*</span></label><textarea id="article-excerpt" value={form.excerpt} maxLength={500} rows={4} aria-invalid={Boolean(errors.excerpt)} onChange={(event) => field("excerpt", event.target.value)} placeholder="Ringkas manfaat utama artikel dalam 1–3 kalimat." className={`mt-2 w-full resize-none rounded-2xl border bg-[#f8fcfa] px-5 py-4 text-sm font-medium leading-7 outline-none focus:ring-4 ${errors.excerpt ? "border-red-400 focus:ring-red-100" : "border-black/10 focus:border-[#006b3f] focus:ring-[#006b3f]/10"}`} /><div className="mt-2 flex justify-between text-xs"><span className="font-bold text-red-600">{errors.excerpt}</span><span className="font-medium text-[#94a3b8]">{form.excerpt.length}/500</span></div></div>
           </section>
-          <ArticleRichTextEditor value={form.contentJson} onChange={(contentJson) => field("contentJson", contentJson)} error={errors.content} />
+          <ArticleRichTextEditor value={form.contentJson} onChange={(contentJson) => field("contentJson", contentJson)} error={errors.content} canUploadMedia={Boolean(identity?.permissions.includes(CMS_PERMISSIONS.MEDIA_UPLOAD))} />
         </main>
 
         <aside className="space-y-4 xl:sticky xl:top-24">
           <section className="rounded-[2rem] bg-white p-5 shadow-xl shadow-slate-900/5 ring-1 ring-black/5">
-            <div className="flex items-center justify-between"><div><p className="text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">Publikasi</p><h2 className="mt-2 text-xl font-black">Status Artikel</h2></div><span className={`rounded-full px-3 py-1.5 text-[10px] font-black ${form.status === "PUBLISHED" ? "bg-emerald-50 text-emerald-700" : form.status === "SCHEDULED" ? "bg-blue-50 text-blue-700" : form.status === "ARCHIVED" ? "bg-slate-100 text-slate-600" : "bg-amber-50 text-amber-700"}`}>{form.status}</span></div>
-            <label className="mt-5 block text-sm font-black">Workflow<select value={form.status} onChange={(event) => field("status", event.target.value as ArticleStatus)} className="mt-2 h-12 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-bold outline-none focus:border-[#006b3f]"><option value="DRAFT">Draft</option><option value="PUBLISHED">Published</option><option value="SCHEDULED">Scheduled</option><option value="ARCHIVED">Archived</option></select></label>
-            {form.status === "PUBLISHED" ? <label className="mt-4 block text-sm font-black">Tanggal terbit<input type="datetime-local" value={form.publishedAt} onChange={(event) => field("publishedAt", event.target.value)} className="mt-2 h-12 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-bold outline-none focus:border-[#006b3f]" /><span className="mt-1 block text-xs font-medium text-[#94a3b8]">Kosongkan untuk menggunakan waktu saat artikel diterbitkan.</span></label> : null}
-            {form.status === "SCHEDULED" ? <label className="mt-4 block text-sm font-black">Jadwal terbit <span className="text-red-600">*</span><input type="datetime-local" value={form.scheduledAt} onChange={(event) => field("scheduledAt", event.target.value)} className={`mt-2 h-12 w-full rounded-2xl border bg-[#f8fcfa] px-4 text-sm font-bold outline-none ${errors.scheduledAt ? "border-red-400" : "border-black/10 focus:border-[#006b3f]"}`} />{errors.scheduledAt ? <span className="mt-1 block text-xs font-bold text-red-600">{errors.scheduledAt}</span> : null}</label> : null}
+            <div className="flex items-center justify-between"><div><p className="text-xs font-black uppercase tracking-[0.22em] text-[#006b3f]">Approval workflow</p><h2 className="mt-2 text-xl font-black">Status Artikel</h2></div><span className={`rounded-full px-3 py-1.5 text-[10px] font-black ${reviewStatus === "PUBLISHED" ? "bg-emerald-50 text-emerald-700" : reviewStatus === "APPROVED" ? "bg-blue-50 text-blue-700" : reviewStatus === "MEDICAL_REVIEW" ? "bg-violet-50 text-violet-700" : "bg-amber-50 text-amber-700"}`}>{reviewLabel}</span></div>
+            <ol className="mt-5 grid grid-cols-4 gap-1" aria-label="Tahapan approval artikel">{["Draft", "Review", "Approved", "Published"].map((step, index) => { const activeIndex = reviewStatus === "DRAFT" ? 0 : reviewStatus === "MEDICAL_REVIEW" ? 1 : reviewStatus === "APPROVED" ? 2 : 3; return <li key={step} className={`rounded-lg px-1.5 py-2 text-center text-[9px] font-semibold ${index <= activeIndex ? "bg-emerald-50 text-[#08704c]" : "bg-slate-50 text-slate-400"}`}>{index < activeIndex ? "✓ " : ""}{step}</li>; })}</ol>
+            <p className="mt-3 text-[11px] leading-5 text-slate-500">Perubahan editorial akan mengembalikan artikel ke tahap Draft agar konten medis ditinjau ulang.</p>
+            {articleState?.reviewNotes ? <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3"><p className="text-[10px] font-semibold uppercase tracking-wide text-amber-700">Catatan Medical Affairs</p><p className="mt-1.5 text-xs leading-5 text-amber-900">{articleState.reviewNotes}</p></div> : null}
+            {canMedicalReview && reviewStatus === "MEDICAL_REVIEW" ? <label className="mt-4 block text-xs font-semibold text-slate-700">Catatan review<textarea value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} rows={3} maxLength={2000} placeholder="Opsional saat menyetujui, wajib saat meminta revisi." className="mt-2 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-medium outline-none focus:border-[#08704c] focus:ring-4 focus:ring-[#08704c]/10" /></label> : null}
+            {canPublish && reviewStatus === "APPROVED" ? <label className="mt-4 block text-xs font-semibold text-slate-700">Jadwal terbit (opsional)<input type="datetime-local" value={form.scheduledAt} onChange={(event) => field("scheduledAt", event.target.value)} className={`mt-2 h-11 w-full rounded-xl border bg-slate-50 px-3 text-xs font-medium outline-none ${errors.scheduledAt ? "border-red-400" : "border-slate-200 focus:border-[#08704c]"}`} />{errors.scheduledAt ? <span className="mt-1 block text-[10px] text-red-600">{errors.scheduledAt}</span> : <span className="mt-1.5 block text-[10px] leading-4 text-slate-400">Kosongkan jika ingin menerbitkan sekarang.</span>}</label> : null}
             <label className="mt-5 flex cursor-pointer items-center justify-between gap-4 rounded-2xl bg-[#f4fbf8] p-4"><span><span className="block text-sm font-black">Artikel Featured</span><span className="mt-1 block text-xs font-medium text-[#64748b]">Tampilkan sebagai artikel utama.</span></span><input type="checkbox" checked={form.isFeatured} onChange={(event) => field("isFeatured", event.target.checked)} className="h-5 w-5 accent-[#006b3f]" /></label>
           </section>
 
@@ -248,9 +307,22 @@ export function ArticleEditorForm({ articleId }: { articleId?: string }) {
         </aside>
       </div>
 
-      <div className="sticky bottom-3 z-30 mt-5 rounded-xl border border-slate-200 bg-white/95 px-3 py-2.5 shadow-[0_12px_35px_rgba(15,23,42,0.12)] backdrop-blur-xl"><div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><button type="button" onClick={() => dirty ? setLeaveOpen(true) : router.push("/cms/articles")} className="h-9 rounded-lg px-3 text-[11px] font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700">← Kembali</button><div className="flex flex-wrap gap-2"><button type="button" disabled={saving} onClick={() => void preview()} className="h-9 rounded-lg border border-slate-200 bg-white px-3.5 text-[11px] font-semibold text-slate-600 disabled:opacity-50">Preview</button>{currentId ? <button type="button" disabled={saving} onClick={() => void save("ARCHIVED")} className="h-9 rounded-lg border border-slate-200 bg-white px-3.5 text-[11px] font-semibold text-slate-600 disabled:opacity-50">Arsipkan</button> : null}<button type="button" disabled={saving} onClick={() => void save("DRAFT")} className="h-9 rounded-lg border border-emerald-200 bg-emerald-50 px-4 text-[11px] font-semibold text-[#08704c] disabled:opacity-50">{saving ? "Menyimpan…" : "Simpan draft"}</button><button type="button" disabled={saving} onClick={() => void save(form.status === "SCHEDULED" ? "SCHEDULED" : "PUBLISHED")} className="h-9 rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white disabled:opacity-50">{form.status === "SCHEDULED" ? "Jadwalkan" : "Terbitkan"}</button></div></div></div>
+      <div className="sticky bottom-3 z-30 mt-5 rounded-xl border border-slate-200 bg-white/95 px-3 py-2.5 shadow-[0_12px_35px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <button type="button" onClick={() => dirty ? setLeaveOpen(true) : router.push("/cms/articles")} className="h-9 rounded-lg px-3 text-[11px] font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700">← Kembali</button>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" disabled={saving} onClick={() => void preview()} className="h-9 rounded-lg border border-slate-200 bg-white px-3.5 text-[11px] font-semibold text-slate-600 disabled:opacity-50">Preview</button>
+            {currentId ? <button type="button" disabled={saving} onClick={() => void save("ARCHIVED")} className="h-9 rounded-lg border border-slate-200 bg-white px-3.5 text-[11px] font-semibold text-slate-600 disabled:opacity-50">Arsipkan</button> : null}
+            <button type="button" disabled={saving} onClick={() => void save("DRAFT")} className="h-9 rounded-lg border border-emerald-200 bg-emerald-50 px-4 text-[11px] font-semibold text-[#08704c] disabled:opacity-50">{saving ? "Menyimpan…" : "Simpan draft"}</button>
+            {currentId && canSubmitReview && reviewStatus === "DRAFT" && !dirty ? <button type="button" disabled={saving} onClick={() => void workflowAction("submit")} className="h-9 rounded-lg bg-blue-600 px-4 text-[11px] font-semibold text-white disabled:opacity-50">Kirim medical review</button> : null}
+            {currentId && canMedicalReview && reviewStatus === "MEDICAL_REVIEW" ? <><button type="button" disabled={saving} onClick={() => void workflowAction("changes")} className="h-9 rounded-lg border border-amber-200 bg-amber-50 px-4 text-[11px] font-semibold text-amber-700 disabled:opacity-50">Minta revisi</button><button type="button" disabled={saving || dirty} onClick={() => void workflowAction("approve")} className="h-9 rounded-lg bg-violet-600 px-4 text-[11px] font-semibold text-white disabled:opacity-50">Setujui medis</button></> : null}
+            {currentId && canPublish && reviewStatus === "APPROVED" ? <>{!dirty ? <button type="button" disabled={saving} onClick={() => void workflowAction("publish")} className="h-9 rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white disabled:opacity-50">Terbitkan</button> : null}{form.scheduledAt ? <button type="button" disabled={saving} onClick={() => void save("SCHEDULED")} className="h-9 rounded-lg border border-blue-200 bg-blue-50 px-4 text-[11px] font-semibold text-blue-700 disabled:opacity-50">Jadwalkan</button> : null}</> : null}
+            {currentId && canPublish && reviewStatus === "PUBLISHED" ? <button type="button" disabled={saving} onClick={() => void workflowAction("unpublish")} className="h-9 rounded-lg border border-amber-200 bg-amber-50 px-4 text-[11px] font-semibold text-amber-700 disabled:opacity-50">Batalkan terbit</button> : null}
+          </div>
+        </div>
+      </div>
 
-      <MediaPicker open={mediaOpen} onClose={() => setMediaOpen(false)} selectedId={cover?.id} onSelect={(media) => { setCover(media); field("coverMediaId", media.id); setMediaOpen(false); }} />
+      <MediaPicker open={mediaOpen} onClose={() => setMediaOpen(false)} selectedId={cover?.id} canUpload={Boolean(identity?.permissions.includes(CMS_PERMISSIONS.MEDIA_UPLOAD))} onSelect={(media) => { setCover(media); field("coverMediaId", media.id); setMediaOpen(false); }} />
       {leaveOpen ? <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#002f22]/65 p-4 backdrop-blur-sm"><section role="alertdialog" aria-modal="true" aria-labelledby="leave-title" onKeyDown={(event) => { if (event.key === "Escape") setLeaveOpen(false); trapDialogFocus(event); }} className="w-full max-w-md rounded-[2rem] bg-white p-7 shadow-2xl"><p className="text-xs font-black uppercase tracking-[0.25em] text-amber-600">Perubahan belum disimpan</p><h2 id="leave-title" className="mt-3 text-2xl font-black">Tinggalkan editor?</h2><p className="mt-3 text-sm font-medium leading-7 text-[#64748b]">Perubahan terakhir akan hilang jika Anda kembali ke daftar sekarang.</p><div className="mt-6 grid grid-cols-2 gap-3"><button autoFocus type="button" onClick={() => setLeaveOpen(false)} className="rounded-full bg-slate-100 px-5 py-3 text-sm font-black">Tetap di Editor</button><button type="button" onClick={() => router.push("/cms/articles")} className="rounded-full bg-amber-600 px-5 py-3 text-sm font-black text-white">Tinggalkan</button></div></section></div> : null}
     </>
   );

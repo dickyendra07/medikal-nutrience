@@ -8,6 +8,7 @@ export const articleInclude = {
   author: { select: { id: true, name: true, email: true } },
   createdBy: { select: { id: true, name: true } },
   updatedBy: { select: { id: true, name: true } },
+  reviewedBy: { select: { id: true, name: true } },
   tags: { include: { tag: true } },
 } satisfies Prisma.ArticleInclude;
 

@@ -8,15 +8,18 @@ import {
   getArticleMeta,
   listArticles,
   trashArticle,
+  submitArticleReview,
+  reviewArticle,
   type AdminArticle,
   type ArticleListResponse,
   type ArticleMeta,
   type ArticleStatus,
 } from "@/lib/cms/article-api";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 import { trapDialogFocus } from "@/components/cms/dialog-focus";
 import { CmsEmptyState } from "@/components/cms/CmsUi";
 
-const emptySummary = { total: 0, published: 0, draft: 0, scheduled: 0, archived: 0, trash: 0 };
+const emptySummary = { total: 0, published: 0, draft: 0, scheduled: 0, archived: 0, trash: 0, pendingReview: 0, approved: 0 };
 const statusLabels: Record<ArticleStatus, string> = {
   DRAFT: "Draft",
   PUBLISHED: "Terbit",
@@ -40,7 +43,7 @@ export function ArticleListClient() {
   const [data, setData] = useState<ArticleListResponse>({ items: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 }, summary: emptySummary, recentActivity: [] });
   const [meta, setMeta] = useState<ArticleMeta>({ categories: [], tags: [], authors: [] });
   const [filters, setFilters] = useState({ search: "", status: "", category: "", author: "", featured: "", dateFrom: "", dateTo: "", sort: "updated-desc", trash: "false", page: "1" });
-  const [role, setRole] = useState<string>("VIEWER");
+  const [permissions, setPermissions] = useState<string[]>([]);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -55,7 +58,7 @@ export function ArticleListClient() {
       const [articles, options, admin] = await Promise.all([listArticles(filters), getArticleMeta(), getCurrentAdmin()]);
       setData(articles);
       setMeta(options);
-      setRole(admin.role ?? "VIEWER");
+      setPermissions(admin.permissions ?? []);
       const params = new URLSearchParams();
       Object.entries(filters).forEach(([key, value]) => value && value !== "false" && params.set(key, value));
       window.history.replaceState(null, "", `/cms/articles${params.size ? `?${params}` : ""}`);
@@ -117,9 +120,28 @@ export function ArticleListClient() {
     }
   }
 
+  async function runReviewAction(article: AdminArticle, action: "submit" | "approve") {
+    setBusyId(article.id);
+    setError(null);
+    try {
+      if (action === "submit") await submitArticleReview(article.id);
+      else await reviewArticle(article.id, "approve-review");
+      setToast(action === "submit" ? "Artikel dikirim untuk medical review." : "Medical review disetujui.");
+      await load();
+    } catch {
+      setError("Aksi review belum dapat diproses. Status artikel mungkin sudah berubah.");
+    } finally {
+      setBusyId(null);
+    }
+  }
+
   const noFilters = !filters.search && !filters.status && !filters.category && !filters.author && !filters.featured && !filters.dateFrom && !filters.dateTo;
-  const canEdit = role !== "VIEWER";
-  const canManageTrash = role === "SUPER_ADMIN" || role === "ADMIN";
+  const canEdit = permissions.includes(CMS_PERMISSIONS.ARTICLE_EDIT);
+  const canCreate = permissions.includes(CMS_PERMISSIONS.ARTICLE_CREATE);
+  const canDelete = permissions.includes(CMS_PERMISSIONS.ARTICLE_DELETE);
+  const canPublish = permissions.includes(CMS_PERMISSIONS.ARTICLE_PUBLISH);
+  const canSubmitReview = permissions.includes(CMS_PERMISSIONS.ARTICLE_SUBMIT_REVIEW);
+  const canMedicalReview = permissions.includes(CMS_PERMISSIONS.ARTICLE_MEDICAL_REVIEW);
 
   return (
     <>
@@ -128,7 +150,7 @@ export function ArticleListClient() {
 
       <section className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm md:flex-row md:items-center md:justify-between">
         <div><p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#16805b]">Editorial workspace</p><h2 className="mt-1.5 text-lg font-semibold text-slate-900">Kelola artikel dan publikasi</h2><p className="mt-1 text-[13px] text-slate-500">Tulis, tinjau, jadwalkan, dan terbitkan artikel dalam satu alur kerja.</p></div>
-        <div className="flex flex-wrap gap-2">{canManageTrash ? <a href="/cms/articles/categories" className="inline-flex h-9 items-center rounded-lg border border-slate-200 bg-white px-3.5 text-[11px] font-semibold text-slate-600 hover:bg-slate-50">Kelola kategori</a> : null}{canEdit ? <a href="/cms/articles/new" className="inline-flex h-9 items-center rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white hover:bg-[#065e40]">Buat artikel</a> : <span className="inline-flex h-9 items-center rounded-lg bg-slate-100 px-3.5 text-[11px] font-medium text-slate-500">Mode baca saja</span>}</div>
+        <div className="flex flex-wrap gap-2">{canEdit ? <a href="/cms/articles/categories" className="inline-flex h-9 items-center rounded-lg border border-slate-200 bg-white px-3.5 text-[11px] font-semibold text-slate-600 hover:bg-slate-50">Kelola kategori</a> : null}{canCreate ? <a href="/cms/articles/new" className="inline-flex h-9 items-center rounded-lg bg-[#08704c] px-4 text-[11px] font-semibold text-white hover:bg-[#065e40]">Buat artikel</a> : !canEdit ? <span className="inline-flex h-9 items-center rounded-lg bg-slate-100 px-3.5 text-[11px] font-medium text-slate-500">Mode baca saja</span> : null}</div>
       </section>
 
       <section className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:grid-cols-6">
@@ -158,25 +180,28 @@ export function ArticleListClient() {
         </details>
 
         {loading ? <div className="space-y-3 p-5" aria-label="Memuat artikel">{[1, 2, 3, 4].map((item) => <div key={item} className="h-24 animate-pulse rounded-2xl bg-slate-100" />)}</div> : null}
-        {!loading && !data.items.length ? <CmsEmptyState icon="✎" title={noFilters && filters.trash !== "true" ? "Belum ada artikel" : "Tidak ada artikel yang cocok"} description={noFilters && filters.trash !== "true" ? "Buat artikel pertama untuk mulai membangun pusat edukasi Medikal Nutrience." : "Ubah kata pencarian atau filter untuk menemukan artikel lain."} action={noFilters && filters.trash !== "true" ? <a href="/cms/articles/new" className="inline-flex h-9 items-center rounded-lg bg-[#08704c] px-4 text-xs font-semibold text-white">Buat artikel pertama</a> : null} /> : null}
+        {!loading && !data.items.length ? <CmsEmptyState icon="✎" title={noFilters && filters.trash !== "true" ? "Belum ada artikel" : "Tidak ada artikel yang cocok"} description={noFilters && filters.trash !== "true" ? "Buat artikel pertama untuk mulai membangun pusat edukasi Medikal Nutrience." : "Ubah kata pencarian atau filter untuk menemukan artikel lain."} action={noFilters && filters.trash !== "true" && canCreate ? <a href="/cms/articles/new" className="inline-flex h-9 items-center rounded-lg bg-[#08704c] px-4 text-xs font-semibold text-white">Buat artikel pertama</a> : null} /> : null}
 
         {!loading && data.items.length ? <div className="divide-y divide-black/5">
           <div className="hidden grid-cols-[72px_1fr_150px_140px_150px_190px] gap-4 bg-[#f8fcfa] px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b] xl:grid"><span>Cover</span><span>Artikel</span><span>Status</span><span>Publikasi</span><span>Diperbarui</span><span className="text-right">Aksi</span></div>
           {data.items.map((article) => <article key={article.id} className="grid gap-3 px-4 py-3.5 transition hover:bg-slate-50/70 xl:grid-cols-[64px_1fr_140px_130px_140px_88px] xl:items-center">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#eef8f3]">{article.coverMedia ? <Image src={article.coverMedia.url} alt={article.coverMedia.altText || article.title} fill sizes="72px" unoptimized={article.coverMedia.mimeType === "image/svg+xml"} className="object-cover" /> : <span className="flex h-full items-center justify-center text-xl text-[#006b3f]/35">▧</span>}</div>
-            <div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><span className="text-[10px] font-black uppercase tracking-[0.16em] text-[#006b3f]">{article.category.name}</span>{article.isFeatured ? <span className="rounded-full bg-amber-50 px-2 py-1 text-[9px] font-black text-amber-700">★ Featured</span> : null}</div><h3 className="mt-2 truncate text-lg font-black text-[#111827]">{article.title}</h3><p className="mt-1 truncate text-xs font-medium text-[#64748b]">/{article.slug} · {article.author.name}</p></div>
+            <div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><span className="text-[10px] font-black uppercase tracking-[0.16em] text-[#006b3f]">{article.category.name}</span>{article.isFeatured ? <span className="rounded-full bg-amber-50 px-2 py-1 text-[9px] font-black text-amber-700">★ Featured</span> : null}<span className="rounded-md bg-blue-50 px-2 py-1 text-[9px] font-semibold text-blue-700">{article.reviewStatus === "MEDICAL_REVIEW" ? "Medical Review" : article.reviewStatus === "APPROVED" ? "Approved" : article.reviewStatus === "PUBLISHED" ? "Reviewed & Published" : "Draft Review"}</span></div><h3 className="mt-2 truncate text-lg font-black text-[#111827]">{article.title}</h3><p className="mt-1 truncate text-xs font-medium text-[#64748b]">/{article.slug} · {article.author.name}</p></div>
             <div><span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[10px] font-black uppercase tracking-wide ring-1 ${statusStyles[article.status]}`}><span aria-hidden="true">●</span>{statusLabels[article.status]}</span></div>
             <p className="text-xs font-bold leading-5 text-[#64748b]">{date(article.publishedAt || article.scheduledAt)}</p>
             <p className="text-xs font-bold leading-5 text-[#64748b]">{date(article.updatedAt)}</p>
             <details className="relative xl:justify-self-end"><summary className="flex h-8 cursor-pointer list-none items-center justify-center rounded-lg border border-slate-200 bg-white px-3 text-[11px] font-semibold text-slate-600 hover:bg-slate-50">Aksi <span aria-hidden="true" className="ml-1.5 text-slate-400">⌄</span></summary><div className="mt-1 grid min-w-36 gap-1 rounded-xl border border-slate-200 bg-white p-1 shadow-xl xl:absolute xl:right-0 xl:z-20">
               {canEdit ? <a href={`/cms/articles/${article.id}/edit`} className="rounded-lg px-3 py-2 text-[11px] font-medium text-slate-700 hover:bg-slate-50">Edit</a> : null}
               <a href={`/cms/articles/${article.id}/preview`} className="rounded-lg px-3 py-2 text-[11px] font-medium text-slate-700 hover:bg-slate-50">Preview</a>
-              {filters.trash === "true" ? (canManageTrash ? <button disabled={busyId === article.id} onClick={() => void runAction(article, "restore")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-blue-700 hover:bg-blue-50">Pulihkan</button> : null) : canEdit ? <>
+              {filters.trash === "true" ? (canDelete ? <button disabled={busyId === article.id} onClick={() => void runAction(article, "restore")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-blue-700 hover:bg-blue-50">Pulihkan</button> : null) : <>
+                {canSubmitReview && article.reviewStatus === "DRAFT" ? <button disabled={busyId === article.id} onClick={() => void runReviewAction(article, "submit")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-blue-700 hover:bg-blue-50">Kirim medical review</button> : null}
+                {canMedicalReview && article.reviewStatus === "MEDICAL_REVIEW" ? <button disabled={busyId === article.id} onClick={() => void runReviewAction(article, "approve")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-emerald-700 hover:bg-emerald-50">Setujui medical review</button> : null}
+                {canEdit ? <>
                 <button disabled={busyId === article.id} onClick={() => void runAction(article, "duplicate")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-slate-700 hover:bg-slate-50">Buat salinan</button>
-                {article.status === "PUBLISHED" ? <button disabled={busyId === article.id} onClick={() => void runAction(article, "unpublish")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-amber-700 hover:bg-amber-50">Batalkan terbit</button> : <button disabled={busyId === article.id} onClick={() => void runAction(article, "publish")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-emerald-700 hover:bg-emerald-50">Terbitkan</button>}
+                {canPublish ? article.status === "PUBLISHED" ? <button disabled={busyId === article.id} onClick={() => void runAction(article, "unpublish")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-amber-700 hover:bg-amber-50">Batalkan terbit</button> : article.reviewStatus === "APPROVED" ? <button disabled={busyId === article.id} onClick={() => void runAction(article, "publish")} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-emerald-700 hover:bg-emerald-50">Terbitkan</button> : null : null}
                 <button disabled={busyId === article.id} onClick={() => setConfirm({ article, action: "archive" })} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-slate-700 hover:bg-slate-50">Arsipkan</button>
-                {canManageTrash ? <button onClick={() => setConfirm({ article, action: "trash" })} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-red-700 hover:bg-red-50">Pindahkan ke sampah</button> : null}
-              </> : null}
+                {canDelete ? <button onClick={() => setConfirm({ article, action: "trash" })} className="rounded-lg px-3 py-2 text-left text-[11px] font-medium text-red-700 hover:bg-red-50">Pindahkan ke sampah</button> : null}
+              </> : null}</>}
             </div></details>
           </article>)}
         </div> : null}

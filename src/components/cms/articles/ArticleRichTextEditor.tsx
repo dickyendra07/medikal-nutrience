@@ -13,7 +13,7 @@ import type { TipTapDocument } from "@/lib/cms/article-api";
 import type { MediaAsset } from "@/lib/cms/media-api";
 import { MediaImage } from "./extensions/MediaImage";
 
-type Props = { value: TipTapDocument; onChange: (value: TipTapDocument) => void; error?: string };
+type Props = { value: TipTapDocument; onChange: (value: TipTapDocument) => void; error?: string; canUploadMedia?: boolean };
 
 function ToolButton({ label, title, active, disabled, onClick }: { label: string; title: string; active?: boolean; disabled?: boolean; onClick: () => void }) {
   return <button type="button" aria-label={title} title={title} aria-pressed={active} disabled={disabled} onClick={onClick} className={`h-8 rounded-lg px-2.5 text-[11px] font-semibold transition focus:outline-none focus:ring-4 focus:ring-[#006b3f]/15 disabled:cursor-not-allowed disabled:opacity-35 ${active ? "bg-[#08704c] text-white" : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 hover:text-[#08704c]"}`}>{label}</button>;
@@ -23,7 +23,7 @@ function Group({ children }: { children: React.ReactNode }) {
   return <div className="flex items-center gap-1 rounded-lg bg-white/70 p-1 ring-1 ring-slate-200/80">{children}</div>;
 }
 
-export function ArticleRichTextEditor({ value, onChange, error }: Props) {
+export function ArticleRichTextEditor({ value, onChange, error, canUploadMedia = false }: Props) {
   const [mediaOpen, setMediaOpen] = useState(false);
   const [linkOpen, setLinkOpen] = useState(false);
   const [linkValue, setLinkValue] = useState("");
@@ -122,7 +122,7 @@ export function ArticleRichTextEditor({ value, onChange, error }: Props) {
       </div>
       <EditorContent editor={editor} />
       {error ? <p className="border-t border-red-100 bg-red-50 px-5 py-3 text-xs font-bold text-red-700">{error}</p> : <p className="border-t border-black/5 px-5 py-3 text-xs font-medium text-[#64748b]">Tips: blok teks untuk memberi format atau link. Klik gambar dan tabel untuk membuka pengaturan kontekstual.</p>}
-      <MediaPicker open={mediaOpen} onClose={() => setMediaOpen(false)} onSelect={insertMedia} />
+      <MediaPicker open={mediaOpen} onClose={() => setMediaOpen(false)} onSelect={insertMedia} canUpload={canUploadMedia} />
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation";
 import { ArticlePreviewClient } from "@/components/cms/articles/ArticlePreviewClient";
-import { isCmsAuthenticated } from "@/lib/cms/auth";
+import { requireCmsPermission } from "@/lib/cms/auth";
+import { CMS_PERMISSIONS } from "@/lib/cms/permissions";
 
 export default async function ArticlePreviewPage({ params }: { params: Promise<{ id: string }> }) {
-  if (!(await isCmsAuthenticated())) redirect("/cms/login");
+  await requireCmsPermission(CMS_PERMISSIONS.ARTICLE_VIEW);
   const { id } = await params;
   return <ArticlePreviewClient articleId={id} />;
 }

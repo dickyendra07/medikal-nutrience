@@ -1,15 +1,18 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
 import {
   ArticleAuditAction,
+  ArticleReviewStatus,
   ArticleStatus,
   Prisma,
 } from "@prisma/client";
 import type { CurrentAdminUser } from "../../auth/types/current-admin";
+import { PERMISSIONS } from "../../auth/permissions";
 import { CreateArticleDto } from "./dto/create-article.dto";
 import { ListArticlesDto, PublicArticlesQueryDto } from "./dto/list-articles.dto";
 import {
@@ -75,7 +78,7 @@ export class ArticlesService {
     const skip = (query.page - 1) * query.limit;
     const prisma = this.repository.prisma;
 
-    const [items, total, publishedCount, draftCount, scheduledCount, archivedCount, trashCount, recentActivity] = await prisma.$transaction([
+    const [items, total, publishedCount, draftCount, scheduledCount, archivedCount, trashCount, pendingReviewCount, approvedCount, recentActivity] = await prisma.$transaction([
       prisma.article.findMany({ where, include: articleInclude, orderBy, skip, take: query.limit }),
       prisma.article.count({ where }),
       prisma.article.count({ where: { deletedAt: null, status: ArticleStatus.PUBLISHED } }),
@@ -83,6 +86,8 @@ export class ArticlesService {
       prisma.article.count({ where: { deletedAt: null, status: ArticleStatus.SCHEDULED } }),
       prisma.article.count({ where: { deletedAt: null, status: ArticleStatus.ARCHIVED } }),
       prisma.article.count({ where: { deletedAt: { not: null } } }),
+      prisma.article.count({ where: { deletedAt: null, reviewStatus: ArticleReviewStatus.MEDICAL_REVIEW } }),
+      prisma.article.count({ where: { deletedAt: null, reviewStatus: ArticleReviewStatus.APPROVED } }),
       prisma.articleAuditLog.findMany({
         take: 8,
         orderBy: { createdAt: "desc" },
@@ -107,6 +112,8 @@ export class ArticlesService {
         scheduled: scheduledCount,
         archived: archivedCount,
         trash: trashCount,
+        pendingReview: pendingReviewCount,
+        approved: approvedCount,
       },
       recentActivity,
     };
@@ -125,7 +132,7 @@ export class ArticlesService {
       prisma.tag.findMany({ orderBy: { name: "asc" } }),
       prisma.adminUser.findMany({
         where: { isActive: true },
-        select: { id: true, name: true, email: true, role: true },
+        select: { id: true, name: true, email: true, cmsRole: { select: { id: true, slug: true, name: true } } },
         orderBy: { name: "asc" },
       }),
     ]);
@@ -145,7 +152,10 @@ export class ArticlesService {
   async create(dto: CreateArticleDto, admin: CurrentAdminUser) {
     const content = validateTipTapDocument(dto.contentJson);
     const media = await this.ensureRelations(dto.categoryId, dto.authorId, dto.coverMediaId, content.mediaIds);
-    const workflow = this.workflow(dto.status ?? ArticleStatus.DRAFT, dto.publishedAt, dto.scheduledAt);
+    if (dto.status && dto.status !== ArticleStatus.DRAFT) {
+      throw new BadRequestException("Artikel baru harus disimpan sebagai draft sebelum medical review.");
+    }
+    const workflow = this.workflow(ArticleStatus.DRAFT, undefined, undefined);
     const tags = this.sanitizeTags(dto.tags ?? []);
 
     try {
@@ -163,6 +173,7 @@ export class ArticlesService {
             seoTitle: optionalText(dto.seoTitle),
             seoDescription: optionalText(dto.seoDescription),
             status: workflow.status,
+            reviewStatus: ArticleReviewStatus.DRAFT,
             isFeatured: dto.isFeatured ?? false,
             publishedAt: workflow.publishedAt,
             scheduledAt: workflow.scheduledAt,
@@ -193,7 +204,40 @@ export class ArticlesService {
       dto.coverMediaId !== undefined ? dto.coverMediaId : existing.coverMediaId ?? undefined,
       contentValidation?.mediaIds ?? [],
     );
-    const resultingStatus = dto.status ?? existing.status;
+    const normalizedIncomingTags = dto.tags === undefined
+      ? null
+      : this.sanitizeTags(dto.tags).map(({ slug }) => slug).sort();
+    const existingTags = existing.tags.map(({ tag }) => tag.slug).sort();
+    const editorialChanged =
+      (dto.title !== undefined && dto.title.trim() !== existing.title) ||
+      (dto.slug !== undefined && slugify(dto.slug) !== existing.slug) ||
+      (dto.excerpt !== undefined && dto.excerpt.trim() !== existing.excerpt) ||
+      (dto.contentJson !== undefined && JSON.stringify(dto.contentJson) !== JSON.stringify(existing.contentJson)) ||
+      (dto.coverMediaId !== undefined && optionalText(dto.coverMediaId) !== existing.coverMediaId) ||
+      (dto.categoryId !== undefined && dto.categoryId !== existing.categoryId) ||
+      (dto.authorId !== undefined && dto.authorId !== existing.authorId) ||
+      (normalizedIncomingTags !== null && JSON.stringify(normalizedIncomingTags) !== JSON.stringify(existingTags));
+    const requestedStatus = dto.status ?? (editorialChanged && existing.status === ArticleStatus.PUBLISHED ? ArticleStatus.DRAFT : existing.status);
+    if (
+      (requestedStatus === ArticleStatus.PUBLISHED || requestedStatus === ArticleStatus.SCHEDULED) &&
+      !admin.permissions.includes(PERMISSIONS.ARTICLE_PUBLISH)
+    ) {
+      throw new ForbiddenException("Anda tidak memiliki permission untuk menerbitkan artikel.");
+    }
+    if (
+      (requestedStatus === ArticleStatus.PUBLISHED || requestedStatus === ArticleStatus.SCHEDULED) &&
+      existing.reviewStatus !== ArticleReviewStatus.APPROVED &&
+      existing.reviewStatus !== ArticleReviewStatus.PUBLISHED
+    ) {
+      throw new BadRequestException("Artikel harus disetujui Medical Affairs sebelum dapat diterbitkan.");
+    }
+    if (
+      editorialChanged &&
+      (requestedStatus === ArticleStatus.PUBLISHED || requestedStatus === ArticleStatus.SCHEDULED)
+    ) {
+      throw new BadRequestException("Simpan perubahan sebagai draft dan ulangi medical review sebelum publikasi.");
+    }
+    const resultingStatus = requestedStatus;
     const workflow = this.workflow(
       resultingStatus,
       dto.publishedAt ?? existing.publishedAt?.toISOString(),
@@ -223,6 +267,16 @@ export class ArticlesService {
             ...(dto.seoDescription !== undefined ? { seoDescription: optionalText(dto.seoDescription) } : {}),
             ...(dto.isFeatured !== undefined ? { isFeatured: dto.isFeatured } : {}),
             status: workflow.status,
+            ...(editorialChanged
+              ? {
+                  reviewStatus: ArticleReviewStatus.DRAFT,
+                  reviewNotes: null,
+                  reviewedAt: null,
+                  reviewedById: null,
+                }
+              : workflow.status === ArticleStatus.PUBLISHED
+                ? { reviewStatus: ArticleReviewStatus.PUBLISHED }
+                : {}),
             publishedAt: workflow.publishedAt,
             scheduledAt: workflow.scheduledAt,
             updatedById: admin.id,
@@ -241,11 +295,11 @@ export class ArticlesService {
   }
 
   publish(id: string, admin: CurrentAdminUser) {
-    return this.setStatus(id, ArticleStatus.PUBLISHED, ArticleAuditAction.PUBLISH, admin);
+    return this.setStatus(id, ArticleStatus.PUBLISHED, ArticleAuditAction.PUBLISH, admin, true);
   }
 
   unpublish(id: string, admin: CurrentAdminUser) {
-    return this.setStatus(id, ArticleStatus.DRAFT, ArticleAuditAction.UNPUBLISH, admin);
+    return this.setStatus(id, ArticleStatus.DRAFT, ArticleAuditAction.UNPUBLISH, admin, false);
   }
 
   archive(id: string, admin: CurrentAdminUser) {
@@ -268,7 +322,7 @@ export class ArticlesService {
     await this.repository.prisma.$transaction(async (tx) => {
       await tx.article.update({
         where: { id },
-        data: { deletedAt: null, status: ArticleStatus.DRAFT, publishedAt: null, scheduledAt: null, updatedById: admin.id },
+        data: { deletedAt: null, status: ArticleStatus.DRAFT, reviewStatus: ArticleReviewStatus.DRAFT, reviewNotes: null, reviewedAt: null, reviewedById: null, publishedAt: null, scheduledAt: null, updatedById: admin.id },
       });
       await this.audit(tx, id, admin.id, ArticleAuditAction.RESTORE);
     });
@@ -293,6 +347,7 @@ export class ArticlesService {
           seoTitle: existing.seoTitle,
           seoDescription: existing.seoDescription,
           status: ArticleStatus.DRAFT,
+          reviewStatus: ArticleReviewStatus.DRAFT,
           isFeatured: false,
           createdById: admin.id,
           updatedById: admin.id,
@@ -310,6 +365,7 @@ export class ArticlesService {
     const now = new Date();
     const where: Prisma.ArticleWhereInput = {
       status: ArticleStatus.PUBLISHED,
+      reviewStatus: ArticleReviewStatus.PUBLISHED,
       deletedAt: null,
       publishedAt: { lte: now },
       ...(query.category ? { category: { slug: query.category, deletedAt: null } } : {}),
@@ -343,7 +399,7 @@ export class ArticlesService {
   async getPublic(slug: string) {
     await this.publishDueScheduled();
     const article = await this.repository.prisma.article.findFirst({
-      where: { slug, status: ArticleStatus.PUBLISHED, deletedAt: null, publishedAt: { lte: new Date() } },
+      where: { slug, status: ArticleStatus.PUBLISHED, reviewStatus: ArticleReviewStatus.PUBLISHED, deletedAt: null, publishedAt: { lte: new Date() } },
       include: articleInclude,
     });
     if (!article) throw new NotFoundException("Artikel tidak ditemukan.");
@@ -412,14 +468,91 @@ export class ArticlesService {
     return { success: true };
   }
 
-  private async setStatus(id: string, status: ArticleStatus, action: ArticleAuditAction, admin: CurrentAdminUser) {
+  async submitReview(id: string, admin: CurrentAdminUser) {
     const existing = await this.repository.findById(id);
     if (!existing || existing.deletedAt) throw new NotFoundException("Artikel tidak ditemukan.");
+    if (existing.reviewStatus !== ArticleReviewStatus.DRAFT) {
+      throw new BadRequestException("Hanya draft yang dapat dikirim untuk medical review.");
+    }
+    await this.repository.prisma.$transaction(async (tx) => {
+      await tx.article.update({
+        where: { id },
+        data: {
+          status: ArticleStatus.DRAFT,
+          reviewStatus: ArticleReviewStatus.MEDICAL_REVIEW,
+          reviewNotes: null,
+          reviewedAt: null,
+          reviewedById: null,
+          updatedById: admin.id,
+        },
+      });
+      await this.audit(tx, id, admin.id, ArticleAuditAction.SUBMIT_REVIEW);
+    });
+    return this.getAdmin(id);
+  }
+
+  async approveReview(id: string, notes: string | undefined, admin: CurrentAdminUser) {
+    const existing = await this.repository.findById(id);
+    if (!existing || existing.deletedAt) throw new NotFoundException("Artikel tidak ditemukan.");
+    if (existing.reviewStatus !== ArticleReviewStatus.MEDICAL_REVIEW) {
+      throw new BadRequestException("Artikel belum berada pada tahap medical review.");
+    }
+    await this.repository.prisma.$transaction(async (tx) => {
+      await tx.article.update({
+        where: { id },
+        data: {
+          reviewStatus: ArticleReviewStatus.APPROVED,
+          reviewNotes: optionalText(notes),
+          reviewedAt: new Date(),
+          reviewedById: admin.id,
+          updatedById: admin.id,
+        },
+      });
+      await this.audit(tx, id, admin.id, ArticleAuditAction.APPROVE_REVIEW, { notes: optionalText(notes) });
+    });
+    return this.getAdmin(id);
+  }
+
+  async requestChanges(id: string, notes: string | undefined, admin: CurrentAdminUser) {
+    const existing = await this.repository.findById(id);
+    if (!existing || existing.deletedAt) throw new NotFoundException("Artikel tidak ditemukan.");
+    if (existing.reviewStatus !== ArticleReviewStatus.MEDICAL_REVIEW) {
+      throw new BadRequestException("Artikel belum berada pada tahap medical review.");
+    }
+    if (!notes?.trim()) throw new BadRequestException("Catatan perubahan wajib diisi.");
+    await this.repository.prisma.$transaction(async (tx) => {
+      await tx.article.update({
+        where: { id },
+        data: {
+          reviewStatus: ArticleReviewStatus.DRAFT,
+          reviewNotes: notes.trim(),
+          reviewedAt: new Date(),
+          reviewedById: admin.id,
+          updatedById: admin.id,
+        },
+      });
+      await this.audit(tx, id, admin.id, ArticleAuditAction.REQUEST_CHANGES, { notes: notes.trim() });
+    });
+    return this.getAdmin(id);
+  }
+
+  private async setStatus(id: string, status: ArticleStatus, action: ArticleAuditAction, admin: CurrentAdminUser, requireApproval = false) {
+    const existing = await this.repository.findById(id);
+    if (!existing || existing.deletedAt) throw new NotFoundException("Artikel tidak ditemukan.");
+    if (requireApproval && existing.reviewStatus !== ArticleReviewStatus.APPROVED) {
+      throw new BadRequestException("Artikel harus disetujui Medical Affairs sebelum dapat diterbitkan.");
+    }
     const workflow = this.workflow(status, status === ArticleStatus.PUBLISHED ? new Date().toISOString() : undefined, undefined);
     await this.repository.prisma.$transaction(async (tx) => {
       await tx.article.update({
         where: { id },
-        data: { status, publishedAt: workflow.publishedAt, scheduledAt: workflow.scheduledAt, updatedById: admin.id },
+        data: {
+          status,
+          reviewStatus: status === ArticleStatus.PUBLISHED ? ArticleReviewStatus.PUBLISHED : existing.reviewStatus === ArticleReviewStatus.PUBLISHED ? ArticleReviewStatus.APPROVED : existing.reviewStatus,
+          publishedAt: workflow.publishedAt,
+          scheduledAt: workflow.scheduledAt,
+          updatedById: admin.id,
+        },
       });
       await this.audit(tx, id, admin.id, action, { previousStatus: existing.status, status });
     });
@@ -442,7 +575,7 @@ export class ArticlesService {
 
   private async publishDueScheduled() {
     const due = await this.repository.prisma.article.findMany({
-      where: { status: ArticleStatus.SCHEDULED, deletedAt: null, scheduledAt: { lte: new Date() } },
+      where: { status: ArticleStatus.SCHEDULED, reviewStatus: ArticleReviewStatus.APPROVED, deletedAt: null, scheduledAt: { lte: new Date() } },
       select: { id: true, scheduledAt: true },
       take: 100,
     });
@@ -451,7 +584,7 @@ export class ArticlesService {
       for (const article of due) {
         await tx.article.update({
           where: { id: article.id },
-          data: { status: ArticleStatus.PUBLISHED, publishedAt: article.scheduledAt, scheduledAt: null },
+          data: { status: ArticleStatus.PUBLISHED, reviewStatus: ArticleReviewStatus.PUBLISHED, publishedAt: article.scheduledAt, scheduledAt: null },
         });
         await this.audit(tx, article.id, null, ArticleAuditAction.PUBLISH, { source: "scheduler" });
       }

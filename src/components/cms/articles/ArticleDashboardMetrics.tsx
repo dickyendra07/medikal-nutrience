@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { CmsCard, CmsSectionHeader } from "@/components/cms/CmsUi";
 import { listArticles, type ArticleListResponse } from "@/lib/cms/article-api";
 
-export function ArticleDashboardMetrics() {
+export function ArticleDashboardMetrics({ mode = "admin" }: { mode?: "admin" | "medical" | "dtc" }) {
   const [data, setData] = useState<ArticleListResponse | null>(null);
 
   useEffect(() => {
@@ -19,7 +19,17 @@ export function ArticleDashboardMetrics() {
     );
   }
 
-  const metrics = [
+  const metrics = mode === "medical" ? [
+    ["Menunggu review medis", data.summary.pendingReview],
+    ["Sudah disetujui", data.summary.approved],
+    ["Draft", data.summary.draft],
+    ["Terbit", data.summary.published],
+  ] as const : mode === "dtc" ? [
+    ["Draft konten", data.summary.draft],
+    ["Dalam medical review", data.summary.pendingReview],
+    ["Siap diterbitkan", data.summary.approved],
+    ["Terjadwal", data.summary.scheduled],
+  ] as const : [
     ["Total", data.summary.total],
     ["Terbit", data.summary.published],
     ["Draft", data.summary.draft],
@@ -29,9 +39,9 @@ export function ArticleDashboardMetrics() {
   return (
     <CmsCard className="mt-5">
       <CmsSectionHeader
-        eyebrow="Editorial"
-        title="Ringkasan artikel"
-        description="Status publikasi dan aktivitas editorial terbaru."
+        eyebrow={mode === "medical" ? "Medical Affairs" : mode === "dtc" ? "Editorial DTC" : "Editorial"}
+        title={mode === "medical" ? "Antrean review konten" : mode === "dtc" ? "Pipeline konten" : "Ringkasan artikel"}
+        description={mode === "medical" ? "Konten yang membutuhkan validasi medis sebelum publikasi." : mode === "dtc" ? "Status draft, review, dan kesiapan publikasi konten digital." : "Status publikasi dan aktivitas editorial terbaru."}
         action={<a href="/cms/articles" className="text-[11px] font-semibold text-[#08704c] hover:text-[#065e40]">Buka artikel →</a>}
       />
       <div className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200 xl:grid-cols-4">
