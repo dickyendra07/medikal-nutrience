@@ -28,18 +28,27 @@ export async function updateLead(
   }
 
   const canUpdate = identity.permissions.includes(CMS_PERMISSIONS.CONSULTATION_UPDATE);
+  const canReview = identity.permissions.includes(CMS_PERMISSIONS.CONSULTATION_REVIEW);
+  const allowedSources: CmsLead["source"][] = ["Assessment", "Contact Form", "Event Registration", "Consultation"];
+  const allowedStatuses: CmsLead["status"][] = ["New", "Contacted", "Converted", "Closed"];
+  const allowedReviewStatuses: Array<Exclude<CmsLead["reviewStatus"], undefined | "Follow Up">> = ["Pending", "Reviewed", "Approved", "Rejected"];
+  const source = String(formData.get("source") ?? "") as CmsLead["source"];
+  const status = String(formData.get("status") ?? "") as CmsLead["status"];
+  const reviewStatus = String(formData.get("reviewStatus") ?? "") as Exclude<CmsLead["reviewStatus"], undefined | "Follow Up">;
   const updatedLead: CmsLead = {
     ...currentLead,
     ...(canUpdate ? {
-      name: String(formData.get("name")),
-      phone: String(formData.get("phone")),
-      email: String(formData.get("email")),
-      source: String(formData.get("source")) as CmsLead["source"],
-      status: String(formData.get("status")) as CmsLead["status"],
-      message: String(formData.get("message")),
+      name: String(formData.get("name") ?? "").trim().slice(0, 120) || currentLead.name,
+      phone: String(formData.get("phone") ?? "").trim().slice(0, 40),
+      email: String(formData.get("email") ?? "").trim().toLowerCase().slice(0, 254),
+      source: allowedSources.includes(source) ? source : currentLead.source,
+      status: allowedStatuses.includes(status) ? status : currentLead.status,
+      message: String(formData.get("message") ?? currentLead.message).trim().slice(0, 4000),
     } : {}),
-    medicalNotes: String(formData.get("medicalNotes") ?? "").trim(),
-    reviewStatus: String(formData.get("reviewStatus") ?? "Pending") as CmsLead["reviewStatus"],
+    ...(canReview ? {
+      medicalNotes: String(formData.get("medicalNotes") ?? "").trim().slice(0, 2000),
+      reviewStatus: allowedReviewStatuses.includes(reviewStatus) ? reviewStatus : "Pending",
+    } : {}),
   };
 
   const updatedLeads = leads.map(

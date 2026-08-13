@@ -17,9 +17,21 @@ export type CmsLead = {
     | "Converted"
     | "Closed";
   message: string;
+  assessment?: CmsAssessmentData;
   medicalNotes?: string;
-  reviewStatus?: "Pending" | "Reviewed" | "Follow Up";
+  reviewStatus?: CmsMedicalReviewStatus | "Follow Up";
   createdAt: string;
+};
+
+export type CmsMedicalReviewStatus = "Pending" | "Reviewed" | "Approved" | "Rejected";
+
+export type CmsAssessmentData = {
+  assessmentType?: string;
+  nutritionCategory?: string;
+  recommendedProduct?: string;
+  recommendationNotes?: string;
+  answers?: Record<string, unknown>;
+  schemaVersion?: number;
 };
 
 const filePath = path.join(

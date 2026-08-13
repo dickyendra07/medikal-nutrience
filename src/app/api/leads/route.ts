@@ -4,6 +4,7 @@ import {
   writeLeadsStorage,
   type CmsLead,
 } from "@/lib/cms/leads-storage";
+import { assessmentDataFromSubmission } from "@/lib/cms/assessment-result";
 
 const MAX_REQUEST_BYTES = 32_000;
 const MAX_ANSWER_BYTES = 12_000;
@@ -32,10 +33,9 @@ export async function POST(request: Request) {
 
     const name = cleanText(body.lead?.name, 120) || "Anonymous";
     const phone = cleanText(body.lead?.whatsapp, 40);
-    const flowLabel = cleanText(body.flowLabel, 160);
-    const recommendedProduct = cleanText(body.recommendedProduct, 160);
+    const assessment = assessmentDataFromSubmission(body);
 
-    if (!flowLabel || !recommendedProduct) {
+    if (!assessment?.recommendedProduct) {
       return NextResponse.json({ success: false }, { status: 400 });
     }
 
@@ -57,13 +57,9 @@ export async function POST(request: Request) {
       status:
         "New",
 
-      message: [
-        `Assessment: ${flowLabel}`,
-        `Rekomendasi: ${recommendedProduct}`,
-        "",
-        "Jawaban:",
-        JSON.stringify(body.answers ?? {}, null, 2),
-      ].join("\n"),
+      message: "Nutrition assessment submitted through the Medikal Nutrience website.",
+
+      assessment,
 
       createdAt:
         body.createdAt ||
