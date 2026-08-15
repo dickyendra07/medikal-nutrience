@@ -4,5 +4,5 @@ coverage/
 .env
 .env.local
 *.log
-storage/
+/storage/
 !.env.example
