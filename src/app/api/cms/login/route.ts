@@ -9,6 +9,11 @@ export async function POST(request: Request) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
+  console.log("[CMS LOGIN] start", {
+    url: `${cmsInternalApiUrl}/admin/auth/login`,
+    email,
+  });
+
   let backendResponse: Response;
 
   try {
@@ -23,7 +28,16 @@ export async function POST(request: Request) {
         password,
       }),
     });
-  } catch {
+
+    console.log("[CMS LOGIN] backend status", backendResponse.status);
+    console.log(
+      "[CMS LOGIN] headers",
+      Array.from(backendResponse.headers.entries())
+    );
+
+  } catch (error) {
+    console.error("[CMS LOGIN] fetch error", error);
+
     return NextResponse.redirect(
       new URL("/cms/login?error=unavailable", request.url),
       {
@@ -33,6 +47,8 @@ export async function POST(request: Request) {
   }
 
   if (!backendResponse.ok) {
+    console.error("[CMS LOGIN] invalid response");
+
     return NextResponse.redirect(
       new URL("/cms/login?error=invalid", request.url),
       {
@@ -43,16 +59,20 @@ export async function POST(request: Request) {
 
   let sessionCookie: string | null = null;
 
-  const cookies = backendResponse.headers.getSetCookie?.();
+  const setCookies = backendResponse.headers.getSetCookie?.();
 
-  if (cookies && cookies.length > 0) {
-    sessionCookie = cookies[0];
+  console.log("[CMS LOGIN] getSetCookie", setCookies);
+
+  if (setCookies && setCookies.length > 0) {
+    sessionCookie = setCookies[0];
   } else {
     sessionCookie = backendResponse.headers.get("set-cookie");
   }
 
+  console.log("[CMS LOGIN] cookie final", sessionCookie);
+
   if (!sessionCookie) {
-    console.error("CMS login: backend session cookie missing");
+    console.error("[CMS LOGIN] cookie missing");
 
     return NextResponse.redirect(
       new URL("/cms/login?error=unavailable", request.url),
@@ -66,6 +86,8 @@ export async function POST(request: Request) {
     /Path=\/api\/admin(?=;|$)/i,
     "Path=/"
   );
+
+  console.log("[CMS LOGIN] normalized cookie", normalizedCookie);
 
   const response = NextResponse.redirect(
     new URL("/cms", request.url),
