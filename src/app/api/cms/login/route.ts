@@ -9,11 +9,6 @@ export async function POST(request: Request) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
-  console.log("[CMS LOGIN] start", {
-    url: `${cmsInternalApiUrl}/admin/auth/login`,
-    email,
-  });
-
   let backendResponse: Response;
 
   try {
@@ -28,13 +23,6 @@ export async function POST(request: Request) {
         password,
       }),
     });
-
-    console.log("[CMS LOGIN] backend status", backendResponse.status);
-    console.log(
-      "[CMS LOGIN] headers",
-      Array.from(backendResponse.headers.entries())
-    );
-
   } catch (error) {
     console.error("[CMS LOGIN] fetch error", error);
 
@@ -61,15 +49,11 @@ export async function POST(request: Request) {
 
   const setCookies = backendResponse.headers.getSetCookie?.();
 
-  console.log("[CMS LOGIN] getSetCookie", setCookies);
-
   if (setCookies && setCookies.length > 0) {
     sessionCookie = setCookies[0];
   } else {
     sessionCookie = backendResponse.headers.get("set-cookie");
   }
-
-  console.log("[CMS LOGIN] cookie final", sessionCookie);
 
   if (!sessionCookie) {
     console.error("[CMS LOGIN] cookie missing");
@@ -86,8 +70,6 @@ export async function POST(request: Request) {
     /Path=\/api\/admin(?=;|$)/i,
     "Path=/"
   );
-
-  console.log("[CMS LOGIN] normalized cookie", normalizedCookie);
 
   const response = NextResponse.redirect(
     new URL("/cms", request.url),
