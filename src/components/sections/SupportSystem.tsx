@@ -1,24 +1,25 @@
 const supportItems = [
   {
-    title: "Cek Status Gizi",
+    title: "Dapur Sehat Mednut",
     description:
-      "Hitung status gizi awal melalui fitur BMI untuk membantu memahami kebutuhan tubuh.",
-    href: "/support-system/kalkulator-status-gizi",
-    image: "/images/support/bmi-calculator.png",
-  },
-  {
-    title: "Mitra Medis & Rumah Sakit",
-    description:
-      "Dukungan kolaborasi bersama tenaga medis, klinik, rumah sakit, dan institusi kesehatan.",
-    href: "/mitra-enterprise",
-    image: "/images/support/medical-partner.png",
-  },
-  {
-    title: "Artikel Medikal Nutrience",
-    description:
-      "Konten edukasi nutrisi dan kesehatan yang disusun untuk membantu masyarakat memahami kebutuhan gizi.",
+      "Temukan inspirasi resep dan panduan menu bernutrisi untuk mendukung kebutuhan harian keluarga.",
     href: "/support-system/dapur-sehat-fima",
+    image: "/images/mednut/products/page-assets/entrakid.jpg",
+  },
+  {
+    title: "Artikel",
+    description:
+      "Baca informasi nutrisi dan edukasi kesehatan untuk membantu memahami kebutuhan tubuh.",
+    href: "/artikel",
     image: "/images/support/edu-article.png",
+  },
+  {
+    title: "Kisah Sukses Pasien",
+    description:
+      "Ikuti cerita inspiratif perjalanan pasien dalam menjaga asupan nutrisi dan kualitas hidup.",
+    href: "/support-system/kisah-sukses-pasien",
+    image:
+      "/images/client-assets/img/general-practitioner-ennumerating-advantages-new-treatment-when-talking-senior-patient.jpg",
   },
 ];
 
@@ -52,7 +53,7 @@ export function SupportSystem() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="h-auto w-full rounded-[2rem] object-contain transition duration-500 group-hover:scale-[1.03]"
+                  className="aspect-[3025/1955] w-full rounded-[2rem] object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
               </div>
 

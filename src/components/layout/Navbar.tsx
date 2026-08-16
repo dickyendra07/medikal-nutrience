@@ -5,15 +5,69 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
+const publicNavigationVisibility = {
+  event: false,
+  contact: false,
+  consultation: false,
+  nutritionCalculator: false,
+};
+
 const menuItems = [
-  { label: "Home", href: "/" },
-  { label: "Tentang", href: "/tentang" },
-  { label: "Produk", href: "/produk", mega: "produk" },
-  { label: "Solusi", href: "/solusi", mega: "solusi" },
-  { label: "Support System", href: "/support-system", mega: "support" },
-  { label: "Event", href: "/event", mega: "event" },
-  { label: "Kontak", href: "/kontak" },
-];
+  { label: "Home", href: "/", visible: true },
+  { label: "Tentang", href: "/tentang", visible: true },
+  { label: "Produk", href: "/produk", mega: "produk", visible: true },
+  { label: "Solusi", href: "/solusi", mega: "solusi", visible: true },
+  {
+    label: "Support System",
+    href: "/support-system",
+    mega: "support",
+    visible: true,
+  },
+  {
+    label: "Event",
+    href: "/event",
+    mega: "event",
+    visible: publicNavigationVisibility.event,
+  },
+  {
+    label: "Kontak",
+    href: "/kontak",
+    visible: publicNavigationVisibility.contact,
+  },
+].filter((item) => item.visible);
+
+const supportMenuItems = [
+  {
+    label: "Kalkulator Status Gizi",
+    href: "/support-system/kalkulator-status-gizi",
+    desc: "Cek BMI/IMT",
+    visible: publicNavigationVisibility.nutritionCalculator,
+  },
+  {
+    label: "Dapur Sehat Mednut",
+    href: "/support-system/dapur-sehat-fima",
+    desc: "Edukasi dan inspirasi nutrisi",
+    visible: true,
+  },
+  {
+    label: "Artikel",
+    href: "/artikel",
+    desc: "Informasi nutrisi dan edukasi kesehatan",
+    visible: true,
+  },
+  {
+    label: "Kisah Sukses Pasien",
+    href: "/support-system/kisah-sukses-pasien",
+    desc: "Cerita dan pengalaman pasien",
+    visible: true,
+  },
+  {
+    label: "Komunitas Sehat",
+    href: "/support-system/komunitas-sehat",
+    desc: "Program komunitas dan edukasi",
+    visible: true,
+  },
+].filter((item) => item.visible);
 
 const megaMenus = {
   produk: {
@@ -78,34 +132,8 @@ const megaMenus = {
     eyebrow: "Support System",
     title: "Tools dan edukasi pendukung",
     description:
-      "Dukung perjalanan nutrisi dengan kalkulator, edukasi, komunitas, dan akses apotek resmi.",
-    items: [
-      {
-        label: "Kalkulator Status Gizi",
-        href: "/support-system/kalkulator-status-gizi",
-        desc: "Cek BMI/IMT",
-      },
-      {
-        label: "Dapur Sehat Mednut",
-        href: "/support-system/dapur-sehat-fima",
-        desc: "Edukasi dan inspirasi nutrisi",
-      },
-      {
-        label: "Artikel",
-        href: "/artikel",
-        desc: "Informasi nutrisi dan edukasi kesehatan",
-      },
-      {
-        label: "Kisah Sukses Pasien",
-        href: "/support-system/kisah-sukses-pasien",
-        desc: "Cerita dan pengalaman pasien",
-      },
-      {
-        label: "Komunitas Sehat",
-        href: "/support-system/komunitas-sehat",
-        desc: "Program komunitas dan edukasi",
-      },
-    ],
+      "Dukung perjalanan nutrisi dengan edukasi, inspirasi menu, komunitas, dan akses apotek resmi.",
+    items: supportMenuItems,
   },
 };
 
@@ -177,17 +205,19 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="/kontak"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#006b3f] px-5 py-3 text-sm font-black text-white shadow-lg shadow-green-900/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#005635] hover:shadow-xl hover:shadow-green-900/20"
-          >
-            Konsultasi
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
-              →
-            </span>
-          </a>
-        </div>
+        {publicNavigationVisibility.consultation ? (
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href="/kontak"
+              className="group inline-flex items-center gap-3 rounded-full bg-[#006b3f] px-5 py-3 text-sm font-black text-white shadow-lg shadow-green-900/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#005635] hover:shadow-xl hover:shadow-green-900/20"
+            >
+              Konsultasi
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
+                →
+              </span>
+            </a>
+          </div>
+        ) : null}
 
         <button
           type="button"
@@ -298,13 +328,15 @@ export function Navbar() {
               );
             })}
 
-            <a
-              href="/kontak"
-              onClick={() => setIsOpen(false)}
-              className="mt-3 rounded-2xl bg-[#006b3f] px-5 py-4 text-center text-base font-black text-white shadow-lg shadow-green-900/15"
-            >
-              Konsultasi Sekarang
-            </a>
+            {publicNavigationVisibility.consultation ? (
+              <a
+                href="/kontak"
+                onClick={() => setIsOpen(false)}
+                className="mt-3 rounded-2xl bg-[#006b3f] px-5 py-4 text-center text-base font-black text-white shadow-lg shadow-green-900/15"
+              >
+                Konsultasi Sekarang
+              </a>
+            ) : null}
           </div>
         </div>
       ) : null}

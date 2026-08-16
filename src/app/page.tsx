@@ -1,7 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { TopBar } from "@/components/layout/TopBar";
-import { ConsultationCTA } from "@/components/sections/ConsultationCTA";
 import { Hero } from "@/components/sections/Hero";
 import { ProductHighlight } from "@/components/sections/ProductHighlight";
 import { SolutionSection } from "@/components/sections/SolutionSection";
@@ -16,7 +15,6 @@ export default function Home() {
       <ProductHighlight />
       <SolutionSection />
       <SupportSystem />
-      <ConsultationCTA />
       <Footer />
     </main>
   );
