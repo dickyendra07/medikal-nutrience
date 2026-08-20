@@ -13,6 +13,7 @@ const products = [
     name: "PEPTISOL",
     href: "/produk/peptisol",
     image: "/images/mednut/home/product-peptisol.png",
+    descriptor: "Tinggi Protein & Zinc",
   },
   {
     name: "ENTRAKID",
@@ -50,11 +51,18 @@ export function ProductHighlight() {
               className="group reveal block overflow-hidden rounded-[1.4rem] bg-white/5 transition duration-300 hover:-translate-y-2 lg:rounded-[2rem]"
               aria-label={`Lihat produk ${product.name}`}
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-auto w-full rounded-[2rem] object-contain transition duration-500 group-hover:scale-[1.03]"
-              />
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-auto w-full rounded-[2rem] object-contain transition duration-500 group-hover:scale-[1.03]"
+                />
+                {product.descriptor ? (
+                  <span className="absolute bottom-0 left-0 flex h-[14%] w-[56%] items-center justify-center rounded-br-[1.4rem] bg-[#ff8f9d] px-1 text-center text-[clamp(0.58rem,1.15vw,1rem)] font-medium leading-tight text-white">
+                    {product.descriptor}
+                  </span>
+                ) : null}
+              </div>
             </a>
           ))}
         </div>

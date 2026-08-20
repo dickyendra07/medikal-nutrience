@@ -28,7 +28,7 @@ export const products = [
 export const solutionTabs = [
   "Ginjal",
   "Hati / Liver",
-  "Syaraf & Otak",
+  "Sistem Saraf",
   "Pernafasan",
   "Pencernaan",
 ];
@@ -77,10 +77,6 @@ export const footerSupport = [
   "Blog Edukasi",
   "Kisah Sukses Pasien",
   "Dapur Sehat",
-  "Kalkulator Status Gizi",
-  "Komunitas Sehat",
-  "Event",
-  "Apotek",
 ];
 
-export const footerHelp = ["FAQ", "Apotek", "Kontak"];
+export const footerHelp = ["FAQ"];

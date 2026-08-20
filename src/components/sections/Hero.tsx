@@ -122,15 +122,6 @@ export function Hero() {
             <div className="absolute right-[-90px] top-24 h-[360px] w-[360px] rounded-full bg-[#d8f6e8]" />
             <div className="absolute bottom-20 left-12 h-[180px] w-[180px] rounded-full bg-white/50" />
 
-            <div className="absolute left-0 top-12 z-0 hidden rounded-3xl bg-white/90 p-5 shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:block xl:left-2">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
-                Konsultasi
-              </p>
-              <p className="mt-2 text-sm font-black text-[#0f172a]">
-                Ahli Gizi Gratis
-              </p>
-            </div>
-
             <div className="absolute bottom-10 right-0 z-0 hidden rounded-3xl bg-white/90 p-5 shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:block xl:right-2">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
                 Partner

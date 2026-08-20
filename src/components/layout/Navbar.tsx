@@ -65,7 +65,7 @@ const supportMenuItems = [
     label: "Komunitas Sehat",
     href: "/support-system/komunitas-sehat",
     desc: "Program komunitas dan edukasi",
-    visible: true,
+    visible: false,
   },
 ].filter((item) => item.visible);
 
@@ -98,11 +98,10 @@ const megaMenus = {
       { label: "Pernapasan", href: "/solusi/pernafasan", desc: "Dukungan Nutrisi Pernapasan" },
       { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan Cepat Serap" },
       {
-        label: "Otak",
+        label: "Sistem Saraf",
         href: "/produk/peptibren",
         desc: "Dukungan Nutrisi Kesehatan Syaraf",
       },
-      { label: "Pemulihan", href: "/solusi/pemulihan", desc: "Recovery dan nutrisi protein" },
     ],
   },
   event: {
@@ -132,7 +131,7 @@ const megaMenus = {
     eyebrow: "Support System",
     title: "Tools dan edukasi pendukung",
     description:
-      "Dukung perjalanan nutrisi dengan edukasi, inspirasi menu, komunitas, dan akses apotek resmi.",
+      "Dukung perjalanan nutrisi dengan edukasi, inspirasi menu, dan cerita pasien.",
     items: supportMenuItems,
   },
 };

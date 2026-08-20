@@ -81,6 +81,39 @@ const featuredSolutions = [
     gradient: "from-[#7c1dbb] via-[#5b0ca8] to-[#2a0045]",
     button: "Lihat Nephrisol-D",
   },
+  {
+    title: "Peptibren",
+    headline: "Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
+    description:
+      "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
+    image: "/images/mednut/products/page-assets/peptibren.jpeg",
+    href: "/produk/peptibren",
+    color: "#ca8a04",
+    gradient: "from-[#9a6700] via-[#ca8a04] to-[#f2b705]",
+    button: "Lihat Peptibren",
+  },
+  {
+    title: "Pulmosol",
+    headline: "Solusi Nutrisi untuk Kesehatan Pernapasan",
+    description:
+      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
+    image: "/images/mednut/products/page-assets/pulmosol.jpeg",
+    href: "/produk/pulmosol",
+    color: "#1e3a8a",
+    gradient: "from-[#0f245f] via-[#1e3a8a] to-[#3157b7]",
+    button: "Lihat Pulmosol",
+  },
+  {
+    title: "Oligo",
+    headline: "Nutrisi Cepat Serap untuk Pemulihan yang Lebih Optimal",
+    description:
+      "Nutrisi dengan protein dan lemak yang lebih cepat diserap tubuh untuk memelihara kesehatan saluran cerna.",
+    image: "/images/mednut/products/page-assets/oligo.jpeg",
+    href: "/produk/oligo",
+    color: "#db2777",
+    gradient: "from-[#9d174d] via-[#db2777] to-[#f472b6]",
+    button: "Lihat Oligo",
+  },
 ];
 
 const otherSolutions = [
@@ -91,14 +124,6 @@ const otherSolutions = [
       "Solusi nutrisi untuk membantu kebutuhan pada kondisi saluran cerna tertentu.",
     href: "/solusi/pencernaan",
     color: "#db2777",
-  },
-  {
-    title: "Pemulihan",
-    subtitle: "Recovery & Protein",
-    description:
-      "Dukungan nutrisi untuk membantu memenuhi kebutuhan saat masa pemulihan.",
-    href: "/solusi/pemulihan",
-    color: "#059669",
   },
   {
     title: "Anak",
@@ -123,10 +148,9 @@ const focusList = [
   "Hati / Liver",
   "Pernafasan",
   "Pencernaan",
-  "Pemulihan",
   "Anak",
   "Dewasa & Lansia",
-  "Syaraf & Otak",
+  "Sistem Saraf",
 ];
 
 export default async function SolutionsPage() {
@@ -340,8 +364,8 @@ export default async function SolutionsPage() {
                   </h2>
 
                   <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80 md:text-base">
-                    Gunakan halaman produk, apotek resmi, atau konsultasi awal
-                    untuk membantu menemukan pilihan yang sesuai.
+                    Gunakan halaman produk untuk membantu menemukan pilihan yang
+                    sesuai dengan kebutuhan Anda.
                   </p>
                 </div>
 
@@ -352,12 +376,6 @@ export default async function SolutionsPage() {
                   >
                     Lihat Produk
                   </Link>
-                  <a
-                    href="/kontak"
-                    className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
-                  >
-                    Konsultasi
-                  </a>
                 </div>
               </div>
             </div>

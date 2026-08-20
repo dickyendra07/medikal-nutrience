@@ -94,16 +94,7 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
                 className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black text-white shadow-xl transition hover:-translate-y-0.5"
                 style={{ backgroundColor: product.theme.primary }}
               >
-                {product.ctaLabel}
-                <span>→</span>
-              </a>
-
-              <a
-                href="/kontak"
-                className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-sm font-black shadow-xl shadow-green-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
-                style={{ color: product.theme.primary }}
-              >
-                Konsultasi
+                Beli Sekarang
                 <span>→</span>
               </a>
             </div>
@@ -209,14 +200,6 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
               manfaat utama dan kesesuaian produk dengan kebutuhan nutrisinya.
             </p>
 
-            <a
-              href="/apotek-resmi"
-              className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-4 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5"
-              style={{ backgroundColor: product.theme.primary }}
-            >
-              Temukan di Apotek Resmi
-              <span>→</span>
-            </a>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 reveal-right">
@@ -317,20 +300,13 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div>
               <a
                 href="/apotek-resmi"
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-black transition hover:-translate-y-0.5"
                 style={{ color: product.theme.primary }}
               >
-                Apotek
-              </a>
-
-              <a
-                href="/kontak"
-                className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
-              >
-                Konsultasi
+                Beli Sekarang
               </a>
             </div>
           </div>
@@ -441,4 +417,3 @@ function EntrakidMerakidsSection({ product }: { product: ProductDetail }) {
     </section>
   );
 }
-

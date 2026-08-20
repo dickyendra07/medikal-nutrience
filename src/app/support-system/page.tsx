@@ -38,6 +38,7 @@ const supportItems = [
     image: mednutAssets.banners.brandArtboard2,
     href: "/support-system/komunitas-sehat",
     accent: "#f59e0b",
+    visible: false,
   },
 ];
 
@@ -45,7 +46,7 @@ const highlights = [
   "Edukasi nutrisi berbasis kebutuhan",
   "Arahan awal untuk memilih produk",
   "Dukungan konten keluarga sehat",
-  "Koneksi ke konsultasi dan apotek resmi",
+  "Akses ke kanal pembelian resmi",
 ];
 
 export default function SupportSystemPage() {
@@ -80,12 +81,6 @@ export default function SupportSystemPage() {
                   className="inline-flex items-center justify-center rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white shadow-xl shadow-green-900/15 transition hover:-translate-y-0.5"
                 >
                   Mulai Cek Status Gizi
-                </a>
-                <a
-                  href="/kontak"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f] shadow-xl shadow-green-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
-                >
-                  Konsultasi Produk
                 </a>
               </div>
             </div>
@@ -151,7 +146,7 @@ export default function SupportSystemPage() {
             </div>
 
             <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {supportItems.map((item) => (
+              {supportItems.filter((item) => item.visible !== false).map((item) => (
                 <a
                   key={item.title}
                   href={item.href}
@@ -220,12 +215,6 @@ export default function SupportSystemPage() {
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="/kontak"
-                    className="inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f] transition hover:-translate-y-0.5"
-                  >
-                    Konsultasi
-                  </a>
                   <a
                     href="/apotek-resmi"
                     className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"

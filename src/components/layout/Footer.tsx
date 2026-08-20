@@ -8,7 +8,7 @@ const instagramAccounts = [
   {
     handle: "@ahlinyagizi.id",
     label: "Ahlinya Gizi",
-    description: "Edukasi nutrisi dan konsultasi gizi untuk keluarga Indonesia.",
+    description: "Edukasi nutrisi untuk keluarga Indonesia.",
     href: "https://www.instagram.com/ahlinyagizi.id/",
   },
   {

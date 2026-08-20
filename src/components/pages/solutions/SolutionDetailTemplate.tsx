@@ -154,14 +154,6 @@ export function SolutionDetailTemplate({
                 <span>→</span>
               </a>
 
-              <a
-                href="/kontak"
-                className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-sm font-black shadow-xl shadow-green-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
-                style={{ color: solution.theme.primary }}
-              >
-                Konsultasi
-                <span>→</span>
-              </a>
             </div>
           </div>
 
@@ -399,28 +391,20 @@ export function SolutionDetailTemplate({
           <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.35em] text-white/70">
-                Konsultasi Nutrisi
+                Produk Medikal Nutrience
               </p>
 
               <h2 className="mt-4 max-w-3xl text-3xl font-black leading-tight md:text-5xl">
-                Belum yakin produk mana yang paling sesuai?
+                Temukan pilihan produk yang sesuai dengan kebutuhan Anda.
               </h2>
 
               <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-white/80 md:text-base md:leading-8">
-                Konsultasikan kebutuhan nutrisi Anda agar tim kami dapat membantu
-                memberikan arahan awal yang lebih tepat.
+                Jelajahi rekomendasi produk pada halaman ini atau gunakan kanal
+                pembelian resmi Medikal Nutrience.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-              <a
-                href="/kontak"
-                className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-black shadow-xl shadow-black/10 transition hover:-translate-y-0.5"
-                style={{ color: solution.theme.primary }}
-              >
-                Konsultasi Sekarang
-              </a>
-
               <a
                 href="/apotek-resmi"
                 className="inline-flex items-center justify-center rounded-full bg-white/15 px-7 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"

@@ -11,14 +11,6 @@ type Props = {
 export function AssessmentResult({
   recommendation,
 }: Props) {
-
-  const whatsappMessage =
-    `Halo, saya mendapatkan rekomendasi nutrisi ${recommendation.product} dari Assessment Medikal Nutrience. Saya ingin konsultasi lebih lanjut.`;
-
-  const whatsappUrl =
-    `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
-
-
   return (
     <div className="
       space-y-8
@@ -147,11 +139,7 @@ export function AssessmentResult({
 
 
 
-      <div className="
-        grid
-        gap-3
-        sm:grid-cols-2
-      ">
+      <div>
 
 
         <Link
@@ -172,28 +160,6 @@ export function AssessmentResult({
           Detail Produk
         </Link>
 
-
-
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="
-            rounded-full
-            border
-            border-[#006b3f]
-            px-8
-            py-4
-            text-center
-            text-sm
-            font-black
-            text-[#006b3f]
-            transition
-            hover:bg-[#e4f8ed]
-          "
-        >
-          Konsultasi WhatsApp
-        </a>
 
 
       </div>

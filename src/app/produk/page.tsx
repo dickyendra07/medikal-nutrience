@@ -143,7 +143,7 @@ const medicalProducts = [
   },
   {
     name: "Peptibren",
-    category: "Syaraf & Otak",
+    category: "Sistem Saraf",
     description:
       "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
     logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
@@ -159,7 +159,7 @@ const categories = [
   "Hati / Liver",
   "Pernafasan",
   "Pencernaan",
-  "Syaraf & Otak",
+  "Sistem Saraf",
 ];
 
 export default async function ProductsPage() {
@@ -400,18 +400,11 @@ export default async function ProductsPage() {
                   </h2>
 
                   <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80 md:text-base">
-                    Konsultasikan kebutuhan nutrisi Anda atau temukan produk melalui
-                    apotek resmi Medikal Nutrience.
+                    Temukan produk melalui kanal pembelian resmi Medikal Nutrience.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="/kontak"
-                    className="inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f] transition hover:-translate-y-0.5"
-                  >
-                    Konsultasi
-                  </a>
                   <a
                     href="/apotek-resmi"
                     className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"

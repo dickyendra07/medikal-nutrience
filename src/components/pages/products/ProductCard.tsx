@@ -55,19 +55,12 @@ export function ProductCard({ product }: ProductCardProps) {
           ))}
         </div>
 
-        <div className="mt-7 flex gap-3">
+        <div className="mt-7">
           <a
             href={product.href ?? "/produk"}
-            className="flex-1 rounded-full bg-[#006b3f] px-5 py-3 text-center text-sm font-black text-white shadow-lg shadow-green-900/20"
+            className="block rounded-full bg-[#006b3f] px-5 py-3 text-center text-sm font-black text-white shadow-lg shadow-green-900/20"
           >
             Detail
-          </a>
-
-          <a
-            href="/kontak"
-            className="flex-1 rounded-full border border-[#006b3f]/20 bg-[#f4fbf8] px-5 py-3 text-center text-sm font-black text-[#006b3f]"
-          >
-            Konsultasi
           </a>
         </div>
       </div>

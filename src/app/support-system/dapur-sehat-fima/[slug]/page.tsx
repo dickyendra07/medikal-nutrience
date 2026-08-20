@@ -165,23 +165,6 @@ export default async function DapurSehatFimaDetailPage({
                 </div>
               </div>
 
-              <div className="mt-10 rounded-[2rem] bg-[#006b3f] p-6 text-white">
-                <h2 className="text-2xl font-black leading-tight">
-                  Butuh rekomendasi nutrisi yang lebih sesuai?
-                </h2>
-
-                <p className="mt-3 text-sm font-medium leading-7 text-white/80">
-                  Konsultasikan kebutuhan Anda untuk mendapatkan arahan awal
-                  produk Medikal Nutrience.
-                </p>
-
-                <a
-                  href="/kontak"
-                  className="mt-5 inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-[#006b3f]"
-                >
-                  Konsultasi Sekarang
-                </a>
-              </div>
             </article>
           </div>
         </section>

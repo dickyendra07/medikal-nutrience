@@ -42,10 +42,9 @@ const focuses = [
   "Hati / Liver",
   "Pernafasan",
   "Pencernaan",
-  "Pemulihan",
   "Anak",
   "Dewasa & Lansia",
-  "Syaraf & Otak",
+  "Sistem Saraf",
 ];
 
 const approaches = [
@@ -65,7 +64,7 @@ const approaches = [
     step: "03",
     title: "Menghubungkan Kanal Resmi",
     description:
-      "Website membantu pengguna menemukan informasi produk, konsultasi awal, dan akses ke apotek resmi.",
+      "Website membantu pengguna menemukan informasi produk, edukasi nutrisi, dan akses ke kanal resmi.",
   },
 ];
 
@@ -120,8 +119,8 @@ export default function AboutPage() {
                 <div className="absolute bottom-[-90px] left-[-70px] h-72 w-72 rounded-full bg-[#eaf8f1]" />
 
                 <img
-                  src="/images/support/konsultasi.png"
-                  alt="Medikal Nutrience consultation"
+                  src="/images/mednut/banners/menu-produk-depan.png"
+                  alt="Keluarga multigenerasi bersama rangkaian produk Medikal Nutrience"
                   className="relative z-10 mx-auto h-auto w-full max-w-[560px] object-contain drop-shadow-2xl"
                 />
 
@@ -163,8 +162,7 @@ export default function AboutPage() {
                   Medikal Nutrience berfokus pada penyediaan informasi produk,
                   edukasi, dan akses kanal resmi untuk kebutuhan nutrisi. Website ini
                   dirancang untuk memudahkan pengguna memahami kategori produk,
-                  memilih solusi berdasarkan kondisi, serta menghubungi kanal resmi
-                  untuk konsultasi awal.
+                  memilih solusi berdasarkan kondisi, serta menemukan kanal resmi.
                 </p>
 
                 <div className="mt-7 grid gap-3 sm:grid-cols-2">
@@ -236,13 +234,6 @@ export default function AboutPage() {
                 melalui kanal resmi.
               </p>
 
-              <a
-                href="/kontak"
-                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-black text-[#006b3f] transition hover:-translate-y-0.5"
-              >
-                Konsultasi Sekarang
-                <span>→</span>
-              </a>
             </div>
 
             <div className="space-y-4 reveal-right">

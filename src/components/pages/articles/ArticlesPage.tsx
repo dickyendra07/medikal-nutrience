@@ -336,26 +336,6 @@ export function ArticlesPage({ articles, articleCategories }: { articles: Public
         </section>
 
 
-        <section className="px-5 pb-20 lg:px-10">
-
-          <div className="mx-auto max-w-[1440px] rounded-[3rem] bg-[#006b3f] p-10 text-white md:p-14">
-
-            <h2 className="text-3xl font-black md:text-5xl">
-              Temukan pendekatan nutrisi yang sesuai dengan kebutuhan Anda.
-            </h2>
-
-            <a
-              href="/kontak"
-              className="mt-8 inline-flex rounded-full bg-white px-8 py-4 text-sm font-black text-[#006b3f]"
-            >
-              Konsultasi Sekarang →
-            </a>
-
-          </div>
-
-        </section>
-
-
       </main>
 
       <Footer />

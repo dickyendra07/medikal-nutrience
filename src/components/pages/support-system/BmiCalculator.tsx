@@ -436,12 +436,6 @@ export function BmiCalculator() {
                     </h2>
                   </div>
 
-                  <a
-                    href="/kontak"
-                    className="inline-flex w-fit items-center justify-center rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white transition hover:-translate-y-0.5"
-                  >
-                    Konsultasi Lanjutan
-                  </a>
                 </div>
 
                 <div className="mt-7 grid gap-4 md:grid-cols-2">
@@ -500,8 +494,7 @@ export function BmiCalculator() {
 
                     <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-white/80">
                       Setelah memahami gambaran awal kebutuhan tubuh, Anda dapat
-                      mencari outlet resmi atau konsultasi untuk arahan lebih
-                      lanjut.
+                      mencari outlet resmi untuk kebutuhan produk lebih lanjut.
                     </p>
                   </div>
 

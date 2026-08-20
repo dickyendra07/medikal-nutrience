@@ -30,14 +30,13 @@ export function ArticleDetailPage({ article, relatedArticles = [], preview = fal
             {article.coverMedia ? <Image src={article.coverMedia.url} alt={article.coverMedia.altText || article.title} fill sizes="(max-width: 1280px) 100vw, 1280px" unoptimized={article.coverMedia.mimeType === "image/svg+xml"} className="object-cover" /> : <div className="flex h-full items-center justify-center text-sm font-black text-[#006b3f]/40">Gambar cover tidak tersedia</div>}
           </div>
 
-          <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1fr_340px]">
+          <div className="mt-12">
             <article className="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-black/5 md:p-12">
               <div className="rounded-[2rem] bg-[#f4fbf8] p-7"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">Ringkasan Artikel</p><p className="mt-4 text-base font-medium leading-8 text-[#475569]">{article.excerpt}</p>{article.keyPoints?.length ? <ul className="mt-5 space-y-4">{article.keyPoints.map((item) => <li key={item} className="flex gap-3 text-sm font-bold leading-7 text-[#334155]"><span aria-hidden="true" className="text-[#006b3f]">✓</span>{item}</li>)}</ul> : null}</div>
               {article.relatedProducts?.length ? <ArticleProductRecommendation products={article.relatedProducts} /> : null}
               <div className="mt-12"><ArticleContentRenderer content={article.contentJson} /></div>
               {article.tags.length ? <div className="mt-12 flex flex-wrap gap-2 border-t border-black/5 pt-7">{article.tags.map((tag) => <span key={tag.id} className="rounded-full bg-[#e4f8ed] px-4 py-2 text-xs font-black text-[#006b3f]">#{tag.name}</span>)}</div> : null}
             </article>
-            <aside className="sticky top-28 h-fit rounded-[2rem] bg-gradient-to-br from-[#006b3f] via-[#087a4c] to-[#10b981] p-7 text-white shadow-xl"><p className="text-xs font-black uppercase tracking-[0.25em] text-white/70">Butuh Bantuan?</p><h2 className="mt-5 text-3xl font-black leading-tight">Konsultasikan kebutuhan nutrisi Anda</h2><p className="mt-5 text-sm leading-7 text-white/80">Dapatkan arahan awal untuk menemukan pilihan nutrisi yang sesuai.</p><Link href="/kontak" className="mt-7 inline-flex rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f]">Konsultasi Sekarang →</Link></aside>
           </div>
         </div>
       </section>

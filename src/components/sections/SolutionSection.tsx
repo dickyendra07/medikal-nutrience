@@ -49,10 +49,10 @@ const solutions: Solution[] = [
   },
   {
     key: "syaraf",
-    tab: "Syaraf & Otak",
+    tab: "Sistem Saraf",
     icon: "brain",
-    eyebrow: "Solusi Syaraf & Otak",
-    title: "Peptibren: Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
+    eyebrow: "Solusi Sistem Saraf",
+    title: "Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
     description:
       "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
     image: "/images/mednut/products/page-assets/peptibren.jpeg",
@@ -66,7 +66,7 @@ const solutions: Solution[] = [
     tab: "Pernapasan",
     icon: "lungs",
     eyebrow: "Solusi Pernapasan",
-    title: "Pulmosol: Solusi Nutrisi untuk Kesehatan Pernapasan",
+    title: "Solusi Nutrisi untuk Kesehatan Pernapasan",
     description:
       "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
     image: "/images/mednut/products/page-assets/pulmosol.jpeg",
@@ -79,7 +79,7 @@ const solutions: Solution[] = [
     tab: "Pencernaan",
     icon: "digestive",
     eyebrow: "Solusi Pencernaan",
-    title: "Oligo: Nutrisi Cepat Serap untuk Pemulihan yang Lebih Optimal",
+    title: "Nutrisi Cepat Serap untuk Pemulihan yang Lebih Optimal",
     description:
       "Nutrisi dengan protein dan lemak yang lebih cepat diserap tubuh untuk memelihara kesehatan saluran cerna.",
     image: "/images/mednut/products/page-assets/oligo.jpeg",
