@@ -89,7 +89,7 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
           className="rounded-[2rem] p-5 md:p-7"
           style={{ backgroundColor: product.theme.soft }}
         >
-          <div className="flex min-h-[92px] items-center justify-center rounded-[1.5rem] bg-white px-6 py-5 shadow-lg shadow-black/5">
+          <div className="flex min-h-[72px] items-center justify-center rounded-[1.5rem] bg-white px-6 py-3 shadow-lg shadow-black/5">
             {asset.logo ? (
               <img
                 src={asset.logo}
