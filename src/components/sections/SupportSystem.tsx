@@ -4,7 +4,7 @@ const supportItems = [
     description:
       "Temukan inspirasi resep dan panduan menu bernutrisi untuk mendukung kebutuhan harian keluarga.",
     href: "/support-system/dapur-sehat-fima",
-    image: "/images/mednut/products/page-assets/entrakid.jpg",
+    image: "/images/mednut/support/dapur-sehat-mednut.png",
   },
   {
     title: "Artikel",
@@ -19,7 +19,7 @@ const supportItems = [
       "Ikuti cerita inspiratif perjalanan pasien dalam menjaga asupan nutrisi dan kualitas hidup.",
     href: "/support-system/kisah-sukses-pasien",
     image:
-      "/images/client-assets/img/general-practitioner-ennumerating-advantages-new-treatment-when-talking-senior-patient.jpg",
+      "/images/mednut/support/kisah-sukses-pasien.png",
   },
 ];
 
