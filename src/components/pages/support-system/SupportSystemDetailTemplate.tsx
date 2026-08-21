@@ -1,5 +1,6 @@
 import { BmiCalculator } from "@/components/pages/support-system/BmiCalculator";
 import { mednutAssets } from "@/data/mednut-assets";
+import Image from "next/image";
 import type { FimaRecipe } from "@/data/dapur-sehat-fima";
 import {
   communityPrograms,
@@ -195,10 +196,10 @@ export function SupportSystemDetailTemplate({
 
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
               <a
-                href="/apotek-resmi"
+                href="/assessment"
                 className="inline-flex items-center justify-center rounded-full bg-white/15 px-7 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
               >
-                Apotek Resmi
+                Assessment
               </a>
             </div>
           </div>
@@ -240,11 +241,13 @@ function RecipeSection({ color, recipes }: { color: string; recipes: FimaRecipe[
               href={`/support-system/dapur-sehat-fima/${recipe.slug}`}
               className="group reveal overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
             >
-              <div className="h-56 overflow-hidden bg-[#f4fbf8]">
-                <img
+              <div className="relative h-56 overflow-hidden bg-[#f4fbf8]">
+                <Image
                   src={recipe.image}
                   alt={recipe.title}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.05]"
                 />
               </div>
 

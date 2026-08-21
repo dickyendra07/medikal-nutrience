@@ -216,10 +216,10 @@ export default function SupportSystemPage() {
 
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <a
-                    href="/apotek-resmi"
+                    href="/assessment"
                     className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
                   >
-                    Apotek Resmi
+                    Assessment
                   </a>
                 </div>
               </div>

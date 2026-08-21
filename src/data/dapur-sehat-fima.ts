@@ -3,150 +3,233 @@ export type FimaIngredient = {
   nutrition: string;
 };
 
+export type FimaIngredientGroup = {
+  title: string;
+  items: string[];
+};
+
+export type FimaNutrition = {
+  energy?: string;
+  protein?: string;
+  fat?: string;
+  carbohydrate?: string;
+  fiber?: string;
+  vitamins?: string[];
+  minerals?: string[];
+};
+
 export type FimaRecipe = {
   slug: string;
   title: string;
+  subtitle?: string;
   category: string;
   readTime: string;
   image: string;
   excerpt: string;
   description: string;
+  product?: {
+    name: string;
+    slug: string;
+    image: string;
+  };
+  ingredientGroups?: FimaIngredientGroup[];
   ingredients: FimaIngredient[];
   steps: string[];
+  nutrition?: FimaNutrition;
   nutritionNotes: string[];
+};
+
+const productImages = {
+  entramix:
+    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+  peptisol:
+    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png",
+  entrasoy:
+    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY.png",
 };
 
 export const fimaRecipes: FimaRecipe[] = [
   {
-    slug: "smoothie-entrakid-pisang",
-    title: "Smoothie Pisang Entrakid",
-    category: "Menu Anak",
-    readTime: "5 menit",
-    image: "/images/mednut/products/page-assets/entrakid.jpg",
+    slug: "mix-banana-oatmeal-pan-seared-chicken",
+    title: "Mix Banana Oatmeal with Pan Seared Chicken",
+    subtitle: "Oatmeal lembut, pisang, dan ayam panggang untuk sajian bernutrisi yang mengenyangkan.",
+    category: "Menu Dewasa & Lansia",
+    readTime: "25 menit",
+    image: "/images/mednut/recipes/mix-banana-oatmeal-chicken.webp",
     excerpt:
-      "Inspirasi minuman sederhana untuk membantu memenuhi kebutuhan energi dan nutrisi anak.",
+      "Perpaduan oatmeal pisang yang lembut dengan pan seared chicken sebagai inspirasi menu lengkap.",
     description:
-      "Smoothie Pisang Entrakid adalah contoh menu praktis yang dapat disiapkan di rumah sebagai variasi asupan anak. Menu ini menggabungkan pisang, susu, dan Entrakid sesuai arahan penyajian untuk membantu mendukung kebutuhan nutrisi harian si kecil.",
+      "Sajian hangat yang memadukan sumber karbohidrat, protein, dan serat dalam satu piring. Entramix ditampilkan sebagai produk nutrisi terkait dan digunakan sesuai petunjuk penyajian pada kemasan.",
+    product: {
+      name: "Entramix",
+      slug: "entramix",
+      image: productImages.entramix,
+    },
+    ingredientGroups: [
+      {
+        title: "Bahan A",
+        items: [
+          "50 g oatmeal",
+          "1 buah pisang matang, iris",
+          "200 ml air atau susu cair sesuai kebutuhan",
+          "Kayu manis secukupnya",
+        ],
+      },
+      {
+        title: "Bahan B",
+        items: [
+          "120 g dada ayam tanpa kulit",
+          "1 sdt minyak zaitun",
+          "Lada dan rempah secukupnya",
+          "Entramix sesuai takaran saji pada kemasan",
+        ],
+      },
+    ],
     ingredients: [
-      {
-        name: "1 buah pisang matang",
-        nutrition:
-          "Mengandung energi, karbohidrat, serat, serta beberapa vitamin dan mineral.",
-      },
-      {
-        name: "200 ml susu cair atau air matang sesuai kebutuhan",
-        nutrition:
-          "Memberikan tambahan energi dan nutrisi sesuai jenis susu yang digunakan.",
-      },
-      {
-        name: "Entrakid sesuai takaran saji pada kemasan",
-        nutrition:
-          "Mengandung kombinasi nutrisi sesuai formulasi produk Entrakid.",
-      },
-      {
-        name: "Es batu secukupnya bila diperlukan",
-        nutrition:
-          "Tidak memberikan tambahan nilai gizi yang signifikan.",
-      },
+      { name: "Oatmeal, pisang, air atau susu cair, dan kayu manis", nutrition: "Sumber karbohidrat dan serat." },
+      { name: "Dada ayam, minyak zaitun, lada, dan rempah", nutrition: "Sumber protein hewani." },
+      { name: "Entramix sesuai takaran saji", nutrition: "Gunakan sesuai petunjuk pada kemasan." },
     ],
     steps: [
-      "Potong pisang menjadi beberapa bagian agar mudah diblender.",
-      "Masukkan pisang, susu cair atau air matang, dan Entrakid ke dalam blender.",
-      "Blend hingga tekstur lembut dan merata.",
-      "Tuang ke gelas saji dan sajikan segera.",
+      "Masak oatmeal bersama air atau susu cair dengan api kecil hingga teksturnya lembut.",
+      "Tambahkan sebagian pisang, lalu aduk perlahan sampai tercampur. Sisihkan agar suhunya turun sebelum menambahkan produk nutrisi.",
+      "Bumbui dada ayam dengan lada dan rempah, lalu pan-sear menggunakan minyak zaitun hingga matang merata.",
+      "Iris ayam, tata bersama oatmeal, lalu tambahkan sisa pisang dan Entramix sesuai petunjuk penyajian pada kemasan.",
     ],
+    nutrition: {
+      energy: "Berasal dari oatmeal, pisang, ayam, dan bahan cair yang digunakan.",
+      protein: "Berasal terutama dari dada ayam dan bahan cair yang dipilih.",
+      fat: "Berasal dari minyak zaitun serta bahan cair yang digunakan.",
+      carbohydrate: "Berasal terutama dari oatmeal dan pisang.",
+      fiber: "Berasal dari oatmeal dan pisang.",
+      vitamins: ["Vitamin B6", "Vitamin yang terkandung pada bahan dan produk terkait"],
+      minerals: ["Kalium", "Mineral yang terkandung pada bahan dan produk terkait"],
+    },
     nutritionNotes: [
-      "Gunakan takaran produk sesuai petunjuk pada kemasan.",
-      "Sesuaikan tekstur dengan usia dan kemampuan makan anak.",
-      "Untuk anak dengan kondisi medis tertentu, konsultasikan dengan dokter atau ahli gizi.",
+      "Nilai gizi akhir dapat berbeda sesuai merek bahan dan besar porsi.",
+      "Gunakan Entramix sesuai petunjuk penyajian pada kemasan.",
     ],
   },
   {
-    slug: "oatmeal-entramix-buah",
-    title: "Oatmeal Entramix Buah",
-    category: "Menu Dewasa",
-    readTime: "7 menit",
-    image: "/images/mednut/products/page-assets/entramix.jpeg",
+    slug: "avocado-toast",
+    title: "Avocado Toast",
+    subtitle: "Roti gandum dengan alpukat segar untuk menu praktis yang kaya rasa dan tekstur.",
+    category: "Menu Pemulihan",
+    readTime: "15 menit",
+    image: "/images/mednut/recipes/avocado-toast.webp",
     excerpt:
-      "Menu sarapan praktis untuk membantu memenuhi energi harian dewasa dan lansia.",
+      "Avocado toast segar dan mudah disiapkan sebagai inspirasi sarapan atau selingan.",
     description:
-      "Oatmeal Entramix Buah dapat menjadi variasi sarapan lembut dan mudah dikonsumsi. Cocok sebagai inspirasi menu harian untuk membantu memenuhi kebutuhan energi.",
+      "Menu praktis berbahan roti gandum, alpukat, dan sayuran segar. Peptisol ditampilkan sebagai produk nutrisi terkait dan digunakan sesuai petunjuk penyajian pada kemasan.",
+    product: {
+      name: "Peptisol",
+      slug: "peptisol",
+      image: productImages.peptisol,
+    },
+    ingredientGroups: [
+      {
+        title: "Bahan A",
+        items: [
+          "2 lembar roti gandum",
+          "1 buah alpukat matang",
+          "1 sdt air lemon",
+          "Lada secukupnya",
+        ],
+      },
+      {
+        title: "Bahan B",
+        items: [
+          "Tomat ceri, belah dua",
+          "Microgreens atau sayuran daun secukupnya",
+          "Biji wijen secukupnya",
+          "Peptisol sesuai takaran saji pada kemasan",
+        ],
+      },
+    ],
     ingredients: [
-      {
-        name: "Oatmeal secukupnya",
-        nutrition:
-          "Sumber karbohidrat kompleks dan serat untuk membantu memenuhi kebutuhan energi.",
-      },
-      {
-        name: "Air hangat atau susu cair",
-        nutrition:
-          "Memberikan cairan dan tambahan nutrisi sesuai pilihan bahan.",
-      },
-      {
-        name: "Entramix sesuai takaran saji pada kemasan",
-        nutrition:
-          "Mengandung kombinasi nutrisi sesuai formulasi produk Entramix.",
-      },
-      {
-        name: "Potongan buah sesuai selera",
-        nutrition:
-          "Memberikan tambahan vitamin, mineral, dan variasi rasa.",
-      },
+      { name: "Roti gandum, alpukat, lemon, dan lada", nutrition: "Sumber karbohidrat, lemak, dan serat." },
+      { name: "Tomat ceri, sayuran daun, dan biji wijen", nutrition: "Memberikan variasi vitamin, mineral, dan tekstur." },
+      { name: "Peptisol sesuai takaran saji", nutrition: "Gunakan sesuai petunjuk pada kemasan." },
     ],
     steps: [
-      "Masak oatmeal hingga tekstur lembut.",
-      "Diamkan sebentar sampai suhu tidak terlalu panas.",
-      "Tambahkan Entramix sesuai takaran saji.",
-      "Aduk rata dan tambahkan potongan buah.",
+      "Panggang roti gandum hingga permukaannya renyah tetapi bagian tengah tetap lembut.",
+      "Haluskan sebagian alpukat bersama air lemon dan lada, lalu sisakan beberapa irisan untuk topping.",
+      "Oleskan alpukat pada roti dan tata irisan alpukat, tomat ceri, sayuran daun, serta biji wijen.",
+      "Sajikan bersama Peptisol yang telah disiapkan terpisah sesuai petunjuk penyajian pada kemasan.",
     ],
+    nutrition: {
+      energy: "Berasal dari roti gandum, alpukat, dan biji wijen.",
+      protein: "Berasal dari roti gandum, biji wijen, dan produk terkait.",
+      fat: "Berasal terutama dari alpukat dan biji wijen.",
+      carbohydrate: "Berasal terutama dari roti gandum.",
+      fiber: "Berasal dari roti gandum, alpukat, dan sayuran.",
+      vitamins: ["Vitamin C", "Vitamin E", "Folat"],
+      minerals: ["Kalium", "Magnesium"],
+    },
     nutritionNotes: [
-      "Jangan mencampur produk dengan air mendidih.",
-      "Sesuaikan porsi dengan kebutuhan energi harian.",
-      "Konsultasikan dengan tenaga kesehatan untuk kondisi khusus.",
+      "Nilai gizi akhir dapat berbeda sesuai merek bahan dan besar porsi.",
+      "Siapkan Peptisol sesuai petunjuk penyajian pada kemasan.",
     ],
   },
   {
-    slug: "puding-entrasoy-almond",
-    title: "Puding Entrasoy Almond",
-    category: "Menu Keluarga",
-    readTime: "10 menit",
-    image: "/images/mednut/products/page-assets/entrasoy.jpeg",
+    slug: "vegan-salad-stuffed-sweet-potato",
+    title: "Vegan Salad Stuffed Sweet Potato",
+    subtitle: "Ubi manis panggang dengan isian salad segar berbasis bahan nabati.",
+    category: "Menu Berbasis Nabati",
+    readTime: "35 menit",
+    image: "/images/mednut/recipes/vegan-salad-stuffed-sweet-potato.webp",
     excerpt:
-      "Inspirasi dessert ringan berbasis soya untuk variasi menu keluarga.",
+      "Ubi panggang berisi salad kacang arab dan sayuran untuk pilihan menu nabati yang berwarna.",
     description:
-      "Puding Entrasoy Almond adalah contoh menu sederhana berbasis protein nabati yang dapat menjadi variasi hidangan keluarga.",
+      "Menu berbasis nabati yang memadukan ubi manis, kacang arab, dan sayuran segar. Entrasoy ditampilkan sebagai produk nutrisi terkait dan digunakan sesuai petunjuk penyajian pada kemasan.",
+    product: {
+      name: "Entrasoy",
+      slug: "entrasoy",
+      image: productImages.entrasoy,
+    },
+    ingredientGroups: [
+      {
+        title: "Bahan A",
+        items: [
+          "2 buah ubi manis ukuran sedang",
+          "1 sdt minyak zaitun",
+          "Lada dan rempah secukupnya",
+        ],
+      },
+      {
+        title: "Bahan B",
+        items: [
+          "100 g kacang arab matang",
+          "Mentimun dan tomat ceri, potong kecil",
+          "Kol ungu dan daun peterseli secukupnya",
+          "1 sdt air lemon",
+          "Entrasoy sesuai takaran saji pada kemasan",
+        ],
+      },
+    ],
     ingredients: [
-      {
-        name: "Agar-agar plain secukupnya",
-        nutrition:
-          "Mengandung serat pangan dan membantu memberikan tekstur pada menu.",
-      },
-      {
-        name: "Air matang",
-        nutrition:
-          "Tidak memberikan tambahan nilai gizi yang signifikan.",
-      },
-      {
-        name: "Entrasoy sesuai takaran saji pada kemasan",
-        nutrition:
-          "Mengandung protein nabati dan nutrisi sesuai formulasi produk Entrasoy.",
-      },
-      {
-        name: "Potongan almond atau topping sesuai selera",
-        nutrition:
-          "Memberikan tambahan energi, lemak baik, dan variasi tekstur.",
-      },
+      { name: "Ubi manis, minyak zaitun, lada, dan rempah", nutrition: "Sumber karbohidrat dan serat." },
+      { name: "Kacang arab, mentimun, tomat, kol ungu, peterseli, dan lemon", nutrition: "Sumber protein nabati, serat, vitamin, dan mineral." },
+      { name: "Entrasoy sesuai takaran saji", nutrition: "Gunakan sesuai petunjuk pada kemasan." },
     ],
     steps: [
-      "Masak agar-agar dengan air sesuai petunjuk.",
-      "Diamkan hingga suhu lebih hangat.",
-      "Campurkan Entrasoy dan aduk rata.",
-      "Tuang ke cetakan, tambahkan topping, lalu dinginkan.",
+      "Cuci ubi hingga bersih, oles tipis dengan minyak zaitun, lalu panggang sampai empuk.",
+      "Campurkan kacang arab, mentimun, tomat ceri, kol ungu, peterseli, air lemon, lada, dan rempah.",
+      "Belah ubi panggang memanjang tanpa memutus bagian bawahnya, lalu tekan perlahan agar terbuka.",
+      "Isi ubi dengan salad dan sajikan bersama Entrasoy yang disiapkan terpisah sesuai petunjuk pada kemasan.",
     ],
+    nutrition: {
+      energy: "Berasal dari ubi manis, kacang arab, dan minyak zaitun.",
+      protein: "Berasal terutama dari kacang arab dan produk terkait.",
+      fat: "Berasal dari minyak zaitun.",
+      carbohydrate: "Berasal terutama dari ubi manis dan kacang arab.",
+      fiber: "Berasal dari ubi, kacang arab, dan sayuran.",
+      vitamins: ["Beta-karoten (provitamin A)", "Vitamin C", "Folat"],
+      minerals: ["Kalium", "Magnesium", "Zat besi"],
+    },
     nutritionNotes: [
-      "Perhatikan suhu saat mencampur produk.",
-      "Gunakan topping sesuai kebutuhan dan toleransi tubuh.",
-      "Hasil menu bersifat inspirasi, bukan pengganti saran medis.",
+      "Nilai gizi akhir dapat berbeda sesuai merek bahan dan besar porsi.",
+      "Siapkan Entrasoy sesuai petunjuk penyajian pada kemasan.",
     ],
   },
 ];

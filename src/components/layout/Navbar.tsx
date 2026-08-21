@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
 const publicNavigationVisibility = {
@@ -41,30 +42,40 @@ const supportMenuItems = [
     label: "Kalkulator Status Gizi",
     href: "/support-system/kalkulator-status-gizi",
     desc: "Cek BMI/IMT",
+    image: "/images/mednut/support/bmi-calculator.jpg",
+    imageFit: "cover",
     visible: publicNavigationVisibility.nutritionCalculator,
   },
   {
     label: "Dapur Sehat Mednut",
     href: "/support-system/dapur-sehat-fima",
     desc: "Edukasi dan inspirasi nutrisi",
+    image: "/images/mednut/support/education-health.jpg",
+    imageFit: "cover",
     visible: true,
   },
   {
     label: "Artikel",
     href: "/artikel",
     desc: "Informasi nutrisi dan edukasi kesehatan",
+    image: "/images/client-assets/img/stacked-books-pencil-stethoscope-white-surface.jpg",
+    imageFit: "cover",
     visible: true,
   },
   {
     label: "Kisah Sukses Pasien",
     href: "/support-system/kisah-sukses-pasien",
     desc: "Cerita dan pengalaman pasien",
+    image: "/images/mednut/support/doctor-consultation.jpg",
+    imageFit: "cover",
     visible: true,
   },
   {
     label: "Komunitas Sehat",
     href: "/support-system/komunitas-sehat",
     desc: "Program komunitas dan edukasi",
+    image: "/images/mednut/banners/brand-artboard-2.png",
+    imageFit: "cover",
     visible: false,
   },
 ].filter((item) => item.visible);
@@ -76,32 +87,27 @@ const megaMenus = {
     description:
       "Jelajahi produk nutrisi untuk kebutuhan anak, dewasa, lansia, dan kondisi kesehatan khusus.",
     items: [
-      { label: "Entrakid", href: "/produk/entrakid", desc: "Nutrisi untuk anak" },
-      { label: "Entramix", href: "/produk/entramix", desc: "Nutrisi lengkap harian" },
-      { label: "Entrasoy", href: "/produk/entrasoy", desc: "Nutrisi berbasis soya" },
-      { label: "Peptisol", href: "/produk/peptisol", desc: "Nutrisi tinggi protein" },
-      { label: "Peptibren", href: "/produk/peptibren", desc: "Nutrisi Kesehatan Syaraf" },
-      { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal" },
-      { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati" },
-      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Nutrisi Kesehatan Pernapasan" },
-      { label: "Oligo", href: "/produk/oligo", desc: "Nutrisi Cepat Serap" },
+      { label: "Entrakid", href: "/produk/entrakid", desc: "Nutrisi untuk anak", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAKID/ENTRAKID VANILA 1.png", imageFit: "contain" },
+      { label: "Entramix", href: "/produk/entramix", desc: "Nutrisi lengkap harian", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png", imageFit: "contain" },
+      { label: "Entrasoy", href: "/produk/entrasoy", desc: "Nutrisi berbasis soya", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY.png", imageFit: "contain" },
+      { label: "Peptisol", href: "/produk/peptisol", desc: "Nutrisi tinggi protein", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png", imageFit: "contain" },
+      { label: "Peptibren", href: "/produk/peptibren", desc: "Nutrisi Kesehatan Syaraf", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN VANILA 1.png", imageFit: "contain" },
+      { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 1.png", imageFit: "contain" },
+      { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL/HEPATOSOL VANILA 1.png", imageFit: "contain" },
+      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Nutrisi Kesehatan Pernapasan", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png", imageFit: "contain" },
+      { label: "Oligo", href: "/produk/oligo", desc: "Nutrisi Cepat Serap", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png", imageFit: "contain" },
     ],
   },
   solusi: {
     eyebrow: "Solusi Kesehatan",
-    title: "Solusi nutrisi berdasarkan kondisi",
+    title: "Solusi nutrisi berdasarkan kebutuhan",
     description:
-      "Temukan rekomendasi nutrisi berdasarkan kebutuhan tubuh dan kondisi kesehatan.",
+      "Temukan pilihan nutrisi untuk kebutuhan keluarga di setiap tahap kehidupan.",
     items: [
-      { label: "Ginjal", href: "/solusi/ginjal", desc: "Dukungan Nutrisi Ginjal" },
-      { label: "Hati / Liver", href: "/solusi/hati-liver", desc: "Dukungan fungsi hati" },
-      { label: "Pernapasan", href: "/solusi/pernafasan", desc: "Dukungan Nutrisi Pernapasan" },
-      { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan Cepat Serap" },
-      {
-        label: "Sistem Saraf",
-        href: "/produk/peptibren",
-        desc: "Dukungan Nutrisi Kesehatan Syaraf",
-      },
+      { label: "Entramix", href: "/produk/entramix", desc: "Kebutuhan Harian Dewasa & Lansia", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png", imageFit: "contain" },
+      { label: "Entrakid", href: "/produk/entrakid", desc: "Tumbuh Kembang Anak", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAKID/ENTRAKID VANILA 1.png", imageFit: "contain" },
+      { label: "Entrasoy", href: "/produk/entrasoy", desc: "Pilihan Nutrisi Berbasis Kedelai", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY.png", imageFit: "contain" },
+      { label: "Peptisol", href: "/produk/peptisol", desc: "Dukungan Nutrisi Masa Pemulihan", image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png", imageFit: "contain" },
     ],
   },
   event: {
@@ -114,16 +120,22 @@ const megaMenus = {
         label: "Hari Gizi Nasional 2026",
         href: "/event",
         desc: "Health talk dan demo cooking untuk lansia kuat dan aktif",
+        image: "/images/mednut/events/hgn-2026.webp",
+        imageFit: "cover",
       },
       {
         label: "Clinical Nutrition Symposium 2026",
         href: "/event",
         desc: "Seminar nutrisi klinis untuk tenaga kesehatan",
+        image: "/images/mednut/events/hgn-2026.webp",
+        imageFit: "cover",
       },
       {
         label: "Edukasi Nutrisi Keluarga",
         href: "/event",
         desc: "Webinar edukasi nutrisi keluarga",
+        image: "/images/mednut/events/hgn-2026.webp",
+        imageFit: "cover",
       },
     ],
   },
@@ -283,17 +295,21 @@ export function Navbar() {
                 <a
                   key={`${item.href}-${item.label}`}
                   href={item.href}
-                  className="group rounded-[1.5rem] border border-black/5 bg-[#f8fcfa] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#006b3f]/20 hover:bg-[#eefaf4] hover:shadow-xl hover:shadow-green-900/10"
+                  className="group grid grid-cols-[4.5rem_1fr] items-center gap-4 rounded-[1.5rem] border border-black/5 bg-[#f8fcfa] p-4 transition duration-300 hover:-translate-y-1 hover:border-[#006b3f]/20 hover:bg-[#eefaf4] hover:shadow-xl hover:shadow-green-900/10"
                 >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e1f5eb] text-sm font-black text-[#006b3f] transition group-hover:bg-[#006b3f] group-hover:text-white">
-                    →
+                  <span className="relative h-[4.5rem] w-[4.5rem] overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
+                    <Image
+                      src={item.image}
+                      alt=""
+                      fill
+                      sizes="72px"
+                      className={item.imageFit === "cover" ? "object-cover" : "object-contain p-2"}
+                    />
                   </span>
-                  <h4 className="mt-4 text-base font-black text-[#111827]">
-                    {item.label}
-                  </h4>
-                  <p className="mt-2 text-sm font-medium leading-6 text-[#6b7280]">
-                    {item.desc}
-                  </p>
+                  <span className="min-w-0">
+                    <span className="block text-base font-black text-[#111827]">{item.label}</span>
+                    <span className="mt-1 block text-sm font-medium leading-5 text-[#6b7280]">{item.desc}</span>
+                  </span>
                 </a>
               ))}
             </div>
