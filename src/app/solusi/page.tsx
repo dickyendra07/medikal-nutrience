@@ -146,7 +146,7 @@ const otherSolutions = [
 const focusList = [
   "Ginjal",
   "Hati / Liver",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
   "Anak",
   "Dewasa & Lansia",

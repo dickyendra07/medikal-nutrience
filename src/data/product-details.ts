@@ -397,8 +397,8 @@ export const productDetails: ProductDetail[] = [
   {
     slug: "pulmosol",
     name: "PULMOSOL",
-    category: "Pernafasan",
-    heroTitle: "Solusi Gizi Masalah Pernafasan PPOK, Asma, Pneumonia, dan TB Paru",
+    category: "Pernapasan",
+    heroTitle: "Solusi Gizi Masalah Pernapasan PPOK, Asma, Pneumonia, dan TB Paru",
     description:
       "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernapasan.",
     theme: {

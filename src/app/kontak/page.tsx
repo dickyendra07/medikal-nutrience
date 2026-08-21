@@ -162,7 +162,7 @@ export default function ContactPage() {
                       <option>Pilih kebutuhan nutrisi</option>
                       <option>Ginjal</option>
                       <option>Hati / Liver</option>
-                      <option>Pernafasan</option>
+                      <option>Pernapasan</option>
                       <option>Pencernaan</option>
                       <option>Pemulihan</option>
                       <option>Anak</option>

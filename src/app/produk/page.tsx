@@ -123,7 +123,7 @@ const medicalProducts = [
   },
   {
     name: "Pulmosol",
-    category: "Pernafasan",
+    category: "Pernapasan",
     description:
       "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernafasan.",
     logo: mednutAssets.productLogos.pulmosol,
@@ -157,7 +157,7 @@ const categories = [
   "Nutrisi Keluarga",
   "Ginjal",
   "Hati / Liver",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
   "Sistem Saraf",
 ];

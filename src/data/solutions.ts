@@ -106,9 +106,9 @@ export const solutionDetails: SolutionDetail[] = [
   },
   {
     slug: "pernafasan",
-    title: "Solusi Nutrisi untuk Masalah Pernafasan",
-    shortTitle: "Pernafasan",
-    eyebrow: "Solusi Pernafasan",
+    title: "Solusi Nutrisi untuk Masalah Pernapasan",
+    shortTitle: "Pernapasan",
+    eyebrow: "Solusi Pernapasan",
     description:
       "Kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru dapat memengaruhi energi, nafsu makan, serta aktivitas harian.",
     problemTitle: "Kondisi yang Perlu Didukung",
