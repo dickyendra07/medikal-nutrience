@@ -123,7 +123,11 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
             <img
               src={asset.packshot}
               alt={product.name}
-              className="relative z-20 h-auto w-[78%] max-w-[420px] object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03]"
+              className={`relative z-20 h-auto object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03] ${
+                product.slug === "entrasoy"
+                  ? "w-[95%] max-w-[520px] scale-110"
+                  : "w-[78%] max-w-[420px]"
+              }`}
             />
           </div>
         </div>
