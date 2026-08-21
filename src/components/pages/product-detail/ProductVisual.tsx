@@ -94,7 +94,11 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
               <img
                 src={asset.logo}
                 alt={`${product.name} logo`}
-                className="max-h-16 w-auto max-w-[320px] object-contain"
+                className={`w-auto object-contain ${
+                  product.slug === "entrasoy"
+                    ? "max-h-24 max-w-[380px] scale-110"
+                    : "max-h-16 max-w-[320px]"
+                }`}
               />
             ) : (
               <p
