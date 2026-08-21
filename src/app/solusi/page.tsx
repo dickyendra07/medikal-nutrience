@@ -126,6 +126,14 @@ const otherSolutions = [
     color: "#db2777",
   },
   {
+    title: "Pemulihan",
+    subtitle: "Recovery & Protein",
+    description:
+      "Dukungan nutrisi untuk membantu memenuhi kebutuhan saat masa pemulihan.",
+    href: "/solusi/pemulihan",
+    color: "#059669",
+  },
+  {
     title: "Anak",
     subtitle: "Tumbuh Kembang",
     description:

@@ -4,41 +4,31 @@ import { mednutAssets } from "@/data/mednut-assets";
 
 const supportItems = [
   {
-    title: "Kalkulator Status Gizi",
-    eyebrow: "Assessment Tools",
-    description:
-      "Bantu pengguna mendapatkan gambaran awal status gizi melalui kalkulator IMT dan estimasi kebutuhan energi harian.",
-    image: mednutAssets.support.bmiCalculator,
-    href: "/support-system/kalkulator-status-gizi",
-    accent: "#006b3f",
-  },
-  {
-    title: "Dapur Sehat FIMA",
+    title: "Dapur Sehat Mednut",
     eyebrow: "Healthy Kitchen",
     description:
       "Inspirasi menu dan edukasi nutrisi yang membantu keluarga menyiapkan pilihan asupan lebih sehat.",
-    image: mednutAssets.support.educationHealth,
+    image: "/images/mednut/support/dapur-sehat-mednut.png",
     href: "/support-system/dapur-sehat-fima",
     accent: "#d85b70",
+  },
+  {
+    title: "Artikel",
+    eyebrow: "Nutrition Education",
+    description:
+      "Baca informasi nutrisi dan edukasi kesehatan untuk membantu memahami kebutuhan tubuh.",
+    image: "/images/support/edu-article.png",
+    href: "/artikel",
+    accent: "#006b3f",
   },
   {
     title: "Kisah Sukses Pasien",
     eyebrow: "Patient Story",
     description:
       "Cerita perjalanan dan pengalaman pasien dalam memenuhi kebutuhan nutrisi sesuai kondisi tubuhnya.",
-    image: mednutAssets.support.doctorConsultation,
+    image: "/images/mednut/support/kisah-sukses-pasien.png",
     href: "/support-system/kisah-sukses-pasien",
     accent: "#1e3a8a",
-  },
-  {
-    title: "Komunitas Sehat",
-    eyebrow: "Healthy Community",
-    description:
-      "Ruang edukasi dan dukungan untuk membantu masyarakat memahami pentingnya nutrisi yang tepat.",
-    image: mednutAssets.banners.brandArtboard2,
-    href: "/support-system/komunitas-sehat",
-    accent: "#f59e0b",
-    visible: false,
   },
 ];
 
@@ -74,15 +64,6 @@ export default function SupportSystemPage() {
                 edukasi, cerita pasien, dan komunitas untuk membantu masyarakat
                 memahami kebutuhan nutrisi sesuai kondisi tubuh.
               </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="/support-system/kalkulator-status-gizi"
-                  className="inline-flex items-center justify-center rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white shadow-xl shadow-green-900/15 transition hover:-translate-y-0.5"
-                >
-                  Mulai Cek Status Gizi
-                </a>
-              </div>
             </div>
 
             <div className="reveal-scale reveal-delay-2">
@@ -145,8 +126,8 @@ export default function SupportSystemPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {supportItems.filter((item) => item.visible !== false).map((item) => (
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {supportItems.map((item) => (
                 <a
                   key={item.title}
                   href={item.href}
