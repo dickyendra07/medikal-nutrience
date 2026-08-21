@@ -147,7 +147,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
     logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
-    image: "/images/mednut/banners/menu-produk-depan.png",
+    image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN VANILA 1.png",
     href: "/produk/peptibren",
     color: "#ca8a04",
   },
