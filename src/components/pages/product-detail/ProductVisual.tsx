@@ -99,6 +99,8 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
                     ? "max-h-40 max-w-[560px] scale-150"
                     : product.slug === "entramix"
                     ? "max-h-32 max-w-[460px] scale-125"
+                    : product.slug === "peptisol"
+                    ? "max-h-32 max-w-[460px] scale-125"
                     : "max-h-16 max-w-[320px]"
                 }`}
               />
