@@ -103,6 +103,8 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
                     ? "max-h-32 max-w-[460px] scale-125"
                     : product.slug === "peptibren"
                     ? "max-h-32 max-w-[460px] scale-125"
+                    : product.slug === "nephrisol"
+                    ? "max-h-32 max-w-[460px] scale-125"
                     : "max-h-16 max-w-[320px]"
                 }`}
               />
