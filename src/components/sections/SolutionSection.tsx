@@ -26,7 +26,7 @@ const solutions: Solution[] = [
     title: "Solusi Perlindungan Ginjal Dimulai dari Nutrisi yang Tepat",
     description:
       "Kebutuhan nutrisi Anda berbeda tergantung pada tahapan kondisi ginjal. Kami menyediakan formula presisi untuk tahap Pra-Dialisis dan Dialisis.",
-    image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
+    image: "/images/mednut/solutions/front-facing/nephrisol.png",
     accent: "#5b0ca8",
     href: "/solusi/ginjal",
     primaryButton: "Predialisis",
@@ -40,8 +40,7 @@ const solutions: Solution[] = [
     title: "Dukungan Nutrisi untuk Gangguan Fungsi Hati",
     description:
       "Dukung kebutuhan nutrisi pada kondisi hati kronik maupun kondisi hati yang membutuhkan perhatian lebih intensif dengan formula yang sesuai.",
-    image:
-      "/images/client-assets/img/img home/HATI LIVER - HEPATOSOL.png",
+    image: "/images/mednut/solutions/front-facing/hepatosol.png",
     accent: "#ef1f2d",
     href: "/solusi/hati-liver",
     primaryButton: "Hati Ringan Moderat",
@@ -55,7 +54,7 @@ const solutions: Solution[] = [
     title: "Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
     description:
       "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
-    image: "/images/mednut/products/page-assets/peptibren.jpeg",
+    image: "/images/mednut/solutions/front-facing/peptibren.png",
     accent: "#f2b705",
     buttonTextColor: "#3f3100",
     href: "/produk/peptibren",
@@ -69,7 +68,7 @@ const solutions: Solution[] = [
     title: "Solusi Nutrisi untuk Kesehatan Pernapasan",
     description:
       "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
-    image: "/images/mednut/products/page-assets/pulmosol.jpeg",
+    image: "/images/mednut/solutions/front-facing/pulmosol.png",
     accent: "#1e3a8a",
     href: "/produk/pulmosol",
     primaryButton: "Lihat Produk",
@@ -82,7 +81,7 @@ const solutions: Solution[] = [
     title: "Nutrisi Cepat Serap untuk Pemulihan yang Lebih Optimal",
     description:
       "Nutrisi dengan protein dan lemak yang lebih cepat diserap tubuh untuk memelihara kesehatan saluran cerna.",
-    image: "/images/mednut/products/page-assets/oligo.jpeg",
+    image: "/images/mednut/solutions/front-facing/oligo.png",
     accent: "#d85b70",
     href: "/produk/oligo",
     primaryButton: "Lihat Produk",
@@ -147,7 +146,7 @@ export function SolutionSection() {
                       <img
                         src={activeSolution.image}
                         alt={activeSolution.title}
-                        className="aspect-[1.28/1] w-full object-cover"
+                        className="aspect-[1.28/1] w-full object-contain"
                       />
                     </div>
 
@@ -214,7 +213,7 @@ export function SolutionSection() {
             <img
               src={activeSolution.image}
               alt={activeSolution.title}
-              className="aspect-[1.18/1] w-full object-cover transition duration-500"
+              className="aspect-[1.18/1] w-full object-contain transition duration-500"
             />
           </div>
 
