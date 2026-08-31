@@ -15,7 +15,7 @@ const tableOfContents = [
   "Jenis Data Pribadi yang Dikumpulkan",
   "Jangka Waktu Pemrosesan dan Retensi Data Pribadi",
   "Hak Subjek Data Pribadi",
-  "Pemrosesan Data Pribadi oleh Pihak Ketiga",
+  "Pemrosesan Data Pribadi Oleh Pihak Ketiga",
   "Keamanan Data Pribadi",
   "Pembaruan Kebijakan Privasi",
   "Hubungi Kami",
@@ -62,8 +62,8 @@ export default function PrivacyPolicyPage() {
         <div className="mx-auto max-w-6xl">
           <div className="rounded-3xl border border-emerald-100 bg-white p-6 shadow-sm md:p-10">
             <div className="space-y-5 text-[15px] leading-7 text-slate-700 md:text-base md:leading-8">
-              <p>Kami adalah PT. Finusolprima Farma Internasional. Dalam rangka penyediaan layanan ini, Data pribadi Anda akan dikendalikan oleh PT. Finusolprima Farma Internasional, yang merupakan bagian dari Grup Kalbe dan bertindak sebagai Pengendali Data Pribadi untuk keperluan pengelolaan dan pemrosesan data ini. PT. Finusolprima Farma Internasional dapat membagi Data Pribadi Anda kepada perusahaan lain dalam Grup Kalbe dan/atau afiliasi da/atau mitra kerja yang ditunjuk (untuk selanjutnya disebut sebagai ”Kami”), yang saat ini berkomitmen untuk melindungi kepentingan dan kenyamanan Anda sebagai pelanggan Kami (selanjutnya disebut ”Anda”) termasuk pada lingkup Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (selanjutnya disebut sebagai ”UU PDP”) dan peraturan perundang-undangan lainnya yang terkait dengan Pelindungan Data Pribadi yang ada di Indonesia.</p>
-              <p>Kebijakan Privasi ini menjelaskan informasi terkait pemrosesan Data Pribadi yang Kami lakukan dimulai dari pemerolehan, pengumpulan, penganalisisan, penampilan, pengiriman, pengungkapan, penyimpanan, perubahan, penghapusan, dan/atau segala bentuk pengelolaan yang terkait dengan Data Pribadi Anda sebagai wujud kepatuhan Kami terhadap UU PDP dan peraturan perundang-undangan lainnya yang terkait dengan Pelindungan Data Pribadi yang ada di Indonesia. Website Medikal Nutrience merupakan bagian dari Kami. Dengan melakukan akses terhadap halaman website medikal nutrience, maka Anda menyatakan telah membaca, dan mengerti segala bentuk pemrosesan yang terkait dengan Data Pribadi Anda.</p>
+              <p>Kami adalah PT. Finusolprima Farma Internasional. Dalam rangka penyediaan layanan ini, Data pribadi Anda akan dikendalikan oleh PT. Finusolprima Farma Internasional, yang merupakan bagian dari Grup Kalbe dan bertindak sebagai Pengendali Data Pribadi untuk keperluan pengelolaan dan pemrosesan data ini. PT. Finusolprima Farma Internasional dapat membagi Data Pribadi Anda kepada perusahaan lain dalam Grup Kalbe dan/atau afiliasi dan/atau mitra kerja yang ditunjuk (untuk selanjutnya disebut sebagai ”Kami”), yang saat ini berkomitmen untuk melindungi kepentingan dan kenyamanan Anda sebagai pelanggan Kami (selanjutnya disebut ”Anda”) termasuk pada lingkup Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (selanjutnya disebut sebagai ”UU PDP”) dan peraturan perundang-undangan lainnya yang terkait dengan Pelindungan Data Pribadi yang ada di Indonesia.</p>
+              <p>Kebijakan Privasi ini menjelaskan informasi terkait pemrosesan Data Pribadi yang Kami lakukan dimulai dari pemerolehan, pengumpulan, penganalisisan, penampilan, pengiriman, pengungkapan, penyimpanan, perubahan, penghapusan, dan/atau segala bentuk pengelolaan yang terkait dengan Data Pribadi Anda sebagai wujud kepatuhan Kami terhadap UU PDP dan peraturan perundang-undangan lainnya yang terkait dengan Pelindungan Data Pribadi yang ada di Indonesia. Website MediKAL Nutrience merupakan bagian dari Kami. Dengan melakukan akses terhadap halaman website MediKAL Nutrience, maka Anda menyatakan telah membaca, dan mengerti segala bentuk pemrosesan yang terkait dengan Data Pribadi Anda.</p>
             </div>
           </div>
 
@@ -97,7 +97,7 @@ export default function PrivacyPolicyPage() {
               <div className="space-y-4">
                 <LegalClause label="a"><p>Data yang diserahkan oleh Anda secara langsung atau tidak langsung;</p></LegalClause>
                 <LegalClause label="b"><p>Data yang didapat saat Anda melakukan pendaftaran akun dan/atau yang terekam secara otomatis pada sistem elektronik yang dimiliki dan/atau dioperasikan oleh Kami; dan</p></LegalClause>
-                <LegalClause label="c"><p>Data yang dikumpulkan oleh Pihak Ketiga dengan memperhatikan peraturan perundang-undangan yang berlaku.</p></LegalClause>
+                <LegalClause label="c"><p>Data yang diperoleh melalui pihak ketiga dengan tetap memperhatikan peraturan perundang-undangan yang berlaku.</p></LegalClause>
               </div>
             </LegalSection>
 
@@ -159,18 +159,19 @@ export default function PrivacyPolicyPage() {
               </div>
             </LegalSection>
 
-            <LegalSection number={7} title="Pemrosesan Data Pribadi oleh Pihak Ketiga">
+            <LegalSection number={7} title="Pemrosesan Data Pribadi Oleh Pihak Ketiga">
               <p>Sejauh untuk memenuhi tujuan pemrosesan Data Pribadi yang disampaikan di atas, Kami dapat mengungkapkan, memberikan akses, atau membagikan Data Pribadi Anda kepada pihak-pihak sebagai berikut:</p>
               <div className="space-y-4">
-                <LegalClause label="a"><p>Kara Digital, alasan berbagi adalah dikarenakan Kami memiliki kantor yang menjalankan kegiatan operasional bisnis Kami sehari-hari untuk dapat mempertahankan kualitas pelayanan Kami kepada Anda;</p></LegalClause>
-                <LegalClause label="b"><p>Penyedia layanan, alasan berbagi untuk membantu Kami dalam memberikan pelayanan terbaik bagi Anda melalui layanan infrastruktur, pengamanan sistem, pemasaran, dan lainnya;</p></LegalClause>
-                <LegalClause label="c"><p>Pemroses pembayaran, alasan berbagi agar proses pembayaran Anda dilakukan secara legal dan terpercaya agar terhindar dari penipuan;</p></LegalClause>
-                <LegalClause label="d"><p>Mitra periklanan, alasan berbagi untuk membantu Kami dalam menghadirkan iklan yang lebih relevan bagi Anda;</p></LegalClause>
-                <LegalClause label="e"><p>Mitra pemasaran, alasan berbagi untuk membantu mempromosikan produk, layanan, dan jasa Kami. Mitra Kami juga dapat menggabungkan Data Pribadi Anda dengan data lain yang mereka kumpulkan yang dapat digunakan untuk penawaran, promosi, atau aktivitas pemasaran lainnya yang Kami yakini relevan bagi Anda;</p></LegalClause>
-                <LegalClause label="f"><p>Peneliti akademis, alasan berbagi untuk berbagi aktivitas, seperti analisis statistik dan studi akademis, tetapi hanya dalam format pseudonim;</p></LegalClause>
-                <LegalClause label="g"><p>Penegakan hukum dan otoritas lainnya, alasan berbagi untuk memenuhi kewajiban hukum dalam memenuhi tujuan seperti untuk keamanan nasional, penegakan hukum, litigasi, penyelidikan, pelindungan keamanan, mencegah terjadinya kematian atau bahaya fisik (<em>vital interest of Data Subject</em>);</p></LegalClause>
-                <LegalClause label="h"><p>Pembeli bisnis Kami, alasan berbagi dalam situasi Kami menjual atau melakukan negosiasi terkait bisnis Kami kepada pembeli atau calon pembeli bisnis Kami, Kami akan memberikan pemberitahuan kepada Anda sebelum Data Pribadi Anda dialihkan kepada pembeli atau Kebijakan Privasi yang berbeda mulai berlaku; dan</p></LegalClause>
-                <LegalClause label="i"><p>Pengungkapan, pemberian akses, dan pembagian Data Pribadi kepada pihak-pihak di atas dilakukan sepanjang tunduk pada ketentuan UU PDP dan peraturan perundang-undangan lainnya yang terkait.</p></LegalClause>
+                <LegalClause label="a"><p>Grup perusahaan PT. Finusolprima Farma Internasional.</p></LegalClause>
+                <LegalClause label="b"><p>Kara Digital, alasan berbagi adalah dikarenakan Kami memiliki kantor yang menjalankan kegiatan operasional bisnis Kami sehari-hari untuk dapat mempertahankan kualitas pelayanan Kami kepada Anda;</p></LegalClause>
+                <LegalClause label="c"><p>Penyedia layanan, alasan berbagi untuk membantu Kami dalam memberikan pelayanan terbaik bagi Anda melalui layanan infrastruktur, pengamanan sistem, pemasaran, dan lainnya;</p></LegalClause>
+                <LegalClause label="d"><p>Pemroses pembayaran, alasan berbagi agar proses pembayaran Anda dilakukan secara legal dan terpercaya agar terhindar dari penipuan;</p></LegalClause>
+                <LegalClause label="e"><p>Mitra periklanan, alasan berbagi untuk membantu Kami dalam menghadirkan iklan yang lebih relevan bagi Anda;</p></LegalClause>
+                <LegalClause label="f"><p>Mitra pemasaran, alasan berbagi untuk membantu mempromosikan produk, layanan, dan jasa Kami. Mitra Kami juga dapat menggabungkan Data Pribadi Anda dengan data lain yang mereka kumpulkan yang dapat digunakan untuk penawaran, promosi, atau aktivitas pemasaran lainnya yang Kami yakini relevan bagi Anda;</p></LegalClause>
+                <LegalClause label="g"><p>Peneliti akademis, alasan berbagi untuk berbagi aktivitas, seperti analisis statistik dan studi akademis, tetapi hanya dalam format pseudonim;</p></LegalClause>
+                <LegalClause label="h"><p>Penegakan hukum dan otoritas lainnya, alasan berbagi untuk memenuhi kewajiban hukum dalam memenuhi tujuan seperti untuk keamanan nasional, penegakan hukum, litigasi, penyelidikan, pelindungan keamanan, mencegah terjadinya kematian atau bahaya fisik (<em>vital interest of Data Subject</em>);</p></LegalClause>
+                <LegalClause label="i"><p>Pembeli bisnis Kami, alasan berbagi dalam situasi Kami menjual atau melakukan negosiasi terkait bisnis Kami kepada pembeli atau calon pembeli bisnis Kami, Kami akan memberikan pemberitahuan kepada Anda sebelum Data Pribadi Anda dialihkan kepada pembeli atau Kebijakan Privasi yang berbeda mulai berlaku; dan</p></LegalClause>
+                <LegalClause label="j"><p>Pengungkapan, pemberian akses, dan pembagian Data Pribadi kepada pihak-pihak di atas dilakukan sepanjang tunduk pada ketentuan UU PDP dan peraturan perundang-undangan lainnya yang terkait.</p></LegalClause>
               </div>
             </LegalSection>
 
