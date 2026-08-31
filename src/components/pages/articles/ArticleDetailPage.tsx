@@ -23,16 +23,17 @@ export function ArticleDetailPage({ article, relatedArticles = [], preview = fal
             <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm font-bold text-[#64748b]"><Link href="/">Beranda</Link><span aria-hidden="true">→</span><Link href="/artikel">Artikel</Link><span aria-hidden="true">→</span><span className="text-[#006b3f]">{article.category.name}</span></nav>
             <p className="inline-flex rounded-full bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.3em] text-[#006b3f] shadow-lg ring-1 ring-black/5">{article.category.name}</p>
             <h1 className="mt-8 text-4xl font-black leading-[1.05] text-[#111827] md:text-6xl">{article.title}</h1>
+            {article.excerpt ? <p className="mt-6 max-w-4xl text-base font-medium leading-8 text-[#475569] md:text-lg md:leading-9">{article.excerpt}</p> : null}
             <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold text-[#64748b]"><span>{formatDate(article.publishedAt)}</span><span aria-hidden="true">•</span><span>{article.readTime}</span><span aria-hidden="true">•</span><span>{article.author.name}</span></div>
           </div>
 
-          <div className="relative mt-12 aspect-[16/8] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl ring-1 ring-black/5 reveal">
-            {article.coverMedia ? <Image src={article.coverMedia.url} alt={article.coverMedia.altText || article.title} fill sizes="(max-width: 1280px) 100vw, 1280px" unoptimized={article.coverMedia.mimeType === "image/svg+xml"} className="object-cover" /> : <div className="flex h-full items-center justify-center text-sm font-black text-[#006b3f]/40">Gambar cover tidak tersedia</div>}
-          </div>
+          {article.coverMedia ? <div className="relative mt-12 aspect-[16/8] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl ring-1 ring-black/5 reveal">
+            <Image src={article.coverMedia.url} alt={article.coverMedia.altText || article.title} fill sizes="(max-width: 1280px) 100vw, 1280px" unoptimized={article.coverMedia.mimeType === "image/svg+xml"} className="object-cover" />
+          </div> : null}
 
           <div className="mt-12">
             <article className="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-black/5 md:p-12">
-              <div className="rounded-[2rem] bg-[#f4fbf8] p-7"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">Ringkasan Artikel</p><p className="mt-4 text-base font-medium leading-8 text-[#475569]">{article.excerpt}</p>{article.keyPoints?.length ? <ul className="mt-5 space-y-4">{article.keyPoints.map((item) => <li key={item} className="flex gap-3 text-sm font-bold leading-7 text-[#334155]"><span aria-hidden="true" className="text-[#006b3f]">✓</span>{item}</li>)}</ul> : null}</div>
+              {article.keyPoints?.length ? <div className="rounded-[2rem] bg-[#f4fbf8] p-7"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#006b3f]">Poin Penting</p><ul className="mt-5 space-y-4">{article.keyPoints.map((item) => <li key={item} className="flex gap-3 text-sm font-bold leading-7 text-[#334155]"><span aria-hidden="true" className="text-[#006b3f]">✓</span>{item}</li>)}</ul></div> : null}
               {article.relatedProducts?.length ? <ArticleProductRecommendation products={article.relatedProducts} /> : null}
               <div className="mt-12"><ArticleContentRenderer content={article.contentJson} /></div>
               {article.tags.length ? <div className="mt-12 flex flex-wrap gap-2 border-t border-black/5 pt-7">{article.tags.map((tag) => <span key={tag.id} className="rounded-full bg-[#e4f8ed] px-4 py-2 text-xs font-black text-[#006b3f]">#{tag.name}</span>)}</div> : null}
