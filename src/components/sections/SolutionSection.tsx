@@ -62,12 +62,12 @@ const solutions: Solution[] = [
   },
   {
     key: "pernafasan",
-    tab: "Pernapasan",
+    tab: "Pernafasan",
     icon: "lungs",
-    eyebrow: "Solusi Pernapasan",
-    title: "Solusi Nutrisi untuk Kesehatan Pernapasan",
+    eyebrow: "Solusi Pernafasan",
+    title: "Solusi Nutrisi untuk Kesehatan Pernafasan",
     description:
-      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
+      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
     image: "/images/mednut/solutions/front-facing/pulmosol.png",
     accent: "#1e3a8a",
     href: "/produk/pulmosol",
@@ -146,7 +146,7 @@ export function SolutionSection() {
                       <img
                         src={activeSolution.image}
                         alt={activeSolution.title}
-                        className="aspect-[1.28/1] w-full object-contain"
+                        className="h-auto w-full object-contain"
                       />
                     </div>
 
@@ -208,12 +208,12 @@ export function SolutionSection() {
           })}
         </div>
 
-        <div className="mt-8 hidden items-center gap-7 md:grid lg:mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
+        <div className="mt-8 hidden items-center gap-7 md:grid lg:mt-16 lg:grid-cols-[1.14fr_0.86fr] lg:gap-10">
           <div className="overflow-hidden rounded-[1.8rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 reveal-left reveal-delay-2 lg:rounded-[2.5rem]">
             <img
               src={activeSolution.image}
               alt={activeSolution.title}
-              className="aspect-[1.18/1] w-full object-contain transition duration-500"
+              className="h-auto w-full object-contain transition duration-500"
             />
           </div>
 

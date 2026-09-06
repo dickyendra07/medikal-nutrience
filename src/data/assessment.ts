@@ -144,7 +144,7 @@ export const assessmentQuestionList: AssessmentQuestion[] = [
       { label: "Stroke / Alzheimer", value: "stroke", icon: "medical", condition: "stroke", nextQuestion: "stroke-swallow" },
       { label: "Ginjal", value: "ginjal", icon: "kidney", condition: "ginjal", nextQuestion: "kidney-dialysis" },
       { label: "Hati / Liver", value: "hati", icon: "liver", condition: "hati", nextQuestion: "liver-severity" },
-      { label: "Pernapasan", value: "pernapasan", icon: "lung", condition: "pernapasan", nextQuestion: "respiratory-breath" },
+      { label: "Pernafasan", value: "pernapasan", icon: "lung", condition: "pernapasan", nextQuestion: "respiratory-breath" },
       { label: "Pencernaan", value: "pencernaan", icon: "digestive", condition: "pencernaan", nextQuestion: "digestive-recovery" },
     ],
   },
@@ -258,7 +258,7 @@ export const assessmentQuestionList: AssessmentQuestion[] = [
   },
   {
     id: "respiratory-breath",
-    eyebrow: "Kebutuhan Pernapasan",
+    eyebrow: "Kebutuhan Pernafasan",
     question: "Apakah Anda mudah merasa sesak atau lelah saat beraktivitas ringan?",
     answerLabel: "Kondisi aktivitas",
     answers: [
@@ -435,7 +435,7 @@ export const assessmentPurposeOptions = [
 export const healthConditions = [
   { label: "Ginjal", value: "ginjal", icon: "kidney", description: "Dukungan nutrisi untuk kebutuhan pasien dengan kondisi ginjal." },
   { label: "Hati / Liver", value: "hati", icon: "liver", description: "Dukungan nutrisi untuk membantu menjaga fungsi hati." },
-  { label: "Pernapasan", value: "pernapasan", icon: "lung", description: "Nutrisi pendukung untuk kebutuhan sistem pernapasan." },
+  { label: "Pernafasan", value: "pernapasan", icon: "lung", description: "Nutrisi pendukung untuk kebutuhan sistem pernafasan." },
   { label: "Pencernaan", value: "pencernaan", icon: "digestive", description: "Nutrisi yang lebih mudah diserap dan dicerna." },
 ];
 
@@ -447,7 +447,7 @@ export const healthTargetOptions = [
 export const assessmentQuestions: Record<string, { title: string; options: AssessmentOption[] }> = {
   ginjal: { title: "Apakah Anda sedang menjalani dialisis?", options: [{ label: "Ya, sedang menjalani dialisis", value: "dialysis" }, { label: "Tidak menjalani dialisis", value: "no-dialysis" }] },
   hati: { title: "Apa kebutuhan nutrisi Anda?", options: [{ label: "Menjaga kesehatan hati", value: "maintenance" }, { label: "Membutuhkan dukungan lebih spesifik", value: "specific" }] },
-  pernapasan: { title: "Apa kebutuhan nutrisi Anda saat ini?", options: [{ label: "Menjaga kesehatan pernapasan", value: "maintenance" }, { label: "Masa pemulihan", value: "recovery" }] },
+  pernapasan: { title: "Apa kebutuhan nutrisi Anda saat ini?", options: [{ label: "Menjaga kesehatan pernafasan", value: "maintenance" }, { label: "Masa pemulihan", value: "recovery" }] },
   pencernaan: { title: "Apa kebutuhan nutrisi Anda?", options: [{ label: "Nutrisi mudah dicerna", value: "easy" }, { label: "Pemulihan setelah tindakan medis", value: "recovery" }] },
   anak: { title: "Apa kebutuhan nutrisi anak saat ini?", options: [{ label: "Mendukung tumbuh kembang anak", value: "entrakid" }] },
   dewasa: { title: "Apa tujuan utama Anda?", options: [{ label: "Menjaga kesehatan harian", value: "entramix" }, { label: "Alternatif tanpa susu sapi", value: "entrasoy" }, { label: "Pemulihan setelah sakit", value: "peptisol" }] },

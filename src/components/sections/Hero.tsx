@@ -1,65 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import { stats } from "@/data/home";
 import { AssessmentModal } from "@/components/assessment/AssessmentModal";
-
-function parseStatValue(value: string) {
-  const numeric = Number(value.replace(/[^0-9]/g, ""));
-  const suffix = value.replace(/[0-9]/g, "");
-
-  return {
-    numeric: Number.isFinite(numeric) ? numeric : 0,
-    suffix,
-  };
-}
-
-function CountUpStat({ value }: { value: string }) {
-  const { numeric, suffix } = useMemo(() => parseStatValue(value), [value]);
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLParagraphElement | null>(null);
-  const hasAnimated = useRef(false);
-
-  useEffect(() => {
-    const target = ref.current;
-    if (!target) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || hasAnimated.current) return;
-
-        hasAnimated.current = true;
-        const duration = 1100;
-        const start = performance.now();
-
-        const animate = (time: number) => {
-          const progress = Math.min((time - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-
-          setCount(Math.round(numeric * eased));
-
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          }
-        };
-
-        requestAnimationFrame(animate);
-      },
-      { threshold: 0.35 }
-    );
-
-    observer.observe(target);
-
-    return () => observer.disconnect();
-  }, [numeric]);
-
-  return (
-    <p ref={ref} className="text-3xl font-black text-[#006b3f] md:text-4xl">
-      {count}
-      {suffix}
-    </p>
-  );
-}
 
 export function Hero() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
@@ -105,12 +48,14 @@ export function Hero() {
             <div className="mt-8 grid max-w-2xl grid-cols-3 gap-4">
               {stats.map((item) => (
                 <div
-                  key={item.label}
+                  key={item.title}
                   className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5"
                 >
-                  <CountUpStat value={item.value} />
-                  <p className="mt-1 text-xs font-semibold leading-5 text-[#64748b]">
-                    {item.label === "Kanal Resmi" ? "Apotek Resmi" : item.label}
+                  <p className="text-base font-black leading-tight text-[#111827] md:text-lg">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-xs font-medium leading-5 text-[#64748b]">
+                    {item.description}
                   </p>
                 </div>
               ))}
@@ -121,15 +66,6 @@ export function Hero() {
             <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b7f7d0] md:h-[680px] md:w-[680px]" />
             <div className="absolute right-[-90px] top-24 h-[360px] w-[360px] rounded-full bg-[#d8f6e8]" />
             <div className="absolute bottom-20 left-12 h-[180px] w-[180px] rounded-full bg-white/50" />
-
-            <div className="absolute bottom-10 right-0 z-0 hidden rounded-3xl bg-white/90 p-5 shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:block xl:right-2">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#006b3f]">
-                Partner
-              </p>
-              <p className="mt-2 text-sm font-black text-[#0f172a]">
-                50+ Apotek Resmi
-              </p>
-            </div>
 
             <div className="relative z-20 mx-auto flex min-h-[500px] max-w-[860px] items-center justify-center md:min-h-[680px]">
               <img

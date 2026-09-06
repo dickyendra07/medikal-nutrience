@@ -24,7 +24,7 @@ export type SolutionDetail = {
 export const solutionDetails: SolutionDetail[] = [
   {
     slug: "ginjal",
-    title: "Solusi Nutrisi untuk Kondisi Ginjal",
+    title: "Solusi Nutrisi untuk Penyakit Ginjal",
     shortTitle: "Ginjal",
     eyebrow: "Solusi Ginjal",
     description:
@@ -106,9 +106,9 @@ export const solutionDetails: SolutionDetail[] = [
   },
   {
     slug: "pernafasan",
-    title: "Solusi Nutrisi untuk Masalah Pernapasan",
-    shortTitle: "Pernapasan",
-    eyebrow: "Solusi Pernapasan",
+    title: "Solusi Nutrisi untuk Masalah Pernafasan",
+    shortTitle: "Pernafasan",
+    eyebrow: "Solusi Pernafasan",
     description:
       "Kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru dapat memengaruhi energi, nafsu makan, serta aktivitas harian.",
     problemTitle: "Kondisi yang Perlu Didukung",

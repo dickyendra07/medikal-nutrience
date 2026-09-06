@@ -182,7 +182,7 @@ const footerHrefMap: Record<string, string> = {
   Entrasoy: "/produk/entrasoy",
   Peptisol: "/produk/peptisol",
   Entramix: "/produk/entramix",
-  "Blog Edukasi": "/support-system/dapur-sehat-fima",
+  Artikel: "/artikel",
   "Kisah Sukses Pasien": "/support-system/kisah-sukses-pasien",
   "Dapur Sehat": "/support-system/dapur-sehat-fima",
   "Kalkulator Status Gizi": "/support-system/kalkulator-status-gizi",

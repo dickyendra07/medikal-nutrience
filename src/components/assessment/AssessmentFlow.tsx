@@ -23,6 +23,9 @@ type HistoryItem = {
   answer: AssessmentAnswer;
 };
 
+// Preserve the lead-capture implementation so it can be re-enabled later.
+const LEAD_CAPTURE_ENABLED = false;
+
 export function AssessmentFlow({
   initialFlowKey,
   onClose,
@@ -69,7 +72,14 @@ export function AssessmentFlow({
       const nextResult = getAssessmentResult(answer.resultId);
       if (!nextResult) return;
       setResult(nextResult);
-      setStep("lead");
+      setStep("loading");
+
+      if (LEAD_CAPTURE_ENABLED) {
+        setStep("lead");
+        return;
+      }
+
+      window.setTimeout(() => setStep("result"), 1200);
     }
   };
 

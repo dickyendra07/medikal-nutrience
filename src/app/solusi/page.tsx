@@ -43,9 +43,9 @@ function getSlugFromHref(href: string) {
 const featuredSolutions = [
   {
     title: "Hepatosol",
-    headline: "Butuh Kondisi Hati Perhatian Lebih?",
-    description: "Dukungan nutrisi lanjutan untuk kondisi hati kronik yang membutuhkan perhatian lebih intensif.",
-    image: "/images/solutions/home/hati-liver-hepatosol.png",
+    headline: "Nutrisi Fungsi Hati Ringan-Moderate",
+    description: "Dukungan nutrisi untuk kondisi hati umum atau kronik dengan dukungan formula nutrisi yang sesuai",
+    image: "/images/mednut/products/packshots/hepatosol-vanila-1.png",
     href: "/produk/hepatosol",
     color: "#dc2626",
     gradient: "from-[#c90000] via-[#e30613] to-[#ff2a2a]",
@@ -53,40 +53,40 @@ const featuredSolutions = [
   },
   {
     title: "Hepatosol Lola",
-    headline: "Nutrisi untuk Perawatan Hati Harian",
-    description: "Untuk kondisi hati umum atau kronik dengan dukungan formula nutrisi yang sesuai.",
-    image: "/images/mednut/products/page-assets/hepatosol-lola.png",
+    headline: "Nutrisi Fungsi Hati Berat",
+    description: "Dukungan nutrisi yang diformulasikan untuk membantu memenuhi kebutuhan nutrisi pasien dengan gangguan fungsi hati berat.",
+    image: "/images/mednut/products/packshots/hepatosol-lola-1.png",
     href: "/produk/hepatosol-lola",
     color: "#dc2626",
     gradient: "from-[#b80000] via-[#dc0000] to-[#f43f3f]",
     button: "Lihat Hepatosol Lola",
   },
   {
-    title: "Nephrisol",
+    title: "Nephrisol-D",
     headline: "Sudah Menjalani Dialisis?",
     description: "Jika Anda sedang menjalani cuci darah atau dialisis, kebutuhan nutrisi Anda berbeda.",
-    image: "/images/solutions/home/ginjal-nephrisol-d.jpeg",
-    href: "/produk/nephrisol",
+    image: "/images/mednut/products/packshots/nephrisol-d-cappucino-1.png",
+    href: "/produk/nephrisol-d",
     color: "#7e22ce",
     gradient: "from-[#8b00c9] via-[#8a00b8] to-[#3b005a]",
-    button: "Lihat Nephrisol",
+    button: "Lihat Nephrisol-D",
   },
   {
-    title: "Nephrisol-D",
+    title: "Nephrisol",
     headline: "Belum Menjalani Dialisis?",
     description: "Jika Anda masih dalam tahap awal gangguan ginjal, tersedia pilihan nutrisi yang sesuai.",
-    image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
-    href: "/produk/nephrisol-d",
+    image: "/images/mednut/products/packshots/nephrisol-cappucino-1.png",
+    href: "/produk/nephrisol",
     color: "#6b21a8",
     gradient: "from-[#7c1dbb] via-[#5b0ca8] to-[#2a0045]",
-    button: "Lihat Nephrisol-D",
+    button: "Lihat Nephrisol",
   },
   {
     title: "Peptibren",
     headline: "Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
     description:
       "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
-    image: "/images/mednut/products/page-assets/peptibren.jpeg",
+    image: "/images/mednut/products/packshots/peptibren-vanila-1.png",
     href: "/produk/peptibren",
     color: "#ca8a04",
     gradient: "from-[#9a6700] via-[#ca8a04] to-[#f2b705]",
@@ -94,10 +94,10 @@ const featuredSolutions = [
   },
   {
     title: "Pulmosol",
-    headline: "Solusi Nutrisi untuk Kesehatan Pernapasan",
+    headline: "Solusi Nutrisi untuk Kesehatan Pernafasan",
     description:
-      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
-    image: "/images/mednut/products/page-assets/pulmosol.jpeg",
+      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
+    image: "/images/mednut/products/packshots/pulmosol-1.png",
     href: "/produk/pulmosol",
     color: "#1e3a8a",
     gradient: "from-[#0f245f] via-[#1e3a8a] to-[#3157b7]",
@@ -108,7 +108,7 @@ const featuredSolutions = [
     headline: "Nutrisi Cepat Serap untuk Pemulihan yang Lebih Optimal",
     description:
       "Nutrisi dengan protein dan lemak yang lebih cepat diserap tubuh untuk memelihara kesehatan saluran cerna.",
-    image: "/images/mednut/products/page-assets/oligo.jpeg",
+    image: "/images/mednut/products/packshots/oligo-1.png",
     href: "/produk/oligo",
     color: "#db2777",
     gradient: "from-[#9d174d] via-[#db2777] to-[#f472b6]",
@@ -154,7 +154,7 @@ const otherSolutions = [
 const focusList = [
   "Ginjal",
   "Hati / Liver",
-  "Pernapasan",
+  "Pernafasan",
   "Pencernaan",
   "Anak",
   "Dewasa & Lansia",
@@ -260,11 +260,11 @@ export default async function SolutionsPage() {
                     <div className="absolute right-[-70px] top-[-70px] h-52 w-52 rounded-full bg-white/15 blur-sm" />
                     <div className="absolute bottom-[-80px] left-[-70px] h-56 w-56 rounded-full bg-black/15 blur-sm" />
 
-                    <div className="relative z-10 h-[220px] overflow-hidden bg-white/10">
+                    <div className="relative z-10 flex h-[240px] items-center justify-center overflow-hidden bg-white/10 p-5">
                       <img
                         src={solution.image}
                         alt={solution.title}
-                        className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-[1.05]"
+                        className="h-full w-full object-contain object-center drop-shadow-2xl transition duration-500 group-hover:scale-[1.05]"
                       />
                     </div>
 

@@ -85,7 +85,7 @@ const medicalProducts = [
     name: "Nephrisol",
     category: "Ginjal",
     description:
-      "Dukungan nutrisi untuk kondisi ginjal kronik tahap pra-dialisis.",
+      "Dukungan nutrisi untuk penyakit ginjal kronik tahap pre-dialisis",
     logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
     image: "/images/mednut/products/page-assets/nephrisol.jpeg",
     href: "/produk/nephrisol",
@@ -95,7 +95,7 @@ const medicalProducts = [
     name: "Nephrisol-D",
     category: "Ginjal",
     description:
-      "Dukungan nutrisi untuk kondisi ginjal kronik dengan terapi dialisis.",
+      "Dukungan nutrisi untuk penyakit ginjal kronik tahap dialisis",
     logo: mednutAssets.productLogos.nephrisolD,
     image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
     href: "/produk/nephrisol-d",
@@ -105,7 +105,7 @@ const medicalProducts = [
     name: "Hepatosol",
     category: "Hati / Liver",
     description:
-      "Dukungan nutrisi untuk kebutuhan pada gangguan fungsi hati.",
+      "Dukungan nutrisi untuk kebutuhan pada fungsi hati ringan/moderat",
     logo: mednutAssets.productLogos.hepatosol,
     image: "/images/mednut/products/page-assets/hepatosol.png",
     href: "/produk/hepatosol",
@@ -115,7 +115,7 @@ const medicalProducts = [
     name: "Hepatosol Lola",
     category: "Hati / Liver",
     description:
-      "Nutrisi khusus untuk mendukung kebutuhan kondisi hati tertentu.",
+      "Dukungan nutrisi untuk kebutuhan pada fungsi hati berat",
     logo: mednutAssets.productLogos.hepatosolLola,
     image: "/images/mednut/products/page-assets/hepatosol-lola.png",
     href: "/produk/hepatosol-lola",
@@ -123,7 +123,7 @@ const medicalProducts = [
   },
   {
     name: "Pulmosol",
-    category: "Pernapasan",
+    category: "Pernafasan",
     description:
       "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernafasan.",
     logo: mednutAssets.productLogos.pulmosol,
@@ -135,7 +135,7 @@ const medicalProducts = [
     name: "Oligo",
     category: "Pencernaan",
     description:
-      "Nutrisi untuk mendukung kebutuhan pada kondisi saluran cerna.",
+      "Solusi Spesifik Cepat Serap untuk Sistem Saluran Cerna",
     logo: mednutAssets.productLogos.oligo,
     image: "/images/mednut/products/page-assets/oligo.jpeg",
     href: "/produk/oligo",
@@ -145,9 +145,9 @@ const medicalProducts = [
     name: "Peptibren",
     category: "Sistem Saraf",
     description:
-      "Dukungan nutrisi untuk kebutuhan khusus seperti stroke dan Alzheimer.",
+      "Nutrisi khusus untuk mendukung kesehatan gangguan neurologis (stroke, Alhzemier)",
     logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
-    image: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN VANILA 1.png",
+    image: "/images/mednut/products/page-assets/peptibren.jpeg",
     href: "/produk/peptibren",
     color: "#ca8a04",
   },
@@ -157,7 +157,7 @@ const categories = [
   "Nutrisi Keluarga",
   "Ginjal",
   "Hati / Liver",
-  "Pernapasan",
+  "Pernafasan",
   "Pencernaan",
   "Sistem Saraf",
 ];
@@ -184,9 +184,9 @@ export default async function ProductsPage() {
 
     return {
       ...product,
-      name: draft?.name ?? product.name,
-      category: draft?.category ?? product.category,
-      description: draft?.description ?? product.description,
+      name: product.name,
+      category: product.category,
+      description: product.description,
       href: `/produk/${draft?.slug ?? slug}`,
     };
   });
@@ -328,14 +328,14 @@ export default async function ProductsPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-10 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
               {medicalProductRows.map((product) => (
                 <a
                   key={product.name}
                   href={product.href}
-                  className="group reveal overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
+                  className="group reveal flex h-full flex-col overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-900/10"
                 >
-                  <div className="grid grid-cols-[0.82fr_1.18fr] items-center gap-4 p-5">
+                  <div className="grid flex-1 grid-cols-[0.82fr_1.18fr] items-center gap-4 p-5">
                     <div className="overflow-hidden rounded-[1.5rem] bg-[#f4fbf8]">
                       <img
                         src={product.image}
@@ -345,11 +345,11 @@ export default async function ProductsPage() {
                     </div>
 
                     <div>
-                      <div className="flex h-12 items-center">
+                      <div className="flex h-14 items-center">
                         <img
                           src={product.logo}
                           alt={`${product.name} logo`}
-                          className="max-h-12 w-auto max-w-[220px] object-contain"
+                          className="max-h-11 w-auto max-w-full object-contain object-left"
                         />
                       </div>
 
@@ -360,7 +360,7 @@ export default async function ProductsPage() {
                         {product.category}
                       </p>
 
-                      <p className="mt-3 text-sm font-medium leading-6 text-[#6b7280]">
+                      <p className="mt-3 min-h-[72px] text-sm font-medium leading-6 text-[#6b7280]">
                         {product.description}
                       </p>
                     </div>
@@ -406,10 +406,10 @@ export default async function ProductsPage() {
 
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <a
-                    href="/apotek-resmi"
+                    href="/assessment"
                     className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
                   >
-                    Apotek Resmi
+                    Assessment
                   </a>
                 </div>
               </div>

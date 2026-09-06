@@ -6,11 +6,11 @@ export const mednutAssets = {
   },
 
   home: {
-    heroFamilyNutrition: "/images/mednut/home/hero-family-nutrition.png",
-    productEntrakid: "/images/mednut/home/product-entrakid.png",
-    productEntramix: "/images/mednut/home/product-entramix.png",
-    productEntrasoy: "/images/mednut/home/product-entrasoy.png",
-    productPeptisol: "/images/mednut/home/product-peptisol.png",
+    heroFamilyNutrition: "/images/client-assets/img/img home/buat di home.png",
+    productEntrakid: "/images/client-assets/img/img home/Entrakid.png",
+    productEntramix: "/images/client-assets/img/img home/Entramix.png",
+    productEntrasoy: "/images/client-assets/img/img home/Entrasoy.png",
+    productPeptisol: "/images/client-assets/img/img home/Peptisol.png",
   },
 
   solutions: {
@@ -66,7 +66,6 @@ export const mednutAssets = {
 
   productIcons: {
     entrakid: [
-      "/images/mednut/products/icons/entrakid/dual-protein-source.svg",
       "/images/mednut/products/icons/entrakid/serat-pangan-inulin.svg",
       "/images/mednut/products/icons/entrakid/dha-omega-3.svg",
       "/images/mednut/products/icons/entrakid/vitamin-mineral.svg",

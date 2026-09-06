@@ -83,7 +83,7 @@ const megaMenus = {
       { label: "Peptibren", href: "/produk/peptibren", desc: "Nutrisi Kesehatan Syaraf" },
       { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal" },
       { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati" },
-      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Nutrisi Kesehatan Pernapasan" },
+      { label: "Pulmosol", href: "/produk/pulmosol", desc: "Nutrisi Kesehatan Pernafasan" },
       { label: "Oligo", href: "/produk/oligo", desc: "Nutrisi Cepat Serap" },
     ],
   },
@@ -95,7 +95,7 @@ const megaMenus = {
     items: [
       { label: "Ginjal", href: "/solusi/ginjal", desc: "Dukungan Nutrisi Ginjal" },
       { label: "Hati / Liver", href: "/solusi/hati-liver", desc: "Dukungan fungsi hati" },
-      { label: "Pernapasan", href: "/solusi/pernafasan", desc: "Dukungan Nutrisi Pernapasan" },
+      { label: "Pernafasan", href: "/solusi/pernafasan", desc: "Dukungan Nutrisi Pernafasan" },
       { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan Cepat Serap" },
       { label: "Sistem Saraf", href: "/produk/peptibren", desc: "Dukungan Nutrisi Kesehatan Syaraf" },
     ],

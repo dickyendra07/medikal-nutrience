@@ -81,7 +81,6 @@ export const productDetails: ProductDetail[] = [
     ],
     benefitTitle: "Entrakid: Rahasia Si Kecil Tumbuh Kembang Optimal dan Cerdas",
     benefits: [
-      "Dual Protein Source",
       "Serat Pangan Inulin",
       "DHA & Omega 3",
       "11 Vitamin & 6 Mineral",
@@ -166,7 +165,7 @@ export const productDetails: ProductDetail[] = [
     category: "Hati / Liver",
     heroTitle: "Solusi Nutrisi Gangguan Fungsi Hati Berat",
     description:
-      "Hepatosol Lola adalah nutrisi enteral lengkap yang diformulasikan untuk membantu memenuhi kebutuhan nutrisi pasien dengan gangguan fungsi hati berat.",
+      "Dukungan nutrisi untuk kebutuhan gangguan fungsi hati berat",
     theme: {
       primary: "#ef1f2d",
       soft: "#fff1f2",
@@ -175,8 +174,7 @@ export const productDetails: ProductDetail[] = [
     },
     needTitle: "Siapa yang Membutuhkan Hepatosol Lola?",
     needs: [
-      { title: "Pasien Hepatitis Kronik" },
-      { title: "Gangguan Fungsi Hati" },
+      { title: "Gangguan Fungsi Hati Berat" },
       { title: "Penurunan Nafsu Makan" },
     ],
     benefitTitle: "Keunggulan Utama Hepatosol Lola",
@@ -184,7 +182,7 @@ export const productDetails: ProductDetail[] = [
       "Tinggi Kalori",
       "Sumber Lemak MCT",
       "Diperkaya BCAA & LOLA",
-      "Densitas Kalori 1,1 Kkal/ml",
+      "Densitas Kalori 1,1 Kkal/mL",
     ],
     ctaLabel: "Beli Sekarang",
     crossSell: {
@@ -203,7 +201,7 @@ export const productDetails: ProductDetail[] = [
     category: "Hati / Liver",
     heroTitle: "Solusi Nutrisi Gangguan Fungsi Hati Ringan-Moderate",
     description:
-      "Hepatosol adalah nutrisi khusus yang diformulasikan untuk membantu memenuhi kebutuhan nutrisi pasien dengan gangguan fungsi hati ringan hingga moderate, termasuk kondisi hepatitis kronik, sirosis hati, dan penurunan nafsu makan.",
+      "Dukungan nutrisi untuk kebutuhan gangguan fungsi hati ringan/moderat",
     theme: {
       primary: "#ef1f2d",
       soft: "#fff1f2",
@@ -397,10 +395,10 @@ export const productDetails: ProductDetail[] = [
   {
     slug: "pulmosol",
     name: "PULMOSOL",
-    category: "Pernapasan",
-    heroTitle: "Solusi Gizi Masalah Pernapasan PPOK, Asma, Pneumonia, dan TB Paru",
+    category: "Pernafasan",
+    heroTitle: "Solusi Gizi Masalah Pernafasan PPOK, Asma, Pneumonia, dan TB Paru",
     description:
-      "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernapasan.",
+      "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernafasan.",
     theme: {
       primary: "#1e3a8a",
       soft: "#eff6ff",
@@ -430,7 +428,7 @@ export const productDetails: ProductDetail[] = [
       "Sumber Vitamin, Mineral, Antioksidan",
     ],
     ctaLabel: "Beli Sekarang",
-    closingTitle: "Solusi untuk Masalah Pernapasanmu",
+    closingTitle: "Solusi untuk Masalah Pernafasanmu",
     closingDescription:
       "Dapatkan rekomendasi nutrisi yang sesuai dengan kondisi Anda untuk membantu proses pemulihan lebih optimal.",
   },

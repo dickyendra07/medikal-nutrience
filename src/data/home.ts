@@ -29,7 +29,7 @@ export const solutionTabs = [
   "Ginjal",
   "Hati / Liver",
   "Sistem Saraf",
-  "Pernapasan",
+  "Pernafasan",
   "Pencernaan",
 ];
 
@@ -53,16 +53,16 @@ export const supports = [
 
 export const stats = [
   {
-    value: "6+",
-    label: "Kategori Produk",
+    title: "Beragam Pilihan",
+    description: "Produk nutrisi untuk berbagai kebutuhan",
   },
   {
-    value: "8+",
-    label: "Solusi Nutrisi",
+    title: "Info Terpercaya",
+    description: "Edukasi nutrisi yang mudah dipahami",
   },
   {
-    value: "50+",
-    label: "Apotek Resmi",
+    title: "Temukan Solusi",
+    description: "Pilih produk sesuai kebutuhan Anda",
   },
 ];
 
@@ -74,7 +74,7 @@ export const footerProducts = [
 ];
 
 export const footerSupport = [
-  "Blog Edukasi",
+  "Artikel",
   "Kisah Sukses Pasien",
   "Dapur Sehat",
 ];

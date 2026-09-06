@@ -910,10 +910,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Hepatosol LOLA merupakan nutrisi enteral yang lengkap untuk pasien dengan gangguan fungsi hati berat. Dengan kombinasi kandungan BCAA dan LOLA yang membantu menurunkan kadar amonia dalam darah, memperbaiki keseimbangan nitrogen dan rasio Fischer serta membantu menurunkan pemecahan protein sebagai sumber protein otot.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke dalam 250 ml air menghasilkan 303 ml larutan.",
+        "1 sachet dilarutkan ke dalam 250 mL air menghasilkan 303 mL larutan.",
 
       servingPer100ml:
-        "27 gram serbuk ke 83 ml air.",
+        "27 gram serbuk ke 83 mL air.",
 
       flavors: [
         "Jeruk",
@@ -950,7 +950,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
 
     disclaimer: [
-      "* Persen AKG berdasarkan kebutuhan energi 2150 kkal.",
+      "* Persen AKG berdasarkan kebutuhan energi 2150 Kkal.",
       "** Middle Chain Triglycerides.",
     ],
 
@@ -972,8 +972,8 @@ export const productNutrition: Record<string, ProductNutrition> = {
       "Formula nutrisi klinis spesifik untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati berat.",
 
     nutrition: [
-      { name: "Energi Total", value: "410", unit: "kkal" },
-      { name: "Energi dari Lemak", value: "70", unit: "kkal" },
+      { name: "Energi Total", value: "410", unit: "Kkal" },
+      { name: "Energi dari Lemak", value: "70", unit: "Kkal" },
       { name: "Lemak Total", value: "7", unit: "g", percentage: "7%" },
       { name: "Protein", value: "16", unit: "g" },
       { name: "Karbohidrat Total", value: "71", unit: "g", percentage: "16%" },
@@ -1179,7 +1179,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     productInformation: {
       background:
-        "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernapasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
+        "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernafasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
 
       servingInstruction:
         "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 240 ml larutan.",
@@ -1265,7 +1265,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       "Keunggulan Utama Pulmosol",
 
     highlightSubtitle:
-      "Formula nutrisi khusus untuk mendukung kebutuhan pasien dengan gangguan pernapasan.",
+      "Formula nutrisi khusus untuk mendukung kebutuhan pasien dengan gangguan pernafasan.",
 
     highlights: [
       {

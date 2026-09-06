@@ -40,7 +40,7 @@ const pillars = [
 const focuses = [
   "Ginjal",
   "Hati / Liver",
-  "Pernapasan",
+  "Pernafasan",
   "Pencernaan",
   "Anak",
   "Dewasa & Lansia",
@@ -284,12 +284,6 @@ export default function AboutPage() {
                   >
                     Lihat Produk
                   </Link>
-                  <a
-                    href="/apotek-resmi"
-                    className="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-4 text-sm font-black text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20"
-                  >
-                    Lihat Apotek
-                  </a>
                 </div>
               </div>
             </div>

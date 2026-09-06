@@ -1,24 +1,26 @@
+import { mednutAssets } from "@/data/mednut-assets";
+
 const products = [
   {
     name: "ENTRASOY",
     href: "/produk/entrasoy",
-    image: "/images/mednut/home/product-entrasoy.png",
+    image: mednutAssets.home.productEntrasoy,
   },
   {
     name: "ENTRAMIX",
     href: "/produk/entramix",
-    image: "/images/mednut/home/product-entramix.png",
+    image: mednutAssets.home.productEntramix,
   },
   {
     name: "PEPTISOL",
     href: "/produk/peptisol",
-    image: "/images/mednut/home/product-peptisol.png",
+    image: mednutAssets.home.productPeptisol,
     descriptor: "Tinggi Protein & Zinc",
   },
   {
     name: "ENTRAKID",
     href: "/produk/entrakid",
-    image: "/images/mednut/home/product-entrakid.png",
+    image: mednutAssets.home.productEntrakid,
   },
 ];
 

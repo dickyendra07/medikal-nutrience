@@ -36,7 +36,7 @@ const faqs = [
   {
     question: "Bagaimana jika saya memiliki kondisi kesehatan tertentu?",
     answer:
-      "Medikal Nutrience menyediakan produk nutrisi untuk berbagai kebutuhan seperti ginjal, hati, stroke, pernapasan, pencernaan, pemulihan setelah sakit atau operasi, serta tumbuh kembang anak. Gunakan fitur Nutrition Finder atau konsultasikan dengan tenaga kesehatan untuk membantu menentukan pilihan yang sesuai.",
+      "Medikal Nutrience menyediakan produk nutrisi untuk berbagai kebutuhan seperti ginjal, hati, stroke, pernafasan, pencernaan, pemulihan setelah sakit atau operasi, serta tumbuh kembang anak. Gunakan fitur Nutrition Finder atau konsultasikan dengan tenaga kesehatan untuk membantu menentukan pilihan yang sesuai.",
   },
   {
     question: "Apakah saya bisa mengunduh brosur atau materi edukasi?",

@@ -87,7 +87,7 @@ export const faqs: FaqItem[] = [
     category:"Kondisi Kesehatan",
     question:"Bagaimana jika saya memiliki kondisi kesehatan tertentu?",
     answer:
-      "Medical Nutrience menyediakan produk nutrisi untuk berbagai kebutuhan seperti ginjal, hati, pernapasan, pencernaan, pemulihan setelah sakit atau operasi, serta tumbuh kembang anak."
+      "Medical Nutrience menyediakan produk nutrisi untuk berbagai kebutuhan seperti ginjal, hati, pernafasan, pencernaan, pemulihan setelah sakit atau operasi, serta tumbuh kembang anak."
   },
 
 
