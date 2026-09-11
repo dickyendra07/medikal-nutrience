@@ -3,10 +3,10 @@ import { WhyEntrakidSection } from "@/components/pages/product-detail/WhyEntraki
 import { mednutAssets } from "@/data/mednut-assets";
 import { productNutrition } from "@/data/product-nutrition";
 import { productConfig } from "@/data/product-config";
-import { getPurchaseUrl } from "@/data/purchase-urls";
 import { ProductNutritionFacts } from "@/components/pages/product-detail/ProductNutritionFacts";
 import { ProductClinicalNutritionFacts } from "@/components/pages/product-detail/ProductClinicalNutritionFacts";
 import { ProductInformationSection } from "@/components/pages/product-detail/ProductInformationSection";
+import { PurchaseButton } from "@/components/pages/product-detail/PurchaseButton";
 import {
   getProductAsset,
   ProductVisual,
@@ -49,7 +49,6 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
   const asset = getProductAsset(product);
   const benefitIcons = getBenefitIcons(product);
   const config = productConfig[product.slug];
-  const purchaseUrl = getPurchaseUrl(product.slug);
 
   return (
     <>
@@ -91,16 +90,13 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={purchaseUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <PurchaseButton
+                productName={product.name}
+                productSlug={product.slug}
                 className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black text-white shadow-xl transition hover:-translate-y-0.5"
                 style={{ backgroundColor: product.theme.primary }}
-              >
-                Beli Sekarang
-                <span>→</span>
-              </a>
+                showArrow
+              />
             </div>
           </div>
 
@@ -305,15 +301,12 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
             </div>
 
             <div>
-              <a
-                href={purchaseUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <PurchaseButton
+                productName={product.name}
+                productSlug={product.slug}
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-black transition hover:-translate-y-0.5"
                 style={{ color: product.theme.primary }}
-              >
-                Beli Sekarang
-              </a>
+              />
             </div>
           </div>
         </section>
