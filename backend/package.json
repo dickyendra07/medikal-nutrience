@@ -33,10 +33,10 @@
     "cookie-parser": "1.4.7",
     "dotenv": "17.4.2",
     "helmet": "8.1.0",
-    "multer": "2.2.0",
+    "multer": "2.3.0",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
-    "sharp": "0.35.3"
+    "sharp": "0.35.4"
   },
   "devDependencies": {
     "@nestjs/cli": "11.0.21",
@@ -55,7 +55,10 @@
     "typescript": "5.9.3"
   },
   "overrides": {
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "multer": "$multer",
+    "qs": "6.16.0",
+    "deepmerge-ts": "8.0.1"
   },
   "jest": {
     "moduleFileExtensions": [
