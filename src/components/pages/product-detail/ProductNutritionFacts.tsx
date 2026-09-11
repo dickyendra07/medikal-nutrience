@@ -1,3 +1,4 @@
+import { NutritionTable } from "@/components/pages/product-detail/NutritionTable";
 import type { ProductNutrition } from "@/data/product-nutrition";
 import { NutritionHighlights } from "@/components/pages/product-detail/NutritionHighlights";
 import { ProductVariantSwitcher } from "@/components/pages/product-detail/ProductVariantSwitcher";
@@ -57,7 +58,7 @@ export function ProductNutritionFacts({
 
 
 
-                <h2 className="mt-6 max-w-3xl text-4xl font-black leading-tight text-[#111827] md:text-6xl">
+                <h2 className="mt-6 max-w-3xl break-words text-3xl font-black leading-tight text-[#111827] sm:text-4xl md:text-6xl">
 
                   Nutrition Facts
 
@@ -68,7 +69,7 @@ export function ProductNutritionFacts({
                       color,
                     }}
                   >
-                    Entrakid
+                    {data.displayName}
                   </span>
 
                 </h2>
@@ -77,9 +78,7 @@ export function ProductNutritionFacts({
 
                 <p className="mt-5 max-w-xl text-sm font-medium leading-7 text-[#6b7280] md:text-base">
 
-                  Formula nutrisi lengkap dengan kombinasi
-                  protein, vitamin, mineral, dan nutrisi penting
-                  untuk mendukung tumbuh kembang anak.
+                  {data.subtitle}
 
                 </p>
 
@@ -122,7 +121,7 @@ export function ProductNutritionFacts({
 
               {/* PACKSHOT */}
 
-              <ProductVariantSwitcher color={color} />
+              <ProductVariantSwitcher color={color} variants={data.variants} />
 
 
             </div>
@@ -137,7 +136,7 @@ export function ProductNutritionFacts({
           {/* TABLE */}
 
 
-          <div className="grid gap-8 p-8 md:p-12 lg:grid-cols-2">
+          <div className="grid gap-8 p-3 sm:p-8 md:p-12 lg:grid-cols-2">
 
 
             <NutritionTable
@@ -155,18 +154,18 @@ export function ProductNutritionFacts({
             />
 
 
-          </div>
-
-
-
-
-          <div className="px-8 pb-10 text-center text-xs font-medium leading-6 text-[#6b7280] md:px-12">
-
-            * Persen AKG berdasarkan kebutuhan energi 2150 kkal.
-            <br />
-            ** Middle Chain Triglycerides.
+            {data.components && data.components.length > 0 ? (
+              <div className="min-w-0 lg:col-span-2">
+                <NutritionTable title="Zat Gizi Lainnya" items={data.components} color={color} />
+              </div>
+            ) : null}
 
           </div>
+
+
+
+
+
 
 
         </div>
@@ -180,97 +179,6 @@ export function ProductNutritionFacts({
       </div>
 
     </section>
-
-  );
-
-}
-
-
-
-
-
-function NutritionTable({
-  title,
-  items,
-  color,
-}: {
-  title: string;
-  items: ProductNutrition["nutrition"];
-  color: string;
-}) {
-
-
-  return (
-
-    <div className="overflow-hidden rounded-[2rem] bg-white shadow-lg ring-1 ring-black/5">
-
-
-      <div
-        className="px-6 py-5 text-base font-black text-white"
-        style={{
-          background:
-            `linear-gradient(90deg, ${color}, #25adc7)`
-        }}
-      >
-
-        {title}
-
-      </div>
-
-
-
-      <div className="divide-y divide-[#eef3f0] p-4">
-
-
-        {items.map((item) => (
-
-          <div
-            key={item.name}
-            className="
-              grid
-              grid-cols-[1fr_auto_auto]
-              items-center
-              gap-4
-              rounded-xl
-              px-3
-              py-3
-              transition
-              hover:bg-[#f4fbf8]
-            "
-          >
-
-
-            <span className="text-sm font-bold text-[#374151]">
-              {item.name}
-            </span>
-
-
-
-            <span className="text-sm font-black text-[#111827]">
-              {item.value} {item.unit}
-            </span>
-
-
-
-            <span
-              className="text-sm font-black"
-              style={{
-                color,
-              }}
-            >
-              {item.percentage ?? "-"}
-            </span>
-
-
-          </div>
-
-        ))}
-
-
-      </div>
-
-
-    </div>
 
   );
 

@@ -76,12 +76,12 @@ export function ProductInformationSection({
 
   const specifications = [
     {
-      title: "Cara Penyajian",
+      title: "Dosis & Cara Penyajian",
       value: info.servingInstruction,
       icon: "serving",
     },
     {
-      title: "Takaran Sajian",
+      title: "Penyajian 100 ml larutan",
       value: info.servingPer100ml,
       icon: "water",
     },

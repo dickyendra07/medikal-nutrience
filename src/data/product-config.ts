@@ -19,6 +19,7 @@ export const productConfig: Record<string, ProductConfig> = {
   },
 
   entrakid: {
+    productInformation: true,
     nutritionFacts: true,
     variants: true,
     nutritionType: "standard",
