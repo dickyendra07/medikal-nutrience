@@ -88,6 +88,7 @@ export function RecipeDetail({ recipe }: { recipe: FimaRecipe }) {
             {recipe.product ? (
               <Link
                 href={`/produk/${recipe.product.slug}`}
+                prefetch={false}
                 className="group flex min-h-64 flex-col overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#006b3f] via-[#087a4c] to-[#10b981] p-6 text-white shadow-2xl shadow-green-900/15 md:p-8"
               >
                 <p className="text-[11px] font-black uppercase tracking-[0.28em] text-white/70">

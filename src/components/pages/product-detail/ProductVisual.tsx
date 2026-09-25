@@ -1,5 +1,6 @@
 import type { ProductDetail } from "@/data/product-details";
 import { mednutAssets } from "@/data/mednut-assets";
+import { FramedLogo } from "@/components/shared/FramedLogo";
 
 const productAssets: Record<
   string,
@@ -89,24 +90,12 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
           className="rounded-[2rem] p-5 md:p-7"
           style={{ backgroundColor: product.theme.soft }}
         >
-          <div className="flex min-h-[72px] items-center justify-center rounded-[1.5rem] bg-white px-6 py-3 shadow-lg shadow-black/5">
+          <div className="flex min-h-[80px] items-center justify-center rounded-[1.5rem] bg-white px-6 py-3 shadow-lg shadow-black/5">
             {asset.logo ? (
-              <img
+              <FramedLogo
                 src={asset.logo}
                 alt={`${product.name} logo`}
-                className={`w-auto object-contain ${
-                  product.slug === "entrasoy"
-                    ? "max-h-40 max-w-[560px] scale-150"
-                    : product.slug === "entramix"
-                    ? "max-h-32 max-w-[460px] scale-125"
-                    : product.slug === "peptisol"
-                    ? "max-h-32 max-w-[460px] scale-125"
-                    : product.slug === "peptibren"
-                    ? "max-h-32 max-w-[460px] scale-125"
-                    : product.slug === "nephrisol"
-                    ? "max-h-32 max-w-[460px] scale-125"
-                    : "max-h-16 max-w-[320px]"
-                }`}
+                className="max-h-14 max-w-full"
               />
             ) : (
               <p
@@ -137,7 +126,7 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
               alt={product.name}
               className={`relative z-20 h-auto object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03] ${
                 product.slug === "entrasoy"
-                  ? "w-[95%] max-w-[520px] scale-110"
+                  ? "w-full max-w-[570px]"
                   : "w-[78%] max-w-[420px]"
               }`}
             />

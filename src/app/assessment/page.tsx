@@ -20,9 +20,9 @@ export default function AssessmentPage() {
         <div className="relative mx-auto grid w-full max-w-[1200px] overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-green-900/10 ring-1 ring-black/5 lg:grid-cols-[0.8fr_1.2fr]">
           <aside className="hidden bg-gradient-to-br from-[#004b34] via-[#006b3f] to-[#10b981] p-8 text-white lg:block lg:p-12">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-white/70">Assessment Nutrisi</p>
-            <h1 className="mt-6 text-4xl font-black leading-tight md:text-5xl">
+            <p className="mt-6 text-4xl font-black leading-tight md:text-5xl">
               Pertanyaan yang mengikuti kebutuhan Anda.
-            </h1>
+            </p>
             <p className="mt-5 max-w-md text-sm font-medium leading-7 text-white/80 md:text-base md:leading-8">
               Setiap pilihan membuka pertanyaan lanjutan yang berbeda agar hasil lebih relevan dengan tujuan, kondisi, dan kebutuhan Anda.
             </p>

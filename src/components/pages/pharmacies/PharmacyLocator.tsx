@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { pharmacies, type PharmacyPartner } from "@/data/pharmacies";
+import { FramedLogo } from "@/components/shared/FramedLogo";
 
 function shouldShowOfficialPartnerBadge(name: string) {
   const normalized = name.toLowerCase();
@@ -131,7 +132,9 @@ export function PharmacyLocator({
   }, [normalizedPartners, search, selectedArea]);
 
   const partnersWithLogo = normalizedPartners
-    .filter((partner) => partner.logo)
+    .filter((partner): partner is typeof partner & { logo: string } =>
+      Boolean(partner.logo),
+    )
     .slice(0, 12);
 
   return (
@@ -195,16 +198,16 @@ export function PharmacyLocator({
                 Apotek dan partner terpercaya.
               </h2>
 
-              <div className="mt-7 grid grid-cols-3 gap-3">
+              <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {partnersWithLogo.map((partner) => (
                   <div
                     key={partner.name}
                     className="flex aspect-[1.35] items-center justify-center rounded-2xl bg-[#f8fcfa] p-4 ring-1 ring-black/5"
                   >
-                    <img
+                    <FramedLogo
                       src={partner.logo}
                       alt={partner.name}
-                      className="max-h-12 w-auto max-w-full object-contain"
+                      className="max-h-10 max-w-full md:max-h-16"
                     />
                   </div>
                 ))}
@@ -230,10 +233,12 @@ export function PharmacyLocator({
               </p>
 
               <div className="mt-5">
-                <label className="text-sm font-black text-[#111827]">
+                <label htmlFor="pharmacy-search" className="text-sm font-black text-[#111827]">
                   Cari Apotek
                 </label>
                 <input
+                  id="pharmacy-search"
+                  type="search"
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Nama apotek atau kota"
@@ -242,10 +247,11 @@ export function PharmacyLocator({
               </div>
 
               <div className="mt-5">
-                <label className="text-sm font-black text-[#111827]">
+                <label htmlFor="pharmacy-area" className="text-sm font-black text-[#111827]">
                   Pilih Area
                 </label>
                 <select
+                  id="pharmacy-area"
                   value={selectedArea}
                   onChange={(event) => setSelectedArea(event.target.value)}
                   className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none transition focus:border-[#006b3f] focus:bg-white"
@@ -264,6 +270,7 @@ export function PharmacyLocator({
                     key={area}
                     type="button"
                     onClick={() => setSelectedArea(area)}
+                    aria-pressed={selectedArea === area}
                     className={`rounded-full px-4 py-2 text-xs font-black transition ${
                       selectedArea === area
                         ? "bg-[#006b3f] text-white"
@@ -304,10 +311,10 @@ export function PharmacyLocator({
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-[#f8fcfa] p-3 ring-1 ring-black/5">
                           {partner.logo ? (
-                            <img
+                            <FramedLogo
                               src={partner.logo}
                               alt={partner.name}
-                              className="max-h-12 w-auto max-w-full object-contain"
+                              className="max-h-12 max-w-full"
                             />
                           ) : (
                             <span className="text-xl font-black text-[#006b3f]">

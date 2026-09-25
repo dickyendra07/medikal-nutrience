@@ -7,6 +7,7 @@ import { ProductNutritionFacts } from "@/components/pages/product-detail/Product
 import { ProductClinicalNutritionFacts } from "@/components/pages/product-detail/ProductClinicalNutritionFacts";
 import { ProductInformationSection } from "@/components/pages/product-detail/ProductInformationSection";
 import { PurchaseButton } from "@/components/pages/product-detail/PurchaseButton";
+import { FramedLogo } from "@/components/shared/FramedLogo";
 import {
   getProductAsset,
   ProductVisual,
@@ -73,10 +74,10 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
 
             {asset.logo ? (
               <div className="mt-7 flex h-24 w-fit max-w-full items-center rounded-[1.5rem] bg-white px-7 py-5 shadow-xl shadow-slate-900/8 ring-1 ring-black/5">
-                <img
+                <FramedLogo
                   src={asset.logo}
                   alt={`${product.name} logo`}
-                  className="max-h-16 w-auto max-w-[340px] object-contain"
+                  className="max-h-14 max-w-[240px] sm:max-w-[340px]"
                 />
               </div>
             ) : null}

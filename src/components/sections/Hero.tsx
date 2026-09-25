@@ -14,7 +14,7 @@ export function Hero() {
         <div className="absolute right-[-260px] top-24 h-[620px] w-[620px] rounded-full bg-[#c7f5d4]" />
         <div className="absolute bottom-[-180px] left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-white/60" />
 
-        <div className="relative mx-auto grid min-h-[760px] w-full max-w-[1600px] items-center gap-10 px-5 py-14 md:grid-cols-[0.95fr_1.05fr] md:py-20 lg:px-12 xl:px-16">
+        <div className="relative mx-auto grid min-h-[760px] w-full max-w-[1600px] items-center gap-10 px-5 py-14 md:py-20 lg:grid-cols-[0.95fr_1.05fr] lg:px-12 xl:px-16">
           <div className="relative z-20 reveal-left">
             <h1 className="max-w-3xl bg-gradient-to-r from-[#004b34] via-[#007a4d] to-[#10b981] bg-clip-text text-[2.55rem] font-black leading-[1.02] tracking-tight text-transparent drop-shadow-sm md:text-7xl">
               Temukan nutrisi yang tepat untuk kondisi Anda
@@ -45,11 +45,11 @@ export function Hero() {
               </button>
             </div>
 
-            <div className="mt-8 grid max-w-2xl grid-cols-3 gap-4">
+            <div className="mt-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
               {stats.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl bg-white p-5 shadow-lg shadow-green-900/5 ring-1 ring-black/5"
+                  className="rounded-2xl bg-white p-4 shadow-lg shadow-green-900/5 ring-1 ring-black/5 sm:p-5"
                 >
                   <p className="text-base font-black leading-tight text-[#111827] md:text-lg">
                     {item.title}

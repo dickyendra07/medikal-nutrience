@@ -80,7 +80,7 @@ export function EventClientPage({
               </div>
 
               <a
-                href="#registration"
+                href="#registrasi-event"
                 className="mt-8 inline-flex rounded-full bg-[#006b3f] px-8 py-4 text-sm font-black text-white shadow-xl shadow-green-900/20 transition hover:-translate-y-1 hover:bg-[#005432]"
               >
                 Daftar Event Sekarang
@@ -190,13 +190,13 @@ export function EventClientPage({
 
             <form className="rounded-[2.5rem] bg-white p-6 shadow-2xl shadow-slate-900/8 ring-1 ring-black/5 md:p-8">
               <div className="grid gap-5 md:grid-cols-2">
-                <Field label="Nama Lengkap" placeholder="Tulis nama lengkap" />
-                <Field label="Email" placeholder="nama@email.com" type="email" />
-                <Field label="Nomor WhatsApp" placeholder="08xxxxxxxxxx" />
-                <div>
-                  <label className="mb-2 block text-sm font-black text-[#0f172a]">
+                <Field label="Nama Lengkap" placeholder="Tulis nama lengkap" autoComplete="name" />
+                <Field label="Email" placeholder="nama@email.com" type="email" autoComplete="email" />
+                <Field label="Nomor WhatsApp" placeholder="08xxxxxxxxxx" type="tel" autoComplete="tel" />
+                <label className="block">
+                  <span className="mb-2 block text-sm font-black text-[#0f172a]">
                     Sumber Informasi Event
-                  </label>
+                  </span>
                   <select className="w-full rounded-2xl border border-black/10 bg-[#f8fafc] px-5 py-4 text-sm font-bold text-[#334155] outline-none focus:border-[#006b3f]">
                     <option value="">Pilih sumber informasi</option>
                     {infoSources.map((source) => (
@@ -205,7 +205,7 @@ export function EventClientPage({
                       </option>
                     ))}
                   </select>
-                </div>
+                </label>
               </div>
 
               <div className="mt-7 rounded-[2rem] bg-[#f8fcfa] p-5 ring-1 ring-black/5">
@@ -289,21 +289,24 @@ function Field({
   label,
   placeholder,
   type = "text",
+  autoComplete,
 }: {
   label: string;
   placeholder: string;
   type?: string;
+  autoComplete?: string;
 }) {
   return (
-    <div>
-      <label className="mb-2 block text-sm font-black text-[#0f172a]">
+    <label className="block">
+      <span className="mb-2 block text-sm font-black text-[#0f172a]">
         {label}
-      </label>
+      </span>
       <input
         type={type}
+        autoComplete={autoComplete}
         placeholder={placeholder}
         className="w-full rounded-2xl border border-black/10 bg-[#f8fafc] px-5 py-4 text-sm font-bold text-[#334155] outline-none focus:border-[#006b3f]"
       />
-    </div>
+    </label>
   );
 }

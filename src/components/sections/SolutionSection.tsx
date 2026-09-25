@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Solution = {
   key: string;
@@ -90,6 +90,22 @@ const solutions: Solution[] = [
 
 export function SolutionSection() {
   const [activeKey, setActiveKey] = useState(solutions[0].key);
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const selectSolution = (key: string) => {
+    setActiveKey(key);
+
+    // On mobile the tabs are an accordion: collapsing the open panel above the
+    // tapped tab shifts it upward, often behind the sticky header.
+    window.requestAnimationFrame(() => {
+      const item = itemRefs.current[key];
+      if (!item || window.matchMedia("(min-width: 768px)").matches) return;
+
+      if (item.getBoundingClientRect().top < 96) {
+        item.scrollIntoView({ block: "start" });
+      }
+    });
+  };
 
   const activeSolution =
     solutions.find((solution) => solution.key === activeKey) ?? solutions[0];
@@ -118,7 +134,10 @@ export function SolutionSection() {
             return (
               <div
                 key={solution.key}
-                className={`relative overflow-hidden rounded-2xl border transition duration-300 md:overflow-visible ${
+                ref={(element) => {
+                  itemRefs.current[solution.key] = element;
+                }}
+                className={`relative scroll-mt-28 overflow-hidden rounded-2xl border transition duration-300 md:overflow-visible ${
                   isActive
                     ? "border-[#006b3f] bg-[#006b3f] text-white shadow-xl shadow-green-900/20"
                     : "border-black/10 bg-white text-[#005b3d] shadow-md shadow-slate-900/5 hover:border-[#006b3f]/30"
@@ -126,7 +145,7 @@ export function SolutionSection() {
               >
                 <button
                   type="button"
-                  onClick={() => setActiveKey(solution.key)}
+                  onClick={() => selectSolution(solution.key)}
                   className="relative flex min-h-[76px] w-full items-center gap-4 px-4 py-4 text-left md:min-h-[120px] md:flex-col md:justify-center md:gap-0 md:px-5 md:py-5 md:text-center"
                 >
                   <Icon type={solution.icon} active={isActive} />

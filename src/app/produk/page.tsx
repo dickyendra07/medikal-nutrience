@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { mednutAssets } from "@/data/mednut-assets";
+import { FramedLogo } from "@/components/shared/FramedLogo";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -346,10 +347,10 @@ export default async function ProductsPage() {
 
                     <div>
                       <div className="flex h-14 items-center">
-                        <img
+                        <FramedLogo
                           src={product.logo}
                           alt={`${product.name} logo`}
-                          className="max-h-11 w-auto max-w-full object-contain object-left"
+                          className="max-h-11 max-w-full"
                         />
                       </div>
 
@@ -438,10 +439,10 @@ function ProductBrand({
   if (logo) {
     return (
       <div className={`flex h-14 w-full items-center ${className}`}>
-        <img
+        <FramedLogo
           src={logo}
           alt={`${name} logo`}
-          className="max-h-11 w-auto max-w-[220px] object-contain object-left"
+          className="max-h-11 max-w-[220px]"
         />
       </div>
     );

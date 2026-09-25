@@ -11,7 +11,7 @@ export function BrandLogo({
     <img
       src="/images/mednut/brand/logo-medikal-nutrience.png"
       alt="Medikal Nutrience"
-      className={`${className} ${variant === "light" ? "brightness-0 invert" : ""}`}
+      className={`${className} object-contain object-left ${variant === "light" ? "brightness-0 invert" : ""}`}
     />
   );
 }

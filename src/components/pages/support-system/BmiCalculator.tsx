@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { mednutAssets } from "@/data/mednut-assets";
+import { FramedLogo } from "@/components/shared/FramedLogo";
 
 const conditionOptions = [
   { value: "general", label: "Kebutuhan umum / menjaga kesehatan" },
@@ -258,11 +259,11 @@ export function BmiCalculator() {
 
           <div className="mt-7 grid gap-4">
             <div>
-              <label className="text-sm font-black text-[#111827]">
+              <p id="bmi-gender" className="text-sm font-black text-[#111827]">
                 Jenis Kelamin
-              </label>
+              </p>
 
-              <div className="mt-3 grid grid-cols-2 gap-3">
+              <div role="group" aria-labelledby="bmi-gender" className="mt-3 grid grid-cols-2 gap-3">
                 {[
                   { value: "male", label: "Pria" },
                   { value: "female", label: "Wanita" },
@@ -271,6 +272,7 @@ export function BmiCalculator() {
                     key={item.value}
                     type="button"
                     onClick={() => setGender(item.value as Gender)}
+                    aria-pressed={gender === item.value}
                     className={`rounded-2xl px-4 py-4 text-sm font-black transition ${
                       gender === item.value
                         ? "bg-[#006b3f] text-white"
@@ -285,11 +287,13 @@ export function BmiCalculator() {
 
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
-                <label className="text-sm font-black text-[#111827]">
+                <label htmlFor="bmi-age" className="text-sm font-black text-[#111827]">
                   Usia
                 </label>
 
                 <input
+                  id="bmi-age"
+                  inputMode="decimal"
                   type="number"
                   min="1"
                   value={age}
@@ -299,11 +303,13 @@ export function BmiCalculator() {
               </div>
 
               <div>
-                <label className="text-sm font-black text-[#111827]">
+                <label htmlFor="bmi-height" className="text-sm font-black text-[#111827]">
                   Tinggi (cm)
                 </label>
 
                 <input
+                  id="bmi-height"
+                  inputMode="decimal"
                   type="number"
                   min="1"
                   value={height}
@@ -313,11 +319,13 @@ export function BmiCalculator() {
               </div>
 
               <div>
-                <label className="text-sm font-black text-[#111827]">
+                <label htmlFor="bmi-weight" className="text-sm font-black text-[#111827]">
                   Berat (kg)
                 </label>
 
                 <input
+                  id="bmi-weight"
+                  inputMode="decimal"
                   type="number"
                   min="1"
                   value={weight}
@@ -328,11 +336,12 @@ export function BmiCalculator() {
             </div>
 
             <div>
-              <label className="text-sm font-black text-[#111827]">
+              <label htmlFor="bmi-condition" className="text-sm font-black text-[#111827]">
                 Kebutuhan / Kondisi
               </label>
 
               <select
+                id="bmi-condition"
                 value={condition}
                 onChange={(event) => setCondition(event.target.value)}
                 className="mt-3 w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-bold text-[#111827] outline-none focus:border-[#006b3f] focus:bg-white"
@@ -456,10 +465,10 @@ export function BmiCalculator() {
 
                         <div>
                           {"logo" in product && product.logo ? (
-                            <img
+                            <FramedLogo
                               src={product.logo}
                               alt={`${product.name} logo`}
-                              className="max-h-12 w-auto max-w-[190px] object-contain"
+                              className="max-h-12 max-w-[190px]"
                             />
                           ) : (
                             <h3 className="text-2xl font-black text-[#006b3f]">

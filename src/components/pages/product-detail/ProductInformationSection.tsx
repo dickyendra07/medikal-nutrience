@@ -115,7 +115,7 @@ export function ProductInformationSection({
       <div className="mx-auto w-full max-w-[1440px]">
 
 
-        <div className="reveal rounded-[3.5rem] bg-[#f4fbf8] p-8 md:p-16 lg:p-20">
+        <div className="reveal rounded-[2.5rem] bg-[#f4fbf8] p-5 sm:p-8 md:rounded-[3.5rem] md:p-16 lg:p-20">
 
 
           <div className="mx-auto max-w-4xl text-center">
@@ -152,13 +152,13 @@ export function ProductInformationSection({
               </h3>
 
 
-              <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-10 flex flex-wrap justify-center gap-6">
 
                 {specifications.map((item, index) => (
 
                   <div
                     key={item.title}
-                    className={`reveal-delay-${Math.min(index + 1, 3)} rounded-[2rem] bg-white p-7 shadow-lg ring-1 ring-black/5 transition duration-300 hover:-translate-y-1`}
+                    className={`reveal-delay-${Math.min(index + 1, 3)} w-full rounded-[2rem] bg-white p-7 md:w-[calc(50%-0.75rem)] lg:w-[calc((100%-3rem)/3)] shadow-lg ring-1 ring-black/5 transition duration-300 hover:-translate-y-1`}
                   >
 
                     <div
@@ -208,13 +208,13 @@ export function ProductInformationSection({
               </h3>
 
 
-              <div className="mt-10 grid gap-8 md:grid-cols-2">
+              <div className="mt-10 flex flex-wrap justify-center gap-8">
 
                 {data.variants.map((variant, index) => (
 
                   <div
                     key={`${variant.name}-${index}`}
-                    className="reveal-scale rounded-[2.5rem] bg-white p-8 text-center shadow-xl ring-1 ring-black/5"
+                    className="reveal-scale w-full rounded-[2.5rem] bg-white p-8 text-center shadow-xl ring-1 ring-black/5 md:w-[calc(50%-1rem)]"
                   >
 
                     <div className="flex h-[320px] items-center justify-center">
@@ -252,7 +252,7 @@ export function ProductInformationSection({
 
           {info.composition ? (
 
-            <div className="mt-20 rounded-[2.5rem] bg-white p-8 shadow-xl ring-1 ring-black/5 md:p-12">
+            <div className="mt-20 rounded-[2.5rem] bg-white p-6 shadow-xl ring-1 ring-black/5 sm:p-8 md:p-12">
 
 
               <h3

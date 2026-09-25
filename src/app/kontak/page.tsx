@@ -147,17 +147,17 @@ export default function ContactPage() {
 
               <form className="mt-7 grid gap-4">
                 <div className="grid gap-4 md:grid-cols-2">
-                  <Field label="Nama Lengkap" placeholder="Masukkan nama lengkap" />
-                  <Field label="Nomor WhatsApp" placeholder="Contoh: 0812xxxxxxx" />
+                  <Field label="Nama Lengkap" placeholder="Masukkan nama lengkap" autoComplete="name" />
+                  <Field label="Nomor WhatsApp" placeholder="Contoh: 0812xxxxxxx" type="tel" autoComplete="tel" />
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <Field label="Email" placeholder="nama@email.com" />
+                  <Field label="Email" placeholder="nama@email.com" type="email" autoComplete="email" />
 
-                  <div>
-                    <label className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
                       Kebutuhan
-                    </label>
+                    </span>
                     <select className="h-[52px] w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-semibold text-[#111827] outline-none transition focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10">
                       <option>Pilih kebutuhan nutrisi</option>
                       <option>Ginjal</option>
@@ -168,19 +168,19 @@ export default function ContactPage() {
                       <option>Anak</option>
                       <option>Dewasa / Lansia</option>
                     </select>
-                  </div>
+                  </label>
                 </div>
 
-                <div>
-                  <label className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
+                <label className="block">
+                  <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
                     Pesan
-                  </label>
+                  </span>
                   <textarea
                     placeholder="Ceritakan kebutuhan atau pertanyaan Anda"
                     rows={5}
                     className="w-full resize-none rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 py-4 text-sm font-semibold text-[#111827] outline-none transition placeholder:text-[#9ca3af] focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10"
                   />
-                </div>
+                </label>
 
                 <button
                   type="button"
@@ -216,16 +216,28 @@ function InfoRow({ title, value }: { title: string; value: string }) {
   );
 }
 
-function Field({ label, placeholder }: { label: string; placeholder: string }) {
+function Field({
+  label,
+  placeholder,
+  type = "text",
+  autoComplete,
+}: {
+  label: string;
+  placeholder: string;
+  type?: string;
+  autoComplete?: string;
+}) {
   return (
-    <div>
-      <label className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
+    <label className="block">
+      <span className="mb-2 block text-xs font-black uppercase tracking-[0.2em] text-[#006b3f]">
         {label}
-      </label>
+      </span>
       <input
+        type={type}
+        autoComplete={autoComplete}
         placeholder={placeholder}
         className="h-[52px] w-full rounded-2xl border border-black/10 bg-[#f8fcfa] px-4 text-sm font-semibold text-[#111827] outline-none transition placeholder:text-[#9ca3af] focus:border-[#006b3f] focus:bg-white focus:ring-4 focus:ring-[#006b3f]/10"
       />
-    </div>
+    </label>
   );
 }

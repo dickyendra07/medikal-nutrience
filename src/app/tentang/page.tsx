@@ -97,6 +97,7 @@ export default function AboutPage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/produk"
+                  prefetch={false}
                   className="inline-flex items-center justify-center gap-3 rounded-full bg-[#006b3f] px-6 py-4 text-sm font-black text-white shadow-xl shadow-green-900/15 transition hover:-translate-y-0.5 hover:bg-[#005635]"
                 >
                   Lihat Produk
@@ -105,6 +106,7 @@ export default function AboutPage() {
 
                 <Link
                   href="/solusi"
+                  prefetch={false}
                   className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f] shadow-xl shadow-green-900/8 ring-1 ring-black/5 transition hover:-translate-y-0.5"
                 >
                   Jelajahi Solusi
@@ -280,6 +282,7 @@ export default function AboutPage() {
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Link
                     href="/produk"
+                    prefetch={false}
                     className="inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-black text-[#006b3f] transition hover:-translate-y-0.5"
                   >
                     Lihat Produk

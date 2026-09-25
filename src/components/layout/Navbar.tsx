@@ -219,6 +219,8 @@ export function Navbar() {
           onClick={() => setIsOpen((value) => !value)}
           className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white text-[#006b3f] shadow-sm lg:hidden"
           aria-label="Toggle menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
           <span className="relative h-4 w-5">
             <span
@@ -301,7 +303,10 @@ export function Navbar() {
       ) : null}
 
       {isOpen ? (
-        <div className="border-t border-black/5 bg-white px-5 py-5 shadow-2xl shadow-slate-900/10 lg:hidden">
+        <div
+          id="mobile-navigation"
+          className="border-t border-black/5 bg-white px-5 py-5 shadow-2xl shadow-slate-900/10 lg:hidden"
+        >
           <div className="mx-auto flex max-w-[1440px] flex-col gap-2">
             {menuItems.map((item) => {
               const active = isActivePath(pathname, item.href);

@@ -1,5 +1,6 @@
 import type { SolutionDetail } from "@/data/solutions";
 import { mednutAssets } from "@/data/mednut-assets";
+import { FramedLogo } from "@/components/shared/FramedLogo";
 
 const solutionAssets: Record<
   string,
@@ -291,10 +292,10 @@ export function SolutionDetailTemplate({
 
                     <div className="relative z-10 flex min-h-[80px] items-center justify-center rounded-[1.5rem] bg-white px-5 py-4 shadow-lg shadow-black/5">
                       {productVisual.logo ? (
-                        <img
+                        <FramedLogo
                           src={productVisual.logo}
                           alt={`${product.name} logo`}
-                          className="max-h-16 w-auto max-w-[260px] object-contain"
+                          className="max-h-12 max-w-full"
                         />
                       ) : (
                         <p

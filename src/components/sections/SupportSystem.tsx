@@ -42,17 +42,18 @@ export function SupportSystem() {
           </p>
         </div>
 
-        <div className="no-scrollbar mt-8 flex snap-x gap-4 overflow-x-auto pb-5 lg:mt-14 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-0">
+        <div className="reveal no-scrollbar mt-8 flex snap-x gap-4 overflow-x-auto pb-5 lg:mt-14 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-0">
           {supportItems.map((item) => (
             <a
               key={item.title}
               href={item.href}
-              className="group reveal min-w-[82%] snap-start overflow-hidden rounded-[1.8rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15 sm:min-w-[58%] lg:min-w-0 lg:rounded-[2.5rem] lg:shadow-2xl"
+              className="group min-w-[82%] snap-start overflow-hidden rounded-[1.8rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-green-900/15 sm:min-w-[58%] lg:min-w-0 lg:rounded-[2.5rem] lg:shadow-2xl"
             >
               <div className="relative overflow-hidden bg-[#eaf8f1] p-3 lg:p-5">
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                   className="aspect-[3025/1955] w-full rounded-[2rem] object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
               </div>

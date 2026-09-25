@@ -133,15 +133,14 @@ export default function SupportSystemPage() {
                   href={item.href}
                   className="group reveal overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-900/10"
                 >
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
+                      className="aspect-[3025/1955] w-full object-cover transition duration-500 group-hover:scale-[1.06]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
 
-                    <div className="absolute bottom-4 left-4 right-4">
+                    <div className="absolute left-4 right-4 top-4">
                       <span
                         className="inline-flex rounded-full px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] text-white"
                         style={{ backgroundColor: item.accent }}

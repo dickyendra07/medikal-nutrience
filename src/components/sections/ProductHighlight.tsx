@@ -53,14 +53,15 @@ export function ProductHighlight() {
               className="group reveal block overflow-hidden rounded-[1.4rem] bg-white/5 transition duration-300 hover:-translate-y-2 lg:rounded-[2rem]"
               aria-label={`Lihat produk ${product.name}`}
             >
-              <div className="relative">
+              <div className="@container relative">
                 <img
                   src={product.image}
                   alt={product.name}
+                  loading="lazy"
                   className="h-auto w-full rounded-[2rem] object-contain transition duration-500 group-hover:scale-[1.03]"
                 />
                 {product.descriptor ? (
-                  <span className="absolute bottom-0 left-0 flex h-[14%] w-[56%] items-center justify-center rounded-br-[1.4rem] bg-[#ff8f9d] px-1 text-center text-[clamp(0.58rem,1.15vw,1rem)] font-medium leading-tight text-white">
+                  <span className="absolute bottom-0 left-0 flex h-[14%] w-[56%] items-center justify-start whitespace-nowrap rounded-br-[1.4rem] bg-[#ff8f9d] pl-[9%] pr-1 text-left text-[4.2cqw] font-medium leading-tight text-white">
                     {product.descriptor}
                   </span>
                 ) : null}

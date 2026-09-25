@@ -478,7 +478,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         title: "Bebas Laktosa & Gluten",
         description: "Formula nutrisi untuk kebutuhan khusus pasien.",
-        icon: "/images/client-assets/icon/HEPATOSOL/NEW ICON/Bebas Laktosa & Gluten 2.svg",
+        icon: "/images/mednut/products/icons/hepatosol/bebas-laktosa-gluten.svg",
       },
       {
         title: "Diperkaya BCAA",
@@ -1185,7 +1185,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         description:
           "Mengandung zinc untuk membantu mendukung proses pemulihan luka.",
         icon:
-          "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Zinc (20% AKG).svg",
+          "/images/mednut/products/icons/peptisol/tinggi-zinc.svg",
       },
       {
         title: "Tinggi Protein",
@@ -1476,7 +1476,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         description:
           "Mengandung DHA dan Omega 3 untuk mendukung fungsi neurologis.",
         icon:
-          "/images/client-assets/icon/ENTRAKID/NEW ICON/DHA & Omega 3.svg",
+          "/images/mednut/products/icons/entrakid/dha-omega-3.svg",
       },
       {
         title: "Dual Protein Source",

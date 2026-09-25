@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { footerHelp, footerProducts, footerSupport } from "@/data/home";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
@@ -34,11 +34,22 @@ const instagramAccounts = [
 export function Footer() {
   const [isInstagramOpen, setIsInstagramOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isInstagramOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsInstagramOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isInstagramOpen]);
+
   return (
     <>
       <footer className="bg-[#004b34] px-5 pt-16 text-white">
-        <div className="mx-auto grid max-w-7xl gap-10 border-b border-white/10 pb-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
+        <div className="mx-auto grid max-w-7xl gap-10 border-b border-white/10 pb-14 sm:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="sm:col-span-3 lg:col-span-1">
             <div className="mb-5">
               <BrandLogo variant="light" />
             </div>
@@ -85,7 +96,7 @@ export function Footer() {
           </p>
 
           <div className="flex gap-6">
-            <a href="/kebijakan-privasi" className="transition hover:text-white">
+            <a href="/kebijakan-privasi" className="inline-flex py-2 transition hover:text-white">
               Kebijakan Privasi
             </a>
           </div>
@@ -101,13 +112,21 @@ export function Footer() {
             aria-label="Close Instagram popup"
           />
 
-          <div className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] bg-white p-6 shadow-2xl md:p-8">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="footer-instagram-title"
+            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] bg-white p-6 shadow-2xl md:p-8"
+          >
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.32em] text-[#006b3f]">
                   Instagram
                 </p>
-                <h2 className="mt-3 text-3xl font-black leading-tight text-[#111827] md:text-5xl">
+                <h2
+                  id="footer-instagram-title"
+                  className="mt-3 text-3xl font-black leading-tight text-[#111827] md:text-5xl"
+                >
                   Ikuti Kanal Edukasi Kami
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm font-medium leading-7 text-[#64748b]">
@@ -119,6 +138,7 @@ export function Footer() {
               <button
                 type="button"
                 onClick={() => setIsInstagramOpen(false)}
+                aria-label="Tutup"
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e4f8ed] text-xl font-black text-[#006b3f] transition hover:bg-[#006b3f] hover:text-white"
               >
                 ×
