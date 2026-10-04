@@ -1,0 +1,15 @@
+.git
+.env*
+node_modules
+dist
+coverage
+storage
+.DS_Store
+.idea
+.vscode
+*.log
+*.tsbuildinfo
+*.swp
+*.tmp
+README.md
+SPRINT-*-SUMMARY.md

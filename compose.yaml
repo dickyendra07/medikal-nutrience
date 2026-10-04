@@ -1,0 +1,67 @@
+# Local/staging example. Supply POSTGRES_PASSWORD and DATABASE_URL from the
+# deployment environment; DATABASE_URL must use the hostname "postgres".
+services:
+  postgres:
+    image: postgres:16-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mednut_cms}
+      POSTGRES_USER: ${POSTGRES_USER:-mednut_cms}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    image: mednut-backend:local
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL with host postgres}
+      FRONTEND_ORIGIN: ${PUBLIC_SITE_URL:-http://localhost:3000}
+      COOKIE_SECURE: "true"
+      COOKIE_SAME_SITE: strict
+      STORAGE_DRIVER: local
+      MEDIA_LOCAL_STORAGE_PATH: storage/media
+      MEDIA_PUBLIC_BASE_URL: ${PUBLIC_MEDIA_BASE_URL:-http://localhost:4000/uploads/media}
+    volumes:
+      - media_data:/app/storage/media
+    ports:
+      - "127.0.0.1:4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+    restart: unless-stopped
+
+  frontend:
+    image: mednut-frontend:local
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-http://localhost:3000}
+        NEXT_PUBLIC_MEDIA_BASE_URL: ${PUBLIC_MEDIA_BASE_URL:-http://localhost:4000/uploads/media}
+        NEXT_PUBLIC_CMS_API_URL: /api
+    environment:
+      CMS_INTERNAL_API_URL: http://backend:4000/api
+      CMS_STATIC_ARTICLE_FALLBACK: ${CMS_STATIC_ARTICLE_FALLBACK:-true}
+    volumes:
+      - cms_data:/app/src/data/cms
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  media_data:
+  cms_data:
