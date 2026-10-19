@@ -1,56 +1,15 @@
 import type { NextConfig } from "next";
 
-const isDevelopment = process.env.NODE_ENV === "development";
-const isHttpsDeployment =
-  process.env.VERCEL === "1" ||
-  process.env.NEXT_PUBLIC_SITE_URL?.startsWith("https://") === true;
-
 const mediaBaseUrl = new URL(
   process.env.NEXT_PUBLIC_MEDIA_BASE_URL ?? "http://localhost:4000/uploads/media",
 );
 const mediaPath = mediaBaseUrl.pathname.replace(/\/$/, "");
 
-function configuredOrigin(value: string | undefined) {
-  if (!value?.startsWith("http://") && !value?.startsWith("https://")) {
-    return null;
-  }
-
-  return new URL(value).origin;
-}
-
-const cmsApiOrigin = configuredOrigin(process.env.NEXT_PUBLIC_CMS_API_URL);
-const mediaOrigin = mediaBaseUrl.origin;
-const connectSources = [
-  "'self'",
-  ...(cmsApiOrigin ? [cmsApiOrigin] : []),
-  ...(isDevelopment ? ["ws://localhost:*", "ws://127.0.0.1:*"] : []),
-];
-const imageSources = [
-  "'self'",
-  "blob:",
-  "data:",
-  ...(process.env.NEXT_PUBLIC_MEDIA_BASE_URL || isDevelopment ? [mediaOrigin] : []),
-];
-
-const contentSecurityPolicy = [
-  "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}`,
-  "script-src-attr 'none'",
-  "style-src 'self' 'unsafe-inline'",
-  `img-src ${[...new Set(imageSources)].join(" ")}`,
-  "font-src 'self'",
-  `connect-src ${[...new Set(connectSources)].join(" ")}`,
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "frame-ancestors 'none'",
-  ...(isHttpsDeployment ? ["upgrade-insecure-requests"] : []),
-].join("; ");
-
+// Content-Security-Policy is set per request in src/proxy.ts (it needs a nonce).
 const securityHeaders = [
   {
-    key: "Content-Security-Policy",
-    value: contentSecurityPolicy,
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
   },
   {
     key: "X-Content-Type-Options",

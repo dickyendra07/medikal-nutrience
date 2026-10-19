@@ -194,7 +194,7 @@ export default function PrivacyPolicyPage() {
 
             <LegalSection number={10} title="Hubungi Kami">
               <p>Kami selalu berkomitmen untuk melindungi Data pribadi Anda sebagai pelanggan Kami yang setia dan berharga.</p>
-              <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai Kebijakan Privasi ini, silahkan menghubungi layanan pelanggan Kami pada alamat e-mail{" "}<a href="mailto:medicalnutrience@gmail.com" className="font-semibold text-[#006b3f] underline decoration-emerald-300 underline-offset-4">medicalnutrience@gmail.com</a>{" "}sebagai berikut:</p>
+              <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai Kebijakan Privasi ini, silahkan menghubungi layanan pelanggan Kami melalui halaman{" "}<a href="/kontak" className="font-semibold text-[#006b3f] underline decoration-emerald-300 underline-offset-4">Kontak</a>{" "}atau alamat berikut:</p>
               <address className="rounded-2xl border border-emerald-100 bg-[#f4fbf7] p-5 not-italic text-slate-800 md:p-6">
                 <p className="font-black text-slate-900">PT. Finusolprima Farma Internasional (A Kalbe Company)</p>
                 <p className="mt-3">Jl. Jend. Ahmad Yani No. 2 RT. 3/RW. 13</p>
