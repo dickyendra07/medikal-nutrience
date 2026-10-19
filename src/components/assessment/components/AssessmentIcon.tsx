@@ -6,7 +6,7 @@ type AssessmentIconProps = {
 const homepageConditionIcons: Record<string, string> = {
   kidney: "/images/mednut/solutions/icons/icon-ginjal.svg",
   liver: "/images/mednut/solutions/icons/icon-hati-liver.svg",
-  lung: "/images/mednut/solutions/icons/icon-pernafasan.svg",
+  lung: "/images/mednut/solutions/icons/icon-pernapasan.svg",
   digestive: "/images/mednut/solutions/icons/icon-pencernaan.svg",
 };
 

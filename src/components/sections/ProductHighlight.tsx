@@ -1,26 +1,42 @@
+import { ProductFrontTile } from "@/components/shared/ProductFrontTile";
 import { mednutAssets } from "@/data/mednut-assets";
 
 const products = [
   {
     name: "ENTRASOY",
+    scene: mednutAssets.scenes.entrasoy,
     href: "/produk/entrasoy",
-    image: mednutAssets.home.productEntrasoy,
+    image: mednutAssets.packshots.entrasoy,
+    tagline: "Protein Nabati",
+    tint: "#e3f1e8",
+    accent: "#00432e",
   },
   {
     name: "ENTRAMIX",
+    scene: mednutAssets.scenes.entramix,
     href: "/produk/entramix",
-    image: mednutAssets.home.productEntramix,
+    image: mednutAssets.packshots.entramixVanila,
+    tagline: "Nutrisi Lansia & Dewasa",
+    tint: "#fdf0dc",
+    accent: "#d4860f",
   },
   {
     name: "PEPTISOL",
+    scene: mednutAssets.scenes.peptisol,
     href: "/produk/peptisol",
-    image: mednutAssets.home.productPeptisol,
-    descriptor: "Tinggi Protein & Zinc",
+    image: mednutAssets.packshots.peptisolVanila,
+    tagline: "Tinggi Protein & Zinc",
+    tint: "#fde4e8",
+    accent: "#f0707f",
   },
   {
     name: "ENTRAKID",
+    scene: mednutAssets.scenes.entrakid,
     href: "/produk/entrakid",
-    image: mednutAssets.home.productEntrakid,
+    image: mednutAssets.packshots.entrakidVanila,
+    tagline: "Tumbuh Kembang Anak",
+    tint: "#dff5fc",
+    accent: "#2bb5de",
   },
 ];
 
@@ -53,19 +69,14 @@ export function ProductHighlight() {
               className="group reveal block overflow-hidden rounded-[1.4rem] bg-white/5 transition duration-300 hover:-translate-y-2 lg:rounded-[2rem]"
               aria-label={`Lihat produk ${product.name}`}
             >
-              <div className="@container relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  loading="lazy"
-                  className="h-auto w-full rounded-[2rem] object-contain transition duration-500 group-hover:scale-[1.03]"
-                />
-                {product.descriptor ? (
-                  <span className="absolute bottom-0 left-0 flex h-[14%] w-[56%] items-center justify-start whitespace-nowrap rounded-br-[1.4rem] bg-[#ff8f9d] pl-[9%] pr-1 text-left text-[4.2cqw] font-medium leading-tight text-white">
-                    {product.descriptor}
-                  </span>
-                ) : null}
-              </div>
+              <ProductFrontTile
+                name={product.name}
+                tagline={product.tagline}
+                image={product.image}
+                tint={product.tint}
+                accent={product.accent}
+                scene={product.scene}
+              />
             </a>
           ))}
         </div>

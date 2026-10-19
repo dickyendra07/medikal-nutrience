@@ -40,7 +40,7 @@ const pillars = [
 const focuses = [
   "Ginjal",
   "Hati / Liver",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
   "Anak",
   "Dewasa & Lansia",

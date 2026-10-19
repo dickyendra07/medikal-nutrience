@@ -105,30 +105,30 @@ export const solutionDetails: SolutionDetail[] = [
     },
   },
   {
-    slug: "pernafasan",
-    title: "Solusi Nutrisi untuk Masalah Pernafasan",
-    shortTitle: "Pernafasan",
-    eyebrow: "Solusi Pernafasan",
+    slug: "pernapasan",
+    title: "Solusi Nutrisi untuk Masalah Pernapasan",
+    shortTitle: "Pernapasan",
+    eyebrow: "Solusi Pernapasan",
     description:
-      "Kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru dapat memengaruhi energi, nafsu makan, serta aktivitas harian.",
+      "Kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru dapat memengaruhi energi, nafsu makan, serta aktivitas harian.",
     problemTitle: "Kondisi yang Perlu Didukung",
     problems: [
       "Mudah sesak saat aktivitas ringan",
       "Cepat lelah atau kehabisan energi",
       "Nafsu makan menurun",
-      "Kondisi pernafasan mengganggu aktivitas harian",
+      "Kondisi pernapasan mengganggu aktivitas harian",
     ],
     recommendedProducts: [
       {
         name: "PULMOSOL",
         slug: "pulmosol",
         description:
-          "Solusi nutrisi untuk membantu memenuhi kebutuhan pada masalah pernafasan.",
+          "Solusi nutrisi untuk membantu memenuhi kebutuhan pada masalah pernapasan.",
       },
     ],
-    educationTitle: "Kenapa kondisi pernafasan membutuhkan dukungan nutrisi?",
+    educationTitle: "Kenapa kondisi pernapasan membutuhkan dukungan nutrisi?",
     educationPoints: [
-      "Gangguan pernafasan dapat meningkatkan kebutuhan energi.",
+      "Gangguan pernapasan dapat meningkatkan kebutuhan energi.",
       "Makan dalam porsi besar kadang membuat napas terasa tidak nyaman.",
       "Dukungan nutrisi membantu tubuh tetap bertenaga dalam aktivitas harian.",
     ],

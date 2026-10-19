@@ -9,7 +9,7 @@ const conditionOptions = [
   { value: "recovery", label: "Pemulihan / pasca sakit" },
   { value: "kidney", label: "Kebutuhan ginjal" },
   { value: "liver", label: "Kebutuhan hati / liver" },
-  { value: "respiratory", label: "Kebutuhan pernafasan" },
+  { value: "respiratory", label: "Kebutuhan pernapasan" },
   { value: "digestive", label: "Kebutuhan pencernaan" },
   { value: "child", label: "Tumbuh kembang anak" },
   { value: "elderly", label: "Dewasa & lansia" },
@@ -109,7 +109,7 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
     return [
       {
         name: "Pulmosol",
-        description: "Dukungan nutrisi untuk kebutuhan pernafasan.",
+        description: "Dukungan nutrisi untuk kebutuhan pernapasan.",
         logo: mednutAssets.productLogos.pulmosol,
         image: mednutAssets.packshots.pulmosol,
         href: "/produk/pulmosol",

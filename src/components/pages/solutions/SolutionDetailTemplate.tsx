@@ -15,8 +15,8 @@ const solutionAssets: Record<
   "hati-liver": {
     image: mednutAssets.solutions.hati,
   },
-  pernafasan: {
-    image: mednutAssets.solutions.pernafasan,
+  pernapasan: {
+    image: mednutAssets.solutions.pernapasan,
   },
   pencernaan: {
     image: mednutAssets.solutions.pencernaan,

@@ -1,3 +1,4 @@
+import { ProductFrontTile } from "@/components/shared/ProductFrontTile";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { mednutAssets } from "@/data/mednut-assets";
@@ -41,41 +42,49 @@ function getSlugFromHref(href: string) {
 const featuredProducts = [
   {
     name: "Entrasoy",
+    scene: mednutAssets.scenes.entrasoy,
     category: "Protein Nabati",
     description:
       "Nutrisi berbasis soya untuk membantu memenuhi kebutuhan protein harian.",
     logo: mednutAssets.productLogos.entrasoy,
-    image: mednutAssets.home.productEntrasoy,
+    image: mednutAssets.packshots.entrasoy,
+    tint: "#e3f1e8",
     href: "/produk/entrasoy",
     accent: "#0d7a53",
   },
   {
     name: "Entramix",
+    scene: mednutAssets.scenes.entramix,
     category: "Nutrisi Lengkap",
     description:
       "Pilihan nutrisi lengkap untuk mendukung kebutuhan energi dan asupan harian.",
     logo: mednutAssets.productLogos.entramix,
-    image: mednutAssets.home.productEntramix,
+    image: mednutAssets.packshots.entramixVanila,
+    tint: "#fdf0dc",
     href: "/produk/entramix",
     accent: "#e88b24",
   },
   {
     name: "Peptisol",
+    scene: mednutAssets.scenes.peptisol,
     category: "Protein Medis",
     description:
       "Nutrisi tinggi protein untuk membantu mendukung kebutuhan pemulihan.",
     logo: mednutAssets.productLogos.peptisol,
-    image: mednutAssets.home.productPeptisol,
+    image: mednutAssets.packshots.peptisolVanila,
+    tint: "#fde4e8",
     href: "/produk/peptisol",
     accent: "#e84f72",
   },
   {
     name: "Entrakid",
+    scene: mednutAssets.scenes.entrakid,
     category: "Tumbuh Kembang Anak",
     description:
       "Nutrisi untuk membantu mendukung kebutuhan tumbuh kembang anak.",
     logo: "",
-    image: mednutAssets.home.productEntrakid,
+    image: mednutAssets.packshots.entrakidVanila,
+    tint: "#dff5fc",
     href: "/produk/entrakid",
     accent: "#1aa5b5",
   },
@@ -88,7 +97,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk penyakit ginjal kronik tahap pre-dialisis",
     logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
-    image: "/images/mednut/products/page-assets/nephrisol.jpeg",
+    image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol",
     color: "#7c3aed",
   },
@@ -98,7 +107,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk penyakit ginjal kronik tahap dialisis",
     logo: mednutAssets.productLogos.nephrisolD,
-    image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
+    image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol-d",
     color: "#5b21b6",
   },
@@ -108,7 +117,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk kebutuhan pada fungsi hati ringan/moderat",
     logo: mednutAssets.productLogos.hepatosol,
-    image: "/images/mednut/products/page-assets/hepatosol.png",
+    image: mednutAssets.scenes.hepatosolPair,
     href: "/produk/hepatosol",
     color: "#dc2626",
   },
@@ -118,17 +127,17 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk kebutuhan pada fungsi hati berat",
     logo: mednutAssets.productLogos.hepatosolLola,
-    image: "/images/mednut/products/page-assets/hepatosol-lola.png",
+    image: mednutAssets.scenes.hepatosolPair,
     href: "/produk/hepatosol-lola",
     color: "#ef4444",
   },
   {
     name: "Pulmosol",
-    category: "Pernafasan",
+    category: "Pernapasan",
     description:
-      "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernafasan.",
+      "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernapasan.",
     logo: mednutAssets.productLogos.pulmosol,
-    image: "/images/mednut/products/page-assets/pulmosol.jpeg",
+    image: mednutAssets.scenes.pulmosol,
     href: "/produk/pulmosol",
     color: "#1e3a8a",
   },
@@ -138,7 +147,7 @@ const medicalProducts = [
     description:
       "Solusi Spesifik Cepat Serap untuk Sistem Saluran Cerna",
     logo: mednutAssets.productLogos.oligo,
-    image: "/images/mednut/products/page-assets/oligo.jpeg",
+    image: mednutAssets.scenes.oligo,
     href: "/produk/oligo",
     color: "#db2777",
   },
@@ -148,7 +157,7 @@ const medicalProducts = [
     description:
       "Nutrisi khusus untuk mendukung kesehatan gangguan neurologis (stroke, Alhzemier)",
     logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
-    image: "/images/mednut/products/page-assets/peptibren.jpeg",
+    image: mednutAssets.scenes.peptibren,
     href: "/produk/peptibren",
     color: "#ca8a04",
   },
@@ -158,7 +167,7 @@ const categories = [
   "Nutrisi Keluarga",
   "Ginjal",
   "Hati / Liver",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
   "Sistem Saraf",
 ];
@@ -270,13 +279,14 @@ export default async function ProductsPage() {
                   href={product.href}
                   className="group reveal overflow-hidden rounded-[1.6rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-900/12 lg:rounded-[2rem]"
                 >
-                  <div className="relative overflow-hidden bg-[#eaf8f1]">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="h-auto w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                    />
-                  </div>
+                  <ProductFrontTile
+                    name={product.name}
+                    tagline={product.category}
+                    image={product.image}
+                    tint={product.tint}
+                    accent={product.accent}
+                    scene={product.scene}
+                  />
 
                   <div className="p-4 lg:p-6">
                     <div className="flex h-12 items-center">
@@ -325,7 +335,7 @@ export default async function ProductsPage() {
 
               <p className="mt-5 text-sm font-medium leading-7 text-[#6b7280] md:text-base md:leading-8">
                 Telusuri produk berdasarkan kebutuhan tubuh dan kondisi kesehatan
-                seperti ginjal, hati, pernafasan, pencernaan, dan kebutuhan pemulihan.
+                seperti ginjal, hati, pernapasan, pencernaan, dan kebutuhan pemulihan.
               </p>
             </div>
 
@@ -341,7 +351,7 @@ export default async function ProductsPage() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.05]"
+                        className="aspect-square w-full object-contain p-3 transition duration-500 group-hover:scale-[1.05]"
                       />
                     </div>
 

@@ -61,13 +61,13 @@ const solutions: Solution[] = [
     primaryButton: "Lihat Produk",
   },
   {
-    key: "pernafasan",
-    tab: "Pernafasan",
+    key: "pernapasan",
+    tab: "Pernapasan",
     icon: "lungs",
-    eyebrow: "Solusi Pernafasan",
-    title: "Solusi Nutrisi untuk Kesehatan Pernafasan",
+    eyebrow: "Solusi Pernapasan",
+    title: "Solusi Nutrisi untuk Kesehatan Pernapasan",
     description:
-      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
+      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
     image: "/images/mednut/solutions/front-facing/pulmosol.png",
     accent: "#1e3a8a",
     href: "/produk/pulmosol",
@@ -300,7 +300,7 @@ function Icon({ type, active }: { type: string; active: boolean }) {
     kidney: "/images/mednut/solutions/icons/icon-ginjal.svg",
     liver: "/images/mednut/solutions/icons/icon-hati-liver.svg",
     brain: "/images/mednut/solutions/icons/icon-syaraf-otak.svg",
-    lungs: "/images/mednut/solutions/icons/icon-pernafasan.svg",
+    lungs: "/images/mednut/solutions/icons/icon-pernapasan.svg",
     digestive: "/images/mednut/solutions/icons/icon-pencernaan.svg",
   };
 
