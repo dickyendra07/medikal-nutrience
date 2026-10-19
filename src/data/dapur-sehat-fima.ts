@@ -41,11 +41,11 @@ export type FimaRecipe = {
 
 const productImages = {
   entramix:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+    "/images/mednut/products/front/entramix-vanila.png",
   peptisol:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png",
+    "/images/mednut/products/front/peptisol-vanila.png",
   entrasoy:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY 3.png",
+    "/images/mednut/products/front/entrasoy.png",
 };
 
 export const fimaRecipes: FimaRecipe[] = [

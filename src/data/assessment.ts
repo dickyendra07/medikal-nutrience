@@ -64,27 +64,27 @@ export const assessmentDisclaimer =
 
 const productImages: Record<string, string> = {
   entrakid:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAKID/ENTRAKID VANILA 2.png",
+    "/images/mednut/products/front/entrakid-vanila.png",
   entramix:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+    "/images/mednut/products/front/entramix-vanila.png",
   entrasoy:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY 3.png",
+    "/images/mednut/products/front/entrasoy.png",
   peptisol:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png",
+    "/images/mednut/products/front/peptisol-vanila.png",
   peptibren:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN VANILA 1.png",
+    "/images/mednut/products/front/peptibren-vanila.png",
   nephrisol:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 1.png",
+    "/images/mednut/products/front/nephrisol-cappucino.png",
   "nephrisol-d":
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL-D/NEPHRISOL-D - CAPPUCINO 1.png",
+    "/images/mednut/products/front/nephrisol-d-cappucino.png",
   hepatosol:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL/HEPATOSOL VANILA 1.png",
+    "/images/mednut/products/front/hepatosol-vanila.png",
   "hepatosol-lola":
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL LOLA/HEPATOSOL LOLA 1.png",
+    "/images/mednut/products/front/hepatosol-lola.png",
   pulmosol:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png",
+    "/images/mednut/products/front/pulmosol.png",
   oligo:
-    "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png",
+    "/images/mednut/products/front/oligo.png",
 };
 
 function createResult(id: string, productSlug: string): AssessmentResult {

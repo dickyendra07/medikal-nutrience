@@ -183,12 +183,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Vanila",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
+          "/images/mednut/products/front/entramix-vanila.png",
       },
       {
         name: "Cokelat",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX COKELAT 1.png",
+          "/images/mednut/products/front/entramix-cokelat.png",
       },
     ],
 
@@ -294,7 +294,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Almond Vanila",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY 3.png",
+          "/images/mednut/products/front/entrasoy.png",
       },
     ],
 
@@ -389,12 +389,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Vanila",
         image:
-          "/images/mednut/products/packshots/hepatosol-vanila-1.png",
+          "/images/mednut/products/front/hepatosol-vanila.png",
       },
       {
         name: "Cokelat",
         image:
-          "/images/mednut/products/packshots/hepatosol-cokelat-1.png",
+          "/images/mednut/products/front/hepatosol-cokelat.png",
       },
     ],
 
@@ -536,12 +536,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Cappuccino",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 1.png",
+          "/images/mednut/products/front/nephrisol-cappucino.png",
       },
       {
         name: "Vanilla",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 2.png",
+          "/images/mednut/products/front/nephrisol-vanila.png",
       },
     ],
 
@@ -673,12 +673,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Vanilla",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL-D/NEPHRISOL-D VANILA 1.png",
+          "/images/mednut/products/front/nephrisol-d-vanila.png",
       },
       {
         name: "Cappuccino",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL-D/NEPHRISOL-D - CAPPUCINO 1.png",
+          "/images/mednut/products/front/nephrisol-d-cappucino.png",
       },
     ],
 
@@ -821,7 +821,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Tropical Banana",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png",
+          "/images/mednut/products/front/oligo.png",
       },
     ],
 
@@ -961,7 +961,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Jeruk",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL LOLA/HEPATOSOL LOLA 1.png",
+          "/images/mednut/products/front/hepatosol-lola.png",
       },
     ],
 
@@ -1101,12 +1101,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Vanilla",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png",
+          "/images/mednut/products/front/peptisol-vanila.png",
       },
       {
         name: "Coklat",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Cokelat 1.png",
+          "/images/mednut/products/front/peptisol-cokelat.png",
       },
     ],
 
@@ -1252,7 +1252,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Creamy Vanilla",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png",
+          "/images/mednut/products/front/pulmosol.png",
       },
     ],
 
@@ -1390,12 +1390,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Vanila",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN VANILA 1.png",
+          "/images/mednut/products/front/peptibren-vanila.png",
       },
       {
         name: "Kacang Hijau",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTIBREN/PEPTIBREN KACANG HIJAU 1.png",
+          "/images/mednut/products/front/peptibren-kacang-hijau.png",
       },
     ],
 

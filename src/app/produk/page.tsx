@@ -1,3 +1,4 @@
+import { ProductFrontTile } from "@/components/shared/ProductFrontTile";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { mednutAssets } from "@/data/mednut-assets";
@@ -41,41 +42,49 @@ function getSlugFromHref(href: string) {
 const featuredProducts = [
   {
     name: "Entrasoy",
+    scene: mednutAssets.scenes.entrasoy,
     category: "Protein Nabati",
     description:
       "Nutrisi berbasis soya untuk membantu memenuhi kebutuhan protein harian.",
     logo: mednutAssets.productLogos.entrasoy,
-    image: mednutAssets.home.productEntrasoy,
+    image: mednutAssets.packshots.entrasoy,
+    tint: "#e3f1e8",
     href: "/produk/entrasoy",
     accent: "#0d7a53",
   },
   {
     name: "Entramix",
+    scene: mednutAssets.scenes.entramix,
     category: "Nutrisi Lengkap",
     description:
       "Pilihan nutrisi lengkap untuk mendukung kebutuhan energi dan asupan harian.",
     logo: mednutAssets.productLogos.entramix,
-    image: mednutAssets.home.productEntramix,
+    image: mednutAssets.packshots.entramixVanila,
+    tint: "#fdf0dc",
     href: "/produk/entramix",
     accent: "#e88b24",
   },
   {
     name: "Peptisol",
+    scene: mednutAssets.scenes.peptisol,
     category: "Protein Medis",
     description:
       "Nutrisi tinggi protein untuk membantu mendukung kebutuhan pemulihan.",
     logo: mednutAssets.productLogos.peptisol,
-    image: mednutAssets.home.productPeptisol,
+    image: mednutAssets.packshots.peptisolVanila,
+    tint: "#fde4e8",
     href: "/produk/peptisol",
     accent: "#e84f72",
   },
   {
     name: "Entrakid",
+    scene: mednutAssets.scenes.entrakid,
     category: "Tumbuh Kembang Anak",
     description:
       "Nutrisi untuk membantu mendukung kebutuhan tumbuh kembang anak.",
     logo: "",
-    image: mednutAssets.home.productEntrakid,
+    image: mednutAssets.packshots.entrakidVanila,
+    tint: "#dff5fc",
     href: "/produk/entrakid",
     accent: "#1aa5b5",
   },
@@ -270,13 +279,14 @@ export default async function ProductsPage() {
                   href={product.href}
                   className="group reveal overflow-hidden rounded-[1.6rem] bg-white shadow-xl shadow-slate-900/8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-900/12 lg:rounded-[2rem]"
                 >
-                  <div className="relative overflow-hidden bg-[#eaf8f1]">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="h-auto w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                    />
-                  </div>
+                  <ProductFrontTile
+                    name={product.name}
+                    tagline={product.category}
+                    image={product.image}
+                    tint={product.tint}
+                    accent={product.accent}
+                    scene={product.scene}
+                  />
 
                   <div className="p-4 lg:p-6">
                     <div className="flex h-12 items-center">
@@ -341,7 +351,7 @@ export default async function ProductsPage() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.05]"
+                        className="aspect-square w-full object-contain p-3 transition duration-500 group-hover:scale-[1.05]"
                       />
                     </div>
 

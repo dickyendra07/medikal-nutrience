@@ -8,23 +8,28 @@ const productAssets: Record<
     logo?: string;
     packshot: string;
     secondaryPackshot?: string;
+    scene?: string;
   }
 > = {
   peptibren: {
+    scene: mednutAssets.scenes.peptibren,
     logo: mednutAssets.productLogos.peptibren,
     packshot: mednutAssets.packshots.peptibrenVanila,
     secondaryPackshot: mednutAssets.packshots.peptibrenKacangHijau,
   },
   entrakid: {
+    scene: mednutAssets.scenes.entrakid,
     packshot: mednutAssets.packshots.entrakidVanila,
     secondaryPackshot: mednutAssets.packshots.entrakidCokelat,
   },
   entramix: {
+    scene: mednutAssets.scenes.entramix,
     logo: mednutAssets.productLogos.entramix,
     packshot: mednutAssets.packshots.entramixVanila,
     secondaryPackshot: mednutAssets.packshots.entramixCokelat,
   },
   entrasoy: {
+    scene: mednutAssets.scenes.entrasoy,
     logo: mednutAssets.productLogos.entrasoy,
     packshot: mednutAssets.packshots.entrasoy,
   },
@@ -48,15 +53,18 @@ const productAssets: Record<
     secondaryPackshot: mednutAssets.packshots.nephrisolCappucinoSecondary,
   },
   oligo: {
+    scene: mednutAssets.scenes.oligo,
     logo: mednutAssets.productLogos.oligo,
     packshot: mednutAssets.packshots.oligo,
   },
   peptisol: {
+    scene: mednutAssets.scenes.peptisol,
     logo: mednutAssets.productLogos.peptisol,
     packshot: mednutAssets.packshots.peptisolVanila,
     secondaryPackshot: mednutAssets.packshots.peptisolCokelat,
   },
   pulmosol: {
+    scene: mednutAssets.scenes.pulmosol,
     logo: mednutAssets.productLogos.pulmosol,
     packshot: mednutAssets.packshots.pulmosol,
   },
@@ -104,26 +112,36 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
             )}
           </div>
 
-          <div className="relative mt-6 flex min-h-[360px] items-center justify-center md:min-h-[460px]">
-            <div
-              className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 md:h-[380px] md:w-[380px]"
-              style={{ backgroundColor: product.theme.primary }}
-            />
-
-            {asset.secondaryPackshot ? (
+          {asset.scene ? (
+            <div className="mt-6 overflow-hidden rounded-[1.5rem] bg-white shadow-lg shadow-black/5">
               <img
-                src={asset.secondaryPackshot}
-                alt={`${product.name} varian lainnya`}
-                className="absolute right-[4%] top-[18%] z-10 h-auto w-[34%] max-w-[190px] rotate-6 object-contain opacity-80 blur-[0.2px] transition duration-500"
+                src={asset.scene}
+                alt={product.name}
+                className="aspect-square h-auto w-full object-cover transition duration-500 hover:scale-[1.03]"
               />
-            ) : null}
+            </div>
+          ) : (
+            <div className="relative mt-6 flex min-h-[360px] items-center justify-center md:min-h-[460px]">
+              <div
+                className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 md:h-[380px] md:w-[380px]"
+                style={{ backgroundColor: product.theme.primary }}
+              />
 
-            <img
-              src={asset.packshot}
-              alt={product.name}
-              className="relative z-20 h-auto w-[78%] max-w-[420px] object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03]"
-            />
-          </div>
+              {asset.secondaryPackshot ? (
+                <img
+                  src={asset.secondaryPackshot}
+                  alt={`${product.name} varian lainnya`}
+                  className="absolute right-[4%] top-[18%] z-10 h-auto w-[34%] max-w-[190px] rotate-6 object-contain opacity-80 blur-[0.2px] transition duration-500"
+                />
+              ) : null}
+
+              <img
+                src={asset.packshot}
+                alt={product.name}
+                className="relative z-20 h-auto w-[78%] max-w-[420px] object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03]"
+              />
+            </div>
+          )}
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
