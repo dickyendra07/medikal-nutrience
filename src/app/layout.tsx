@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import "./globals.css";
 import { RevealProvider } from "@/components/shared/RevealProvider";
 import { getSettings } from "@/lib/cms/settings-storage";
@@ -31,11 +32,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Nonce-based CSP requires per-request rendering (see src/proxy.ts).
+  await connection();
+
   return (
     <html lang="id">
       <body>

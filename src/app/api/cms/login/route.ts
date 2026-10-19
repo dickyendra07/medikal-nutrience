@@ -1,13 +1,40 @@
 import { NextResponse } from "next/server";
 import { cmsInternalApiUrl } from "@/lib/cms/backend";
+import {
+  clearLoginAttempts,
+  clientKey,
+  isLoginRateLimited,
+} from "@/lib/cms/login-rate-limit";
 
 export const runtime = "nodejs";
 
+const MAX_FIELD_LENGTH = 256;
+
 export async function POST(request: Request) {
+  const rateLimitKey = clientKey(request);
+
+  if (isLoginRateLimited(rateLimitKey)) {
+    return NextResponse.redirect(
+      new URL("/cms/login?error=unavailable", request.url),
+      {
+        status: 303,
+      }
+    );
+  }
+
   const formData = await request.formData();
 
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
+
+  if (email.length > MAX_FIELD_LENGTH || password.length > MAX_FIELD_LENGTH) {
+    return NextResponse.redirect(
+      new URL("/cms/login?error=invalid", request.url),
+      {
+        status: 303,
+      }
+    );
+  }
 
   let backendResponse: Response;
 
@@ -44,6 +71,8 @@ export async function POST(request: Request) {
       }
     );
   }
+
+  clearLoginAttempts(rateLimitKey);
 
   let sessionCookie: string | null = null;
 
