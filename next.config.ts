@@ -67,7 +67,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Standalone output is only needed for the Docker image; Vercel builds without it.
+  ...(process.env.NEXT_OUTPUT === "standalone" ? { output: "standalone" as const } : {}),
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   images: {
