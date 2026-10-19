@@ -261,7 +261,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Kurang dari 250.",
 
       flavors: [
-        "Almond Vanila",
+        "Almond Soya",
       ],
 
       availability:
@@ -292,7 +292,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     variants: [
       {
-        name: "Almond Vanila",
+        name: "Almond Soya",
         image:
           "/images/mednut/products/front/entrasoy.png",
       },
