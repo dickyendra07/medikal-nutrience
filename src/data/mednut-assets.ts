@@ -16,7 +16,7 @@ export const mednutAssets = {
   solutions: {
     ginjal: "/images/mednut/solutions/solution-ginjal-nephrisol.png",
     hati: "/images/mednut/solutions/solution-hati-hepatosol.png",
-    pernafasan: "/images/mednut/solutions/solution-pernafasan-pulmosol.png",
+    pernapasan: "/images/mednut/solutions/solution-pernapasan-pulmosol.png",
     pencernaan: "/images/mednut/solutions/solution-pencernaan-oligo.png",
     syarafOtak: "/images/mednut/solutions/solution-syaraf-otak.png",
   },
@@ -35,12 +35,11 @@ export const mednutAssets = {
   },
 
   packshots: {
-    entrakidVanila: "/images/mednut/products/packshots/entrakid-vanila-1.png",
-    entrakidCokelat: "/images/mednut/products/packshots/entrakid-cokelat-1.png",
+    entrakidVanila: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAKID/ENTRAKID VANILA 2.png",
+    entrakidCokelat: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAKID/ENTRAKID COKELAT 1.png",
     entramixVanila: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX VANILA 1.png",
     entramixCokelat: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRAMIX/ENTRAMIX COKELAT 1.png",
-    entrasoy: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY.png",
-    entrasoySecondary: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY 1.png",
+    entrasoy: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY 3.png",
     peptisolVanila: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 1.png",
     peptisolVanilaSecondary: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Vanila 2.png",
     peptisolCokelat: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PEPTISOL/Peptisol Cokelat 1.png",
@@ -59,9 +58,7 @@ export const mednutAssets = {
     hepatosolCokelat: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL/HEPATOSOL COKELAT 1.png",
     hepatosolLola: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/HEPATOSOL LOLA/HEPATOSOL LOLA 1.png",
     oligo: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 1.png",
-    oligoSecondary: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/OLIGO/OLIGO 2.png",
     pulmosol: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 1.png",
-    pulmosolSecondary: "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/PULMOSOL/PULMOSOL 2.png",
   },
 
   productIcons: {

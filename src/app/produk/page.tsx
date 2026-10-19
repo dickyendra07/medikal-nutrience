@@ -124,9 +124,9 @@ const medicalProducts = [
   },
   {
     name: "Pulmosol",
-    category: "Pernafasan",
+    category: "Pernapasan",
     description:
-      "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernafasan.",
+      "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernapasan.",
     logo: mednutAssets.productLogos.pulmosol,
     image: "/images/mednut/products/page-assets/pulmosol.jpeg",
     href: "/produk/pulmosol",
@@ -158,7 +158,7 @@ const categories = [
   "Nutrisi Keluarga",
   "Ginjal",
   "Hati / Liver",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
   "Sistem Saraf",
 ];
@@ -325,7 +325,7 @@ export default async function ProductsPage() {
 
               <p className="mt-5 text-sm font-medium leading-7 text-[#6b7280] md:text-base md:leading-8">
                 Telusuri produk berdasarkan kebutuhan tubuh dan kondisi kesehatan
-                seperti ginjal, hati, pernafasan, pencernaan, dan kebutuhan pemulihan.
+                seperti ginjal, hati, pernapasan, pencernaan, dan kebutuhan pemulihan.
               </p>
             </div>
 

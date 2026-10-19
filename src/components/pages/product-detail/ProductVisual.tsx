@@ -27,7 +27,6 @@ const productAssets: Record<
   entrasoy: {
     logo: mednutAssets.productLogos.entrasoy,
     packshot: mednutAssets.packshots.entrasoy,
-    secondaryPackshot: mednutAssets.packshots.entrasoySecondary,
   },
   "hepatosol-lola": {
     logo: mednutAssets.productLogos.hepatosolLola,
@@ -41,7 +40,7 @@ const productAssets: Record<
   "nephrisol-d": {
     logo: mednutAssets.productLogos.nephrisolD,
     packshot: mednutAssets.packshots.nephrisolDVanila,
-    secondaryPackshot: mednutAssets.packshots.nephrisolDVanilaSecondary,
+    secondaryPackshot: mednutAssets.packshots.nephrisolDCappucino,
   },
   nephrisol: {
     logo: mednutAssets.productLogos.nephrisol,
@@ -51,7 +50,6 @@ const productAssets: Record<
   oligo: {
     logo: mednutAssets.productLogos.oligo,
     packshot: mednutAssets.packshots.oligo,
-    secondaryPackshot: mednutAssets.packshots.oligoSecondary,
   },
   peptisol: {
     logo: mednutAssets.productLogos.peptisol,
@@ -61,7 +59,6 @@ const productAssets: Record<
   pulmosol: {
     logo: mednutAssets.productLogos.pulmosol,
     packshot: mednutAssets.packshots.pulmosol,
-    secondaryPackshot: mednutAssets.packshots.pulmosolSecondary,
   },
 };
 
@@ -124,11 +121,7 @@ export function ProductVisual({ product }: { product: ProductDetail }) {
             <img
               src={asset.packshot}
               alt={product.name}
-              className={`relative z-20 h-auto object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03] ${
-                product.slug === "entrasoy"
-                  ? "w-full max-w-[570px]"
-                  : "w-[78%] max-w-[420px]"
-              }`}
+              className="relative z-20 h-auto w-[78%] max-w-[420px] object-contain drop-shadow-2xl transition duration-500 hover:scale-[1.03]"
             />
           </div>
         </div>

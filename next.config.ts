@@ -80,6 +80,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  redirects() {
+    return [
+      {
+        source: "/solusi/pernafasan",
+        destination: "/solusi/pernapasan",
+        permanent: true,
+      },
+    ];
+  },
   headers() {
     return [
       {

@@ -22,7 +22,7 @@ export default async function CmsSolutionsPage() {
       active="solutions"
       title="Manajemen Solusi"
       eyebrow="CMS Solutions"
-      description="Kelola konten solusi nutrisi berdasarkan kebutuhan tubuh seperti ginjal, hati, pernafasan, pencernaan, anak, pemulihan, dan lansia."
+      description="Kelola konten solusi nutrisi berdasarkan kebutuhan tubuh seperti ginjal, hati, pernapasan, pencernaan, anak, pemulihan, dan lansia."
       actions={
         <a
           href="/solusi"

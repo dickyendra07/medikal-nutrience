@@ -395,10 +395,10 @@ export const productDetails: ProductDetail[] = [
   {
     slug: "pulmosol",
     name: "PULMOSOL",
-    category: "Pernafasan",
-    heroTitle: "Solusi Gizi Masalah Pernafasan PPOK, Asma, Pneumonia, dan TB Paru",
+    category: "Pernapasan",
+    heroTitle: "Solusi Gizi Masalah Pernapasan PPOK, Asma, Pneumonia, dan TB Paru",
     description:
-      "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernafasan.",
+      "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernapasan.",
     theme: {
       primary: "#1e3a8a",
       soft: "#eff6ff",
@@ -428,7 +428,7 @@ export const productDetails: ProductDetail[] = [
       "Sumber Vitamin, Mineral, Antioksidan",
     ],
     ctaLabel: "Beli Sekarang",
-    closingTitle: "Solusi untuk Masalah Pernafasanmu",
+    closingTitle: "Solusi untuk Masalah Pernapasanmu",
     closingDescription:
       "Dapatkan rekomendasi nutrisi yang sesuai dengan kondisi Anda untuk membantu proses pemulihan lebih optimal.",
   },

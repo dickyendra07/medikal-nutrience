@@ -29,7 +29,7 @@ export const solutionTabs = [
   "Ginjal",
   "Hati / Liver",
   "Sistem Saraf",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
 ];
 

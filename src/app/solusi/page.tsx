@@ -94,9 +94,9 @@ const featuredSolutions = [
   },
   {
     title: "Pulmosol",
-    headline: "Solusi Nutrisi untuk Kesehatan Pernafasan",
+    headline: "Solusi Nutrisi untuk Kesehatan Pernapasan",
     description:
-      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernafasan seperti PPOK, asma, pneumonia, dan TB paru.",
+      "Pulmosol diformulasikan untuk membantu memenuhi kebutuhan nutrisi pada kondisi pernapasan seperti PPOK, asma, pneumonia, dan TB paru.",
     image: "/images/mednut/products/packshots/pulmosol-1.png",
     href: "/produk/pulmosol",
     color: "#1e3a8a",
@@ -154,7 +154,7 @@ const otherSolutions = [
 const focusList = [
   "Ginjal",
   "Hati / Liver",
-  "Pernafasan",
+  "Pernapasan",
   "Pencernaan",
   "Anak",
   "Dewasa & Lansia",

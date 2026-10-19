@@ -294,7 +294,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         name: "Almond Vanila",
         image:
-          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY.png",
+          "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/ENTRASOY PACKSHOOT/ENTRASOY 3.png",
       },
     ],
 
@@ -539,7 +539,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
           "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 1.png",
       },
       {
-        name: "Cappuccino",
+        name: "Vanilla",
         image:
           "/images/client-assets/Packshoot 3D Susu Mednut terbaru 2026 - Per Halaman/NEPHRISOL/NEPHRISOL CAPPUCINO 2.png",
       },
@@ -1216,7 +1216,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     productInformation: {
       background:
-        "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernafasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
+        "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernapasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
 
       servingInstruction:
         "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 240 ml larutan",
@@ -1316,7 +1316,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       "Keunggulan Utama Pulmosol",
 
     highlightSubtitle:
-      "Formula nutrisi khusus untuk mendukung kebutuhan pasien dengan gangguan pernafasan.",
+      "Formula nutrisi khusus untuk mendukung kebutuhan pasien dengan gangguan pernapasan.",
 
     highlights: [
       {
