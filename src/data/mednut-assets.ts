@@ -64,6 +64,8 @@ export const mednutAssets = {
     peptisol: "/images/mednut/products/scenes/peptisol.jpg",
     oligo: "/images/mednut/products/scenes/oligo.jpg",
     pulmosol: "/images/mednut/products/scenes/pulmosol.jpg",
+    hepatosolPair: "/images/mednut/products/scenes/hepatosol-pair.jpg",
+    nephrisolPair: "/images/mednut/products/scenes/nephrisol-pair.jpg",
   },
 
   productIcons: {

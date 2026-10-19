@@ -97,7 +97,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk penyakit ginjal kronik tahap pre-dialisis",
     logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
-    image: "/images/mednut/products/page-assets/nephrisol.jpeg",
+    image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol",
     color: "#7c3aed",
   },
@@ -107,7 +107,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk penyakit ginjal kronik tahap dialisis",
     logo: mednutAssets.productLogos.nephrisolD,
-    image: "/images/mednut/products/page-assets/nephrisol-d.jpeg",
+    image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol-d",
     color: "#5b21b6",
   },
@@ -117,7 +117,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk kebutuhan pada fungsi hati ringan/moderat",
     logo: mednutAssets.productLogos.hepatosol,
-    image: "/images/mednut/products/page-assets/hepatosol.png",
+    image: mednutAssets.scenes.hepatosolPair,
     href: "/produk/hepatosol",
     color: "#dc2626",
   },
@@ -127,7 +127,7 @@ const medicalProducts = [
     description:
       "Dukungan nutrisi untuk kebutuhan pada fungsi hati berat",
     logo: mednutAssets.productLogos.hepatosolLola,
-    image: "/images/mednut/products/page-assets/hepatosol-lola.png",
+    image: mednutAssets.scenes.hepatosolPair,
     href: "/produk/hepatosol-lola",
     color: "#ef4444",
   },
@@ -137,7 +137,7 @@ const medicalProducts = [
     description:
       "Nutrisi untuk membantu memenuhi kebutuhan kondisi pernapasan.",
     logo: mednutAssets.productLogos.pulmosol,
-    image: "/images/mednut/products/page-assets/pulmosol.jpeg",
+    image: mednutAssets.scenes.pulmosol,
     href: "/produk/pulmosol",
     color: "#1e3a8a",
   },
@@ -147,7 +147,7 @@ const medicalProducts = [
     description:
       "Solusi Spesifik Cepat Serap untuk Sistem Saluran Cerna",
     logo: mednutAssets.productLogos.oligo,
-    image: "/images/mednut/products/page-assets/oligo.jpeg",
+    image: mednutAssets.scenes.oligo,
     href: "/produk/oligo",
     color: "#db2777",
   },
@@ -157,7 +157,7 @@ const medicalProducts = [
     description:
       "Nutrisi khusus untuk mendukung kesehatan gangguan neurologis (stroke, Alhzemier)",
     logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
-    image: "/images/mednut/products/page-assets/peptibren.jpeg",
+    image: mednutAssets.scenes.peptibren,
     href: "/produk/peptibren",
     color: "#ca8a04",
   },
