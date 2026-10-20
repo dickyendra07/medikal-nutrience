@@ -80,7 +80,7 @@ const megaMenus = {
       { label: "Entramix", href: "/produk/entramix", desc: "Nutrisi lengkap harian" },
       { label: "Entrasoy", href: "/produk/entrasoy", desc: "Nutrisi berbasis soya" },
       { label: "Peptisol", href: "/produk/peptisol", desc: "Nutrisi tinggi protein" },
-      { label: "Peptibren", href: "/produk/peptibren", desc: "Nutrisi Kesehatan Syaraf" },
+      { label: "Peptibren", href: "/produk/peptibren", desc: "Nutrisi Kesehatan Saraf" },
       { label: "Nephrisol", href: "/produk/nephrisol", desc: "Dukungan nutrisi ginjal" },
       { label: "Hepatosol", href: "/produk/hepatosol", desc: "Dukungan nutrisi hati" },
       { label: "Pulmosol", href: "/produk/pulmosol", desc: "Nutrisi Kesehatan Pernapasan" },
@@ -97,7 +97,7 @@ const megaMenus = {
       { label: "Hati / Liver", href: "/solusi/hati-liver", desc: "Dukungan fungsi hati" },
       { label: "Pernapasan", href: "/solusi/pernapasan", desc: "Dukungan Nutrisi Pernapasan" },
       { label: "Pencernaan", href: "/solusi/pencernaan", desc: "Dukungan Cepat Serap" },
-      { label: "Sistem Saraf", href: "/produk/peptibren", desc: "Dukungan Nutrisi Kesehatan Syaraf" },
+      { label: "Sistem Saraf", href: "/produk/peptibren", desc: "Dukungan Nutrisi Kesehatan Saraf" },
     ],
   },
   event: {

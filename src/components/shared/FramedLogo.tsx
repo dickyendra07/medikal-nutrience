@@ -13,6 +13,7 @@ type LogoFrame = Pick<CSSProperties, "aspectRatio" | "objectPosition">;
 const logoFrames: Record<string, LogoFrame> = {
   [productLogos.entrasoy]: { aspectRatio: "1000 / 214", objectPosition: "50% 50.8%" },
   [productLogos.entramix]: { aspectRatio: "1000 / 216", objectPosition: "50% 48.7%" },
+  [productLogos.entrakid]: { aspectRatio: "1000 / 176", objectPosition: "50% 50%" },
   [productLogos.peptisol]: { aspectRatio: "1000 / 252", objectPosition: "50% 51.1%" },
   [productLogos.peptibren]: { aspectRatio: "1000 / 212", objectPosition: "50% 50.9%" },
   [productLogos.nephrisol]: { aspectRatio: "1000 / 229", objectPosition: "50% 51%" },
