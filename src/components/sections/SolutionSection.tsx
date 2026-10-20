@@ -51,9 +51,9 @@ const solutions: Solution[] = [
     tab: "Sistem Saraf",
     icon: "brain",
     eyebrow: "Solusi Sistem Saraf",
-    title: "Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
+    title: "Dukungan Kesehatan Saraf (Stroke & Alzheimer)",
     description:
-      "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
+      "Dukungan nutrisi untuk menjaga kesehatan saraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
     image: "/images/mednut/solutions/front-facing/peptibren.png",
     accent: "#f2b705",
     buttonTextColor: "#3f3100",

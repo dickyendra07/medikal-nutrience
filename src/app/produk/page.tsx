@@ -82,7 +82,7 @@ const featuredProducts = [
     category: "Tumbuh Kembang Anak",
     description:
       "Nutrisi untuk membantu mendukung kebutuhan tumbuh kembang anak.",
-    logo: "",
+    logo: mednutAssets.productLogos.entrakid,
     image: mednutAssets.packshots.entrakidVanila,
     tint: "#dff5fc",
     href: "/produk/entrakid",

@@ -83,9 +83,9 @@ const featuredSolutions = [
   },
   {
     title: "Peptibren",
-    headline: "Dukungan Kesehatan Syaraf (Stroke & Alzheimer)",
+    headline: "Dukungan Kesehatan Saraf (Stroke & Alzheimer)",
     description:
-      "Dukungan nutrisi untuk menjaga kesehatan syaraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
+      "Dukungan nutrisi untuk menjaga kesehatan saraf termasuk dengan tantangan asupan makanan dan kesulitan menelan.",
     image: "/images/mednut/products/front/peptibren-vanila.png",
     href: "/produk/peptibren",
     color: "#ca8a04",
