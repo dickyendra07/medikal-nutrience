@@ -95,7 +95,7 @@ const medicalProducts = [
     name: "Nephrisol",
     category: "Ginjal",
     description:
-      "Dukungan nutrisi untuk penyakit ginjal kronik tahap pre-dialisis",
+      "Dukungan nutrisi untuk penyakit ginjal kronik tahap pradialisis",
     logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
     image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol",
@@ -122,7 +122,7 @@ const medicalProducts = [
     color: "#dc2626",
   },
   {
-    name: "Hepatosol Lola",
+    name: "Hepatosol LOLA",
     category: "Hati / Liver",
     description:
       "Dukungan nutrisi untuk kebutuhan pada fungsi hati berat",

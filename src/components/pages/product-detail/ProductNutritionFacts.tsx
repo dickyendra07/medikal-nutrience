@@ -1,5 +1,6 @@
 import { NutritionTable } from "@/components/pages/product-detail/NutritionTable";
 import type { ProductNutrition } from "@/data/product-nutrition";
+import { getNutritionTables } from "@/components/pages/product-detail/nutrition-facts";
 import { NutritionHighlights } from "@/components/pages/product-detail/NutritionHighlights";
 import { ProductVariantSwitcher } from "@/components/pages/product-detail/ProductVariantSwitcher";
 
@@ -11,6 +12,8 @@ export function ProductNutritionFacts({
   data: ProductNutrition;
   color: string;
 }) {
+
+  const { macros, micros } = getNutritionTables(data);
 
   return (
 
@@ -140,25 +143,19 @@ export function ProductNutritionFacts({
 
 
             <NutritionTable
-              title="Makronutrisi"
-              items={data.nutrition}
+              title="Makronutrien"
+              items={macros}
               color={color}
             />
 
 
 
             <NutritionTable
-              title="Vitamin & Mineral"
-              items={data.vitamins}
+              title="Mikronutrien"
+              items={micros}
               color={color}
             />
 
-
-            {data.components && data.components.length > 0 ? (
-              <div className="min-w-0 lg:col-span-2">
-                <NutritionTable title="Zat Gizi Lainnya" items={data.components} color={color} />
-              </div>
-            ) : null}
 
           </div>
 

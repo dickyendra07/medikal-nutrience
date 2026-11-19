@@ -14,7 +14,9 @@ type Solution = {
   buttonTextColor?: string;
   href: string;
   primaryButton: string;
+  primaryHref?: string;
   secondaryButton?: string;
+  secondaryHref?: string;
 };
 
 const solutions: Solution[] = [
@@ -25,12 +27,14 @@ const solutions: Solution[] = [
     eyebrow: "Solusi Ginjal",
     title: "Solusi Perlindungan Ginjal Dimulai dari Nutrisi yang Tepat",
     description:
-      "Kebutuhan nutrisi Anda berbeda tergantung pada tahapan kondisi ginjal. Kami menyediakan formula presisi untuk tahap Pra-Dialisis dan Dialisis.",
+      "Kebutuhan nutrisi Anda berbeda tergantung pada tahapan kondisi ginjal. Kami menyediakan formula presisi untuk tahap Pradialisis dan Dialisis.",
     image: "/images/mednut/solutions/front-facing/nephrisol.png",
     accent: "#5b0ca8",
     href: "/solusi/ginjal",
-    primaryButton: "Predialisis",
+    primaryButton: "Pradialisis",
+    primaryHref: "/produk/nephrisol",
     secondaryButton: "Dialisis",
+    secondaryHref: "/produk/nephrisol-d",
   },
   {
     key: "hati",
@@ -195,7 +199,7 @@ export function SolutionSection() {
                       }`}
                     >
                       <a
-                        href={activeSolution.href}
+                        href={activeSolution.primaryHref ?? activeSolution.href}
                         className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black shadow-lg transition hover:-translate-y-0.5"
                         style={{
                           backgroundColor: activeSolution.accent,
@@ -208,7 +212,7 @@ export function SolutionSection() {
 
                       {activeSolution.secondaryButton ? (
                         <a
-                          href={activeSolution.href}
+                          href={activeSolution.secondaryHref ?? activeSolution.href}
                           className="inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-black shadow-lg transition hover:-translate-y-0.5"
                           style={{
                             backgroundColor: activeSolution.accent,
@@ -257,7 +261,7 @@ export function SolutionSection() {
 
             <div className="mt-6 flex flex-wrap gap-3 md:mt-8 md:gap-5">
               <a
-                href={activeSolution.href}
+                href={activeSolution.primaryHref ?? activeSolution.href}
                 className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide shadow-lg transition hover:-translate-y-1"
                 style={{
                   backgroundColor: activeSolution.accent,
@@ -273,7 +277,7 @@ export function SolutionSection() {
 
               {activeSolution.secondaryButton ? (
                 <a
-                  href={activeSolution.href}
+                  href={activeSolution.secondaryHref ?? activeSolution.href}
                   className="group inline-flex items-center gap-4 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide shadow-lg transition hover:-translate-y-1"
                   style={{
                     backgroundColor: activeSolution.accent,

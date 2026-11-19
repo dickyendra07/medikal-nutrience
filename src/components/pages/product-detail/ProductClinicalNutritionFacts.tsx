@@ -1,6 +1,7 @@
 import { NutritionTable } from "@/components/pages/product-detail/NutritionTable";
 import type { ProductNutrition } from "@/data/product-nutrition";
 import { ProductVariantSwitcher } from "@/components/pages/product-detail/ProductVariantSwitcher";
+import { getNutritionTables } from "@/components/pages/product-detail/nutrition-facts";
 import { ProductClinicalHighlights } from "@/components/pages/product-detail/ProductClinicalHighlights";
 
 export function ProductClinicalNutritionFacts({
@@ -10,6 +11,8 @@ export function ProductClinicalNutritionFacts({
   data: ProductNutrition;
   color: string;
 }) {
+  const { macros, micros } = getNutritionTables(data);
+
   return (
     <section className="bg-[#f4fbf8] px-5 py-14 lg:px-10">
       <div className="mx-auto w-full max-w-[1440px]">
@@ -103,8 +106,8 @@ export function ProductClinicalNutritionFacts({
             <div className="space-y-8">
 
               <NutritionTable
-                title="Makronutrisi"
-                items={data.nutrition}
+                title="Makronutrien"
+                items={macros}
                 color={color}
               />
 
@@ -115,16 +118,10 @@ export function ProductClinicalNutritionFacts({
 
 
             <NutritionTable
-              title="Vitamin & Mineral"
-              items={data.vitamins}
+              title="Mikronutrien"
+              items={micros}
               color={color}
             />
-
-            {data.components && data.components.length > 0 ? (
-              <div className="min-w-0 lg:col-span-2">
-                <NutritionTable title="Zat Gizi Lainnya" items={data.components} color={color} />
-              </div>
-            ) : null}
 
           </div>
 
@@ -148,6 +145,8 @@ export function ProductClinicalNutritionFacts({
           <ProductClinicalHighlights
             color={color}
             highlights={data.highlights}
+            title={data.highlightTitle ?? `Mengapa ${data.displayName}?`}
+            subtitle={data.whySubtitle}
           />
         ) : null}
 

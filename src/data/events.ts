@@ -104,7 +104,7 @@ export const eventPageData: EventPageData = {
     "Peptisol",
     "Oligo",
     "Hepatosol",
-    "Hepatosol Lola",
+    "Hepatosol LOLA",
     "Peptibren",
   ],
   infoSources: [

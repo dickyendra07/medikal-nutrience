@@ -47,11 +47,11 @@ export const productList = [
   {
     name: "NEPHRISOL",
     category: "Ginjal",
-    tagline: "Nutrisi khusus untuk kebutuhan pra-dialisis.",
+    tagline: "Nutrisi khusus untuk kebutuhan pradialisis.",
     description:
       "Diformulasikan untuk membantu mendukung kebutuhan nutrisi pada kondisi ginjal tertentu.",
     color: "from-[#7e22ce] to-[#3b0764]",
-    benefits: ["Ginjal", "Pra-dialisis", "Formula khusus"],
+    benefits: ["Ginjal", "Pradialisis", "Formula khusus"],
   },
   {
     name: "NEPHRISOL-D",

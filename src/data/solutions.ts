@@ -28,7 +28,7 @@ export const solutionDetails: SolutionDetail[] = [
     shortTitle: "Ginjal",
     eyebrow: "Solusi Ginjal",
     description:
-      "Kondisi ginjal membutuhkan pendekatan nutrisi yang lebih terarah. Medikal Nutrience menyediakan pilihan nutrisi untuk kebutuhan pra-dialisis dan dialisis.",
+      "Kondisi ginjal membutuhkan pendekatan nutrisi yang lebih terarah. Medikal Nutrience menyediakan pilihan nutrisi untuk kebutuhan pradialisis dan dialisis.",
     problemTitle: "Kondisi yang Perlu Diperhatikan",
     problems: [
       "Gangguan ginjal sebelum dialisis",
@@ -52,7 +52,7 @@ export const solutionDetails: SolutionDetail[] = [
     ],
     educationTitle: "Kenapa nutrisi ginjal perlu disesuaikan?",
     educationPoints: [
-      "Kebutuhan protein dapat berbeda antara pra-dialisis dan dialisis.",
+      "Kebutuhan protein dapat berbeda antara pradialisis dan dialisis.",
       "Asupan mineral tertentu perlu diperhatikan sesuai kondisi tubuh.",
       "Pemilihan nutrisi sebaiknya mengikuti arahan tenaga kesehatan.",
     ],

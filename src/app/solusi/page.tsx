@@ -52,14 +52,14 @@ const featuredSolutions = [
     button: "Lihat Hepatosol",
   },
   {
-    title: "Hepatosol Lola",
+    title: "Hepatosol LOLA",
     headline: "Nutrisi Fungsi Hati Berat",
     description: "Dukungan nutrisi yang diformulasikan untuk membantu memenuhi kebutuhan nutrisi pasien dengan gangguan fungsi hati berat.",
     image: "/images/mednut/products/front/hepatosol-lola.png",
     href: "/produk/hepatosol-lola",
     color: "#dc2626",
     gradient: "from-[#b80000] via-[#dc0000] to-[#f43f3f]",
-    button: "Lihat Hepatosol Lola",
+    button: "Lihat Hepatosol LOLA",
   },
   {
     title: "Nephrisol-D",

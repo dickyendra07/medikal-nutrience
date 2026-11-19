@@ -71,7 +71,7 @@ export const fimaRecipes: FimaRecipe[] = [
         items: [
           "50 g oatmeal",
           "1 buah pisang matang, iris",
-          "200 ml air atau susu cair sesuai kebutuhan",
+          "200 mL air atau susu cair sesuai kebutuhan",
           "Kayu manis secukupnya",
         ],
       },

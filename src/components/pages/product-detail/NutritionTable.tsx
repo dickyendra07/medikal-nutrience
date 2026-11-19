@@ -1,4 +1,5 @@
 import type { NutritionItem } from "@/data/product-nutrition";
+import { formatDecimal } from "@/components/pages/product-detail/nutrition-facts";
 
 export function NutritionTable({
   title,
@@ -39,7 +40,7 @@ export function NutritionTable({
                 {item.name}
               </th>
               <td className="break-words whitespace-pre-wrap px-2 py-3 font-black text-[#111827]">
-                {item.value}
+                {formatDecimal(item.value)}
               </td>
               {hasUnits ? <td className="break-words px-2 py-3 text-[#6b7280]">{item.unit}</td> : null}
             </tr>
