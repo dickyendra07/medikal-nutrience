@@ -693,7 +693,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     title: "Nutrition Facts",
     subtitle:
-      "Informasi nutrisi lengkap untuk membantu memenuhi kebutuhan pasien ginjal kronik dengan terapi dialisis.",
+      "Informasi nutrisi lengkap untuk membantu memenuhi kebutuhan penyakit ginjal kronik",
 
     serving: "Per Sajian Nephrisol D",
 
