@@ -172,12 +172,12 @@ export const productDetails: ProductDetail[] = [
       dark: "#9f1239",
       gradient: "from-[#ef1f2d] to-[#be123c]",
     },
-    needTitle: "Siapa yang Membutuhkan Hepatosol Lola?",
+    needTitle: "Siapa yang Membutuhkan Hepatosol LOLA?",
     needs: [
       { title: "Gangguan Fungsi Hati Berat" },
       { title: "Penurunan Nafsu Makan" },
     ],
-    benefitTitle: "Keunggulan Utama Hepatosol Lola",
+    benefitTitle: "Keunggulan Utama Hepatosol LOLA",
     benefits: [
       "Tinggi Kalori",
       "Sumber Lemak MCT",
@@ -225,7 +225,7 @@ export const productDetails: ProductDetail[] = [
     crossSell: {
       title: "Butuh Kondisi Hati Perhatian Lebih?",
       description: "Dukungan nutrisi lanjutan untuk nutrisi lebih intensif.",
-      buttonLabel: "Lihat Hepatosol Lola",
+      buttonLabel: "Lihat Hepatosol LOLA",
       href: "/produk/hepatosol-lola",
     },
     closingTitle: "Kebutuhan Asupan Nutrisi Pasien Hati Kronik",

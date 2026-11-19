@@ -7,6 +7,9 @@ export type ProductConfig = {
   nutritionFacts?: boolean;
   variants?: boolean;
   nutritionType?: ProductNutritionType;
+  // Template sections default to visible; set false to remove them.
+  showNeeds?: boolean; // "Siapa yang Membutuhkan [Produk]?"
+  showBenefits?: boolean; // "Keunggulan Produk" / "Keunggulan Utama [Produk]"
 };
 
 export const productConfig: Record<string, ProductConfig> = {
@@ -44,6 +47,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   "hepatosol-lola": {
@@ -51,6 +56,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   "nephrisol-d": {
@@ -58,6 +65,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   peptisol: {
@@ -72,6 +81,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   oligo: {
@@ -79,6 +90,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   nephrisol: {
@@ -86,5 +99,7 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 };

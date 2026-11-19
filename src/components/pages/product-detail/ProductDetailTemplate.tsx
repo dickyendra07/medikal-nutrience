@@ -139,6 +139,7 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
         </section>
       ) : null}
 
+      {config?.showNeeds !== false ? (
       <section className="px-5 py-12 md:py-16 lg:px-10">
         <div className="mx-auto w-full max-w-[1440px]">
           <div className="mx-auto max-w-3xl text-center reveal">
@@ -181,7 +182,9 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
           </div>
         </div>
       </section>
+      ) : null}
 
+      {config?.showBenefits !== false ? (
       <section className="bg-white px-5 py-12 md:py-16 lg:px-10">
         <div className="mx-auto grid w-full max-w-[1440px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div className="reveal-left">
@@ -238,6 +241,7 @@ export function ProductDetailTemplate({ product }: { product: ProductDetail }) {
           </div>
         </div>
       </section>
+      ) : null}
 
       {product.slug === "entrakid" ? (
         <WhyEntrakidSection color={product.theme.primary} />

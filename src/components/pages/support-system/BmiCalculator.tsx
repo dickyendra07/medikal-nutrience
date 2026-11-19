@@ -95,7 +95,7 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
         href: "/produk/hepatosol",
       },
       {
-        name: "Hepatosol Lola",
+        name: "Hepatosol LOLA",
         description:
           "Dukungan nutrisi untuk kondisi hati dengan kebutuhan spesifik.",
         logo: mednutAssets.productLogos.hepatosolLola,

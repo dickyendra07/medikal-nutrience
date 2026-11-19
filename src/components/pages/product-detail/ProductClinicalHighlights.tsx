@@ -9,9 +9,13 @@ export type ClinicalHighlight = {
 export function ProductClinicalHighlights({
   highlights,
   color,
+  title = "Keunggulan Nutrisi Utama",
+  subtitle = "Formulasi nutrisi yang dirancang untuk mendukung kebutuhan pasien sesuai kondisi klinis.",
 }: {
   highlights: ClinicalHighlight[];
   color: string;
+  title?: string;
+  subtitle?: string;
 }) {
   if (!highlights || highlights.length === 0) {
     return null;
@@ -67,13 +71,12 @@ export function ProductClinicalHighlights({
                 md:text-4xl
               "
             >
-              Keunggulan Nutrisi Utama
+              {title}
             </h2>
 
 
             <p className="mt-4 text-base font-medium leading-7 text-[#6b7280]">
-              Formulasi nutrisi yang dirancang untuk mendukung kebutuhan
-              pasien sesuai kondisi klinis.
+              {subtitle}
             </p>
 
           </div>

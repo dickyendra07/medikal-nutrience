@@ -35,6 +35,8 @@ export type ProductNutrition = {
   highlights?: ProductHighlight[];
   highlightTitle?: string;
   highlightSubtitle?: string;
+  // Intro under the "Mengapa [Produk]?" heading; falls back to the generic line.
+  whySubtitle?: string;
 
   disclaimer?: string[];
 
@@ -73,8 +75,8 @@ export const clinicalNutritionProducts = [
 export const productNutrition: Record<string, ProductNutrition> = {
   entrakid: {
     productInformation: {
-      "servingInstruction": "3 sendok takar (+/- 45 g) dilarutkan ke 190 ml air menghasilkan 235 ml larutan",
-      "servingPer100ml": "22 gram serbuk ke 90 ml air",
+      "servingInstruction": "3 sendok takar (+/- 45 g) dilarutkan ke 190 mL air menghasilkan 235 mL larutan",
+      "servingPer100ml": "22 Gram serbuk ke 90 mL air",
       "composition": "Susu bubuk, Protein Whey, Maltodekstrin, Lemak Nabati, SUkrosa, Serat Pangan, Perisa Sintetik, Premiks Mineral dan Vitamin",
       "specificComposition": [
         "DHA, Inulin, Omega 3, Omega 6"
@@ -141,10 +143,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Minuman berbasis whey bubuk dengan sumber protein, sumber serat pangan, sumber kalsium, rendah laktosa, mengandung 12 vitamin dan 8 mineral untuk memenuhi gizi seimbang pada dewasa dan lansia. Entramix digunakan untuk melengkapi gaya hidup sehat dengan pola makan gizi lengkap dan seimbang. Entramix mendukung pemenuhan nutrisi dan aktivitas sehari-hari.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 250 ml larutan",
+        "Untuk menyajikan 250 mL larutan, tambahkan satu (1) Sachet ENTRAMIX (± 58 Gram) ke dalam 200 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "23 gram serbuk ke 80 ml air",
+        "23 Gram serbuk ke 80 mL air",
 
       osmolality:
         "Kurang dari 250.",
@@ -155,10 +157,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 174 gram (3 x 58 gram).",
+        "Gramasi 174 Gram (3 x 58 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
@@ -252,7 +254,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Entrasoy by Entramix merupakan formula dengan 100% protein nabati dari isolat protein kedelai. Entrasoy mengandung tinggi protein, tinggi serat pangan, sumber 12 vitamin dan 8 mineral. Entrasoy bebas laktosa, bebas gluten, dan bebas kolesterol.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke 160 ml air menghasilkan 180 ml larutan",
+        "Untuk menyajikan 180 mL larutan, tambahkan satu (1) Sachet ENTRASOY by Entramix (± 40 Gram) ke dalam 160 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
         "Mengikuti kebutuhan",
@@ -265,10 +267,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 200 gram (5 sachet x 40 gram).",
+        "Gramasi 200 Gram (5 Sachet x 40 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
@@ -357,10 +359,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Hepatosol merupakan nutrisi adekuat dengan nutrien spesifik seperti BCAA dan Lemak Rantai Sedang (MCT) yang dapat membantu mempercepat pemulihan. Solusi untuk pemenuhan nutrisi malam hari sebelum beristirahat.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke 300 ml air menghasilkan 363 ml larutan",
+        "Untuk menyajikan 363 mL larutan, tambahkan satu (1) Sachet HEPATOSOL (± 80 Gram) ke dalam 300 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "22 gram serbuk ke 83 ml air",
+        "22 Gram serbuk ke 83 mL air",
 
       flavors: [
         "Vanilla",
@@ -368,18 +370,16 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 240 gram (3 sachet x 80 gram).",
+        "Gramasi 240 Gram (3 Sachet x 80 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
         "Maltodekstrin, Bubuk MCT, Sukrosa, Isolat protein Whey, Konsentrat Protein Whey, Inulin, Premiks Asam Amino (BCAA), Natrium Klorida, Kalsium Karbonat, Mononatrium Fosfat, Bubuk Lemak Nabati, Vitamin & Mineral",
-
-      specificComposition: ["MCT, BCAA, Inulin"],
     },
 
     displayName: "Hepatosol",
@@ -415,7 +415,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     serving: "Per Sajian Hepatosol",
 
     highlightTitle:
-      "Keunggulan Utama Hepatosol",
+      "Mengapa Hepatosol?",
 
     highlightSubtitle:
       "Formula nutrisi klinis yang diformulasikan untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderate.",
@@ -504,10 +504,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Nephrisol diformulasikan secara khusus untuk membantu memenuhi kebutuhan gizi pasien ginjal kronik tahap pradialisis dengan diet rendah protein dan tinggi kalori serta berbagai mikronutrien yang sesuai. Nephrisol merupakan sumber 13 vitamin dan 6 mineral, rendah laktosa, dan sumber serat pangan.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 250 ml larutan",
+        "Untuk menyajikan 250 mL larutan, tambahkan satu (1) Sachet NEPHRISOL (± 67 Gram) ke dalam 200 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "29 gram serbuk ke 78 ml air",
+        "29 Gram serbuk ke 78 mL air",
 
       osmolality:
         "555 mOsmol/kg air",
@@ -518,18 +518,16 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 201 gram (3 sachet x 67 gram).",
+        "Gramasi 201 Gram (3 Sachet x 67 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
         "Base bubuk (mengandung susu, antioksidan askorbil palmitat dan alfa tokoferol), isomaltulosa, serat pangan inulin, trigliserida, MCT, premiks asam amino, perisa sintetik, kalium sorbat, steviol, premiks vitamin mineral",
-
-      specificComposition: ["9 jenis Asam amino esensial dan 11 jenis asam amino non esensial"],
     },
 
     variants: [
@@ -600,6 +598,9 @@ export const productNutrition: Record<string, ProductNutrition> = {
       { name: "Zat Gizi Lainnya", value: "Vitamin K1 10 mcg" },
     ],
 
+    whySubtitle:
+      "Formulasi nutrisi yang dirancang untuk mendukung kebutuhan penyakit ginjal kronik stadium pradialisis",
+
     highlights: [
       {
         title: "Rendah Protein",
@@ -641,10 +642,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Nephrisol-D diformulasikan khusus untuk membantu memenuhi kebutuhan gizi pasien penyakit ginjal kronik dengan terapi dialisis (CAPD dan HD). Formula ini memiliki kandungan tinggi kalori dan protein, rendah laktosa, serta diperkaya dengan vitamin, mineral, dan serat pangan.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke dalam 150 ml air menghasilkan 200 ml larutan",
+        "Untuk menyajikan 200 mL larutan, tambahkan satu (1) Sachet NEPHRISOL-D (± 70 Gram) ke dalam 150 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "35 gram serbuk ke 75 ml air",
+        "35 Gram serbuk ke 75 mL air",
 
       osmolality:
         "487 mOsmol/kg air.",
@@ -655,18 +656,16 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 210 gram (3 sachet x 70 gram).",
+        "Gramasi 210 Gram (3 Sachet x 70 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
         "Base bubuk, serat pangan inulin, isomaltulosa, MCT, perisa, steviol, premiks vitamin dan mineral",
-
-      specificComposition: ["9 jenis Asam amino esensial dan 11 jenis asam amino non esensial"],
     },
 
     variants: [
@@ -790,10 +789,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Oligo merupakan formula oligomerik dengan kandungan makronutrien cepat serap dengan mikronutrien yang lengkap. Oligo mengandung protein berbasis peptida / oligomerik, lemak rantai sedang dan karbohidrat sederhana menjadi solusi pada pasien dengan gangguan pengosongan lambung dan malabsorbsi saluran cerna.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke 200 ml air menghasilkan 250 ml larutan",
+        "Untuk menyajikan 250 mL larutan, tambahkan satu (1) Sachet OLIGO (± 55 Gram) ke dalam 200 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "25 gram serbuk ke 80 ml air",
+        "25 Gram serbuk ke 80 mL air",
 
       osmolality:
         "353 mOsmol/kg air",
@@ -803,18 +802,16 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 165 gram (3 sachet x 55 gram)",
+        "Gramasi 165 Gram (3 Sachet x 55 Gram)",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
         "Maltodekstrin, Protein Whey Terhidrolisa, Lemak MCT, Isomaltulosa, Sukrosa, Vitamin & Mineral, DHA, Bubuk Pisang",
-
-      specificComposition: ["MCT, Whey Terhidrolisa, Omega 3, Omega 6"],
     },
 
     variants: [
@@ -886,7 +883,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
 
     highlightTitle:
-      "Keunggulan Utama Oligo",
+      "Mengapa Oligo?",
 
     highlightSubtitle:
       "Formula oligomerik dengan makronutrien cepat serap untuk mendukung kebutuhan nutrisi pada gangguan saluran cerna.",
@@ -924,27 +921,27 @@ export const productNutrition: Record<string, ProductNutrition> = {
   },
 
   "hepatosol-lola": {
-    displayName: "Hepatosol Lola",
+    displayName: "Hepatosol LOLA",
 
     productInformation: {
       background:
         "Hepatosol LOLA merupakan nutrisi enteral yang lengkap untuk pasien dengan gangguan fungsi hati berat. Dengan kombinasi kandungan BCAA dan LOLA yang membantu menurunkan kadar amonia dalam darah, memperbaiki keseimbangan nitrogen dan rasio Fischer serta membantu menurunkan pemecahan protein sebagai sumber protein otot.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke 250 ml air menghasilkan 303 ml larutan",
+        "Untuk menyajikan 303 mL larutan, tambahkan satu (1) Sachet HEPATOSOL LOLA (± 83 Gram) ke dalam 250 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "27 gram serbuk ke 83 ml air",
+        "27 Gram serbuk ke 83 mL air",
 
       flavors: [
         "Jeruk",
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 249 gram (3 sachet x 83 gram).",
+        "Gramasi 249 Gram (3 Sachet x 83 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
@@ -971,7 +968,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
 
     targetAudience: {
-      title: "Siapa yang Membutuhkan Hepatosol Lola?",
+      title: "Siapa yang Membutuhkan Hepatosol LOLA?",
       description:
         "Formula nutrisi klinis spesifik untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati berat.",
     },
@@ -982,7 +979,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     serving: "Per Sajian Hepatosol LOLA",
 
     highlightTitle:
-      "Keunggulan Utama Hepatosol Lola",
+      "Mengapa Hepatosol LOLA?",
 
     highlightSubtitle:
       "Formula nutrisi klinis spesifik untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati berat.",
@@ -1067,13 +1064,13 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     productInformation: {
       background:
-        "Peptisol merupakan nutrisi enteral tinggi protein (13 gram/saji) dengan formula rendah residu untuk membantu memenuhi kebutuhan diet tinggi protein pada fase pemulihan, pasca pembedahan, sarkopenia, peningkatan kebutuhan protein, serta kondisi yang membutuhkan dukungan nutrisi tinggi protein.",
+        "Peptisol merupakan nutrisi enteral tinggi protein (13 Gram/saji) dengan formula rendah residu untuk membantu memenuhi kebutuhan diet tinggi protein pada fase pemulihan, pasca pembedahan, sarkopenia, peningkatan kebutuhan protein, serta kondisi yang membutuhkan dukungan nutrisi tinggi protein.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke 200 ml air menghasilkan 250 ml larutan",
+        "Untuk menyajikan 260 mL larutan, tambahkan satu (1) Sachet PEPTISOL (± 60 Gram) ke dalam 210 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "22 gram serbuk ke 80 ml air",
+        "22 Gram serbuk ke 80 mL air",
 
       flavors: [
         "Vanilla",
@@ -1081,10 +1078,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 180 gram (3 sachet x 60 gram).",
+        "Gramasi 180 Gram (3 Sachet x 60 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan hindari paparan sinar matahari langsung.",
@@ -1174,7 +1171,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
 
     highlightTitle:
-      "Keunggulan Utama Peptisol",
+      "Mengapa Peptisol?",
 
     highlightSubtitle:
       "Formula tinggi protein dengan dukungan zinc untuk membantu proses pemulihan.",
@@ -1190,7 +1187,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       {
         title: "Tinggi Protein",
         description:
-          "Mengandung 13 gram protein per sajian.",
+          "Mengandung 13 Gram protein per sajian.",
         icon:
           "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Protein 13 grsaji.svg",
       },
@@ -1219,10 +1216,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernapasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke dalam 200 ml air menghasilkan 240 ml larutan",
+        "Untuk menyajikan 240 mL larutan, tambahkan satu (1) Sachet PULMOSOL (± 50 Gram) ke dalam 200 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
-        "21 gram serbuk ke 83 ml air",
+        "21 Gram serbuk ke 83 mL air",
 
       osmolality:
         "221 mOsmol/kg air.",
@@ -1232,10 +1229,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 150 gram (3 sachet x 50 gram).",
+        "Gramasi 150 Gram (3 Sachet x 50 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung.",
@@ -1313,7 +1310,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
 
     highlightTitle:
-      "Keunggulan Utama Pulmosol",
+      "Mengapa Pulmosol?",
 
     highlightSubtitle:
       "Formula nutrisi khusus untuk mendukung kebutuhan pasien dengan gangguan pernapasan.",
@@ -1358,10 +1355,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Peptibren merupakan nutrisi tinggi energi dan tinggi protein yang membantu memenuhi kebutuhan nutrisi pasien dengan gangguan neurologis seperti stroke, Alzheimer dan demensia dengan kesulitan menelan atau disfagia. Peptibren mengandung nutrien spesifik Kolin, Fosfatidilserin, dan Uridin Monofosfat yang membantu mendukung pemulihan fungsi saraf.",
 
       servingInstruction:
-        "1 sachet dilarutkan ke 200 ml air menghasilkan 250 ml larutan",
+        "1 Sachet dilarutkan ke 200 mL air menghasilkan 250 mL larutan",
 
       servingPer100ml:
-        "26 gram serbuk ke 80 ml air",
+        "26 Gram serbuk ke 80 mL air",
 
       flavors: [
         "Vanila",
@@ -1369,10 +1366,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
 
       availability:
-        "Box",
+        "Boks",
 
       packaging:
-        "Gramasi 195 gram (3 sachet x 65 gram).",
+        "Gramasi 195 Gram (3 Sachet x 65 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan hindari terkena sinar matahari langsung.",
@@ -1458,7 +1455,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
 
     highlightTitle:
-      "Keunggulan Utama Peptibren",
+      "Mengapa Peptibren?",
 
     highlightSubtitle:
       "Formula nutrisi spesifik untuk mendukung kebutuhan energi, protein, dan nutrisi neurologis.",
