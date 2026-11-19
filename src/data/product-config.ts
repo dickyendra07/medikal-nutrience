@@ -33,6 +33,7 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showBenefits: false,
   },
 
   entrasoy: {

@@ -81,6 +81,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Entrakid merupakan suplemen nutrisi dengan komposisi gizi lengkap yang diformulasikan untuk membantu mendukung tumbuh kembang anak usia 1–12 tahun. Dengan kandungan nutrisi yang seimbang, Entrakid menjadi pilihan untuk melengkapi kebutuhan nutrisi anak dalam masa pertumbuhan.",
       flavors: ["Coklat", "Vanilla"],
       availability: "Boks",
+      packaging: "Gramasi 185 Gram (3 Sachet x 61 Gram).",
       osmolalityByFlavor: [
         { flavor: "Coklat", value: "474 mOsm/L" },
         { flavor: "Vanilla", value: "486 mOsm/L" },
@@ -158,8 +159,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       servingPer100ml:
         "23 Gram serbuk ke 80 mL air",
 
-      osmolality:
-        "Kurang dari 250.",
+      osmolalityByFlavor: [
+        { flavor: "Coklat", value: "453 mOsm/L" },
+        { flavor: "Vanilla", value: "424 mOsm/L" },
+      ],
 
       flavors: [
         "Vanilla",
@@ -254,6 +257,30 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
     components: [
       { name: "Zat Gizi Lainnya", value: "-" },
+    ],
+
+    highlights: [
+      {
+        title: "Tinggi Kalori",
+        description:
+          "Membantu memenuhi kebutuhan energi harian.",
+        icon:
+          "/images/mednut/products/icons/entramix/tinggi-kalori.svg",
+      },
+      {
+        title: "Nutrisi Lengkap dan Seimbang",
+        description:
+          "Mengandung kombinasi zat gizi untuk mendukung kebutuhan nutrisi tubuh.",
+        icon:
+          "/images/mednut/products/icons/entramix/sumber-kalsium.svg",
+      },
+      {
+        title: "Inulin",
+        description:
+          "Prebiotik untuk saluran cerna.",
+        icon:
+          "/images/mednut/products/icons/entramix/serat-pangan-inulin.svg",
+      },
     ],
   },
 
@@ -365,8 +392,12 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
   hepatosol: {
     productInformation: {
+      osmolalityByFlavor: [
+        { flavor: "Vanilla", value: "429 mOsm/L" },
+        { flavor: "Coklat", value: "420 mOsm/L" },
+      ],
       background:
-        "Hepatosol merupakan nutrisi adekuat dengan nutrien spesifik seperti BCAA dan Lemak Rantai Sedang (MCT) yang dapat membantu mempercepat pemulihan. Solusi untuk pemenuhan nutrisi malam hari sebelum beristirahat.",
+        "Hepatosol merupakan nutrisi yang diperkaya BCAA dan Lemak Rantai Sedang (MCT) yang dapat membantu mempercepat pemulihan yang dikonsumsi sebagai kudapan malam (late evening snack) sebelum beristirahat.",
 
       servingInstruction:
         "Untuk menyajikan 363 mL larutan, tambahkan satu (1) Sachet HEPATOSOL (± 80 Gram) ke dalam 300 mL air matang hangat, aduk hingga larut.",
@@ -389,7 +420,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
-        "Maltodekstrin, Bubuk MCT, Sukrosa, Isolat protein Whey, Konsentrat Protein Whey, Inulin, Premiks Asam Amino (BCAA), Natrium Klorida, Kalsium Karbonat, Mononatrium Fosfat, Bubuk Lemak Nabati, Vitamin & Mineral",
+        "Maltodekstrin, Bubuk MCT (mengandung Protein Susu), Sukrosa, Isolat Protein Whey, Konsentrat Protein Whey, Inulin, Premiks Asam Amino (BCAA), Natrium Klorida, Kalsium Karbonat, Mononatrium Fosfat, Bubuk Lemak Nabati (mengandung Protein Susu), Premiks Vitamin & Mineral, Perisa Sintetik (Vanila & Susu).",
     },
 
     displayName: "Hepatosol",
@@ -811,7 +842,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
-        "Maltodekstrin, Protein Whey Terhidrolisa, Lemak MCT, Isomaltulosa, Sukrosa, Vitamin & Mineral, DHA, Bubuk Pisang",
+        "Maltodekstrin, Protein Whey Terhidrolisa, Lemak Trigliserida Rantai Sedang (mengandung Protein Susu), Isomaltulosa, Bubuk Lemak Nabati, Sukrosa, DHA (mengandung antioksidan Natrium Askorbat, dl-Alfa Tokoferol, Askorbil Palmitat, dan Protein Susu), Perisa Sintetik, Bubuk Pisang, Premiks Mineral & Vitamin.",
     },
 
     variants: [
@@ -890,32 +921,25 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     highlights: [
       {
-        title: "Protein Whey Terhidrolisa",
+        title: "Protein Whey",
         description:
           "Protein berbasis peptida / oligomerik yang membantu mendukung proses penyerapan.",
         icon:
           "/images/mednut/products/icons/oligo/protein-terhidrolisa.svg",
       },
       {
-        title: "Osmolalitas 353 mOsmol/kg",
+        title: "Rasa Tropical Banana",
         description:
-          "Formula dengan osmolalitas 353 mOsmol/kg air.",
+          "Memberikan pengalaman rasa yang lebih nikmat saat dikonsumsi.",
         icon:
-          "/images/mednut/products/icons/oligo/osmolaritas-fisiologis.svg",
+          "/images/mednut/products/icons/oligo/rasa-tropical-banana.svg",
       },
       {
         title: "Lemak MCT",
         description:
-          "Mengandung lemak rantai sedang sebagai bagian dari formula nutrisi Oligo.",
+          "Mengandung lemak rantai sedang yang mudah dan cepat diserap.",
         icon:
           "/images/mednut/products/icons/oligo/lemak-mct.svg",
-      },
-      {
-        title: "Formula Cepat Serap",
-        description:
-          "Makronutrien dirancang untuk mendukung kebutuhan pada kondisi gangguan pencernaan dan malabsorbsi.",
-        icon:
-          "/images/mednut/products/icons/oligo/rendah-residu-cepat-serap.svg",
       },
     ],
   },
@@ -928,7 +952,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         { flavor: "Jeruk", value: "470 mOsm/L" },
       ],
       background:
-        "Hepatosol LOLA merupakan nutrisi enteral yang lengkap untuk pasien dengan gangguan fungsi hati berat. Dengan kombinasi kandungan BCAA dan LOLA yang membantu menurunkan kadar amonia dalam darah, memperbaiki keseimbangan nitrogen dan rasio Fischer serta membantu menurunkan pemecahan protein sebagai sumber protein otot.",
+        "Hepatosol LOLA nutrisi untuk gangguan fungsi hati berat. Dengan kombinasi kandungan BCAA dan LOLA yang membantu menurunkan kadar amonia dalam darah, memperbaiki keseimbangan nitrogen dan rasio Fischer serta membantu menurunkan pemecahan protein sebagai sumber protein otot. Hepatosol LOLA juga dapat dikonsumsi sebagai kudapan malam (late evening snack) sebelum beristirahat.",
 
       servingInstruction:
         "Untuk menyajikan 303 mL larutan, tambahkan satu (1) Sachet HEPATOSOL LOLA (± 83 Gram) ke dalam 250 mL air matang hangat, aduk hingga larut.",
@@ -1039,24 +1063,31 @@ export const productNutrition: Record<string, ProductNutrition> = {
     highlights: [
       {
         title: "Tinggi Kalori",
-        description: "Mendukung kebutuhan energi pasien dengan kondisi hati berat.",
-        icon: "/images/client-assets/icon/HEPATOSOL/NEW ICON/Tinggi Kalori.svg",
+        description:
+          "Membantu memenuhi kebutuhan energi harian.",
+        icon:
+          "/images/client-assets/icon/HEPATOSOL/NEW ICON/Tinggi Kalori.svg",
       },
       {
-        title: "Diperkaya BCAA",
-        description: "Mengandung asam amino rantai cabang.",
-        icon: "/images/client-assets/icon/HEPATOSOL/NEW ICON/Diperkaya BCAA.svg",
+        title: "Tinggi Protein dan BCAA",
+        description:
+          "Membantu memenuhi kebutuhan protein serta mendukung pemeliharaan massa otot.",
+        icon:
+          "/images/client-assets/icon/HEPATOSOL/NEW ICON/Diperkaya BCAA.svg",
       },
       {
         title: "Sumber Lemak MCT",
-        description: "Sumber energi dari lemak rantai sedang.",
-        icon: "/images/client-assets/icon/HEPATOSOL/NEW ICON/sumber-lemak-mct.svg",
+        description:
+          "Mengandung lemak rantai sedang sebagai sumber energi.",
+        icon:
+          "/images/client-assets/icon/HEPATOSOL/NEW ICON/sumber-lemak-mct.svg",
       },
       {
         title: "LOLA",
         description:
-          "Mengandung L-Ornithine L-Aspartate untuk mendukung kebutuhan nutrisi spesifik pasien hati.",
-        icon: "/images/client-assets/icon/HEPATOSOL/NEW ICON/Diperkaya BCAA.svg",
+          "Mengandung L-Ornithine L-Aspartate (LOLA) yang membantu mendukung metabolisme amonia.",
+        icon:
+          "/images/client-assets/icon/HEPATOSOL/NEW ICON/Diperkaya BCAA.svg",
       },
     ],
   }
@@ -1185,13 +1216,6 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     highlights: [
       {
-        title: "Tinggi Zinc",
-        description:
-          "Mengandung zinc untuk membantu mendukung proses pemulihan luka.",
-        icon:
-          "/images/mednut/products/icons/peptisol/tinggi-zinc.svg",
-      },
-      {
         title: "Tinggi Protein",
         description:
           "Mengandung 13 Gram protein per sajian.",
@@ -1199,18 +1223,18 @@ export const productNutrition: Record<string, ProductNutrition> = {
           "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Protein 13 grsaji.svg",
       },
       {
-        title: "Rendah Laktosa",
+        title: "Rendah Residu",
         description:
-          "Formula dengan kandungan laktosa rendah.",
+          "Untuk endoskopi dan operasi.",
         icon:
-          "/images/client-assets/icon/PEPTISOL/NEW ICON/Rendah Laktosa 2.svg",
+          "/images/mednut/products/icons/oligo/rendah-residu-cepat-serap.svg",
       },
       {
-        title: "Dual Protein Source",
+        title: "Mengandung Zinc",
         description:
-          "Menggunakan kombinasi sumber protein.",
+          "Membantu mendukung proses pemulihan luka.",
         icon:
-          "/images/client-assets/icon/PEPTISOL/NEW ICON/Dual Protein Source 2.svg",
+          "/images/mednut/products/icons/peptisol/tinggi-zinc.svg",
       },
     ],
   },
@@ -1325,9 +1349,16 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     highlights: [
       {
+        title: "Rendah Karbohidrat",
+        description:
+          "Membantu meminimalkan produksi CO₂ dari metabolisme zat gizi.",
+        icon:
+          "/images/mednut/products/icons/pulmosol/karbohidrat-rendah.svg",
+      },
+      {
         title: "Tinggi Protein",
         description:
-          "Mendukung pemenuhan kebutuhan protein.",
+          "Untuk pemulihan otot-otot pernapasan dan mencegah sarcopenia.",
         icon:
           "/images/mednut/products/icons/pulmosol/tinggi-protein.svg",
       },
@@ -1337,20 +1368,6 @@ export const productNutrition: Record<string, ProductNutrition> = {
           "Mengandung lemak baik untuk kebutuhan energi.",
         icon:
           "/images/mednut/products/icons/pulmosol/tinggi-lemak.svg",
-      },
-      {
-        title: "Karbohidrat Rendah",
-        description:
-          "Formula dengan komposisi karbohidrat terkontrol.",
-        icon:
-          "/images/mednut/products/icons/pulmosol/karbohidrat-rendah.svg",
-      },
-      {
-        title: "Vitamin Mineral Antioksidan",
-        description:
-          "Diperkaya vitamin dan mineral untuk mendukung nutrisi.",
-        icon:
-          "/images/mednut/products/icons/pulmosol/vitamin-mineral-antioksidan.svg",
       },
     ],
   },

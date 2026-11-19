@@ -134,7 +134,7 @@ export const productDetails: ProductDetail[] = [
     category: "Protein Nabati",
     heroTitle: "Solusi Gizi 100% Protein Nabati",
     description:
-      "Entrasoy sesuai diberikan untuk semua orang yang membutuhkan suplemen nutrisi dengan konsep gizi seimbang, termasuk yang memiliki intoleransi laktosa, alergi protein sapi, dan pola diet vegetarian.",
+      "Entrasoy sesuai diberikan untuk semua orang yang membutuhkan suplemen nutrisi dengan konsep gizi seimbang, terutama memiliki intoleransi laktosa, alergi protein sapi, dan pola diet vegetarian.",
     theme: {
       primary: "#009c68",
       soft: "#e4f8ed",
@@ -223,7 +223,7 @@ export const productDetails: ProductDetail[] = [
     ],
     ctaLabel: "Beli Sekarang",
     crossSell: {
-      title: "Butuh Kondisi Hati Perhatian Lebih?",
+      title: "Butuh nutrisi untuk kondisi hati yang lebih berat?",
       description: "Dukungan nutrisi lanjutan untuk nutrisi lebih intensif.",
       buttonLabel: "Lihat Hepatosol LOLA",
       href: "/produk/hepatosol-lola",
@@ -285,7 +285,7 @@ export const productDetails: ProductDetail[] = [
   {
     slug: "nephrisol",
     name: "NEPHRISOL",
-    category: "Ginjal Non Dialisis",
+    category: "Penyakit Ginjal Kronik Stadium Pradialisis",
     heroTitle: "Dukungan Nutrisi untuk Menjaga Fungsi Ginjal",
     description:
       "Nephrisol membantu melengkapi kebutuhan nutrisi pada kondisi penyakit ginjal kronik stadium pradialisis, dengan formula yang disesuaikan untuk menjaga status gizi dan fungsi ginjal sisa.",
@@ -398,7 +398,7 @@ export const productDetails: ProductDetail[] = [
     category: "Sistem Pernapasan",
     heroTitle: "Solusi Gizi Masalah Pernapasan",
     description:
-      "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernapasan.",
+      "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernapasan (PPOK, Asma, Pneumonia, dan TB Paru).",
     theme: {
       primary: "#1e3a8a",
       soft: "#eff6ff",

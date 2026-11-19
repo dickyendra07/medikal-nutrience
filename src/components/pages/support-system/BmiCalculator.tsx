@@ -70,7 +70,7 @@ function getProductRecommendations(condition: string, bmi: number, age: number) 
     return [
       {
         name: "Nephrisol",
-        description: "Dukungan nutrisi untuk kebutuhan ginjal non dialisis.",
+        description: "Dukungan nutrisi untuk kebutuhan penyakit ginjal kronik stadium pradialisis.",
         logo: mednutAssets.productLogos.nephrisol,
         image: mednutAssets.packshots.nephrisolCappucino,
         href: "/produk/nephrisol",
