@@ -726,7 +726,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
     subtitle:
       "Informasi nutrisi lengkap untuk membantu memenuhi kebutuhan penyakit ginjal kronik",
 
-    serving: "Per Sajian Nephrisol D",
+    serving: "Per Sajian Nephrisol-D",
 
     nutrition: [
       { name: "Energi", value: "315", unit: "kkal" },
