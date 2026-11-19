@@ -15,7 +15,7 @@ export function WhyEntrakidSection({
     {
       title: "Pertumbuhan Optimal",
       description:
-        "Mengandung protein berkualitas untuk membantu mendukung pertumbuhan anak.",
+        "Mengandung gizi lengkap untuk membantu mendukung pertumbuhan anak.",
       icon:
         "/images/mednut/products/icons/entrakid/dual-protein-source.svg",
     },
