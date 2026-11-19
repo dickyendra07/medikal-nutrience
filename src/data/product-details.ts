@@ -147,7 +147,7 @@ export const productDetails: ProductDetail[] = [
       { title: "Intoleransi Laktosa" },
       { title: "Alergi Protein Hewani" },
     ],
-    benefitTitle: "Keunggulan Utama Entrasoy",
+    benefitTitle: "Mengapa Entrasoy?",
     benefits: [
       "Bebas Laktosa & Gluten",
       "Bebas Kolesterol",
@@ -298,7 +298,7 @@ export const productDetails: ProductDetail[] = [
     needTitle: "Siapa yang Membutuhkan Nephrisol?",
     needs: [
       {
-        title: "Khusus Ginjal Non Dialisis",
+        title: "Khusus Ginjal Pradialisis",
         description:
           "Untuk pasien dengan gangguan ginjal yang belum menjalani dialisis.",
       },
@@ -315,7 +315,7 @@ export const productDetails: ProductDetail[] = [
     benefits: [
       "Kandungan Mikronutrien (Na, K, Fosfor)",
       "Rendah Protein",
-      "Khusus untuk Ginjal Non Dialisis",
+      "Khusus untuk Ginjal Pradialisis",
       "Dengan 13 Vitamin dan 6 Mineral",
     ],
     ctaLabel: "Beli Sekarang",
