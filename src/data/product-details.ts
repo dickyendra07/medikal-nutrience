@@ -383,7 +383,7 @@ export const productDetails: ProductDetail[] = [
     benefitTitle: "Keunggulan Utama Peptisol",
     benefits: [
       "Tinggi Zinc (20% AKG)",
-      "Tinggi Protein (13 gr/saji)",
+      "Tinggi Protein (13 Gram/saji)",
       "Rendah Laktosa",
       "Dual Protein Source",
     ],
