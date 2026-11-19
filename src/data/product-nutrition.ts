@@ -82,6 +82,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       flavors: ["Coklat", "Vanilla"],
       availability: "Boks",
       packaging: "Gramasi 185 Gram (3 Sachet x 61 Gram).",
+      storage: "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
       osmolalityByFlavor: [
         { flavor: "Coklat", value: "474 mOsm/L" },
         { flavor: "Vanilla", value: "486 mOsm/L" },
@@ -296,8 +297,9 @@ export const productNutrition: Record<string, ProductNutrition> = {
       servingPer100ml:
         "Mengikuti kebutuhan",
 
-      osmolality:
-        "Kurang dari 250.",
+      osmolalityByFlavor: [
+        { flavor: "Almond Soya", value: "374 mOsm/L" },
+      ],
 
       flavors: [
         "Almond Soya",
@@ -825,8 +827,9 @@ export const productNutrition: Record<string, ProductNutrition> = {
       servingPer100ml:
         "25 Gram serbuk ke 80 mL air",
 
-      osmolality:
-        "353 mOsmol/kg air",
+      osmolalityByFlavor: [
+        { flavor: "Tropical Banana", value: "353 mOsm/L" },
+      ],
 
       flavors: [
         "Tropical Banana",

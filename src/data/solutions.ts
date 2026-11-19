@@ -31,7 +31,7 @@ export const solutionDetails: SolutionDetail[] = [
       "Kondisi ginjal membutuhkan pendekatan nutrisi yang lebih terarah. Medikal Nutrience menyediakan pilihan nutrisi untuk kebutuhan pradialisis dan dialisis.",
     problemTitle: "Kondisi yang Perlu Diperhatikan",
     problems: [
-      "Gangguan ginjal sebelum dialisis",
+      "Penyakit ginjal kronik stadium pradialisis",
       "Sedang menjalani cuci darah atau dialisis",
       "Memiliki pantangan makanan tertentu",
       "Membutuhkan dukungan nutrisi khusus",
@@ -41,7 +41,7 @@ export const solutionDetails: SolutionDetail[] = [
         name: "NEPHRISOL",
         slug: "nephrisol",
         description:
-          "Dukungan nutrisi untuk kondisi gangguan ginjal sebelum dialisis.",
+          "Dukungan nutrisi untuk penyakit ginjal kronik stadium pradialisis.",
       },
       {
         name: "NEPHRISOL-D",

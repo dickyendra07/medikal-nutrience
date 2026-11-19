@@ -81,11 +81,6 @@ export function ProductInformationSection({
       icon: "serving",
     },
     {
-      title: "Penyajian 100 mL larutan",
-      value: info.servingPer100ml,
-      icon: "water",
-    },
-    {
       title: "Osmolalitas",
       value: info.osmolalityByFlavor?.length
         ? info.osmolalityByFlavor
