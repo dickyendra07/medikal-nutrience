@@ -66,7 +66,7 @@ export const productDetails: ProductDetail[] = [
     category: "Nutrisi Anak",
     heroTitle: "Solusi Gizi untuk Tumbuh Kembang Anak yang Optimal",
     description:
-      "Entrakid adalah suplementasi yang diperkaya dengan jenis protein hewani berkualitas tinggi yang lebih mudah dicerna oleh tubuh anak dan mengandung asam amino esensial yang lebih lengkap. Dirancang khusus untuk mendukung masa tumbuh kembang anak usia 1–12 tahun.",
+      "Entrakid adalah suplemen nutrisi dengan komposisi gizi lengkap untuk mendukung tumbuh kembang anak usia 1–12 tahun.",
     theme: {
       primary: "#13a8c5",
       soft: "#e7f9fd",
@@ -199,7 +199,7 @@ export const productDetails: ProductDetail[] = [
     slug: "hepatosol",
     name: "HEPATOSOL",
     category: "Hati / Liver",
-    heroTitle: "Solusi Nutrisi Gangguan Fungsi Hati Ringan-Moderate",
+    heroTitle: "Solusi Nutrisi Gangguan Fungsi Hati Ringan-Moderat",
     description:
       "Dukungan nutrisi untuk kebutuhan gangguan fungsi hati ringan/moderat",
     theme: {
@@ -235,10 +235,10 @@ export const productDetails: ProductDetail[] = [
   {
     slug: "nephrisol-d",
     name: "NEPHRISOL-D",
-    category: "Ginjal Dialisis",
-    heroTitle: "Solusi Gizi Penyakit Ginjal Kronis Dialisis",
+    category: "Penyakit Ginjal Kronik Stadium Dialisis",
+    heroTitle: "Solusi Gizi Penyakit Ginjal Kronik Stadium Dialisis",
     description:
-      "Nephrisol-D diformulasikan untuk membantu memenuhi kebutuhan nutrisi bagi pasien yang menjalani dialisis, guna mendukung kondisi tubuh dan energi harian.",
+      "Nephrisol-D diformulasikan untuk membantu memenuhi kebutuhan nutrisi penyakit ginjal kronik stadium dialisis, guna mendukung kondisi tubuh dan energi harian.",
     theme: {
       primary: "#7e22ce",
       soft: "#f5f3ff",
@@ -288,7 +288,7 @@ export const productDetails: ProductDetail[] = [
     category: "Ginjal Non Dialisis",
     heroTitle: "Dukungan Nutrisi untuk Menjaga Fungsi Ginjal",
     description:
-      "Nephrisol membantu melengkapi kebutuhan nutrisi pada kondisi gangguan ginjal sebelum dialisis, dengan formula yang disesuaikan untuk menjaga kondisi tubuh tetap stabil.",
+      "Nephrisol membantu melengkapi kebutuhan nutrisi pada kondisi penyakit ginjal kronik stadium pradialisis, dengan formula yang disesuaikan untuk menjaga status gizi dan fungsi ginjal sisa.",
     theme: {
       primary: "#a855f7",
       soft: "#f5f3ff",
@@ -322,7 +322,7 @@ export const productDetails: ProductDetail[] = [
     crossSell: {
       title: "Sudah Menjalani Dialisis?",
       description:
-        "Jika Anda sedang menjalani cuci darah, kebutuhan nutrisi Anda berbeda.",
+        "Jika Anda sedang menjalani cuci darah dialisis",
       buttonLabel: "Lihat Nephrisol-D",
       href: "/produk/nephrisol-d",
     },
@@ -336,7 +336,7 @@ export const productDetails: ProductDetail[] = [
     category: "Saluran Cerna",
     heroTitle: "Solusi Spesifik Cepat Serap untuk Sistem Saluran Cerna",
     description:
-      "OLIGO merupakan nutrisi oligomerik dengan 100% protein terhidrolisa parsial dan 75% lemak rantai sedang untuk perioperative bedah digestif guna memenuhi kebutuhan nutrisi kondisi malabsorbsi protein utuh.",
+      "OLIGO merupakan nutrisi oligomerik dengan 100% protein terhidrolisa parsial dan 75% lemak rantai sedang (MCT) untuk memenuhi kebutuhan nutrisi pada kondisi gangguan penyerapan (misalnya pasca bedah saluran cerna).",
     theme: {
       primary: "#d85b70",
       soft: "#fff1f2",
@@ -388,15 +388,15 @@ export const productDetails: ProductDetail[] = [
       "Dual Protein Source",
     ],
     ctaLabel: "Beli Sekarang",
-    closingTitle: "Dukung Kesehatan dengan Nutrisi yang Tepat",
+    closingTitle: "Dukung Pemulihan dengan Nutrisi Pasca Operasi",
     closingDescription:
       "Dapatkan rekomendasi nutrisi yang sesuai dengan kondisi Anda untuk membantu proses pemulihan lebih optimal.",
   },
   {
     slug: "pulmosol",
     name: "PULMOSOL",
-    category: "Pernapasan",
-    heroTitle: "Solusi Gizi Masalah Pernapasan PPOK, Asma, Pneumonia, dan TB Paru",
+    category: "Sistem Pernapasan",
+    heroTitle: "Solusi Gizi Masalah Pernapasan",
     description:
       "Pulmosol merupakan inovasi terbaru dari Medikal Nutrience sebagai produk pertama di Indonesia yang diformulasi untuk membantu meringankan sesak napas karena gangguan pernapasan.",
     theme: {
