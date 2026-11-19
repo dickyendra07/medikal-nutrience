@@ -95,7 +95,7 @@ const medicalProducts = [
     name: "Nephrisol",
     category: "Ginjal",
     description:
-      "Dukungan nutrisi untuk penyakit ginjal kronik tahap pradialisis",
+      "Solusi Nutrisi untuk Penyakit Ginjal Kronik Stadium Pradialisis",
     logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
     image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol",
