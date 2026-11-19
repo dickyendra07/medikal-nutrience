@@ -30,7 +30,7 @@ export const mednutAssets = {
     nephrisol: "/images/mednut/products/logos/logo-nephrisol.png",
     nephrisolD: "/images/mednut/products/logos/logo-nephrisol-d.png",
     hepatosol: "/images/mednut/products/logos/logo-hepatosol.png",
-    hepatosolLola: "/images/mednut/products/logos/logo-hepatosol-lola.png",
+    hepatosolLola: "/images/mednut/products/logos/logo-hepatosol-lola.svg",
     oligo: "/images/client-assets/img/logo/Oligo.png",
     pulmosol: "/images/client-assets/img/logo/pulmosol.png",
   },
