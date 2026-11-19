@@ -87,7 +87,11 @@ export function ProductInformationSection({
     },
     {
       title: "Osmolalitas",
-      value: info.osmolality,
+      value: info.osmolalityByFlavor?.length
+        ? info.osmolalityByFlavor
+            .map((item) => `${item.flavor}: ${item.value}`)
+            .join("\n")
+        : info.osmolality,
       icon: "science",
     },
     {
@@ -182,7 +186,7 @@ export function ProductInformationSection({
                     </h4>
 
 
-                    <p className="mt-4 text-sm font-medium leading-7 text-[#4b5563]">
+                    <p className="mt-4 whitespace-pre-line text-sm font-medium leading-7 text-[#4b5563]">
                       {item.value}
                     </p>
 

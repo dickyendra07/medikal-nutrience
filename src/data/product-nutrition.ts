@@ -51,6 +51,8 @@ export type ProductNutrition = {
     servingInstruction?: string;
     servingPer100ml?: string;
     osmolality?: string;
+    // Per-flavor values; takes precedence over `osmolality` when present.
+    osmolalityByFlavor?: { flavor: string; value: string }[];
     flavors?: string[];
     availability?: string;
     packaging?: string;
@@ -75,9 +77,17 @@ export const clinicalNutritionProducts = [
 export const productNutrition: Record<string, ProductNutrition> = {
   entrakid: {
     productInformation: {
+      background:
+        "Entrakid merupakan suplemen nutrisi dengan komposisi gizi lengkap yang diformulasikan untuk membantu mendukung tumbuh kembang anak usia 1–12 tahun. Dengan kandungan nutrisi yang seimbang, Entrakid menjadi pilihan untuk melengkapi kebutuhan nutrisi anak dalam masa pertumbuhan.",
+      flavors: ["Coklat", "Vanilla"],
+      availability: "Boks",
+      osmolalityByFlavor: [
+        { flavor: "Coklat", value: "474 mOsm/L" },
+        { flavor: "Vanilla", value: "486 mOsm/L" },
+      ],
       "servingInstruction": "3 sendok takar (+/- 45 g) dilarutkan ke 190 mL air menghasilkan 235 mL larutan",
       "servingPer100ml": "22 Gram serbuk ke 90 mL air",
-      "composition": "Susu bubuk, Protein Whey, Maltodekstrin, Lemak Nabati, SUkrosa, Serat Pangan, Perisa Sintetik, Premiks Mineral dan Vitamin",
+      "composition": "Susu Bubuk (mengandung Padatan Susu, Protein Whey dan Kalsium Kaseinat), Krimer Minuman (mengandung Susu, Maltodekstrin, Lemak Nabati (mengandung Susu), Antioksidan Askorbil Palmitat, Natrium Askorbat, Tokoferol Campuran Pekat dan d-Alfa Tokoferol), Sukrosa, Serat Pangan, Perisa Sintetik, Premiks Mineral dan Vitamin.",
       "specificComposition": [
         "DHA, Inulin, Omega 3, Omega 6"
       ]
@@ -166,7 +176,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
-        "Base bubuk maltodextrin, kalsium kaseinat, lemak nabati (mengandung protein susu dan antioksidan askorbil palmitat dan tokoferol, protein whey, MCT, serat pangan, sukrosa, premiks vitamin dan mineral",
+        "Base bubuk (Maltodekstrin, Kalsium Kaseinat, Lemak Nabati, Protein Whey mengandung Protein Susu, Trigliserida Rantai Sedang, Antioksidan (Askorbil Palmitat dan Tokoferol)), Serat Pangan, Sukrosa, Perisa Sintetik, Premiks Mineral dan Vitamin.",
 
       specificComposition: ["Protein, MCT, Omega 3, Omega 6, Serat Pangan, Komposisi gizi seimbang"],
     },
@@ -276,7 +286,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
-        "Sari kacang kedelai bubuk, maltodextrin, isolat protein kedelai, serat pangan, sukrosa, vitamin dan mineral, perisa sintetik, pengelmulsi nabati, bubuk almond, steviol, allergen",
+        "Sari Kacang Kedelai Bubuk, Maltodekstrin, Isolat Protein Kedelai, Serat Pangan (mengandung Inulin), Sukrosa, Perisa Sintetik, Pengemulsi Nabati, Bubuk Almond, Pemanis Alami Glikosida Steviol, Premiks Mineral dan Vitamin.",
 
       specificComposition: ["Mengandung isoflavon"],
     },
@@ -509,8 +519,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       servingPer100ml:
         "29 Gram serbuk ke 78 mL air",
 
-      osmolality:
-        "555 mOsmol/kg air",
+      osmolalityByFlavor: [
+        { flavor: "Vanilla", value: "438 mOsm/L" },
+        { flavor: "Cappuccino", value: "608 mOsm/L" },
+      ],
 
       flavors: [
         "Vanilla",
@@ -527,7 +539,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
-        "Base bubuk (mengandung susu, antioksidan askorbil palmitat dan alfa tokoferol), isomaltulosa, serat pangan inulin, trigliserida, MCT, premiks asam amino, perisa sintetik, kalium sorbat, steviol, premiks vitamin mineral",
+        "Base Bubuk (mengandung Susu, Antioksidan Askorbil Palmitat dan dl Alfa Tokoferol), Isomaltulosa, Serat Pangan (mengandung Inulin), Trigliserida Rantai Sedang (mengandung Susu), Premiks Asam Amino, Perisa Sintetik (mengandung Pewarna Alami Karamel IV, Pengawet Kalium Sorbat), Pemanis Alami Glikosida Steviol, Premiks Mineral dan Vitamin.",
     },
 
     variants: [
@@ -603,32 +615,18 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     highlights: [
       {
-        title: "Rendah Protein",
-        description:
-          "Formula nutrisi yang disesuaikan untuk kebutuhan pasien ginjal non dialisis.",
-        icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Rendah Protein.svg",
-      },
-      {
         title: "Kandungan Mikronutrien",
         description:
-          "Mengandung mikronutrien yang sesuai untuk kebutuhan nutrisi klinis.",
+          "Memiliki kandungan natrium, kalium, dan fosfor yang rendah.",
         icon:
           "/images/client-assets/icon/NEPHRISOL/NEW ICON/Kandungan Mikronutrien.svg",
       },
       {
-        title: "Khusus untuk Ginjal Non Dialisis",
+        title: "Tinggi Energi",
         description:
-          "Diformulasikan untuk pasien ginjal kronik tahap pradialisis.",
+          "Membantu pemenuhan kalori harian yang meningkat.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Khusus untuk Ginjal Non Dialisis.svg",
-      },
-      {
-        title: "13 Vitamin dan 6 Mineral",
-        description:
-          "Sumber vitamin dan mineral untuk mendukung pemenuhan nutrisi.",
-        icon:
-          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Dengan 13 Vitamin dan 6 Mineral.svg",
+          "/images/mednut/products/icons/nephrisol-d/tinggi-energi.svg",
       },
     ],
   },
@@ -647,8 +645,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
       servingPer100ml:
         "35 Gram serbuk ke 75 mL air",
 
-      osmolality:
-        "487 mOsmol/kg air.",
+      osmolalityByFlavor: [
+        { flavor: "Vanilla", value: "478 mOsm/L" },
+        { flavor: "Cappuccino", value: "490 mOsm/L" },
+      ],
 
       flavors: [
         "Vanilla",
@@ -665,7 +665,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
-        "Base bubuk, serat pangan inulin, isomaltulosa, MCT, perisa, steviol, premiks vitamin dan mineral",
+        "Base Bubuk, Serat Pangan (mengandung Inulin), Isomaltulosa, Lemak Trigliserida Rantai Sedang, Premiks Asam Amino, Perisa Sintetik (mengandung Pemanis Alami Glikosida Steviol), Pemanis Alami Glikosida Steviol, Premiks Mineral dan Vitamin.",
     },
 
     variants: [
@@ -748,32 +748,32 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     highlights: [
       {
-        title: "Tinggi Kalori dan Protein",
+        title: "Rendah Gula dan Laktosa",
         description:
-          "Membantu memenuhi kebutuhan energi dan protein pasien yang menjalani terapi dialisis.",
-        icon:
-          "/images/client-assets/icon/NEPHRISOL/Website Icon-17.svg",
-      },
-      {
-        title: "Rendah Laktosa",
-        description:
-          "Diformulasikan rendah laktosa untuk mendukung toleransi konsumsi.",
+          "Diformulasikan rendah gula dan rendah laktosa untuk mendukung toleransi konsumsi.",
         icon:
           "/images/client-assets/icon/NEPHRISOL/Website Icon-18.svg",
       },
       {
-        title: "Untuk Terapi Dialisis",
+        title: "Tinggi Energi",
         description:
-          "Formula nutrisi klinis untuk pasien penyakit ginjal kronik dengan terapi CAPD atau HD.",
+          "Membantu pemenuhan kalori harian yang meningkat.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/Website Icon-19.svg",
+          "/images/mednut/products/icons/nephrisol-d/tinggi-energi.svg",
       },
       {
-        title: "Diperkaya Vitamin dan Mineral",
+        title: "Tinggi Protein",
         description:
-          "Mengandung vitamin dan mineral untuk membantu melengkapi kebutuhan nutrisi harian.",
+          "Membantu memenuhi kebutuhan protein penyakit ginjal kronik stadium dialisis.",
         icon:
-          "/images/client-assets/icon/NEPHRISOL/Website Icon-20.svg",
+          "/images/mednut/products/icons/nephrisol-d/tinggi-protein.svg",
+      },
+      {
+        title: "Kandungan Mikronutrien",
+        description:
+          "Memiliki kandungan natrium, kalium, dan fosfor yang rendah.",
+        icon:
+          "/images/client-assets/icon/NEPHRISOL/NEW ICON/Kandungan Mikronutrien.svg",
       },
     ],
   },
@@ -786,7 +786,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     productInformation: {
       background:
-        "Oligo merupakan formula oligomerik dengan kandungan makronutrien cepat serap dengan mikronutrien yang lengkap. Oligo mengandung protein berbasis peptida / oligomerik, lemak rantai sedang dan karbohidrat sederhana menjadi solusi pada pasien dengan gangguan pengosongan lambung dan malabsorbsi saluran cerna.",
+        "Oligo merupakan formula oligomerik dengan kandungan makronutrien cepat serap dengan mikronutrien yang lengkap. Oligo mengandung protein berbasis peptida / oligomerik, lemak rantai sedang dan karbohidrat sederhana menjadi solusi pada pasien dengan gangguan penyerapan saluran cerna.",
 
       servingInstruction:
         "Untuk menyajikan 250 mL larutan, tambahkan satu (1) Sachet OLIGO (± 55 Gram) ke dalam 200 mL air matang hangat, aduk hingga larut.",
@@ -924,6 +924,9 @@ export const productNutrition: Record<string, ProductNutrition> = {
     displayName: "Hepatosol LOLA",
 
     productInformation: {
+      osmolalityByFlavor: [
+        { flavor: "Jeruk", value: "470 mOsm/L" },
+      ],
       background:
         "Hepatosol LOLA merupakan nutrisi enteral yang lengkap untuk pasien dengan gangguan fungsi hati berat. Dengan kombinasi kandungan BCAA dan LOLA yang membantu menurunkan kadar amonia dalam darah, memperbaiki keseimbangan nitrogen dan rasio Fischer serta membantu menurunkan pemecahan protein sebagai sumber protein otot.",
 
@@ -1063,6 +1066,10 @@ export const productNutrition: Record<string, ProductNutrition> = {
     displayName: "Peptisol",
 
     productInformation: {
+      osmolalityByFlavor: [
+        { flavor: "Coklat", value: "478 mOsm/L" },
+        { flavor: "Vanilla", value: "474 mOsm/L" },
+      ],
       background:
         "Peptisol merupakan nutrisi enteral tinggi protein (13 Gram/saji) dengan formula rendah residu untuk membantu memenuhi kebutuhan diet tinggi protein pada fase pemulihan, pasca pembedahan, sarkopenia, peningkatan kebutuhan protein, serta kondisi yang membutuhkan dukungan nutrisi tinggi protein.",
 
@@ -1087,7 +1094,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan hindari paparan sinar matahari langsung.",
 
       composition:
-        "Base Bubuk, Isolat Protein Kedelai, Perisa Sintetik, Premiks Mineral dan Vitamin",
+        "Base Bubuk (mengandung Protein Susu), Bubuk Kakao, Isolat Protein Kedelai, Perisa Sintetik, Penstabil Mononatrium Fosfat, Premiks Mineral dan Vitamin.",
 
       specificComposition: ["Whey, Kasein, 5 Vitamin dan 4 Mineral"],
     },
@@ -1213,7 +1220,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     productInformation: {
       background:
-        "Pulmosol sebagai dukungan nutrisi bagi orang dewasa malnutrisi dengan komposisi tinggi protein, tinggi vitamin D, rendah natrium, sumber 10 vitamin dan 5 mineral. Pulmosol digunakan sebagai makanan tambahan atau pengganti makanan total yang dikhususkan untuk gangguan pernapasan dan pulmonologi seperti TB, PPOK, Asma, Pneumonia, serta pasien ventilator.",
+        "Pulmosol merupakan nutrisi rendah karbohidrat dan tinggi lemak yang membantu meminimalkan produksi CO₂ dari metabolisme zat gizi, sehingga mendukung pemenuhan kebutuhan nutrisi pada pasien dengan gangguan pernapasan, khususnya yang mengalami sesak napas.",
 
       servingInstruction:
         "Untuk menyajikan 240 mL larutan, tambahkan satu (1) Sachet PULMOSOL (± 50 Gram) ke dalam 200 mL air matang hangat, aduk hingga larut.",
@@ -1221,8 +1228,9 @@ export const productNutrition: Record<string, ProductNutrition> = {
       servingPer100ml:
         "21 Gram serbuk ke 83 mL air",
 
-      osmolality:
-        "221 mOsmol/kg air.",
+      osmolalityByFlavor: [
+        { flavor: "Creamy Vanilla", value: "470 mOsm/L" },
+      ],
 
       flavors: [
         "Creamy Vanilla",
