@@ -67,7 +67,7 @@ const featuredProducts = [
   {
     name: "Peptisol",
     scene: mednutAssets.scenes.peptisol,
-    category: "Protein Medis",
+    category: "Nutrisi Tinggi Protein",
     description:
       "Nutrisi tinggi protein untuk membantu mendukung kebutuhan pemulihan.",
     logo: mednutAssets.productLogos.peptisol,
@@ -96,7 +96,7 @@ const medicalProducts = [
     category: "Ginjal",
     description:
       "Solusi Nutrisi untuk Penyakit Ginjal Kronik Stadium Pradialisis",
-    logo: "/images/mednut/products/logos-fixed/logo-nephrisol.png",
+    logo: mednutAssets.productLogos.nephrisol,
     image: mednutAssets.scenes.nephrisolPair,
     href: "/produk/nephrisol",
     color: "#7c3aed",
@@ -156,7 +156,7 @@ const medicalProducts = [
     category: "Sistem Saraf",
     description:
       "Nutrisi khusus untuk mendukung kesehatan gangguan neurologis (stroke, Alhzemier)",
-    logo: "/images/mednut/products/logos-fixed/logo-peptibren.png",
+    logo: mednutAssets.productLogos.peptibren,
     image: mednutAssets.scenes.peptibren,
     href: "/produk/peptibren",
     color: "#ca8a04",
@@ -266,9 +266,9 @@ export default async function ProductsPage() {
               </div>
 
               <p className="text-sm font-medium leading-7 text-[#6b7280] md:text-base md:leading-8">
-                Produk unggulan ditampilkan dengan asset resmi yang sudah
-                disiapkan client agar halaman terasa lebih kredibel, informatif,
-                dan siap dipresentasikan.
+                Rangkaian produk nutrisi yang dikembangkan untuk membantu
+                memenuhi kebutuhan tubuh pada berbagai tahap kehidupan dan
+                kondisi kesehatan.
               </p>
             </div>
 

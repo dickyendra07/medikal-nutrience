@@ -200,7 +200,7 @@ export const articles: Article[] = [
     excerpt:
       "Picky eater dapat membuat orang tua khawatir. Kenali strategi sederhana untuk membantu memenuhi kebutuhan nutrisi anak.",
     image:
-      "/images/mednut/merakids/merakids-banner.png",
+      "/images/mednut/merakids/merakids-banner.webp",
     date: "15 Juli 2026",
     readTime: "6 menit membaca",
     tags: [

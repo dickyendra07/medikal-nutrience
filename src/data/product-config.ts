@@ -18,7 +18,9 @@ export const productConfig: Record<string, ProductConfig> = {
     productInformation: true,
     nutritionFacts: true,
     variants: true,
-    nutritionType: "standard",
+    nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   entrakid: {
@@ -26,6 +28,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "standard",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   entramix: {
@@ -33,6 +37,7 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
     showBenefits: false,
   },
 
@@ -41,6 +46,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   hepatosol: {
@@ -75,6 +82,8 @@ export const productConfig: Record<string, ProductConfig> = {
     nutritionFacts: true,
     variants: true,
     nutritionType: "clinical",
+    showNeeds: false,
+    showBenefits: false,
   },
 
   pulmosol: {
