@@ -48,7 +48,9 @@ const solutions: Solution[] = [
     accent: "#ef1f2d",
     href: "/solusi/hati-liver",
     primaryButton: "Hati Ringan Moderat",
+    primaryHref: "/produk/hepatosol",
     secondaryButton: "Hati Berat",
+    secondaryHref: "/produk/hepatosol-lola",
   },
   {
     key: "syaraf",

@@ -234,7 +234,7 @@ export const solutionDetails: SolutionDetail[] = [
     educationTitle: "Mengapa nutrisi anak perlu diperhatikan?",
     educationPoints: [
       "Masa anak-anak adalah fase penting untuk tumbuh kembang.",
-      "Picky eater dapat memengaruhi asupan makro dan mikro nutrisi.",
+      "Picky eater dapat memengaruhi asupan makronutrien dan mikronutrien.",
       "Nutrisi seimbang membantu anak tetap aktif dan berkembang optimal.",
     ],
     theme: {

@@ -87,7 +87,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         { flavor: "Coklat", value: "474 mOsm/L" },
         { flavor: "Vanilla", value: "486 mOsm/L" },
       ],
-      "servingInstruction": "3 sendok takar (+/- 45 g) dilarutkan ke 190 mL air menghasilkan 235 mL larutan",
+      "servingInstruction": "3 sendok takar (+/- 45 Gram) dilarutkan ke 190 mL air menghasilkan 235 mL larutan",
       "servingPer100ml": "22 Gram serbuk ke 90 mL air",
       "composition": "Susu Bubuk (mengandung Padatan Susu, Protein Whey dan Kalsium Kaseinat), Krimer Minuman (mengandung Susu, Maltodekstrin, Lemak Nabati (mengandung Susu), Antioksidan Askorbil Palmitat, Natrium Askorbat, Tokoferol Campuran Pekat dan d-Alfa Tokoferol), Sukrosa, Serat Pangan, Perisa Sintetik, Premiks Mineral dan Vitamin.",
       "specificComposition": [
@@ -174,15 +174,13 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Boks",
 
       packaging:
-        "Gramasi 174 Gram (3 x 58 Gram).",
+        "Gramasi 174 Gram (3 Sachet x 58 Gram).",
 
       storage:
         "Simpan di tempat yang kering, bersih, dan jangan terkena sinar matahari langsung. Jangan dikonsumsi apabila terjadi perubahan yang mencolok pada bau, rasa, atau warna.",
 
       composition:
         "Base bubuk (Maltodekstrin, Kalsium Kaseinat, Lemak Nabati, Protein Whey mengandung Protein Susu, Trigliserida Rantai Sedang, Antioksidan (Askorbil Palmitat dan Tokoferol)), Serat Pangan, Sukrosa, Perisa Sintetik, Premiks Mineral dan Vitamin.",
-
-      specificComposition: ["Protein, MCT, Omega 3, Omega 6, Serat Pangan, Komposisi gizi seimbang"],
     },
 
     displayName: "Entramix",
@@ -389,6 +387,37 @@ export const productNutrition: Record<string, ProductNutrition> = {
     ],
     components: [
       { name: "Zat Gizi Lainnya", value: null },
+    ],
+
+    highlights: [
+      {
+        title: "100% Protein Nabati",
+        description:
+          "Mengandung protein yang berasal dari sumber nabati.",
+        icon:
+          "/images/mednut/products/icons/entrasoy/protein-nabati.svg",
+      },
+      {
+        title: "Nutrisi Lengkap dan Seimbang",
+        description:
+          "Membantu melengkapi kebutuhan nutrisi tubuh.",
+        icon:
+          "/images/mednut/products/icons/entrasoy/nutrisi-lengkap.svg",
+      },
+      {
+        title: "Alternatif Nutrisi Non-Susu Sapi",
+        description:
+          "Menjadi pilihan nutrisi bagi individu yang menghindari protein susu sapi.",
+        icon:
+          "/images/mednut/products/icons/entrasoy/bebas-laktosa-gluten.svg",
+      },
+      {
+        title: "Cocok untuk Pola Diet Vegetarian",
+        description:
+          "Dapat menjadi pilihan suplemen nutrisi bagi individu yang menjalani pola diet vegetarian.",
+        icon:
+          "/images/mednut/products/icons/entrasoy/serat-pangan-inulin.svg",
+      },
     ],
   },
 
@@ -660,6 +689,13 @@ export const productNutrition: Record<string, ProductNutrition> = {
           "Membantu pemenuhan kalori harian yang meningkat.",
         icon:
           "/images/mednut/products/icons/nephrisol-d/tinggi-energi.svg",
+      },
+      {
+        title: "Khusus untuk Ginjal Non Dialisis",
+        description:
+          "Diformulasikan untuk pasien ginjal kronik tahap pradialisis.",
+        icon:
+          "/images/mednut/products/icons/nephrisol/ginjal-non-dialisis.svg",
       },
     ],
   },
@@ -978,8 +1014,6 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
       composition:
         "Dekstrin, Maltodekstrin, Konsentrat Protein Whey, Bubuk MCT, Inulin, Premiks Asam Amino, Natrium Klorida, Mononatrium Fosfat, Kalsium Karbonat, Trikalsium Fosfat",
-
-      specificComposition: ["MCT, BCAA, LOLA, Inulin"],
     },
 
     category: "Clinical Nutrition Formula",
@@ -1274,8 +1308,6 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
       composition:
         "Base bubuk, MCT, isolat protein kedelai, serat pangan inulin, bubuk DHA (mengandung antioksidan askorbil palmitat), natrium askorbat, tokoferol, perisa sintetik, penstabil nabati, steviol, premiks vitamin mineral",
-
-      specificComposition: ["DHA, EPA, Isoleusin, Leusin, Valin, Omega 3, Omega 6, MCT - rendah karbohidrat, tinggi lemak baik"],
     },
 
     category: "Respiratory Nutrition Formula",
@@ -1389,8 +1421,13 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "26 Gram serbuk ke 80 mL air",
 
       flavors: [
-        "Vanila",
+        "Vanilla",
         "Kacang Hijau",
+      ],
+
+      osmolalityByFlavor: [
+        { flavor: "Kacang Hijau", value: "736 mOsm/L" },
+        { flavor: "Vanilla", value: "708 mOsm/L" },
       ],
 
       availability:
@@ -1403,9 +1440,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Simpan di tempat yang kering, bersih, dan hindari terkena sinar matahari langsung.",
 
       composition:
-        "Maltodekstrin, Bubuk Lemak Nabati, Inulin, Sukrosa, Konsentrat Protein Whey, Dekstrin, Isomaltulosa, Sorbitol, Bubuk Ekstrak Malt,",
-
-      specificComposition: ["Protein Whey, Kolin Bitartrat, Premiks Vitamin & Mineral"],
+        "Maltodekstrin, Bubuk Lemak Nabati (mengandung Protein Susu), Kalsium Kaseinat, Isolat Protein Whey (9.4%), Inulin, Sukrosa, Konsentrat Protein Whey (4.2%), Dekstrin, Isomaltulosa, Pemanis Alami Sorbitol, Bubuk Ekstrak Malt, Trikalsium Fosfat, Kolin Bitartrat, Premiks Vitamin dan Mineral, Magnesium Karbonat, Nukleotida, Fosfatidilserin, Dikalium Fosfat, Perisa Sintetik, Pemanis Alami Glikosida Steviol.",
     },
 
     category:
@@ -1413,7 +1448,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
     variants: [
       {
-        name: "Vanila",
+        name: "Vanilla",
         image:
           "/images/mednut/products/front/peptibren-vanila.png",
       },
@@ -1485,30 +1520,30 @@ export const productNutrition: Record<string, ProductNutrition> = {
     highlightTitle:
       "Mengapa Peptibren?",
 
-    highlightSubtitle:
-      "Formula nutrisi spesifik untuk mendukung kebutuhan energi, protein, dan nutrisi neurologis.",
+    whySubtitle:
+      "Dukungan nutrisi untuk membantu memenuhi kebutuhan pasien stroke dan Alzheimer, terutama dengan tantangan asupan makan.",
 
     highlights: [
       {
-        title: "Tinggi Protein",
+        title: "Dukungan Nutrisi Stroke dan Alzheimer",
         description:
-          "Mengandung protein untuk membantu memenuhi kebutuhan nutrisi pasien.",
+          "Mendukung pemenuhan kebutuhan nutrisi pada pasien stroke dan Alzheimer.",
         icon:
-          "/images/client-assets/icon/PEPTISOL/NEW ICON/Tinggi Protein 13 grsaji.svg",
+          "/images/mednut/products/icons/peptibren/stroke-alzheimer.svg",
       },
       {
-        title: "DHA & Omega 3",
+        title: "Mendukung Asupan Nutrisi",
         description:
-          "Mengandung DHA dan Omega 3 untuk mendukung fungsi neurologis.",
+          "Membantu melengkapi kebutuhan nutrisi ketika pasien mengalami tantangan asupan makan.",
         icon:
-          "/images/mednut/products/icons/entrakid/dha-omega-3.svg",
+          "/images/mednut/products/icons/peptibren/asupan-nutrisi.svg",
       },
       {
-        title: "Dual Protein Source",
+        title: "Dukungan Nutrisi Harian",
         description:
-          "Kombinasi sumber protein untuk mendukung pemenuhan nutrisi.",
+          "Membantu melengkapi kebutuhan nutrisi sesuai kondisi pasien.",
         icon:
-          "/images/client-assets/icon/PEPTISOL/NEW ICON/Dual Protein Source 2.svg",
+          "/images/mednut/products/icons/peptibren/nutrisi-harian.svg",
       },
     ],
   },

@@ -19,6 +19,7 @@ const productAssets: Record<
   },
   entrakid: {
     scene: mednutAssets.scenes.entrakid,
+    logo: mednutAssets.productLogos.entrakid,
     packshot: mednutAssets.packshots.entrakidVanila,
     secondaryPackshot: mednutAssets.packshots.entrakidCokelat,
   },

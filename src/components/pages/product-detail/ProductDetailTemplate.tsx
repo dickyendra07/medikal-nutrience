@@ -368,7 +368,7 @@ function EntrakidMerakidsSection({ product }: { product: ProductDetail }) {
           <div className="relative flex min-h-[220px] items-center justify-center overflow-hidden rounded-[2rem] bg-white p-5 md:min-h-[300px]">
             <div className="absolute inset-0 bg-white" />
             <img
-              src="/images/mednut/merakids/merakids-banner.png"
+              src="/images/mednut/merakids/merakids-banner.webp"
               alt="MERAKIDS"
               className="relative z-10 h-auto w-full max-w-[520px] object-contain drop-shadow-2xl"
             />
