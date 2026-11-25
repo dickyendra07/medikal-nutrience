@@ -75,9 +75,11 @@ export function ProductClinicalHighlights({
             </h2>
 
 
-            <p className="mt-4 text-base font-medium leading-7 text-[#6b7280]">
-              {subtitle}
-            </p>
+            {subtitle ? (
+              <p className="mt-4 text-base font-medium leading-7 text-[#6b7280]">
+                {subtitle}
+              </p>
+            ) : null}
 
           </div>
 

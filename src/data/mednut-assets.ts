@@ -22,8 +22,8 @@ export const mednutAssets = {
   },
 
   productLogos: {
-    entrasoy: "/images/mednut/products/logos/logo-entrasoy.png",
-    entramix: "/images/mednut/products/logos/logo-entramix.png",
+    entrasoy: "/images/mednut/products/logos-2026/logo-entrasoy.png",
+    entramix: "/images/mednut/products/logos-2026/logo-entramix.png",
     entrakid: "/images/mednut/products/logos-2026/logo-entrakid.png",
     peptisol: "/images/mednut/products/logos-2026/logo-peptisol.png",
     peptibren: "/images/mednut/products/logos-2026/logo-peptibren.png",

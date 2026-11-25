@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { mednutAssets } from "@/data/mednut-assets";
 
-const { productLogos, pharmacies } = mednutAssets;
+const { pharmacies } = mednutAssets;
 
 type LogoFrame = Pick<CSSProperties, "aspectRatio" | "objectPosition">;
 
@@ -11,8 +11,6 @@ type LogoFrame = Pick<CSSProperties, "aspectRatio" | "objectPosition">;
 // instead of per-logo scale overrides. Values come from the artwork's pixel
 // bounds: aspectRatio = width / band height, objectPosition = band offset.
 const logoFrames: Record<string, LogoFrame> = {
-  [productLogos.entrasoy]: { aspectRatio: "1000 / 214", objectPosition: "50% 50.8%" },
-  [productLogos.entramix]: { aspectRatio: "1000 / 216", objectPosition: "50% 48.7%" },
   [pharmacies.apotekBerkat]: { aspectRatio: "4267 / 872", objectPosition: "50% 48.9%" },
   [pharmacies.apotekGunaFarma]: { aspectRatio: "4267 / 1792", objectPosition: "50% 43.7%" },
   [pharmacies.apotekMandjur]: { aspectRatio: "4267 / 1526", objectPosition: "50% 56%" },

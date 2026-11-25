@@ -389,6 +389,8 @@ export const productNutrition: Record<string, ProductNutrition> = {
       { name: "Zat Gizi Lainnya", value: null },
     ],
 
+    whySubtitle: "",
+
     highlights: [
       {
         title: "100% Protein Nabati",
@@ -843,6 +845,15 @@ export const productNutrition: Record<string, ProductNutrition> = {
           "Memiliki kandungan natrium, kalium, dan fosfor yang rendah.",
         icon:
           "/images/client-assets/icon/NEPHRISOL/NEW ICON/Kandungan Mikronutrien.svg",
+      },
+      // Wording follows slide 5 of the 25 Nov client deck verbatim. It says
+      // "Non Dialisis" on the dialysis product; confirm before production.
+      {
+        title: "Khusus untuk Ginjal Non Dialisis",
+        description:
+          "Diformulasikan untuk pasien ginjal kronik tahap pradialisis.",
+        icon:
+          "/images/mednut/products/icons/nephrisol/ginjal-non-dialisis.svg",
       },
     ],
   },
@@ -1415,7 +1426,9 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Peptibren merupakan nutrisi tinggi energi dan tinggi protein yang membantu memenuhi kebutuhan nutrisi pasien dengan gangguan neurologis seperti stroke, Alzheimer dan demensia dengan kesulitan menelan atau disfagia. Peptibren mengandung nutrien spesifik Kolin, Fosfatidilserin, dan Uridin Monofosfat yang membantu mendukung pemulihan fungsi saraf.",
 
       servingInstruction:
-        "1 Sachet dilarutkan ke 200 mL air menghasilkan 250 mL larutan",
+        // Verbatim from slide 9 of the 25 Nov client deck. Name and weight
+        // differ from Peptibren's 65 Gram sachet; confirm before production.
+        "Untuk menyajikan 250 ml larutan, tambahkan satu (1) sachet NEPHRISOL (± 67 g) ke dalam 200 ml air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
         "26 Gram serbuk ke 80 mL air",
