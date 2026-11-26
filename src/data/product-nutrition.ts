@@ -58,7 +58,6 @@ export type ProductNutrition = {
     packaging?: string;
     storage?: string;
     composition?: string;
-    specificComposition?: string[];
   };
 };
 
@@ -89,10 +88,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
       ],
       "servingInstruction": "3 sendok takar (+/- 45 Gram) dilarutkan ke 190 mL air menghasilkan 235 mL larutan",
       "servingPer100ml": "22 Gram serbuk ke 90 mL air",
-      "composition": "Susu Bubuk (mengandung Padatan Susu, Protein Whey dan Kalsium Kaseinat), Krimer Minuman (mengandung Susu, Maltodekstrin, Lemak Nabati (mengandung Susu), Antioksidan Askorbil Palmitat, Natrium Askorbat, Tokoferol Campuran Pekat dan d-Alfa Tokoferol), Sukrosa, Serat Pangan, Perisa Sintetik, Premiks Mineral dan Vitamin.",
-      "specificComposition": [
-        "DHA, Inulin, Omega 3, Omega 6"
-      ]
+      "composition": "Susu Bubuk (mengandung Padatan Susu, Protein Whey dan Kalsium Kaseinat), Krimer Minuman (mengandung Susu, Maltodekstrin, Lemak Nabati (mengandung Susu), Antioksidan Askorbil Palmitat, Natrium Askorbat, Tokoferol Campuran Pekat dan d-Alfa Tokoferol), Sukrosa, Serat Pangan, Perisa Sintetik, Premiks Mineral dan Vitamin."
     },
     displayName: "Entrakid",
     title: "Nutrition Facts",
@@ -314,8 +310,6 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
       composition:
         "Sari Kacang Kedelai Bubuk, Maltodekstrin, Isolat Protein Kedelai, Serat Pangan (mengandung Inulin), Sukrosa, Perisa Sintetik, Pengemulsi Nabati, Bubuk Almond, Pemanis Alami Glikosida Steviol, Premiks Mineral dan Vitamin.",
-
-      specificComposition: ["Mengandung isoflavon"],
     },
 
     displayName: "Entrasoy",
@@ -480,19 +474,19 @@ export const productNutrition: Record<string, ProductNutrition> = {
     targetAudience: {
       title: "Siapa yang Membutuhkan Hepatosol?",
       description:
-        "Formula nutrisi klinis yang diformulasikan untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderate.",
+        "Formula nutrisi klinis yang diformulasikan untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderat.",
     },
 
     title: "Nutrition Facts",
     subtitle:
-      "Informasi nutrisi lengkap untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderate.",
+      "Informasi nutrisi lengkap untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderat.",
     serving: "Per Sajian Hepatosol",
 
     highlightTitle:
       "Mengapa Hepatosol?",
 
     highlightSubtitle:
-      "Formula nutrisi klinis yang diformulasikan untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderate.",
+      "Formula nutrisi klinis yang diformulasikan untuk membantu memenuhi kebutuhan pasien dengan gangguan fungsi hati ringan hingga moderat.",
 
     nutrition: [
       { name: "Energi", value: "380", unit: "kkal" },
@@ -1174,8 +1168,6 @@ export const productNutrition: Record<string, ProductNutrition> = {
 
       composition:
         "Base Bubuk (mengandung Protein Susu), Bubuk Kakao, Isolat Protein Kedelai, Perisa Sintetik, Penstabil Mononatrium Fosfat, Premiks Mineral dan Vitamin.",
-
-      specificComposition: ["Whey, Kasein, 5 Vitamin dan 4 Mineral"],
     },
 
     category: "Recovery Nutrition Formula",
@@ -1426,9 +1418,7 @@ export const productNutrition: Record<string, ProductNutrition> = {
         "Peptibren merupakan nutrisi tinggi energi dan tinggi protein yang membantu memenuhi kebutuhan nutrisi pasien dengan gangguan neurologis seperti stroke, Alzheimer dan demensia dengan kesulitan menelan atau disfagia. Peptibren mengandung nutrien spesifik Kolin, Fosfatidilserin, dan Uridin Monofosfat yang membantu mendukung pemulihan fungsi saraf.",
 
       servingInstruction:
-        // Verbatim from slide 9 of the 25 Nov client deck. Name and weight
-        // differ from Peptibren's 65 Gram sachet; confirm before production.
-        "Untuk menyajikan 250 ml larutan, tambahkan satu (1) sachet NEPHRISOL (± 67 g) ke dalam 200 ml air matang hangat, aduk hingga larut.",
+        "Untuk menyajikan 250 mL larutan, tambahkan satu (1) sachet PEPTIBREN (± 65 g) ke dalam 200 mL air matang hangat, aduk hingga larut.",
 
       servingPer100ml:
         "26 Gram serbuk ke 80 mL air",
