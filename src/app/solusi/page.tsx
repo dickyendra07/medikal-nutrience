@@ -43,7 +43,7 @@ function getSlugFromHref(href: string) {
 const featuredSolutions = [
   {
     title: "Hepatosol",
-    headline: "Nutrisi Fungsi Hati Ringan-Moderate",
+    headline: "Nutrisi Fungsi Hati Ringan-Moderat",
     description: "Dukungan nutrisi untuk kondisi hati umum atau kronik dengan dukungan formula nutrisi yang sesuai",
     image: "/images/mednut/products/front/hepatosol-vanila.png",
     href: "/produk/hepatosol",

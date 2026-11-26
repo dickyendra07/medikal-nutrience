@@ -269,37 +269,6 @@ export function ProductInformationSection({
               </p>
 
 
-
-              {info.specificComposition &&
-              info.specificComposition.length > 0 ? (
-
-                <div className="mt-10">
-
-                  <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#111827]">
-                    Kandungan Utama
-                  </h4>
-
-
-                  <div className="mt-5 flex flex-wrap gap-3">
-
-                    {info.specificComposition.map((item) => (
-
-                      <span
-                        key={item}
-                        className="rounded-full bg-[#f4fbf8] px-5 py-3 text-sm font-black text-[#374151]"
-                      >
-                        {item}
-                      </span>
-
-                    ))}
-
-                  </div>
-
-                </div>
-
-              ) : null}
-
-
             </div>
 
           ) : null}
